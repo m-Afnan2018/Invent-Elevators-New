@@ -1,0 +1,293 @@
+/* ─────────────────────────────────────────
+   ProductCategories.module.css
+   Fonts: Syne (headings) + DM Sans (body)
+   — same as HeroSection, already loaded
+   ───────────────────────────────────────── */
+
+.section {
+  background: #f4f6f9;
+  padding: 96px 2rem 80px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ──────────────── INTRO ROW ──────────────── */
+.introRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-start;
+  margin-bottom: 64px;
+}
+
+/* Left */
+.introLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #1565c0;
+  background: rgba(21, 101, 192, 0.08);
+  padding: 0.3rem 0.9rem;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.heading {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #0d1b2a;
+  margin: 0;
+}
+
+.heading em {
+  font-style: normal;
+  color: #1565c0;
+}
+
+/* Right */
+.introRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 0.5rem;
+}
+
+.introText {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #4a5568;
+  margin: 0;
+}
+
+.consultBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.75rem 1.6rem;
+  background: #1565c0;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.22s, transform 0.2s;
+  box-shadow: 0 4px 18px rgba(21, 101, 192, 0.3);
+}
+
+.consultBtn:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+}
+
+.arrow {
+  font-size: 1rem;
+  transition: transform 0.2s;
+}
+
+.consultBtn:hover .arrow {
+  transform: translateX(3px);
+}
+
+.tagline {
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: #718096;
+  margin: 0;
+  border-left: 3px solid #e2e8f0;
+  padding-left: 1rem;
+}
+
+/* ──────────────── CARDS GRID ──────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+/* ── Single card ── */
+.card {
+  position: relative;
+  display: block;
+  height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+
+  /* entrance animation */
+  animation: fadeUp 0.55s var(--delay, 0s) ease both;
+}
+
+/* Background image */
+.cardBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.card:hover .cardBg {
+  transform: scale(1.07);
+}
+
+/* Dark gradient overlay */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 10, 22, 0.08) 0%,
+    rgba(5, 10, 22, 0.65) 70%,
+    rgba(5, 10, 22, 0.85) 100%
+  );
+  transition: background 0.3s;
+}
+
+.card:hover .cardOverlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 10, 22, 0.15) 0%,
+    rgba(5, 10, 22, 0.72) 70%,
+    rgba(5, 10, 22, 0.9) 100%
+  );
+}
+
+/* Card text */
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.cardTitle {
+  font-family: "Syne", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.discoverLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.22s;
+}
+
+.card:hover .discoverLink {
+  color: #4fc3f7;
+}
+
+.discoverArrow {
+  font-size: 0.9rem;
+  transition: transform 0.22s;
+}
+
+.card:hover .discoverArrow {
+  transform: translate(2px, -2px);
+}
+
+/* Blue accent line at bottom */
+.cardAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: #1565c0;
+  border-radius: 0 0 0 16px;
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 3;
+}
+
+.card:hover .cardAccent {
+  width: 100%;
+}
+
+/* ──────────────── ANIMATIONS ──────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ──────────────── RESPONSIVE ──────────────── */
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .introRow {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 40px;
+  }
+
+  .section {
+    padding: 64px 1.25rem 60px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .card {
+    height: 240px;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    height: 220px;
+  }
+}

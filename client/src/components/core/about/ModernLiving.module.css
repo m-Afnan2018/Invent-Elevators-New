@@ -1,0 +1,138 @@
+.section {
+  background: #f7f7f5;
+  padding: 100px 0;
+}
+
+/* ── Main Layout ── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+
+/* ── Left: Heading ── */
+.left {
+  position: sticky;
+  top: 100px;
+}
+
+.heading {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 700;
+  color: #0a0a0a;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* ── Right: Intro + Grid ── */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.intro {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #4a4a4a;
+  line-height: 1.78;
+  margin: 0;
+  padding-top: 6px;
+}
+
+/* ── Feature Cards Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: #e2e2de;
+  border: 2px solid #e2e2de;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card {
+  background: #f7f7f5;
+  padding: 32px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background 0.25s ease;
+}
+
+.card:hover {
+  background: #ffffff;
+}
+
+/* ── Icon ── */
+.iconWrap {
+  color: #0a0a0a;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+/* ── Card Title ── */
+.cardTitle {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #0a0a0a;
+  line-height: 1.3;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Card Description ── */
+.cardDesc {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #5f5f5f;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .container {
+    gap: 52px;
+  }
+}
+
+@media (max-width: 860px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .left {
+    position: static;
+  }
+
+  .heading {
+    font-size: clamp(28px, 6vw, 38px);
+  }
+}
+
+@media (max-width: 540px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

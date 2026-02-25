@@ -1,0 +1,263 @@
+/* ─────────────────────────────────────────
+   HeroSection.module.css
+   ───────────────────────────────────────── */
+
+/* Google Font – import in your _app.jsx or layout.jsx:
+   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+*/
+
+.heroWrapper {
+  position: relative;
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ──────────────── HERO ──────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Dark photo background */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      110deg,
+      rgba(5, 10, 22, 0.82) 0%,
+      rgba(5, 10, 22, 0.55) 55%,
+      rgba(5, 10, 22, 0.3) 100%
+    ),
+    url("https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1600&q=80")
+      center/cover no-repeat;
+  /* 
+    Replace the Unsplash URL with your own elevator/building hero image.
+    Recommended: a dark, cinematic interior shot of a modern elevator or building lobby.
+  */
+}
+
+/* Subtle grain overlay */
+.heroBg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* Hero content */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  width: 100%;
+}
+
+.heroEyebrow {
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #4fc3f7;
+  margin: 0 0 0.75rem;
+  animation: fadeUp 0.7s ease both;
+}
+
+.heroTitle {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  color: #ffffff;
+  margin: 0 0 1.5rem;
+  max-width: 640px;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.heroSubtitle {
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 480px;
+  margin: 0 0 2.5rem;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.heroCtas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+.ctaPrimary {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background: #1565c0;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.25s, transform 0.2s;
+  box-shadow: 0 4px 20px rgba(21, 101, 192, 0.45);
+}
+
+.ctaPrimary:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+}
+
+.ctaSecondary {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  transition: background 0.25s, transform 0.2s;
+}
+
+.ctaSecondary:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+}
+
+.heroScroll {
+  margin-top: 3.5rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  animation: fadeUp 0.7s 0.5s ease both;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.heroScroll::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Floating badge */
+.heroBadge {
+  position: absolute;
+  right: 5%;
+  bottom: 10%;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  text-align: center;
+  animation: fadeUp 0.8s 0.6s ease both;
+}
+
+.badgeYear {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1;
+}
+
+.badgeNum {
+  font-family: "Syne", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #4fc3f7;
+}
+
+.badgeLabel {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 0 8px;
+  line-height: 1.3;
+}
+
+/* ──────────────── ANIMATIONS ──────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ──────────────── RESPONSIVE ──────────────── */
+@media (max-width: 768px) {
+  .navLinks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 10, 22, 0.97);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    z-index: 99;
+  }
+
+  .navLinks.open {
+    transform: translateX(0);
+  }
+
+  .navLinks li a {
+    font-size: 1.3rem;
+  }
+
+  .hamburger {
+    display: flex;
+    z-index: 200;
+  }
+
+  .orderBtn {
+    display: none;
+  }
+
+  .heroBadge {
+    display: none;
+  }
+
+  .heroContent {
+    padding-top: 100px;
+  }
+}

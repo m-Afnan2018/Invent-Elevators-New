@@ -10,11 +10,16 @@
   --button-secondary-border: #ebebeb;
 
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   align-items: center;
   justify-content: center;
   font-family: var(--font-geist-sans);
   background-color: var(--background);
+}
+
+.page > section {
+  width: 100%;
 }
 
 .main {

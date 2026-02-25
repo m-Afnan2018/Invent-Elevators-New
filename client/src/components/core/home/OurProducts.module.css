@@ -1,0 +1,289 @@
+/* ─────────────────────────────────────────
+   OurProducts.module.css
+   Fonts: Syne + DM Sans (already loaded)
+   ───────────────────────────────────────── */
+
+.section {
+  background: #f4f6f9;
+  padding: 96px 2rem 100px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ──────────────── HEADER ──────────────── */
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-end;
+  margin-bottom: 56px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #1565c0;
+  background: rgba(21, 101, 192, 0.08);
+  padding: 0.3rem 0.9rem;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.heading {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #0d1b2a;
+  margin: 0;
+}
+
+.heading em {
+  font-style: normal;
+  color: #1565c0;
+}
+
+.headerRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 4px;
+}
+
+.headerDesc {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #4a5568;
+  margin: 0;
+}
+
+.viewAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.72rem 1.5rem;
+  border: 1.5px solid #0d1b2a;
+  color: #0d1b2a;
+  font-size: 0.87rem;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.22s, color 0.22s, transform 0.2s;
+}
+
+.viewAllBtn:hover {
+  background: #0d1b2a;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btnArrow {
+  transition: transform 0.2s;
+}
+
+.viewAllBtn:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+/* ──────────────── GRID ──────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+/* ──────────────── CARD ──────────────── */
+.card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e8edf5;
+  transition: box-shadow 0.3s, transform 0.3s;
+  animation: fadeUp 0.55s var(--delay, 0s) ease both;
+}
+
+.card:hover {
+  box-shadow: 0 16px 48px rgba(13, 27, 42, 0.12);
+  transform: translateY(-5px);
+}
+
+/* ── Image wrapper ── */
+.cardImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.06);
+}
+
+/* Tag pill on image */
+.cardTag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(21, 101, 192, 0.85);
+  backdrop-filter: blur(6px);
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+}
+
+/* ── Card body ── */
+.cardBody {
+  padding: 1.4rem 1.3rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: "Syne", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0d1b2a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.cardDesc {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #718096;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── CTA link ── */
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  width: fit-content;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #1565c0;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: gap 0.2s, color 0.2s;
+}
+
+.cardCta:hover {
+  color: #0d47a1;
+  gap: 0.75rem;
+}
+
+.ctaIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(21, 101, 192, 0.1);
+  transition: background 0.22s, transform 0.22s;
+  flex-shrink: 0;
+}
+
+.cardCta:hover .ctaIconWrap {
+  background: #1565c0;
+  color: #fff;
+  transform: rotate(-45deg);
+}
+
+/* ── Bottom accent bar ── */
+.cardBar {
+  height: 3px;
+  width: 0;
+  background: linear-gradient(90deg, #1565c0, #4fc3f7);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 0 0 18px 18px;
+}
+
+.card:hover .cardBar {
+  width: 100%;
+}
+
+/* ──────────────── ANIMATIONS ──────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ──────────────── RESPONSIVE ──────────────── */
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 1.25rem 72px;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 36px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .cardImageWrapper {
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardImageWrapper {
+    height: 200px;
+  }
+}

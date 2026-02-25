@@ -1,0 +1,352 @@
+/* ─────────────────────────────────────────
+   OurProjects.module.css
+   Fonts: Syne + DM Sans (already loaded)
+   ───────────────────────────────────────── */
+
+.section {
+  background: #ffffff;
+  padding: 96px 2rem 80px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* ──────────────── HEADER ──────────────── */
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-end;
+  margin-bottom: 48px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #1565c0;
+  background: rgba(21, 101, 192, 0.08);
+  padding: 0.3rem 0.9rem;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+.heading {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #0d1b2a;
+  margin: 0;
+}
+
+.heading em {
+  font-style: normal;
+  color: #1565c0;
+}
+
+.headerRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 4px;
+}
+
+.headerDesc {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #4a5568;
+  margin: 0;
+}
+
+.viewAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.72rem 1.5rem;
+  border: 1.5px solid #0d1b2a;
+  color: #0d1b2a;
+  font-size: 0.87rem;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.22s, color 0.22s, transform 0.2s;
+}
+
+.viewAllBtn:hover {
+  background: #0d1b2a;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btnArrow {
+  transition: transform 0.2s;
+}
+
+.viewAllBtn:hover .btnArrow,
+.ctaStripBtn:hover .btnArrow {
+  transform: translateX(3px);
+}
+
+/* ──────────────── GRID LAYOUT ──────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1.25rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+/* Right stacked column */
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ──────────────── CARD BASE ──────────────── */
+.card {
+  position: relative;
+  display: block;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Large card */
+.cardLarge {
+  height: 520px;
+}
+
+/* Small cards */
+.cardSmall {
+  height: 245px;
+}
+
+/* BG image */
+.cardBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.card:hover .cardBg {
+  transform: scale(1.07);
+}
+
+/* Gradient overlay */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 10, 22, 0.05) 0%,
+    rgba(5, 10, 22, 0.55) 60%,
+    rgba(5, 10, 22, 0.82) 100%
+  );
+  transition: background 0.35s;
+}
+
+.card:hover .cardOverlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(5, 10, 22, 0.1) 0%,
+    rgba(5, 10, 22, 0.62) 60%,
+    rgba(5, 10, 22, 0.88) 100%
+  );
+}
+
+/* Card content */
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  z-index: 2;
+}
+
+/* Category tag */
+.cardTag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(21, 101, 192, 0.75);
+  backdrop-filter: blur(6px);
+  padding: 0.22rem 0.7rem;
+  border-radius: 100px;
+  width: fit-content;
+}
+
+/* Card title */
+.cardTitle {
+  font-family: "Syne", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.cardSmall .cardTitle {
+  font-size: 0.98rem;
+}
+
+/* Discover CTA — slides up on hover */
+.discoverBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #4fc3f7;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.discoverVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Blue left border accent on hover */
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  top: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, transparent 40%, #1565c0);
+  border-radius: 18px 0 0 18px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 3;
+}
+
+.card:hover::before {
+  transform: scaleY(1);
+}
+
+/* ──────────────── BOTTOM CTA STRIP ──────────────── */
+.ctaStrip {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 2rem;
+  background: #f4f6f9;
+  border-radius: 14px;
+  border: 1px solid #e8edf5;
+  gap: 1.5rem;
+}
+
+.ctaStripText {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0d1b2a;
+  margin: 0;
+}
+
+.ctaStripBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.72rem 1.5rem;
+  background: #1565c0;
+  color: #fff;
+  font-size: 0.87rem;
+  font-weight: 500;
+  border-radius: 8px;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background 0.22s, transform 0.2s;
+  box-shadow: 0 4px 16px rgba(21, 101, 192, 0.3);
+}
+
+.ctaStripBtn:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+}
+
+/* ──────────────── ANIMATIONS ──────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ──────────────── RESPONSIVE ──────────────── */
+@media (max-width: 1024px) {
+  .cardLarge {
+    height: 420px;
+  }
+
+  .cardSmall {
+    height: 196px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 1.25rem 72px;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 32px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cardLarge {
+    height: 320px;
+  }
+
+  .cardSmall {
+    height: 220px;
+  }
+
+  .ctaStrip {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.25rem 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardLarge,
+  .cardSmall {
+    height: 240px;
+  }
+}

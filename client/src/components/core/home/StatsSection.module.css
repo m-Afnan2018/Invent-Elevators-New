@@ -1,0 +1,181 @@
+/* ─────────────────────────────────────────
+   StatsSection.module.css
+   Fonts: Syne + DM Sans (already loaded)
+   ───────────────────────────────────────── */
+
+.section {
+  position: relative;
+  padding: 100px 2rem;
+  width: 100%;
+  overflow: hidden;
+  font-family: "DM Sans", sans-serif;
+}
+
+/* ── Background photo ── */
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+    url("https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1600&q=80")
+    center / cover no-repeat;
+  /*
+    Replace with a dramatic interior/architectural photo —
+    a wide shot of a building lobby, elevator shaft, or cityscape works great.
+  */
+}
+
+/* Deep dark overlay — matches the PDF's navy/dark-blue tone */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(8, 15, 40, 0.93) 0%,
+    rgba(10, 25, 70, 0.88) 60%,
+    rgba(8, 15, 40, 0.93) 100%
+  );
+}
+
+/* ── Container ── */
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #4fc3f7;
+  margin: 0 0 1rem;
+  animation: fadeUp 0.6s ease both;
+}
+
+/* ── Heading ── */
+.heading {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+  animation: fadeUp 0.6s 0.08s ease both;
+}
+
+/* ── Divider ── */
+.divider {
+  width: 56px;
+  height: 3px;
+  background: linear-gradient(90deg, #1565c0, #4fc3f7);
+  border-radius: 2px;
+  margin: 1.75rem auto 3.5rem;
+  animation: fadeUp 0.6s 0.14s ease both;
+}
+
+/* ── Stats row ── */
+.statsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* ── Single stat ── */
+.statItem {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1.5rem;
+  position: relative;
+  animation: fadeUp 0.6s var(--delay, 0s) ease both;
+  transition: transform 0.3s;
+}
+
+.statItem:hover {
+  transform: translateY(-4px);
+}
+
+/* Vertical separator between items */
+.statItem:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.statValue {
+  font-family: "Syne", sans-serif;
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  background: linear-gradient(135deg, #fff 30%, #4fc3f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.statLabel {
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ──────────────── ANIMATIONS ──────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ──────────────── RESPONSIVE ──────────────── */
+@media (max-width: 768px) {
+  .section {
+    padding: 72px 1.25rem;
+  }
+
+  .statsRow {
+    gap: 0;
+  }
+
+  .statItem {
+    min-width: 45%;
+    flex: 0 0 45%;
+    padding: 1.5rem 1rem;
+  }
+
+  /* Hide separators on mobile — messy with wrapping */
+  .statItem::after {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .statItem {
+    min-width: 100%;
+    flex: 0 0 100%;
+  }
+}

@@ -1,0 +1,235 @@
+.section {
+  background: #ffffff;
+  padding: 100px 0 80px;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.header {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.heading {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700;
+  color: #0a0a0a;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* ── Carousel Wrapper ── */
+.carouselWrapper {
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── Track Outer (clips overflow) ── */
+.trackOuter {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Track ── */
+.track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* ── Card ── */
+.card {
+  flex: 0 0 calc((100% - 48px) / 3);
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f7f7f5;
+  border: 1px solid #e8e8e4;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+/* ── Card Image ── */
+.cardImageWrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #ececec;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.55s ease;
+}
+
+.card:hover .cardImage {
+  transform: scale(1.05);
+}
+
+/* ── Card Content ── */
+.cardContent {
+  padding: 24px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.cardTitle {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0a0a0a;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.cardDesc {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: #5f5f5f;
+  line-height: 1.7;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── View Product Button ── */
+.viewBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 10px 20px;
+  background: #0a0a0a;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 30px;
+  align-self: flex-start;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.viewBtn:hover {
+  background: #2a2a2a;
+  transform: translateX(2px);
+}
+
+.viewBtnIcon {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.viewBtn:hover .viewBtnIcon {
+  transform: translateX(3px);
+}
+
+/* ── Nav Buttons ── */
+.navBtn {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  border: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  z-index: 2;
+}
+
+.navBtn:hover:not(.navDisabled) {
+  background: #333333;
+  transform: scale(1.08);
+}
+
+.navDisabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ── Dots ── */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d0d0cc;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.dotActive {
+  background: #0a0a0a;
+  transform: scale(1.25);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .card {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+
+  .track {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .section {
+    padding: 64px 0 56px;
+  }
+
+  .carouselWrapper {
+    padding: 0 16px;
+    gap: 10px;
+  }
+
+  .header {
+    padding: 0 20px;
+  }
+
+  .card {
+    flex: 0 0 calc(100% - 0px);
+  }
+
+  .navBtn {
+    width: 36px;
+    height: 36px;
+  }
+}
