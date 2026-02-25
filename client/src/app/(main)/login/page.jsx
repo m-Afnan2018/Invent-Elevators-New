@@ -56,7 +56,7 @@ export default function Login() {
 
                 <div className={styles.footer}>
                     <p>
-                        Don't have an account? <span onClick={() => router.push("/register")}>Register</span>
+                        Don&apos;t have an account? <span onClick={() => router.push("/register")}>Register</span>
                     </p>
                 </div>
             </div>
