@@ -22,6 +22,7 @@ import {
 } from 'react-icons/ri';
 import styles from './page.module.css';
 import Image from 'next/image';
+import { getUsers, createUser, updateUser, deleteUser, resetUserPassword } from '@/services/users.service';
 
 const USER_ROLES = [
     { value: 'admin', label: 'Admin', color: '#ef4444' },
@@ -97,80 +98,13 @@ const UsersPage = () => {
     }, []);
 
     async function fetchUsers() {
-        // Temp data
-        const tempUsers = [
-            {
-                _id: '1',
-                firstName: 'John',
-                lastName: 'Doe',
-                email: 'john.doe@lift.com',
-                phone: '+91 98765 43210',
-                role: 'admin',
-                status: 'active',
-                department: 'Engineering',
-                jobTitle: 'System Administrator',
-                profileImage: 'https://ui-avatars.com/api/?name=John+Doe&size=200',
-                street: '123 Main Street',
-                city: 'Mumbai',
-                state: 'Maharashtra',
-                zipCode: '400001',
-                country: 'India',
-                permissions: PERMISSIONS.map((p) => p.id),
-                lastLogin: '2024-02-24T10:30:00',
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '2',
-                firstName: 'Sarah',
-                lastName: 'Williams',
-                email: 'sarah.w@lift.com',
-                phone: '+91 98765 43211',
-                role: 'manager',
-                status: 'active',
-                department: 'Operations',
-                jobTitle: 'Operations Manager',
-                profileImage: 'https://ui-avatars.com/api/?name=Sarah+Williams&size=200',
-                street: '456 Park Avenue',
-                city: 'Delhi',
-                state: 'Delhi',
-                zipCode: '110001',
-                country: 'India',
-                permissions: ['products_view', 'products_edit', 'blogs_view', 'blogs_edit', 'projects_view', 'projects_edit'],
-                lastLogin: '2024-02-23T15:45:00',
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '3',
-                firstName: 'Mike',
-                lastName: 'Johnson',
-                email: 'mike.j@lift.com',
-                phone: '+91 98765 43212',
-                role: 'editor',
-                status: 'pending',
-                department: 'Marketing',
-                jobTitle: 'Content Editor',
-                profileImage: 'https://ui-avatars.com/api/?name=Mike+Johnson&size=200',
-                street: '789 Lake Road',
-                city: 'Bangalore',
-                state: 'Karnataka',
-                zipCode: '560001',
-                country: 'India',
-                permissions: ['blogs_view', 'blogs_create', 'blogs_edit'],
-                lastLogin: null,
-                createdAt: new Date().toISOString(),
-            },
-        ];
-        setUsers(tempUsers);
-
-        // Real API call (commented out)
-        // try {
-        //   const response = await fetch('http://localhost:5000/api/users');
-        //   const data = await response.json();
-        //   setUsers(data);
-        // } catch (error) {
-        //   console.error('Error fetching users:', error);
-        // }
-    };
+        try {
+            const data = await getUsers();
+            setUsers(data || []);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -178,7 +112,7 @@ const UsersPage = () => {
             ...formData,
             [name]: type === 'checkbox' ? checked : value,
         });
-    };
+    }
 
     const handleProfileImageChange = (e) => {
         const file = e.target.files[0];
@@ -296,21 +230,13 @@ const UsersPage = () => {
             return;
         }
 
-        // Update password logic here
-        alert(`Password reset successfully for ${passwordResetUser.email}`);
-        closePasswordModal();
-
-        // Real API call (commented out)
-        // try {
-        //   await fetch(`http://localhost:5000/api/users/${passwordResetUser._id}/reset-password`, {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({ password: passwordData.newPassword }),
-        //   });
-        //   closePasswordModal();
-        // } catch (error) {
-        //   console.error('Error resetting password:', error);
-        // }
+        try {
+            await resetUserPassword(passwordResetUser._id, { password: passwordData.newPassword });
+            alert(`Password reset successfully for ${passwordResetUser.email}`);
+            closePasswordModal();
+        } catch (error) {
+            console.error('Error resetting password:', error);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -322,27 +248,27 @@ const UsersPage = () => {
             profileImage: formData.profileImage || `https://ui-avatars.com/api/?name=${formData.firstName}+${formData.lastName}&size=200`,
         };
 
-        if (editingUser) {
-            const updatedUsers = users.map((user) =>
-                user._id === editingUser._id ? { ...user, ...finalData, lastLogin: user.lastLogin } : user
-            );
-            setUsers(updatedUsers);
-        } else {
-            const newUser = {
-                _id: Date.now().toString(),
-                ...finalData,
-                lastLogin: null,
-                createdAt: new Date().toISOString(),
-            };
-            setUsers([...users, newUser]);
+        try {
+            if (editingUser) {
+                await updateUser(editingUser._id, finalData);
+            } else {
+                await createUser(finalData);
+            }
+            await fetchUsers();
+            closeModal();
+        } catch (error) {
+            console.error('Error saving user:', error);
         }
-
-        closeModal();
     };
 
     const handleDelete = async (userId) => {
         if (confirm('Are you sure you want to delete this user?')) {
-            setUsers(users.filter((user) => user._id !== userId));
+            try {
+                await deleteUser(userId);
+                await fetchUsers();
+            } catch (error) {
+                console.error('Error deleting user:', error);
+            }
         }
     };
 

@@ -19,6 +19,16 @@ import {
 } from 'react-icons/ri';
 import styles from './page.module.css';
 import Image from 'next/image';
+import {
+    getCategories,
+    createCategory,
+    updateCategory,
+    deleteCategory,
+    getSubCategories,
+    createSubCategory,
+    updateSubCategory,
+    deleteSubCategory,
+} from '@/services/categories.service';
 
 const CategoriesPage = () => {
     const [categories, setCategories] = useState([]);
@@ -49,110 +59,24 @@ const CategoriesPage = () => {
     }, []);
 
     async function fetchCategories() {
-        // Temp data with nested structure
-        const tempCategories = [
-            {
-                _id: '1',
-                name: 'Residential',
-                description: 'Residential elevator solutions',
-                slug: 'residential',
-                icon: 'https://via.placeholder.com/60',
-                status: 'active',
-                order: 1,
-                metaTitle: 'Residential Elevators | Lift Solutions',
-                metaDescription: 'Premium residential elevator solutions for homes',
-                metaKeywords: 'residential, home elevators, villa lifts',
-                parentId: null,
-                subCategories: [
-                    {
-                        _id: '1a',
-                        name: 'Villa Elevators',
-                        description: 'Luxury elevators for villas',
-                        slug: 'villa-elevators',
-                        icon: 'https://via.placeholder.com/60',
-                        status: 'active',
-                        order: 1,
-                        metaTitle: 'Villa Elevators',
-                        metaDescription: 'Premium villa elevator solutions',
-                        metaKeywords: 'villa, luxury elevators',
-                        parentId: '1',
-                    },
-                    {
-                        _id: '1b',
-                        name: 'Apartment Lifts',
-                        description: 'Compact lifts for apartments',
-                        slug: 'apartment-lifts',
-                        icon: 'https://via.placeholder.com/60',
-                        status: 'active',
-                        order: 2,
-                        metaTitle: 'Apartment Lifts',
-                        metaDescription: 'Space-saving apartment lift solutions',
-                        metaKeywords: 'apartment, compact lifts',
-                        parentId: '1',
-                    },
-                ],
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '2',
-                name: 'Commercial',
-                description: 'Commercial and industrial solutions',
-                slug: 'commercial',
-                icon: 'https://via.placeholder.com/60',
-                status: 'active',
-                order: 2,
-                metaTitle: 'Commercial Elevators',
-                metaDescription: 'Heavy-duty commercial elevator systems',
-                metaKeywords: 'commercial, business elevators',
-                parentId: null,
-                subCategories: [
-                    {
-                        _id: '2a',
-                        name: 'Office Buildings',
-                        description: 'High-speed office elevators',
-                        slug: 'office-buildings',
-                        icon: 'https://via.placeholder.com/60',
-                        status: 'active',
-                        order: 1,
-                        metaTitle: 'Office Building Elevators',
-                        metaDescription: 'Fast and efficient office elevators',
-                        metaKeywords: 'office, business, corporate',
-                        parentId: '2',
-                    },
-                    {
-                        _id: '2b',
-                        name: 'Shopping Malls',
-                        description: 'Escalators and elevators for malls',
-                        slug: 'shopping-malls',
-                        icon: 'https://via.placeholder.com/60',
-                        status: 'active',
-                        order: 2,
-                        metaTitle: 'Shopping Mall Elevators',
-                        metaDescription: 'Mall elevator and escalator solutions',
-                        metaKeywords: 'shopping, malls, retail',
-                        parentId: '2',
-                    },
-                ],
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '3',
-                name: 'Industrial',
-                description: 'Heavy-duty industrial lifts',
-                slug: 'industrial',
-                icon: 'https://via.placeholder.com/60',
-                status: 'active',
-                order: 3,
-                metaTitle: 'Industrial Lifts',
-                metaDescription: 'Heavy-duty lifts for industrial use',
-                metaKeywords: 'industrial, heavy duty, cargo lifts',
-                parentId: null,
-                subCategories: [],
-                createdAt: new Date().toISOString(),
-            },
-        ];
-        setCategories(tempCategories);
-    };
+        try {
+            const [categoryRows, subCategoryRows] = await Promise.all([
+                getCategories(),
+                getSubCategories(),
+            ]);
+
+            const categoriesWithSubs = (categoryRows || []).map((category) => ({
+                ...category,
+                subCategories: (subCategoryRows || []).filter(
+                    (subCategory) => String(subCategory.parentId) === String(category._id)
+                ),
+            }));
+
+            setCategories(categoriesWithSubs);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -166,7 +90,7 @@ const CategoriesPage = () => {
                 .replace(/(^-|-$)/g, '');
             setFormData((prev) => ({ ...prev, slug }));
         }
-    };
+    }
 
     const handleIconChange = (e) => {
         const file = e.target.files[0];
@@ -240,70 +164,37 @@ const CategoriesPage = () => {
             parentId: isSubCategory ? parentCategoryId : null,
         };
 
-        if (editingCategory) {
-            // Update category
-            const updatedCategories = categories.map((cat) => {
-                if (cat._id === editingCategory._id) {
-                    return { ...cat, ...categoryData };
+        try {
+            if (editingCategory) {
+                if (editingCategory.parentId) {
+                    await updateSubCategory(editingCategory._id, categoryData);
+                } else {
+                    await updateCategory(editingCategory._id, categoryData);
                 }
-                // Update in subcategories
-                if (cat.subCategories) {
-                    const updatedSubs = cat.subCategories.map((sub) =>
-                        sub._id === editingCategory._id ? { ...sub, ...categoryData } : sub
-                    );
-                    return { ...cat, subCategories: updatedSubs };
-                }
-                return cat;
-            });
-            setCategories(updatedCategories);
-        } else {
-            // Add new category
-            if (isSubCategory) {
-                const updatedCategories = categories.map((cat) => {
-                    if (cat._id === parentCategoryId) {
-                        const newSubCategory = {
-                            _id: `${cat._id}${String.fromCharCode(97 + cat.subCategories.length)}`,
-                            ...categoryData,
-                            parentId: cat._id,
-                            createdAt: new Date().toISOString(),
-                        };
-                        return {
-                            ...cat,
-                            subCategories: [...cat.subCategories, newSubCategory],
-                        };
-                    }
-                    return cat;
-                });
-                setCategories(updatedCategories);
+            } else if (isSubCategory) {
+                await createSubCategory(categoryData);
             } else {
-                const newCategory = {
-                    _id: (categories.length + 1).toString(),
-                    ...categoryData,
-                    subCategories: [],
-                    createdAt: new Date().toISOString(),
-                };
-                setCategories([...categories, newCategory]);
+                await createCategory(categoryData);
             }
-        }
 
-        closeModal();
+            await fetchCategories();
+            closeModal();
+        } catch (error) {
+            console.error('Error saving category:', error);
+        }
     };
 
-    const handleDelete = (categoryId, isSubCat = false, parentId = null) => {
+    const handleDelete = async (categoryId, isSubCat = false) => {
         if (confirm('Are you sure you want to delete this category?')) {
-            if (isSubCat) {
-                const updatedCategories = categories.map((cat) => {
-                    if (cat._id === parentId) {
-                        return {
-                            ...cat,
-                            subCategories: cat.subCategories.filter((sub) => sub._id !== categoryId),
-                        };
-                    }
-                    return cat;
-                });
-                setCategories(updatedCategories);
-            } else {
-                setCategories(categories.filter((cat) => cat._id !== categoryId));
+            try {
+                if (isSubCat) {
+                    await deleteSubCategory(categoryId);
+                } else {
+                    await deleteCategory(categoryId);
+                }
+                await fetchCategories();
+            } catch (error) {
+                console.error('Error deleting category:', error);
             }
         }
     };

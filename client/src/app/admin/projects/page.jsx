@@ -22,6 +22,9 @@ import {
 } from 'react-icons/ri';
 import styles from './page.module.css';
 import Image from 'next/image';
+import { getProjects, createProject, updateProject, deleteProject } from '@/services/projects.service';
+import { getProducts } from '@/services/products.service';
+import { getCategories } from '@/services/categories.service';
 
 const STATUS_OPTIONS = [
     { value: 'quote', label: 'Quote', color: '#94a3b8' },
@@ -81,96 +84,31 @@ const ProjectsPage = () => {
     }, []);
 
     async function fetchProjects() {
-        // Temp data
-        const tempProjects = [
-            {
-                _id: '1',
-                title: 'Sky Tower Residential Complex',
-                description: 'Modern residential building with 6 high-speed elevators serving 40 floors.',
-                client: 'Sky Developers Ltd',
-                location: 'Mumbai, Maharashtra',
-                completionDate: '2024-01-15',
-                category: 'Residential',
-                status: 'completed',
-                featuredImage: 'https://via.placeholder.com/800x500',
-                galleryImages: [
-                    'https://via.placeholder.com/400x300',
-                    'https://via.placeholder.com/400x300',
-                    'https://via.placeholder.com/400x300',
-                ],
-                isFeatured: true,
-                linkedProducts: ['1', '2'],
-                customSpecs: {
-                    capacity: '1000 kg',
-                    speed: '2.5 m/s',
-                    floors: '40',
-                    cabinSize: '1.5m x 1.5m',
-                    driveType: 'Gearless',
-                    otherSpecs: 'Stainless steel finish, LED lighting',
-                },
-                testimonials: [
-                    {
-                        name: 'Rajesh Kumar',
-                        company: 'Sky Developers Ltd',
-                        role: 'Project Manager',
-                        message: 'Excellent service and quality installation. Highly recommended!',
-                        rating: 5,
-                    },
-                ],
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '2',
-                title: 'Metro Shopping Mall',
-                description: 'Large commercial mall with escalators and elevators.',
-                client: 'Metro Retail Group',
-                location: 'Delhi, NCR',
-                completionDate: '2023-12-20',
-                category: 'Commercial',
-                status: 'completed',
-                featuredImage: 'https://via.placeholder.com/800x500',
-                galleryImages: ['https://via.placeholder.com/400x300'],
-                isFeatured: false,
-                linkedProducts: ['1'],
-                customSpecs: {
-                    capacity: '1500 kg',
-                    speed: '3.0 m/s',
-                    floors: '5',
-                    cabinSize: '2m x 2m',
-                    driveType: 'Traction',
-                    otherSpecs: 'Glass cabin, panoramic view',
-                },
-                testimonials: [],
-                createdAt: new Date().toISOString(),
-            },
-        ];
-        setProjects(tempProjects);
-
-        // Real API call (commented out)
-        // try {
-        //   const response = await fetch('http://localhost:5000/api/projects');
-        //   const data = await response.json();
-        //   setProjects(data);
-        // } catch (error) {
-        //   console.error('Error fetching projects:', error);
-        // }
-    };
+        try {
+            const data = await getProjects();
+            setProjects(data || []);
+        } catch (error) {
+            console.error('Error fetching projects:', error);
+        }
+    }
 
     async function fetchProducts() {
-        // Temp data
-        const tempProducts = [
-            { _id: '1', name: 'Elevator Model A' },
-            { _id: '2', name: 'Escalator Pro' },
-            { _id: '3', name: 'Home Lift Compact' },
-        ];
-        setProducts(tempProducts);
-    };
+        try {
+            const data = await getProducts();
+            setProducts(data || []);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
 
     async function fetchCategories() {
-        // Temp data
-        const tempCategories = ['Residential', 'Commercial', 'Industrial', 'Healthcare'];
-        setCategories(tempCategories);
-    };
+        try {
+            const data = await getCategories();
+            setCategories((data || []).map((category) => category.name));
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -178,7 +116,7 @@ const ProjectsPage = () => {
             ...formData,
             [name]: type === 'checkbox' ? checked : value,
         });
-    };
+    }
 
     const handleSpecChange = (e) => {
         const { name, value } = e.target;
@@ -364,26 +302,27 @@ const ProjectsPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (editingProject) {
-            const updatedProjects = projects.map((proj) =>
-                proj._id === editingProject._id ? { ...proj, ...formData } : proj
-            );
-            setProjects(updatedProjects);
-        } else {
-            const newProject = {
-                _id: Date.now().toString(),
-                ...formData,
-                createdAt: new Date().toISOString(),
-            };
-            setProjects([...projects, newProject]);
+        try {
+            if (editingProject) {
+                await updateProject(editingProject._id, formData);
+            } else {
+                await createProject(formData);
+            }
+            await fetchProjects();
+            closeModal();
+        } catch (error) {
+            console.error('Error saving project:', error);
         }
-
-        closeModal();
     };
 
     const handleDelete = async (projectId) => {
         if (confirm('Are you sure you want to delete this project?')) {
-            setProjects(projects.filter((proj) => proj._id !== projectId));
+            try {
+                await deleteProject(projectId);
+                await fetchProjects();
+            } catch (error) {
+                console.error('Error deleting project:', error);
+            }
         }
     };
 

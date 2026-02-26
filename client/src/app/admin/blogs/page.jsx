@@ -22,6 +22,7 @@ import {
 } from 'react-icons/ri';
 import styles from './page.module.css';
 import Image from 'next/image';
+import { getBlogs, createBlog, updateBlog, deleteBlog } from '@/services/blogs.service';
 
 const STATUS_OPTIONS = [
     { value: 'draft', label: 'Draft', icon: RiDraftLine },
@@ -63,77 +64,13 @@ const BlogsPage = () => {
     }, []);
 
     async function fetchBlogs() {
-        // Temp data
-        const tempBlogs = [
-            {
-                _id: '1',
-                title: 'The Future of Elevator Technology',
-                slug: 'future-of-elevator-technology',
-                excerpt: 'Exploring the latest innovations in vertical transportation systems.',
-                content: '<p>Content about elevator technology...</p>',
-                featuredImage: 'https://via.placeholder.com/400x250',
-                author: 'John Doe',
-                tags: ['Technology', 'Innovation', 'Elevators'],
-                status: 'published',
-                publishDate: '2024-02-01',
-                isFeatured: true,
-                metaTitle: 'Future of Elevator Technology | Lift Blog',
-                metaDescription: 'Discover the latest innovations in elevator technology.',
-                metaKeywords: 'elevator, technology, innovation',
-                ogImage: 'https://via.placeholder.com/1200x630',
-                canonicalUrl: 'https://example.com/blog/future-of-elevator-technology',
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '2',
-                title: 'Maintenance Tips for Home Elevators',
-                slug: 'maintenance-tips-home-elevators',
-                excerpt: 'Keep your home elevator running smoothly with these essential tips.',
-                content: '<p>Maintenance tips content...</p>',
-                featuredImage: 'https://via.placeholder.com/400x250',
-                author: 'Jane Smith',
-                tags: ['Maintenance', 'Home Elevators', 'Tips'],
-                status: 'published',
-                publishDate: '2024-01-28',
-                isFeatured: false,
-                metaTitle: 'Home Elevator Maintenance Tips',
-                metaDescription: 'Essential maintenance tips for home elevators.',
-                metaKeywords: 'home elevator, maintenance, tips',
-                ogImage: '',
-                canonicalUrl: '',
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '3',
-                title: 'Understanding Lift Safety Standards',
-                slug: 'understanding-lift-safety-standards',
-                excerpt: 'A comprehensive guide to elevator safety regulations and compliance.',
-                content: '<p>Safety standards content...</p>',
-                featuredImage: 'https://via.placeholder.com/400x250',
-                author: 'Mike Johnson',
-                tags: ['Safety', 'Regulations', 'Standards'],
-                status: 'draft',
-                publishDate: '',
-                isFeatured: false,
-                metaTitle: '',
-                metaDescription: '',
-                metaKeywords: '',
-                ogImage: '',
-                canonicalUrl: '',
-                createdAt: new Date().toISOString(),
-            },
-        ];
-        setBlogs(tempBlogs);
-
-        // Real API call (commented out)
-        // try {
-        //   const response = await fetch('http://localhost:5000/api/blogs');
-        //   const data = await response.json();
-        //   setBlogs(data);
-        // } catch (error) {
-        //   console.error('Error fetching blogs:', error);
-        // }
-    };
+        try {
+            const data = await getBlogs();
+            setBlogs(data || []);
+        } catch (error) {
+            console.error('Error fetching blogs:', error);
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -150,7 +87,7 @@ const BlogsPage = () => {
                 .replace(/(^-|-$)/g, '');
             setFormData((prev) => ({ ...prev, slug }));
         }
-    };
+    }
 
     const handleContentChange = (html) => {
         setFormData({ ...formData, content: html });
@@ -253,60 +190,27 @@ const BlogsPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (editingBlog) {
-            const updatedBlogs = blogs.map((blog) =>
-                blog._id === editingBlog._id ? { ...blog, ...formData } : blog
-            );
-            setBlogs(updatedBlogs);
-
-            // Real API call (commented out)
-            // try {
-            //   await fetch(`http://localhost:5000/api/blogs/${editingBlog._id}`, {
-            //     method: 'PUT',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            //   });
-            //   fetchBlogs();
-            // } catch (error) {
-            //   console.error('Error updating blog:', error);
-            // }
-        } else {
-            const newBlog = {
-                _id: Date.now().toString(),
-                ...formData,
-                createdAt: new Date().toISOString(),
-            };
-            setBlogs([...blogs, newBlog]);
-
-            // Real API call (commented out)
-            // try {
-            //   await fetch('http://localhost:5000/api/blogs', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            //   });
-            //   fetchBlogs();
-            // } catch (error) {
-            //   console.error('Error creating blog:', error);
-            // }
+        try {
+            if (editingBlog) {
+                await updateBlog(editingBlog._id, formData);
+            } else {
+                await createBlog(formData);
+            }
+            await fetchBlogs();
+            closeModal();
+        } catch (error) {
+            console.error('Error saving blog:', error);
         }
-
-        closeModal();
     };
 
     const handleDelete = async (blogId) => {
         if (confirm('Are you sure you want to delete this blog?')) {
-            setBlogs(blogs.filter((blog) => blog._id !== blogId));
-
-            // Real API call (commented out)
-            // try {
-            //   await fetch(`http://localhost:5000/api/blogs/${blogId}`, {
-            //     method: 'DELETE',
-            //   });
-            //   fetchBlogs();
-            // } catch (error) {
-            //   console.error('Error deleting blog:', error);
-            // }
+            try {
+                await deleteBlog(blogId);
+                await fetchBlogs();
+            } catch (error) {
+                console.error('Error deleting blog:', error);
+            }
         }
     };
 

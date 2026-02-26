@@ -16,6 +16,9 @@ import {
     RiUploadCloudLine,
 } from 'react-icons/ri';
 import styles from './page.module.css';
+import { getProducts, createProduct, updateProduct, deleteProduct } from '@/services/products.service';
+import { getCategories, getSubCategories } from '@/services/categories.service';
+import { getComponents } from '@/services/components.service';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -36,7 +39,7 @@ const ProductsPage = () => {
     });
     const [imagePreview, setImagePreview] = useState('');
 
-    // Fetch data (temp data for now)
+    // Fetch data
     useEffect(() => {
         fetchProducts();
         fetchCategories();
@@ -44,86 +47,46 @@ const ProductsPage = () => {
         fetchComponents();
     }, []);
 
-    const fetchProducts = async () => {
-        // Temp data - replace with actual API call
-        const tempProducts = [
-            {
-                _id: '1',
-                name: 'Elevator Model A',
-                description: 'High-speed elevator for commercial buildings',
-                image: 'https://via.placeholder.com/150',
-                categories: ['cat1', 'cat2'],
-                subCategories: ['sub1'],
-                components: ['comp1', 'comp2'],
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '2',
-                name: 'Escalator Pro',
-                description: 'Durable escalator for shopping malls',
-                image: 'https://via.placeholder.com/150',
-                categories: ['cat1'],
-                subCategories: ['sub2'],
-                components: ['comp1'],
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '3',
-                name: 'Home Lift Compact',
-                description: 'Space-saving home elevator solution',
-                image: 'https://via.placeholder.com/150',
-                categories: ['cat2'],
-                subCategories: ['sub1', 'sub2'],
-                components: ['comp2'],
-                createdAt: new Date().toISOString(),
-            },
-        ];
-        setProducts(tempProducts);
+    async function fetchProducts() {
+        try {
+            const data = await getProducts();
+            setProducts(data || []);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    }
 
-        // Real API call (commented out for now)
-        // try {
-        //   const response = await fetch('http://localhost:5000/api/products');
-        //   const data = await response.json();
-        //   setProducts(data);
-        // } catch (error) {
-        //   console.error('Error fetching products:', error);
-        // }
-    };
+    async function fetchCategories() {
+        try {
+            const data = await getCategories();
+            setCategories(data || []);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }
 
-    const fetchCategories = async () => {
-        // Temp data
-        const tempCategories = [
-            { _id: 'cat1', name: 'Commercial' },
-            { _id: 'cat2', name: 'Residential' },
-            { _id: 'cat3', name: 'Industrial' },
-        ];
-        setCategories(tempCategories);
-    };
+    async function fetchSubCategories() {
+        try {
+            const data = await getSubCategories();
+            setSubCategories(data || []);
+        } catch (error) {
+            console.error('Error fetching sub-categories:', error);
+        }
+    }
 
-    const fetchSubCategories = async () => {
-        // Temp data
-        const tempSubCategories = [
-            { _id: 'sub1', name: 'High-Speed' },
-            { _id: 'sub2', name: 'Standard' },
-            { _id: 'sub3', name: 'Luxury' },
-        ];
-        setSubCategories(tempSubCategories);
-    };
-
-    const fetchComponents = async () => {
-        // Temp data
-        const tempComponents = [
-            { _id: 'comp1', name: 'Motor System' },
-            { _id: 'comp2', name: 'Control Panel' },
-            { _id: 'comp3', name: 'Safety Features' },
-        ];
-        setComponents(tempComponents);
-    };
+    async function fetchComponents() {
+        try {
+            const data = await getComponents();
+            setComponents(data || []);
+        } catch (error) {
+            console.error('Error fetching components:', error);
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-    };
+    }
 
     const handleMultiSelectChange = (e, field) => {
         const options = e.target.options;
@@ -192,62 +155,27 @@ const ProductsPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (editingProduct) {
-            // Update product
-            const updatedProducts = products.map((p) =>
-                p._id === editingProduct._id ? { ...p, ...formData } : p
-            );
-            setProducts(updatedProducts);
-
-            // Real API call (commented out)
-            // try {
-            //   await fetch(`http://localhost:5000/api/products/${editingProduct._id}`, {
-            //     method: 'PUT',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            //   });
-            //   fetchProducts();
-            // } catch (error) {
-            //   console.error('Error updating product:', error);
-            // }
-        } else {
-            // Add new product
-            const newProduct = {
-                _id: Date.now().toString(),
-                ...formData,
-                createdAt: new Date().toISOString(),
-            };
-            setProducts([...products, newProduct]);
-
-            // Real API call (commented out)
-            // try {
-            //   await fetch('http://localhost:5000/api/products', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            //   });
-            //   fetchProducts();
-            // } catch (error) {
-            //   console.error('Error creating product:', error);
-            // }
+        try {
+            if (editingProduct) {
+                await updateProduct(editingProduct._id, formData);
+            } else {
+                await createProduct(formData);
+            }
+            await fetchProducts();
+            closeModal();
+        } catch (error) {
+            console.error('Error saving product:', error);
         }
-
-        closeModal();
     };
 
     const handleDelete = async (productId) => {
         if (confirm('Are you sure you want to delete this product?')) {
-            setProducts(products.filter((p) => p._id !== productId));
-
-            // Real API call (commented out)
-            // try {
-            //   await fetch(`http://localhost:5000/api/products/${productId}`, {
-            //     method: 'DELETE',
-            //   });
-            //   fetchProducts();
-            // } catch (error) {
-            //   console.error('Error deleting product:', error);
-            // }
+            try {
+                await deleteProduct(productId);
+                await fetchProducts();
+            } catch (error) {
+                console.error('Error deleting product:', error);
+            }
         }
     };
 
