@@ -16,6 +16,8 @@ import {
     RiArrowDownLine,
 } from 'react-icons/ri';
 import styles from './page.module.css';
+import { getAttributes, createAttribute, updateAttribute, deleteAttribute } from '@/services/attributes.service';
+import { getCategories } from '@/services/categories.service';
 
 const FIELD_TYPES = [
     { value: 'text', label: 'Text Input' },
@@ -48,122 +50,28 @@ const AttributesPage = () => {
         fetchCategories();
     }, []);
 
-    const fetchAttributes = async () => {
-        // Temp data
-        const tempAttributes = [
-            {
-                _id: '1',
-                name: 'Product Specifications',
-                description: 'Technical specifications for lift products',
-                category: 'cat1',
-                status: 'active',
-                fields: [
-                    {
-                        fieldId: 'f1',
-                        fieldName: 'Capacity',
-                        fieldType: 'dropdown',
-                        isRequired: true,
-                        options: ['500kg', '1000kg', '1500kg', '2000kg'],
-                    },
-                    {
-                        fieldId: 'f2',
-                        fieldName: 'Speed',
-                        fieldType: 'number',
-                        isRequired: true,
-                        options: [],
-                    },
-                    {
-                        fieldId: 'f3',
-                        fieldName: 'Safety Features',
-                        fieldType: 'checkbox',
-                        isRequired: false,
-                        options: ['Emergency Brake', 'Overload Sensor', 'Backup Power'],
-                    },
-                ],
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '2',
-                name: 'Customer Requirements',
-                description: 'Custom requirements from customers',
-                category: 'cat2',
-                status: 'active',
-                fields: [
-                    {
-                        fieldId: 'f4',
-                        fieldName: 'Building Type',
-                        fieldType: 'radio',
-                        isRequired: true,
-                        options: ['Residential', 'Commercial', 'Industrial'],
-                    },
-                    {
-                        fieldId: 'f5',
-                        fieldName: 'Installation Date',
-                        fieldType: 'date',
-                        isRequired: true,
-                        options: [],
-                    },
-                    {
-                        fieldId: 'f6',
-                        fieldName: 'Special Requirements',
-                        fieldType: 'textarea',
-                        isRequired: false,
-                        options: [],
-                    },
-                ],
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '3',
-                name: 'Maintenance Form',
-                description: 'Maintenance and service tracking',
-                category: 'cat1',
-                status: 'inactive',
-                fields: [
-                    {
-                        fieldId: 'f7',
-                        fieldName: 'Technician Name',
-                        fieldType: 'text',
-                        isRequired: true,
-                        options: [],
-                    },
-                    {
-                        fieldId: 'f8',
-                        fieldName: 'Service Report',
-                        fieldType: 'file',
-                        isRequired: false,
-                        options: [],
-                    },
-                ],
-                createdAt: new Date().toISOString(),
-            },
-        ];
-        setAttributes(tempAttributes);
+    async function fetchAttributes() {
+        try {
+            const data = await getAttributes();
+            setAttributes(data || []);
+        } catch (error) {
+            console.error('Error fetching attributes:', error);
+        }
+    }
 
-        // Real API call (commented out)
-        // try {
-        //   const response = await fetch('http://localhost:5000/api/attributes');
-        //   const data = await response.json();
-        //   setAttributes(data);
-        // } catch (error) {
-        //   console.error('Error fetching attributes:', error);
-        // }
-    };
-
-    const fetchCategories = async () => {
-        // Temp data
-        const tempCategories = [
-            { _id: 'cat1', name: 'Technical' },
-            { _id: 'cat2', name: 'Customer' },
-            { _id: 'cat3', name: 'Maintenance' },
-        ];
-        setCategories(tempCategories);
-    };
+    async function fetchCategories() {
+        try {
+            const data = await getCategories();
+            setCategories(data || []);
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-    };
+    }
 
     const addNewField = () => {
         const newField = {
@@ -274,26 +182,27 @@ const AttributesPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (editingAttribute) {
-            const updatedAttributes = attributes.map((attr) =>
-                attr._id === editingAttribute._id ? { ...attr, ...formData } : attr
-            );
-            setAttributes(updatedAttributes);
-        } else {
-            const newAttribute = {
-                _id: Date.now().toString(),
-                ...formData,
-                createdAt: new Date().toISOString(),
-            };
-            setAttributes([...attributes, newAttribute]);
+        try {
+            if (editingAttribute) {
+                await updateAttribute(editingAttribute._id, formData);
+            } else {
+                await createAttribute(formData);
+            }
+            await fetchAttributes();
+            closeModal();
+        } catch (error) {
+            console.error('Error saving attribute:', error);
         }
-
-        closeModal();
     };
 
     const handleDelete = async (attributeId) => {
         if (confirm('Are you sure you want to delete this attribute?')) {
-            setAttributes(attributes.filter((attr) => attr._id !== attributeId));
+            try {
+                await deleteAttribute(attributeId);
+                await fetchAttributes();
+            } catch (error) {
+                console.error('Error deleting attribute:', error);
+            }
         }
     };
 

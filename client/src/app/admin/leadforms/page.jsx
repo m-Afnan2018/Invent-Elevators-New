@@ -23,6 +23,9 @@ import {
   RiAlertLine,
 } from 'react-icons/ri';
 import styles from './page.module.css';
+import { getLeads, createLead, updateLead, deleteLead } from '@/services/leads.service';
+import { getUsers } from '@/services/users.service';
+import { getProducts } from '@/services/products.service';
 
 const LEAD_STATUS = [
   { value: 'new', label: 'New', color: '#3b82f6' },
@@ -98,108 +101,36 @@ const LeadFormsPage = () => {
   }, []);
 
   async function fetchLeads() {
-    // Temp data
-    const tempLeads = [
-      {
-        _id: '1',
-        name: 'Rajesh Kumar',
-        email: 'rajesh.k@example.com',
-        phone: '+91 98765 43210',
-        company: 'Tech Solutions Pvt Ltd',
-        location: 'Mumbai, Maharashtra',
-        message: 'Interested in residential elevator for 10-floor building',
-        productInterest: '1',
-        budget: '50-75 Lakhs',
-        timeline: '3-6 months',
-        source: 'Website',
-        priority: 'high',
-        status: 'new',
-        assignedTo: '1',
-        notes: 'Client seems serious, follow up tomorrow',
-        files: [],
-        customFields: {
-          cf1: '2024-06-15',
-          cf2: '10',
-          cf3: 'Residential',
-        },
-        createdAt: '2024-02-25T09:30:00',
-      },
-      {
-        _id: '2',
-        name: 'Priya Sharma',
-        email: 'priya.sharma@example.com',
-        phone: '+91 98765 43211',
-        company: 'Metro Shopping Complex',
-        location: 'Delhi, NCR',
-        message: 'Need quotation for commercial escalators',
-        productInterest: '2',
-        budget: '1-2 Crores',
-        timeline: '6-12 months',
-        source: 'Referral',
-        priority: 'medium',
-        status: 'contacted',
-        assignedTo: '2',
-        notes: 'Sent initial quotation, waiting for response',
-        files: ['proposal.pdf'],
-        customFields: {
-          cf1: '2024-09-01',
-          cf2: '5',
-          cf3: 'Commercial',
-        },
-        createdAt: '2024-02-23T14:15:00',
-      },
-      {
-        _id: '3',
-        name: 'Amit Patel',
-        email: 'amit.p@example.com',
-        phone: '+91 98765 43212',
-        company: 'Healthcare Hospitals',
-        location: 'Bangalore, Karnataka',
-        message: 'Hospital elevator requirements',
-        productInterest: '3',
-        budget: 'Above 2 Crores',
-        timeline: '12+ months',
-        source: 'Phone',
-        priority: 'urgent',
-        status: 'qualified',
-        assignedTo: '1',
-        notes: 'Meeting scheduled for site visit',
-        files: ['floor-plans.pdf', 'specifications.docx'],
-        customFields: {
-          cf1: '2025-03-01',
-          cf2: '15',
-          cf3: 'Healthcare',
-        },
-        createdAt: '2024-02-20T11:45:00',
-      },
-    ];
-    setLeads(tempLeads);
-  };
+    try {
+      const data = await getLeads();
+      setLeads(data || []);
+    } catch (error) {
+      console.error('Error fetching leads:', error);
+    }
+  }
 
   async function fetchUsers() {
-    // Temp data
-    const tempUsers = [
-      { _id: '1', firstName: 'John', lastName: 'Doe' },
-      { _id: '2', firstName: 'Sarah', lastName: 'Williams' },
-      { _id: '3', firstName: 'Mike', lastName: 'Johnson' },
-    ];
-    setUsers(tempUsers);
-  };
+    try {
+      const data = await getUsers();
+      setUsers(data || []);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  }
 
   async function fetchProducts() {
-    // Temp data
-    const tempProducts = [
-      { _id: '1', name: 'Residential Elevator' },
-      { _id: '2', name: 'Commercial Escalator' },
-      { _id: '3', name: 'Hospital Elevator' },
-    ];
-    setProducts(tempProducts);
-  };
+    try {
+      const data = await getProducts();
+      setProducts(data || []);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
+  }
 
   const handleCustomFieldChange = (fieldId, value) => {
     setFormData({
@@ -255,7 +186,7 @@ const LeadFormsPage = () => {
         company: lead.company,
         location: lead.location,
         message: lead.message,
-        productInterest: lead.productInterest,
+        productInterest: Array.isArray(lead.productInterest) ? (lead.productInterest[0] || '') : lead.productInterest,
         budget: lead.budget,
         timeline: lead.timeline,
         source: lead.source,
@@ -304,26 +235,33 @@ const LeadFormsPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (editingLead) {
-      const updatedLeads = leads.map((lead) =>
-        lead._id === editingLead._id ? { ...lead, ...formData } : lead
-      );
-      setLeads(updatedLeads);
-    } else {
-      const newLead = {
-        _id: Date.now().toString(),
+    try {
+      const payload = {
         ...formData,
-        createdAt: new Date().toISOString(),
+        productInterest: formData.productInterest ? [formData.productInterest] : [],
       };
-      setLeads([...leads, newLead]);
-    }
 
-    closeModal();
+      if (editingLead) {
+        await updateLead(editingLead._id, payload);
+      } else {
+        await createLead(payload);
+      }
+
+      await fetchLeads();
+      closeModal();
+    } catch (error) {
+      console.error('Error saving lead:', error);
+    }
   };
 
   const handleDelete = async (leadId) => {
     if (confirm('Are you sure you want to delete this lead?')) {
-      setLeads(leads.filter((lead) => lead._id !== leadId));
+      try {
+        await deleteLead(leadId);
+        await fetchLeads();
+      } catch (error) {
+        console.error('Error deleting lead:', error);
+      }
     }
   };
 
@@ -392,7 +330,8 @@ const LeadFormsPage = () => {
   };
 
   const getProductName = (productId) => {
-    return products.find((p) => p._id === productId)?.name || 'N/A';
+    const normalizedProductId = Array.isArray(productId) ? productId[0] : productId;
+    return products.find((p) => p._id === normalizedProductId)?.name || 'N/A';
   };
 
   const getUserName = (userId) => {

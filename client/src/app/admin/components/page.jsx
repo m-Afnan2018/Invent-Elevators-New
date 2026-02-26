@@ -14,6 +14,8 @@ import {
     RiCheckboxCircleLine,
 } from 'react-icons/ri';
 import styles from './page.module.css';
+import { getComponents, createComponent, updateComponent, deleteComponent } from '@/services/components.service';
+import { getAttributes } from '@/services/attributes.service';
 
 const ComponentsPage = () => {
     const [components, setComponents] = useState([]);
@@ -36,166 +38,28 @@ const ComponentsPage = () => {
         fetchAttributes();
     }, []);
 
-    const fetchComponents = async () => {
-        // Temp data
-        const tempComponents = [
-            {
-                _id: '1',
-                name: 'Standard Elevator Specs',
-                description: 'Standard specifications for commercial elevators',
-                status: 'active',
-                attributeId: '1',
-                attributeName: 'Product Specifications',
-                filledData: {
-                    f1: '1000kg',
-                    f2: '2.5',
-                    f3: ['Emergency Brake', 'Overload Sensor'],
-                },
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '2',
-                name: 'Residential Building Requirements',
-                description: 'Standard requirements for residential projects',
-                status: 'active',
-                attributeId: '2',
-                attributeName: 'Customer Requirements',
-                filledData: {
-                    f4: 'Residential',
-                    f5: '2024-03-15',
-                    f6: 'Need noise reduction features',
-                },
-                createdAt: new Date().toISOString(),
-            },
-            {
-                _id: '3',
-                name: 'Monthly Maintenance Record',
-                description: 'Template for monthly maintenance checks',
-                status: 'inactive',
-                attributeId: '3',
-                attributeName: 'Maintenance Form',
-                filledData: {
-                    f7: 'John Doe',
-                    f8: 'maintenance-report.pdf',
-                },
-                createdAt: new Date().toISOString(),
-            },
-        ];
-        setComponents(tempComponents);
+    async function fetchComponents() {
+        try {
+            const data = await getComponents();
+            setComponents(data || []);
+        } catch (error) {
+            console.error('Error fetching components:', error);
+        }
+    }
 
-        // Real API call (commented out)
-        // try {
-        //   const response = await fetch('http://localhost:5000/api/components');
-        //   const data = await response.json();
-        //   setComponents(data);
-        // } catch (error) {
-        //   console.error('Error fetching components:', error);
-        // }
-    };
-
-    const fetchAttributes = async () => {
-        // Temp data - matches the attributes we created
-        const tempAttributes = [
-            {
-                _id: '1',
-                name: 'Product Specifications',
-                description: 'Technical specifications for lift products',
-                category: 'cat1',
-                status: 'active',
-                fields: [
-                    {
-                        fieldId: 'f1',
-                        fieldName: 'Capacity',
-                        fieldType: 'dropdown',
-                        isRequired: true,
-                        options: ['500kg', '1000kg', '1500kg', '2000kg'],
-                    },
-                    {
-                        fieldId: 'f2',
-                        fieldName: 'Speed',
-                        fieldType: 'number',
-                        isRequired: true,
-                        options: [],
-                    },
-                    {
-                        fieldId: 'f3',
-                        fieldName: 'Safety Features',
-                        fieldType: 'checkbox',
-                        isRequired: false,
-                        options: ['Emergency Brake', 'Overload Sensor', 'Backup Power'],
-                    },
-                ],
-            },
-            {
-                _id: '2',
-                name: 'Customer Requirements',
-                description: 'Custom requirements from customers',
-                category: 'cat2',
-                status: 'active',
-                fields: [
-                    {
-                        fieldId: 'f4',
-                        fieldName: 'Building Type',
-                        fieldType: 'radio',
-                        isRequired: true,
-                        options: ['Residential', 'Commercial', 'Industrial'],
-                    },
-                    {
-                        fieldId: 'f5',
-                        fieldName: 'Installation Date',
-                        fieldType: 'date',
-                        isRequired: true,
-                        options: [],
-                    },
-                    {
-                        fieldId: 'f6',
-                        fieldName: 'Special Requirements',
-                        fieldType: 'textarea',
-                        isRequired: false,
-                        options: [],
-                    },
-                ],
-            },
-            {
-                _id: '3',
-                name: 'Maintenance Form',
-                description: 'Maintenance and service tracking',
-                category: 'cat1',
-                status: 'active',
-                fields: [
-                    {
-                        fieldId: 'f7',
-                        fieldName: 'Technician Name',
-                        fieldType: 'text',
-                        isRequired: true,
-                        options: [],
-                    },
-                    {
-                        fieldId: 'f8',
-                        fieldName: 'Service Report',
-                        fieldType: 'file',
-                        isRequired: false,
-                        options: [],
-                    },
-                ],
-            },
-        ];
-        setAttributes(tempAttributes.filter((attr) => attr.status === 'active'));
-
-        // Real API call (commented out)
-        // try {
-        //   const response = await fetch('http://localhost:5000/api/attributes?status=active');
-        //   const data = await response.json();
-        //   setAttributes(data);
-        // } catch (error) {
-        //   console.error('Error fetching attributes:', error);
-        // }
-    };
+    async function fetchAttributes() {
+        try {
+            const data = await getAttributes();
+            setAttributes((data || []).filter((attr) => attr.status === 'active'));
+        } catch (error) {
+            console.error('Error fetching attributes:', error);
+        }
+    }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-    };
+    }
 
     const handleAttributeSelect = (e) => {
         const attributeId = e.target.value;
@@ -280,60 +144,28 @@ const ComponentsPage = () => {
             attributeName: attribute?.name,
         };
 
-        if (editingComponent) {
-            const updatedComponents = components.map((comp) =>
-                comp._id === editingComponent._id ? { ...comp, ...componentData } : comp
-            );
-            setComponents(updatedComponents);
+        try {
+            if (editingComponent) {
+                await updateComponent(editingComponent._id, componentData);
+            } else {
+                await createComponent(componentData);
+            }
 
-            // Real API call (commented out)
-            // try {
-            //   await fetch(`http://localhost:5000/api/components/${editingComponent._id}`, {
-            //     method: 'PUT',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            //   });
-            //   fetchComponents();
-            // } catch (error) {
-            //   console.error('Error updating component:', error);
-            // }
-        } else {
-            const newComponent = {
-                _id: Date.now().toString(),
-                ...componentData,
-                createdAt: new Date().toISOString(),
-            };
-            setComponents([...components, newComponent]);
-
-            // Real API call (commented out)
-            // try {
-            //   await fetch('http://localhost:5000/api/components', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData),
-            //   });
-            //   fetchComponents();
-            // } catch (error) {
-            //   console.error('Error creating component:', error);
-            // }
+            await fetchComponents();
+            closeModal();
+        } catch (error) {
+            console.error('Error saving component:', error);
         }
-
-        closeModal();
     };
 
     const handleDelete = async (componentId) => {
         if (confirm('Are you sure you want to delete this component?')) {
-            setComponents(components.filter((comp) => comp._id !== componentId));
-
-            // Real API call (commented out)
-            // try {
-            //   await fetch(`http://localhost:5000/api/components/${componentId}`, {
-            //     method: 'DELETE',
-            //   });
-            //   fetchComponents();
-            // } catch (error) {
-            //   console.error('Error deleting component:', error);
-            // }
+            try {
+                await deleteComponent(componentId);
+                await fetchComponents();
+            } catch (error) {
+                console.error('Error deleting component:', error);
+            }
         }
     };
 
