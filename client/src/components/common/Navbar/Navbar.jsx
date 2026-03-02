@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { getProducts } from "@/services/products.service";
 import styles from "./Navbar.module.css";
@@ -10,6 +10,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const closeTimeoutRef = useRef(null);
+  const productsMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -37,6 +39,36 @@ export default function Navbar() {
     loadProducts();
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!productsMenuRef.current?.contains(event.target)) {
+        setProductsOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setProductsOpen(false);
+        setMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/categories", label: "Our Categories" },
@@ -49,6 +81,20 @@ export default function Navbar() {
     () => products.filter((item) => item?.name && item?._id),
     [products]
   );
+
+  const openProductsMenu = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setProductsOpen(true);
+  };
+
+  const closeProductsMenu = () => {
+    closeTimeoutRef.current = setTimeout(() => {
+      setProductsOpen(false);
+    }, 130);
+  };
 
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
@@ -71,28 +117,31 @@ export default function Navbar() {
           ))}
 
           <li
-            style={{ position: "relative" }}
-            onMouseEnter={() => setProductsOpen(true)}
-            onMouseLeave={() => setProductsOpen(false)}
+            ref={productsMenuRef}
+            className={styles.productsItem}
+            onMouseEnter={openProductsMenu}
+            onMouseLeave={closeProductsMenu}
           >
             <button
               type="button"
-              className={styles.navLink}
-              style={{ background: "transparent", border: "none", cursor: "pointer" }}
+              className={`${styles.navLink} ${styles.productsTrigger}`}
               onClick={() => setProductsOpen((prev) => !prev)}
+              aria-expanded={productsOpen}
+              aria-haspopup="menu"
             >
               Our Products
+              <span className={`${styles.productsChevron} ${productsOpen ? styles.productsChevronOpen : ""}`}>▼</span>
               <span className={styles.linkUnderline} />
             </button>
 
             {productsOpen && (
-              <div className={styles.productsMega}>
+              <div className={styles.productsMega} role="menu">
                 <div className={styles.productsInner}>
                   <div className={styles.productsLeft}>
                     <ul>
-                      <li><Link href="/products">All Products</Link></li>
-                      <li><Link href="/categories">Product Categories</Link></li>
-                      <li><Link href="/contact">Request Consultation</Link></li>
+                      <li><Link href="/products" onClick={() => setProductsOpen(false)}>All Products</Link></li>
+                      <li><Link href="/categories" onClick={() => setProductsOpen(false)}>Product Categories</Link></li>
+                      <li><Link href="/contact" onClick={() => setProductsOpen(false)}>Request Consultation</Link></li>
                     </ul>
                   </div>
 
@@ -110,7 +159,7 @@ export default function Navbar() {
                         </Link>
                       ))
                     ) : (
-                      <Link href="/products" className={styles.productCard}>
+                      <Link href="/products" className={styles.productCard} onClick={() => setProductsOpen(false)}>
                         <h4>Explore Catalog</h4>
                         <p>Browse our complete list of elevators and lift solutions.</p>
                       </Link>
