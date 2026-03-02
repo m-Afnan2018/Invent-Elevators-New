@@ -34,7 +34,7 @@ export default function Navbar() {
     const loadProducts = async () => {
       try {
         const response = await getProducts();
-        setProducts(Array.isArray(response) ? response.slice(0, 4) : []);
+        setProducts(Array.isArray(response) ? response : []);
       } catch (_error) {
         setProducts([]);
       }
@@ -184,11 +184,40 @@ export default function Navbar() {
                       <li><Link href="/projects" onClick={() => setProductsOpen(false)}>Projects</Link></li>
                       <li><Link href="/contact" onClick={() => setProductsOpen(false)}>Request Consultation</Link></li>
                     </ul>
+
+                    <p className={styles.categoryTitle}>Categories</p>
+                    <ul className={styles.categoryList}>
+                      {activeCategories.map((category) => (
+                        <li key={category._id}>
+                          <Link
+                            href={`/categories/${category._id}`}
+                            className={`${styles.categoryLink} ${resolvedActiveCategoryId === category._id ? styles.categoryLinkActive : ""}`}
+                            onMouseEnter={() => setHoveredCategoryId(category._id)}
+                            onFocus={() => setHoveredCategoryId(category._id)}
+                            onClick={() => setProductsOpen(false)}
+                          >
+                            {category.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
                   <div className={styles.productsRight}>
-                    {featuredProducts.length ? (
-                      featuredProducts.map((product) => (
+                    {activeCategoryProducts.length ? (
+                      activeCategoryProducts.map((product) => (
+                        <Link
+                          key={product._id}
+                          href={`/products/${product._id}`}
+                          className={styles.productCard}
+                          onClick={() => setProductsOpen(false)}
+                        >
+                          <h4>{product.name}</h4>
+                          <p>{product.description || "View complete product details."}</p>
+                        </Link>
+                      ))
+                    ) : featuredProducts.length ? (
+                      featuredProducts.slice(0, 6).map((product) => (
                         <Link
                           key={product._id}
                           href={`/products/${product._id}`}
