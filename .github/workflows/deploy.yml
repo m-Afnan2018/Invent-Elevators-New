@@ -23,9 +23,6 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            cd server && npm install --omit=dev && cd ..
-            cd client && npm install && cd ..
-
             docker-compose down
             docker-compose up -d --build
 

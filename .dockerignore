@@ -1,8 +1,7 @@
-# Dependencies
-# test
-# node_modules
-# */node_modules
-# **/node_modules
+# Dependencies 
+node_modules
+*/node_modules
+**/node_modules
 
 # Git
 .git
