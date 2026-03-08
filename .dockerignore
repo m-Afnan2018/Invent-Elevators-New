@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+*/node_modules
+**/node_modules
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build outputs
+client/build
+client/dist
+server/dist
+
+# Environment files
+.env
+**/.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker files (no need to send these)
+docker-compose*.yml
+Dockerfile*
