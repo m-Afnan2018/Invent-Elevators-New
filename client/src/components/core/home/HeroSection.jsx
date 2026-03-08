@@ -2,43 +2,51 @@
 import styles from "./HeroSection.module.css";
 import Link from "next/link";
 
-export default function HeroSection() {
+const heroHighlights = [
+  "EN 81 compliant safety architecture",
+  "Tailored lift cabins and compact shaft options",
+  "Fast installation and preventive AMC support",
+];
 
+export default function HeroSection() {
   return (
     <section className={styles.heroWrapper}>
-      {/* ── HERO ── */}
       <div className={styles.hero}>
-        {/* Background image with overlay */}
         <div className={styles.heroBg} />
 
         <div className={styles.heroContent}>
-          <p className={styles.heroEyebrow}>Elevating Home with</p>
+          <p className={styles.heroEyebrow}>Invent Elevator · Premium Mobility Systems</p>
           <h1 className={styles.heroTitle}>
-            Design &amp; <br />Performance
+            Elevators Crafted for
+            <br />
+            Contemporary Buildings
           </h1>
           <p className={styles.heroSubtitle}>
-            High-quality Hydraulic Cargo Lifts, Scissor Lifts, Car Lifts &amp;
-            Custom Vertical Solutions designed for safety, durability, and
-            industrial efficiency.
+            From home lifts and passenger elevators to freight and hospital solutions,
+            we deliver smooth, secure, and efficient vertical transport with modern
+            engineering and reliable after-sales support.
           </p>
 
           <div className={styles.heroCtas}>
-            <Link href="/products" className={styles.ctaPrimary}>
-              Our products
+            <Link href="/contact" className={styles.ctaPrimary}>
+              Book Site Visit
             </Link>
-            <Link href="/brochure" className={styles.ctaSecondary}>
-              Download Brochure
+            <Link href="/products" className={styles.ctaSecondary}>
+              Explore Products
             </Link>
           </div>
 
-          <p className={styles.heroScroll}>Explore our lift solutions</p>
+          <ul className={styles.heroHighlights}>
+            {heroHighlights.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </div>
 
-        {/* Floating badge */}
         <div className={styles.heroBadge}>
-          <span className={styles.badgeYear}>Since</span>
-          <strong className={styles.badgeNum}>1947</strong>
-          <span className={styles.badgeLabel}>Global Lift Co.</span>
+          <span className={styles.badgeYear}>Trusted Since</span>
+          <strong className={styles.badgeNum}>1999</strong>
+          <span className={styles.badgeLabel}>Pan-India Installations</span>
         </div>
       </div>
     </section>

@@ -24,7 +24,7 @@
 
 /* Frosted glass on scroll */
 .navbar.scrolled {
-  background: rgba(5, 10, 22, 0.88);
+  background: rgba(8, 14, 26, 0.92);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
@@ -53,7 +53,7 @@
 
 .logoIcon {
   font-size: 1.3rem;
-  color: #4fc3f7;
+  color: #d39b54;
   line-height: 1;
   transition: transform 0.3s ease;
 }
@@ -72,7 +72,7 @@
 
 .logoText strong {
   font-weight: 800;
-  color: #4fc3f7;
+  color: #d39b54;
 }
 
 /* ── DESKTOP NAV LINKS ── */
@@ -114,7 +114,7 @@
   transform: translateX(-50%) scaleX(0);
   width: calc(100% - 1.6rem);
   height: 1.5px;
-  background: #4fc3f7;
+  background: #d39b54;
   border-radius: 2px;
   transition: transform 0.25s ease;
   transform-origin: center;
@@ -138,7 +138,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 1.4rem;
-  background: #1565c0;
+  background: #b0742e;
   color: #fff;
   font-family: "DM Sans", sans-serif;
   font-size: 0.86rem;
@@ -147,7 +147,7 @@
   text-decoration: none;
   border-radius: 7px;
   border: 1.5px solid transparent;
-  box-shadow: 0 2px 16px rgba(21, 101, 192, 0.4);
+  box-shadow: 0 2px 16px rgba(176, 116, 46, 0.35);
   transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
   white-space: nowrap;
 }
@@ -157,9 +157,9 @@
 }
 
 .orderBtn:hover {
-  background: #1976d2;
+  background: #c4853a;
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(21, 101, 192, 0.55);
+  box-shadow: 0 4px 20px rgba(176, 116, 46, 0.45);
 }
 
 .orderBtn:hover svg {
@@ -311,7 +311,7 @@
   font-family: "DM Sans", sans-serif;
   font-size: 0.65rem;
   font-weight: 400;
-  color: #4fc3f7;
+  color: #d39b54;
   letter-spacing: 0.1em;
   min-width: 20px;
 }
@@ -329,7 +329,7 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.85rem 1.5rem;
-  background: #1565c0;
+  background: #b0742e;
   color: #fff;
   font-family: "DM Sans", sans-serif;
   font-size: 0.9rem;
@@ -337,12 +337,12 @@
   letter-spacing: 0.03em;
   border-radius: 8px;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(21, 101, 192, 0.4);
+  box-shadow: 0 4px 20px rgba(176, 116, 46, 0.35);
   transition: background 0.25s, transform 0.2s;
 }
 
 .mobileOrderBtn:hover {
-  background: #1976d2;
+  background: #c4853a;
   transform: translateY(-1px);
 }
 
@@ -471,7 +471,7 @@
 
 .categoryLink:hover,
 .categoryLinkActive {
-  color: #1565c0;
+  color: #b0742e;
   background: #f5f9ff;
 }
 
@@ -491,7 +491,7 @@
 }
 
 .productsLeft li a:hover {
-  color: #1565c0;
+  color: #b0742e;
   background: #f5f9ff;
 }
 
@@ -513,7 +513,7 @@
 }
 
 .productCard:hover {
-  border-color: #1565c0;
+  border-color: #b0742e;
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(21, 101, 192, 0.14);
 }

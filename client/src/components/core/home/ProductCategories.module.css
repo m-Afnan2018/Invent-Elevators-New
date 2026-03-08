@@ -1,12 +1,6 @@
-/* ─────────────────────────────────────────
-   ProductCategories.module.css
-   Fonts: Syne (headings) + DM Sans (body)
-   — same as HeroSection, already loaded
-   ───────────────────────────────────────── */
-
 .section {
-  background: #f4f6f9;
-  padding: 96px 2rem 80px;
+  background: #f5f7fb;
+  padding: 92px 2rem 78px;
   font-family: "DM Sans", sans-serif;
 }
 
@@ -15,230 +9,123 @@
   margin: 0 auto;
 }
 
-/* ──────────────── INTRO ROW ──────────────── */
 .introRow {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: flex-start;
-  margin-bottom: 64px;
-}
-
-/* Left */
-.introLeft {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3.5rem;
+  align-items: end;
+  margin-bottom: 48px;
 }
 
 .eyebrow {
   display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #1565c0;
-  background: rgba(21, 101, 192, 0.08);
-  padding: 0.3rem 0.9rem;
-  border-radius: 100px;
-  width: fit-content;
+  color: #b0742e;
+  margin-bottom: 1rem;
 }
 
 .heading {
   font-family: "Syne", sans-serif;
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  font-weight: 800;
-  line-height: 1.15;
-  color: #0d1b2a;
+  font-size: clamp(2rem, 3.3vw, 3rem);
+  line-height: 1.13;
   margin: 0;
-}
-
-.heading em {
-  font-style: normal;
-  color: #1565c0;
-}
-
-/* Right */
-.introRight {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  padding-top: 0.5rem;
+  color: #101a2f;
 }
 
 .introText {
-  font-size: 0.95rem;
-  line-height: 1.75;
-  color: #4a5568;
-  margin: 0;
+  margin: 0 0 1.1rem;
+  color: #4f5c6f;
+  line-height: 1.7;
 }
 
 .consultBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  width: fit-content;
-  padding: 0.75rem 1.6rem;
-  background: #1565c0;
-  color: #fff;
-  font-size: 0.88rem;
-  font-weight: 500;
-  border-radius: 8px;
+  gap: 0.45rem;
   text-decoration: none;
-  letter-spacing: 0.03em;
-  transition: background 0.22s, transform 0.2s;
-  box-shadow: 0 4px 18px rgba(21, 101, 192, 0.3);
-}
-
-.consultBtn:hover {
-  background: #1976d2;
-  transform: translateY(-2px);
+  color: #101a2f;
+  font-weight: 600;
 }
 
 .arrow {
-  font-size: 1rem;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .consultBtn:hover .arrow {
   transform: translateX(3px);
 }
 
-.tagline {
-  font-size: 0.85rem;
-  line-height: 1.65;
-  color: #718096;
-  margin: 0;
-  border-left: 3px solid #e2e8f0;
-  padding-left: 1rem;
-}
-
-/* ──────────────── CARDS GRID ──────────────── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem;
 }
 
-/* ── Single card ── */
 .card {
   position: relative;
-  display: block;
-  height: 360px;
+  min-height: 300px;
   border-radius: 16px;
   overflow: hidden;
   text-decoration: none;
-  cursor: pointer;
-
-  /* entrance animation */
   animation: fadeUp 0.55s var(--delay, 0s) ease both;
 }
 
-/* Background image */
 .cardBg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: transform;
+  transition: transform 0.5s ease;
 }
 
-.card:hover .cardBg {
-  transform: scale(1.07);
+.cardBgFallback {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(211, 155, 84, 0.32), transparent 38%),
+    linear-gradient(130deg, #0e1f36 0%, #142a46 60%, #1a3656 100%);
 }
 
-/* Dark gradient overlay */
 .cardOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(5, 10, 22, 0.08) 0%,
-    rgba(5, 10, 22, 0.65) 70%,
-    rgba(5, 10, 22, 0.85) 100%
-  );
-  transition: background 0.3s;
+  background: linear-gradient(180deg, rgba(4, 10, 18, 0.2) 20%, rgba(4, 10, 18, 0.86) 100%);
 }
 
-.card:hover .cardOverlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(5, 10, 22, 0.15) 0%,
-    rgba(5, 10, 22, 0.72) 70%,
-    rgba(5, 10, 22, 0.9) 100%
-  );
-}
-
-/* Card text */
 .cardContent {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem 1.4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  inset: auto 0 0;
   z-index: 2;
+  padding: 1.4rem;
 }
 
 .cardTitle {
   font-family: "Syne", sans-serif;
-  font-size: 1.2rem;
-  font-weight: 700;
   color: #fff;
-  margin: 0;
-  line-height: 1.2;
+  font-size: 1.28rem;
+  margin: 0 0 0.45rem;
 }
 
 .discoverLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  transition: color 0.22s;
-}
-
-.card:hover .discoverLink {
-  color: #4fc3f7;
 }
 
 .discoverArrow {
-  font-size: 0.9rem;
-  transition: transform 0.22s;
+  margin-left: 0.35rem;
 }
 
-.card:hover .discoverArrow {
-  transform: translate(2px, -2px);
+.card:hover .cardBg {
+  transform: scale(1.06);
 }
 
-/* Blue accent line at bottom */
-.cardAccent {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  width: 0;
-  background: #1565c0;
-  border-radius: 0 0 0 16px;
-  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  z-index: 3;
-}
-
-.card:hover .cardAccent {
-  width: 100%;
-}
-
-/* ──────────────── ANIMATIONS ──────────────── */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(18px);
   }
   to {
     opacity: 1;
@@ -246,48 +133,23 @@
   }
 }
 
-/* ──────────────── RESPONSIVE ──────────────── */
-@media (max-width: 1100px) {
+@media (max-width: 992px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .card {
-    height: 300px;
-  }
-}
-
-@media (max-width: 768px) {
   .introRow {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 40px;
-  }
-
-  .section {
-    padding: 64px 1.25rem 60px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .card {
-    height: 240px;
-  }
-
-  .cardTitle {
-    font-size: 1rem;
+    gap: 1.4rem;
   }
 }
 
-@media (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr;
+@media (max-width: 680px) {
+  .section {
+    padding: 70px 1.2rem 60px;
   }
 
-  .card {
-    height: 220px;
+  .grid {
+    grid-template-columns: 1fr;
   }
 }

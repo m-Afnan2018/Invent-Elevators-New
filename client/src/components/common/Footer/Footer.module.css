@@ -5,7 +5,7 @@
 
 .footer {
   font-family: "DM Sans", sans-serif;
-  background: #0a1628;
+  background: #0c1424;
   width: 100%;
   color: #fff;
 }
@@ -14,7 +14,7 @@
    TOP BAND
    ══════════════════════════════════════ */
 .topBand {
-  background: #1565c0;
+  background: #b0742e;
   padding: 1.25rem 2rem;
 }
 
@@ -110,7 +110,7 @@
 
 .logoIcon {
   font-size: 1.3rem;
-  color: #4fc3f7;
+  color: #d39b54;
   line-height: 1;
 }
 
@@ -124,7 +124,7 @@
 
 .logoText strong {
   font-weight: 800;
-  color: #4fc3f7;
+  color: #d39b54;
 }
 
 .brandDesc {
@@ -188,9 +188,9 @@
 }
 
 .socialBtn:hover {
-  background: #1565c0;
+  background: #b0742e;
   color: #fff;
-  border-color: #1565c0;
+  border-color: #b0742e;
   transform: translateY(-2px);
 }
 
