@@ -14,6 +14,7 @@ export default function Navbar() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [hoveredCategoryId, setHoveredCategoryId] = useState(null);
   const closeTimeoutRef = useRef(null);
   const productsMenuRef = useRef(null);
 
@@ -29,19 +30,6 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const response = await getProducts();
-        setProducts(Array.isArray(response) ? response : []);
-      } catch (_error) {
-        setProducts([]);
-      }
-    };
-
-    loadProducts();
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -121,13 +109,16 @@ export default function Navbar() {
   useEffect(() => {
     const loadMenuData = async () => {
       try {
-        const [categoryRes, projectRes] = await Promise.all([
+        const [productRes, categoryRes, projectRes] = await Promise.all([
+          getProducts(),
           getCategories(),
           getProjects(),
         ]);
+        setProducts(Array.isArray(productRes) ? productRes : []);
         setCategories(Array.isArray(categoryRes) ? categoryRes : []);
         setProjects(Array.isArray(projectRes) ? projectRes : []);
       } catch (_error) {
+        setProducts([]);
         setCategories([]);
         setProjects([]);
       }
@@ -135,6 +126,41 @@ export default function Navbar() {
 
     loadMenuData();
   }, []);
+
+  const resolvedActiveCategoryId = useMemo(() => {
+    if (!activeCategories.length) {
+      return null;
+    }
+
+    const hoveredExists = activeCategories.some((category) => category._id === hoveredCategoryId);
+    return hoveredExists ? hoveredCategoryId : activeCategories[0]._id;
+  }, [activeCategories, hoveredCategoryId]);
+
+  const activeCategoryProducts = useMemo(() => {
+    if (!resolvedActiveCategoryId) {
+      return [];
+    }
+
+    return featuredProducts
+      .filter((product) => {
+        const normalizedCategory = product?.category?._id || product?.categoryId || product?.category;
+        const categoryList = Array.isArray(product?.categories) ? product.categories : [];
+        const hasCategoryInArray = categoryList.some((category) => {
+          if (!category) {
+            return false;
+          }
+
+          if (typeof category === "string") {
+            return category === resolvedActiveCategoryId;
+          }
+
+          return category?._id === resolvedActiveCategoryId;
+        });
+
+        return normalizedCategory === resolvedActiveCategoryId || hasCategoryInArray;
+      })
+      .slice(0, 6);
+  }, [featuredProducts, resolvedActiveCategoryId]);
 
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
@@ -204,43 +230,24 @@ export default function Navbar() {
                   </div>
 
                   <div className={styles.productsRight}>
-                    {activeCategoryProducts.length ? (
-                      activeCategoryProducts.map((product) => (
-                        <Link
-                          key={product._id}
-                          href={`/products/${product._id}`}
-                          className={styles.productCard}
-                          onClick={() => setProductsOpen(false)}
-                        >
-                          <h4>{product.name}</h4>
-                          <p>{product.description || "View complete product details."}</p>
-                        </Link>
-                      ))
-                    ) : featuredProducts.length ? (
-                      featuredProducts.slice(0, 6).map((product) => (
-                        <Link
-                          key={product._id}
-                          href={`/products/${product._id}`}
-                          className={styles.productCard}
-                          onClick={() => setProductsOpen(false)}
-                        >
-                          <h4>{product.name}</h4>
-                          <p>{product.description || "View complete product details."}</p>
-                        </Link>
-                      ))
-                    ) : null}
-
-                    {activeCategories.map((category) => (
+                    {(activeCategoryProducts.length ? activeCategoryProducts : featuredProducts.slice(0, 6)).map((product) => (
                       <Link
-                        key={category._id}
-                        href={`/categories/${category._id}`}
+                        key={product._id}
+                        href={`/products/${product._id}`}
                         className={styles.productCard}
                         onClick={() => setProductsOpen(false)}
                       >
-                        <h4>{category.name}</h4>
-                        <p>{category.description || "Explore products in this category."}</p>
+                        <h4>{product.name}</h4>
+                        <p>{product.description || "View complete product details."}</p>
                       </Link>
                     ))}
+
+                    {!featuredProducts.length ? (
+                      <Link href="/products" className={styles.productCard} onClick={() => setProductsOpen(false)}>
+                        <h4>Explore Catalog</h4>
+                        <p>Browse our complete list of elevators and lift solutions.</p>
+                      </Link>
+                    ) : null}
 
                     {featuredProjects.map((project) => (
                       <Link
@@ -253,13 +260,6 @@ export default function Navbar() {
                         <p>{project.location || project.description || "View completed project details."}</p>
                       </Link>
                     ))}
-
-                    {!featuredProducts.length && !activeCategories.length && !featuredProjects.length ? (
-                      <Link href="/products" className={styles.productCard} onClick={() => setProductsOpen(false)}>
-                        <h4>Explore Catalog</h4>
-                        <p>Browse our complete list of elevators and lift solutions.</p>
-                      </Link>
-                    ) : null}
                   </div>
                 </div>
               </div>
@@ -321,7 +321,7 @@ export default function Navbar() {
                 <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </Link>
-            <p className={styles.drawerTagline}>Elevating spaces since 1947</p>
+            <p className={styles.drawerTagline}>Trusted vertical mobility partner for modern buildings</p>
           </div>
         </div>
       </div>

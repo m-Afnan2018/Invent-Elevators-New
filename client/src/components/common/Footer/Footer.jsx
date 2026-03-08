@@ -99,7 +99,7 @@ export default function Footer() {
 
             <p className={styles.brandDesc}>
               Elevating homes and businesses with precision-engineered lift
-              solutions since 1947. Smart, sustainable, and Scandinavian.
+              solutions with a focus on quality, safety, and fast support.
             </p>
 
             {/* Language + Login */}
@@ -172,7 +172,7 @@ export default function Footer() {
       {/* ── Bottom bar ── */}
       <div className={styles.bottomBar}>
         <div className={styles.bottomInner}>
-          <p className={styles.copyright}>© 2026 Cibes Lift. All rights reserved.</p>
+          <p className={styles.copyright}>© 2026 Invent Elevator. All rights reserved.</p>
           <div className={styles.legalLinks}>
             <Link href="/privacy-policy" className={styles.legalLink}>Privacy Policy</Link>
             <span className={styles.dot}>·</span>

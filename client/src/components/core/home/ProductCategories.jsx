@@ -32,39 +32,29 @@ export default function ProductCategories() {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
-
-        {/* ── Top: Intro text + Right description ── */}
         <div className={styles.introRow}>
           <div className={styles.introLeft}>
-            <span className={styles.eyebrow}>Our Product Categories</span>
+            <span className={styles.eyebrow}>Core Product Lines</span>
             <h2 className={styles.heading}>
-              Lifts for greater <br />
-              <em>comfort and joy</em> in life
+              Elevator solutions engineered
+              <br />
+              for every project type
             </h2>
           </div>
 
           <div className={styles.introRight}>
             <p className={styles.introText}>
-              At Cibes, we make lift solutions for increased comfort and joy in
-              life — and that has been our driving force since 1947. Today, we
-              are a global lift company with sales and distribution on all
-              continents. We believe that our unique combination of smart,
-              sustainable lift technology and sleek Scandinavian design has taken
-              us to where we are today.
+              Choose from home elevators, passenger lifts, freight systems, and
+              custom-built options designed around traffic, space, and performance
+              requirements.
             </p>
             <Link href="/contact" className={styles.consultBtn}>
-              Request a free consultation
+              Talk to an expert
               <span className={styles.arrow}>→</span>
             </Link>
-            <p className={styles.tagline}>
-              We design elevator solutions for all kinds of buildings. Regardless
-              of whether you need a lift for your home, a school, an office, a
-              hotel or a warehouse, we have the perfect lift model for you.
-            </p>
           </div>
         </div>
 
-        {/* ── Category Cards ── */}
         <div className={styles.grid}>
           {activeCategories.map((cat, i) => (
             <Link
@@ -73,48 +63,38 @@ export default function ProductCategories() {
               className={styles.card}
               style={{ "--delay": `${i * 0.08}s` }}
             >
-              {/* Background image */}
-              <div
-                className={styles.cardBg}
-                style={{ backgroundImage: `url(${cat.image || "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&q=80"})` }}
-              />
+              {cat.image ? (
+                <div className={styles.cardBg} style={{ backgroundImage: `url(${cat.image})` }} />
+              ) : (
+                <div className={`${styles.cardBg} ${styles.cardBgFallback}`} />
+              )}
 
-              {/* Gradient overlay */}
               <div className={styles.cardOverlay} />
 
-              {/* Content */}
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>{cat.name}</h3>
                 <span className={styles.discoverLink}>
-                  Discover more
+                  View category
                   <span className={styles.discoverArrow}>↗</span>
                 </span>
               </div>
-
-              {/* Hover line accent */}
-              <div className={styles.cardAccent} />
             </Link>
           ))}
 
           {!activeCategories.length ? (
             <Link href="/categories" className={styles.card}>
-              <div
-                className={styles.cardBg}
-                style={{ backgroundImage: "url(https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&q=80)" }}
-              />
+              <div className={`${styles.cardBg} ${styles.cardBgFallback}`} />
               <div className={styles.cardOverlay} />
               <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>Explore Categories</h3>
+                <h3 className={styles.cardTitle}>Browse Categories</h3>
                 <span className={styles.discoverLink}>
-                  Discover more
+                  View category
                   <span className={styles.discoverArrow}>↗</span>
                 </span>
               </div>
-              <div className={styles.cardAccent} />
             </Link>
           ) : null}
         </div>
-
       </div>
     </section>
   );
