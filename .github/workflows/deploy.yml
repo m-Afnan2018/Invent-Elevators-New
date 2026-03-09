@@ -14,12 +14,12 @@ jobs:
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_IP }}
-          username: bitnami
+          username: ubuntu
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             set -e
 
-            cd /home/bitnami/invent_elevators/Invent-Elevators
+            cd /home/ubuntu/web-apps/Invent-Elevators
             git fetch origin main
             git reset --hard origin/main
 
