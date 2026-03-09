@@ -18,16 +18,16 @@ jobs:
           timeout: 1h       # ← THIS is likely the culprit!
           command_timeout: 1h # ← ADD THIS LINE
           host: ${{ secrets.SERVER_IP }}
-          username: ubuntu
+          username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             set -e
 
-            cd /home/ubuntu/web-apps/Invent-Elevators
+            cd /home/ec2-user/web-apps/Invent-Elevators
             git fetch origin main
             git reset --hard origin/main
 
-            docker compose down
-            docker compose up -d --build
+            docker-compose down
+            docker-compose up -d --build
 
             docker image prune -f
