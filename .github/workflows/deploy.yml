@@ -24,13 +24,24 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       # Builds on GitHub's runner (7GB RAM) — not on your 0.5GB Lightsail instance
-      - name: Build and push Docker image
+      - name: Build and push client image
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: ./Dockerfile.client
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/invent-elevators:latest
-          cache-from: type=gha # Cache layers between runs = faster builds
+          tags: ${{ secrets.DOCKER_USERNAME }}/invent-elevators-client:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push server image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.server
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/invent-elevators-server:latest
+          cache-from: type=gha
           cache-to: type=gha,mode=max
 
   deploy:
