@@ -1,139 +1,170 @@
-.page { background: #f6f8fb; color: #102239; }
-.container { width: min(1220px, 92%); margin: 0 auto; }
-.hero { position: relative; min-height: 96vh; display: grid; align-items: center; background: linear-gradient(120deg, #06192f 0%, #0c2d4b 52%, #1b4f78 100%); overflow: hidden; }
-.heroOverlay { position: absolute; inset: 0; background: radial-gradient(circle at 78% 18%, rgba(221, 165, 88, 0.45), transparent 38%); }
-.hero .container { position: relative; z-index: 1; padding: 8.5rem 0 4.5rem; }
-.eyebrow { color: #e5b26d; text-transform: uppercase; letter-spacing: 0.16em; font-size: .78rem; margin-bottom: 1rem; }
-.hero h1 { color: #fff; font-size: clamp(2.3rem, 6vw, 5rem); line-height: 1.03; max-width: 910px; margin-bottom: 1.2rem; }
-.hero p { color: rgba(255,255,255,.87); max-width: 700px; line-height: 1.8; }
-.heroActions { margin-top: 2rem; display: flex; gap: .85rem; flex-wrap: wrap; }
-.primaryBtn,.secondaryBtn { text-decoration: none; padding: .92rem 1.45rem; border-radius: 999px; font-size: .86rem; text-transform: uppercase; letter-spacing: .08em; transition: all .2s ease; }
-.primaryBtn { background: #dca55a; color: #1a2431; font-weight: 700; }
-.primaryBtn:hover { transform: translateY(-2px); background: #e4b876; }
-.secondaryBtn { border: 1px solid rgba(255,255,255,.35); color: #fff; }
-.secondaryBtn:hover { background: rgba(255,255,255,.1); }
-.metricsGrid { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: .9rem; }
-.metricCard { border: 1px solid rgba(255,255,255,.22); border-radius: 14px; background: rgba(255,255,255,.08); backdrop-filter: blur(4px); padding: .95rem 1rem; }
-.metricCard strong { color:#fff; font-size:1.52rem; display:block; }
-.metricCard span { color: rgba(255,255,255,.77); font-size:.84rem; }
-.section { padding: 4.8rem 0; }
-.lightSection { background: #ffffff; }
-.trustSection { background: linear-gradient(180deg, #f7faff 0%, #eef4fc 100%); }
-.sectionHead { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; margin-bottom: 1.6rem; }
-.sectionHead h2 { font-size: clamp(1.65rem,2vw,2.3rem); }
-.sectionHead a { color: #8f5d1f; text-decoration: none; font-weight: 600; }
-.gridThree,.gridFour,.processGrid,.whyGrid,.trustGrid,.faqGrid { display: grid; gap: 1.1rem; }
-.gridThree { grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); }
-.gridFour { grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
-.processGrid { grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); }
-.whyGrid { grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); }
-.trustGrid { grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); }
-.faqGrid { grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); }
-.categoryCard,.productCard,.projectCard,.blogCard,.processCard,.whyCard,.trustCard,.faqItem { display: block; text-decoration: none; color: inherit; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid #e7edf4; transition: transform .2s ease, box-shadow .2s ease; }
-.categoryCard:hover,.productCard:hover,.projectCard:hover,.blogCard:hover,.processCard:hover,.whyCard:hover,.trustCard:hover,.faqItem:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(16,34,57,.1); }
-.cardMedia,.productImageWrap { position: relative; width: 100%; overflow: hidden; }
-.cardMedia { height: 220px; }
-.productImageWrap { height: 185px; }
-.cardImage { object-fit: cover; }
-.cardBody { padding: 1rem; }
-.cardBody span { color: #8f5d1f; font-size: .9rem; }
-.productCard div,.projectCard,.blogCard,.processCard,.whyCard,.trustCard,.faqItem { padding: 1rem; }
-.productCard p,.projectCard p,.blogCard p,.whyCard p,.trustCard p,.faqItem p { margin-top:.55rem; color:#526175; line-height:1.68; font-size:.92rem; }
-.processCard span { color:#8f5d1f; font-weight:700; letter-spacing:.08em; }
-.processCard h3,.faqItem h3 { margin-top:.45rem; }
-.ctaSection { background: linear-gradient(120deg, #0f2238, #1a3f61); color: #fff; text-align: center; }
-.ctaSection .container { display:flex; flex-direction:column; align-items:center; gap:1rem; }
-.ctaSection p { max-width: 700px; color: rgba(255,255,255,.84); }
-@media (max-width: 768px) { .hero .container { padding-top: 7.2rem; } }
+.page {
+  background: #f6f8fb;
+  color: #102239;
+}
 
-.partnerStrip {
+.container {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+}
+
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: grid;
+  align-items: center;
+  background: linear-gradient(116deg, #06192f 0%, #0c2d4b 55%, #154369 100%);
+  overflow: hidden;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 75% 20%, rgba(221, 165, 88, 0.4), transparent 40%);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+}
+
+.eyebrow {
+  color: #dca55a;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  color: #fff;
+  font-size: clamp(2.2rem, 6vw, 4.8rem);
+  line-height: 1.05;
+  max-width: 900px;
+  margin-bottom: 1.2rem;
+}
+
+.hero p {
+  color: rgba(255, 255, 255, 0.84);
+  max-width: 700px;
+  line-height: 1.75;
+}
+
+.heroActions {
+  margin-top: 2rem;
   display: flex;
-  gap: 0.7rem;
+  gap: 0.8rem;
   flex-wrap: wrap;
 }
 
-.partnerStrip span {
-  border: 1px solid #d9e3ef;
+.primaryBtn,
+.secondaryBtn {
+  text-decoration: none;
+  padding: 0.9rem 1.4rem;
   border-radius: 999px;
-  padding: 0.45rem 0.85rem;
-  font-size: 0.82rem;
-  color: #30455f;
+  font-size: 0.88rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.primaryBtn {
+  background: #dca55a;
+  color: #1a2431;
+  font-weight: 700;
+}
+
+.secondaryBtn {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+.lightSection {
+  background: #ffffff;
+}
+
+.sectionHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHead h2 {
+  font-size: clamp(1.6rem, 2vw, 2.2rem);
+}
+
+.sectionHead a {
+  color: #8f5d1f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.gridThree,
+.gridFour {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.gridThree {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.gridFour {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.categoryCard,
+.productCard,
+.projectCard,
+.blogCard {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 16px;
+  overflow: hidden;
   background: #fff;
+  border: 1px solid #e7edf4;
 }
 
-.mobileQuickBar {
-  display: none;
+.cardMedia {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
 }
 
-@media (max-width: 900px) {
-  .sectionHead {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.45rem;
-  }
-
-  .metricsGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hero h1 {
-    font-size: clamp(2rem, 9vw, 3rem);
-  }
+.cardBody {
+  padding: 1rem;
 }
 
-@media (max-width: 640px) {
-  .section {
-    padding: 3.6rem 0;
-  }
+.cardBody span {
+  color: #8f5d1f;
+  font-size: 0.9rem;
+}
 
-  .metricsGrid {
-    grid-template-columns: 1fr 1fr;
-    gap: 0.6rem;
-  }
+.productCard img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
 
-  .metricCard {
-    padding: 0.75rem;
-  }
+.productCard div,
+.projectCard,
+.blogCard {
+  padding: 1rem;
+}
 
-  .metricCard strong {
-    font-size: 1.25rem;
-  }
-
-  .mobileQuickBar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1200;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.55rem;
-    padding: 0.65rem;
-    background: rgba(7, 16, 30, 0.95);
-    backdrop-filter: blur(8px);
-  }
-
-  .mobileQuickBar a {
-    text-decoration: none;
-    text-align: center;
-    font-size: 0.82rem;
-    border-radius: 10px;
-    padding: 0.75rem 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-  }
-
-  .mobileQuickBar a:first-child {
-    background: #dca55a;
-    color: #172537;
-  }
-
-  .mobileQuickBar a:last-child {
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    color: #fff;
-  }
-
-  .ctaSection {
-    padding-bottom: 5.4rem;
-  }
+.productCard p,
+.projectCard p,
+.blogCard p {
+  margin-top: 0.55rem;
+  color: #526175;
+  line-height: 1.6;
+  font-size: 0.92rem;
 }

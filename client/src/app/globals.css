@@ -1,13 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@500;700;800&display=swap');
-
-:root {
-  --brand-navy: #102239;
-  --brand-blue: #154369;
-  --brand-gold: #dca55a;
-  --surface: #f6f8fb;
-  --surface-white: #ffffff;
-  --text-muted: #526175;
-}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Syne:wght@500;700&display=swap');
 
 * {
   box-sizing: border-box;
@@ -20,30 +11,13 @@ body {
   width: 100%;
   overflow-x: hidden;
   font-family: "DM Sans", sans-serif;
-  background: var(--surface);
-  color: var(--brand-navy);
-  scroll-behavior: smooth;
+  background: #f6f8fb;
+  color: #102239;
 }
 
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
+h4 {
   font-family: "Syne", sans-serif;
-}
-
-a {
-  color: inherit;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-::selection {
-  background: rgba(220, 165, 90, 0.25);
-  color: var(--brand-navy);
 }

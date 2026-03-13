@@ -6,24 +6,103 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-and-push:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Builds on GitHub's runner (7GB RAM) — not on your 0.5GB Lightsail instance
+      - name: Build and push client image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.client
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/invent-elevators-client:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push server image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.server
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/invent-elevators-server:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push # Only deploy after image is built & pushed
+    timeout-minutes: 10
+
+    steps:
+      # Lightsail just pulls the pre-built image — no building on server
       - name: Deploy to Lightsail
-        uses: appleboy/ssh-action@v0.1.6
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_IP }}
-          username: bitnami
+          username: ec2-user
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          command_timeout: 10m
           script: |
             set -e
 
-            cd /home/bitnami/invent_elevators/Invent-Elevators
-            git fetch origin main
-            git reset --hard origin/main
+            cd /home/ec2-user/web-apps/Invent-Elevators
 
-            docker-compose down
-            docker-compose up -d --build
+            # Pull the pre-built image from Docker Hub
+            docker-compose pull
 
+            # Restart with new image (no --build flag needed!)
+            docker-compose up -d
+
+            # Clean up old images
             docker image prune -f
+
+# name: Deploy MERN Docker
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 30
+
+#     steps:
+#       - name: Deploy to Lightsail
+#         uses: appleboy/ssh-action@v0.1.6
+#         timeout-minutes: 60
+#         with:
+#           timeout: 1h       # ← THIS is likely the culprit!
+#           command_timeout: 1h # ← ADD THIS LINE
+#           host: ${{ secrets.SERVER_IP }}
+#           username: ec2-user
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+#           script: |
+#             set -e
+
+#             cd /home/ec2-user/web-apps/Invent-Elevators
+#             git fetch origin main
+#             git reset --hard origin/main
+
+#             docker-compose down
+#             docker-compose up -d --build
+
+#             docker image prune -f
