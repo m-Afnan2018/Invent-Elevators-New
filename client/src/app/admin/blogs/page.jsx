@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // import AdminLayout from '@/components/AdminLayout';
 import AdminLayout from '@/components/common/AdminLayout/AdminLayout';
 import TipTapEditor from '@/components/core/blogs/TipTapEditor';
@@ -58,6 +58,8 @@ const BlogsPage = () => {
         canonicalUrl: '',
     });
     const [tagInput, setTagInput] = useState('');
+    const featuredImageInputRef = useRef(null);
+    const ogImageInputRef = useRef(null);
 
     async function fetchBlogs() {
         try {
@@ -111,6 +113,27 @@ const BlogsPage = () => {
                 }
             };
             reader.readAsDataURL(file);
+        }
+    };
+
+
+    const clearSelectedImage = (field) => {
+        if (field === 'featuredImage') {
+            setImagePreview('');
+            setFormData((prev) => ({ ...prev, featuredImage: '' }));
+
+            if (featuredImageInputRef.current) {
+                featuredImageInputRef.current.value = '';
+            }
+
+            return;
+        }
+
+        setOgImagePreview('');
+        setFormData((prev) => ({ ...prev, ogImage: '' }));
+
+        if (ogImageInputRef.current) {
+            ogImageInputRef.current.value = '';
         }
     };
 
@@ -181,6 +204,14 @@ const BlogsPage = () => {
             });
             setImagePreview('');
             setOgImagePreview('');
+
+            if (featuredImageInputRef.current) {
+                featuredImageInputRef.current.value = '';
+            }
+
+            if (ogImageInputRef.current) {
+                ogImageInputRef.current.value = '';
+            }
         }
         setIsModalOpen(true);
     };
@@ -189,6 +220,14 @@ const BlogsPage = () => {
         setIsModalOpen(false);
         setEditingBlog(null);
         setTagInput('');
+
+        if (featuredImageInputRef.current) {
+            featuredImageInputRef.current.value = '';
+        }
+
+        if (ogImageInputRef.current) {
+            ogImageInputRef.current.value = '';
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -535,17 +574,27 @@ const BlogsPage = () => {
                                                 accept="image/*"
                                                 onChange={(e) => handleImageChange(e, 'featuredImage')}
                                                 className={styles.fileInput}
+                                                ref={featuredImageInputRef}
                                             />
                                             <label htmlFor="featuredImageUpload" className={styles.uploadLabel}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Click to upload featured image</span>
                                             </label>
                                             {imagePreview && (
-                                                <div className={styles.imagePreview}>
-                                                    <Image
-                                                        width={1000}
-                                                        height={1000} src={imagePreview} alt="Preview" />
-                                                </div>
+                                                <>
+                                                    <button
+                                                        type="button"
+                                                        className={styles.clearImageButton}
+                                                        onClick={() => clearSelectedImage('featuredImage')}
+                                                    >
+                                                        Remove selected image
+                                                    </button>
+                                                    <div className={styles.imagePreview}>
+                                                        <Image
+                                                            width={1000}
+                                                            height={1000} src={imagePreview} alt="Preview" />
+                                                    </div>
+                                                </>
                                             )}
                                         </div>
                                     </div>
@@ -651,17 +700,27 @@ const BlogsPage = () => {
                                                 accept="image/*"
                                                 onChange={(e) => handleImageChange(e, 'ogImage')}
                                                 className={styles.fileInput}
+                                                ref={ogImageInputRef}
                                             />
                                             <label htmlFor="ogImageUpload" className={styles.uploadLabel}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Upload OG image (1200x630 recommended)</span>
                                             </label>
                                             {ogImagePreview && (
-                                                <div className={styles.imagePreview}>
-                                                    <Image
-                                                        width={1000}
-                                                        height={1000} src={ogImagePreview} alt="OG Preview" />
-                                                </div>
+                                                <>
+                                                    <button
+                                                        type="button"
+                                                        className={styles.clearImageButton}
+                                                        onClick={() => clearSelectedImage('ogImage')}
+                                                    >
+                                                        Remove selected image
+                                                    </button>
+                                                    <div className={styles.imagePreview}>
+                                                        <Image
+                                                            width={1000}
+                                                            height={1000} src={ogImagePreview} alt="OG Preview" />
+                                                    </div>
+                                                </>
                                             )}
                                         </div>
                                     </div>
