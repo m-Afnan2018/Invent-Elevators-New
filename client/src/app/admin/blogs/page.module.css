@@ -693,6 +693,22 @@
   font-size: 0.9rem;
 }
 
+.clearImageButton {
+  align-self: flex-start;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.4rem;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.clearImageButton:hover {
+  color: var(--danger, #dc2626);
+  border-color: var(--danger, #dc2626);
+}
+
 .imagePreview {
   width: 100%;
   max-height: 300px;

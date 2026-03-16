@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // import AdminLayout from '@/components/common/AdminLayout/AdminLayout';
 // import AdminLayout from '@app/admin/layout';
 import {
@@ -38,6 +38,7 @@ const ProductsPage = () => {
         components: [],
     });
     const [imagePreview, setImagePreview] = useState('');
+    const imageInputRef = useRef(null);
 
     // Fetch data
 
@@ -117,6 +118,16 @@ const ProductsPage = () => {
         }
     };
 
+
+    const clearSelectedImage = () => {
+        setImagePreview('');
+        setFormData((prev) => ({ ...prev, image: '' }));
+
+        if (imageInputRef.current) {
+            imageInputRef.current.value = '';
+        }
+    };
+
     const openModal = (product = null) => {
         if (product) {
             setEditingProduct(product);
@@ -140,6 +151,10 @@ const ProductsPage = () => {
                 components: [],
             });
             setImagePreview('');
+
+            if (imageInputRef.current) {
+                imageInputRef.current.value = '';
+            }
         }
         setIsModalOpen(true);
     };
@@ -156,6 +171,10 @@ const ProductsPage = () => {
             components: [],
         });
         setImagePreview('');
+
+        if (imageInputRef.current) {
+            imageInputRef.current.value = '';
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -410,15 +429,25 @@ const ProductsPage = () => {
                                             accept="image/*"
                                             onChange={handleImageChange}
                                             className={styles.fileInput}
+                                            ref={imageInputRef}
                                         />
                                         <label htmlFor="imageUpload" className={styles.uploadLabel}>
                                             <RiUploadCloudLine className={styles.uploadIcon} />
                                             <span>Click to upload image</span>
                                         </label>
                                         {imagePreview && (
-                                            <div className={styles.imagePreview}>
-                                                <img src={imagePreview} alt="Preview" />
-                                            </div>
+                                            <>
+                                                <button
+                                                    type="button"
+                                                    className={styles.clearImageButton}
+                                                    onClick={clearSelectedImage}
+                                                >
+                                                    Remove selected image
+                                                </button>
+                                                <div className={styles.imagePreview}>
+                                                    <img src={imagePreview} alt="Preview" />
+                                                </div>
+                                            </>
                                         )}
                                     </div>
                                 </div>
