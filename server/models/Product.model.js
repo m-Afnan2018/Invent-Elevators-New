@@ -19,6 +19,7 @@ const productSchema = new mongoose.Schema(
     name: { type: String, required: true, trim: true },
     description: { type: String, trim: true },
     image: { type: String },
+    images: [{ type: String }],
     capacity: { type: String },
     stops: { type: Number },
     speed: { type: String },

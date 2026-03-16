@@ -33,21 +33,28 @@ const ProductsPage = () => {
         name: '',
         description: '',
         image: '',
+        images: [],
         categories: [],
         subCategories: [],
         components: [],
     });
     const [imagePreview, setImagePreview] = useState('');
+    const [saveError, setSaveError] = useState('');
     const imageInputRef = useRef(null);
+
+    const normalizeIds = (items = []) =>
+        items.map((item) => (typeof item === 'object' && item !== null ? item._id : item)).filter(Boolean);
 
     // Fetch data
 
     async function fetchProducts() {
         try {
+            setSaveError('');
             const data = await getProducts();
             setProducts(data || []);
         } catch (error) {
             console.error('Error fetching products:', error);
+            setSaveError(error?.message || 'Failed to fetch products. Please try again.');
         }
     }
 
@@ -107,21 +114,28 @@ const ProductsPage = () => {
     };
 
     const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImagePreview(reader.result);
-                setFormData({ ...formData, image: reader.result });
-            };
-            reader.readAsDataURL(file);
-        }
+        const files = Array.from(e.target.files || []);
+        if (!files.length) return;
+
+        Promise.all(
+            files.map(
+                (file) =>
+                    new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onloadend = () => resolve(reader.result);
+                        reader.readAsDataURL(file);
+                    })
+            )
+        ).then((encodedImages) => {
+            setImagePreview(encodedImages[0]);
+            setFormData({ ...formData, image: encodedImages[0], images: encodedImages });
+        });
     };
 
 
     const clearSelectedImage = () => {
         setImagePreview('');
-        setFormData((prev) => ({ ...prev, image: '' }));
+        setFormData((prev) => ({ ...prev, image: '', images: [] }));
 
         if (imageInputRef.current) {
             imageInputRef.current.value = '';
@@ -135,9 +149,10 @@ const ProductsPage = () => {
                 name: product.name,
                 description: product.description,
                 image: product.image,
-                categories: product.categories,
-                subCategories: product.subCategories,
-                components: product.components,
+                images: product.images?.length ? product.images : (product.image ? [product.image] : []),
+                categories: normalizeIds(product.categories),
+                subCategories: normalizeIds(product.subCategories),
+                components: normalizeIds(product.components),
             });
             setImagePreview(product.image);
         } else {
@@ -146,6 +161,7 @@ const ProductsPage = () => {
                 name: '',
                 description: '',
                 image: '',
+                images: [],
                 categories: [],
                 subCategories: [],
                 components: [],
@@ -166,6 +182,7 @@ const ProductsPage = () => {
             name: '',
             description: '',
             image: '',
+            images: [],
             categories: [],
             subCategories: [],
             components: [],
@@ -179,6 +196,7 @@ const ProductsPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setSaveError('');
 
         try {
             if (editingProduct) {
@@ -190,16 +208,19 @@ const ProductsPage = () => {
             closeModal();
         } catch (error) {
             console.error('Error saving product:', error);
+            setSaveError(error?.message || 'Unable to save product. Please check your input and try again.');
         }
     };
 
     const handleDelete = async (productId) => {
         if (confirm('Are you sure you want to delete this product?')) {
             try {
+                setSaveError('');
                 await deleteProduct(productId);
                 await fetchProducts();
             } catch (error) {
                 console.error('Error deleting product:', error);
+                setSaveError(error?.message || 'Unable to delete product. Please try again.');
             }
         }
     };
@@ -275,6 +296,8 @@ const ProductsPage = () => {
                         </div>
                     </div>
                 </div>
+
+                {saveError && <p className={styles.errorMessage}>{saveError}</p>}
 
                 {/* Content */}
                 {viewMode === 'table' ? (
@@ -427,14 +450,16 @@ const ProductsPage = () => {
                                             type="file"
                                             id="imageUpload"
                                             accept="image/*"
+                                            multiple
                                             onChange={handleImageChange}
                                             className={styles.fileInput}
                                             ref={imageInputRef}
                                         />
                                         <label htmlFor="imageUpload" className={styles.uploadLabel}>
                                             <RiUploadCloudLine className={styles.uploadIcon} />
-                                            <span>Click to upload image</span>
+                                            <span>Click to upload image(s)</span>
                                         </label>
+                                        <small className={styles.helpText}>You can select multiple images at once.</small>
                                         {imagePreview && (
                                             <>
                                                 <button
@@ -447,6 +472,11 @@ const ProductsPage = () => {
                                                 <div className={styles.imagePreview}>
                                                     <img src={imagePreview} alt="Preview" />
                                                 </div>
+                                                {formData.images?.length > 1 && (
+                                                    <small className={styles.helpText}>
+                                                        {formData.images.length} images selected. First image will be used as product thumbnail.
+                                                    </small>
+                                                )}
                                             </>
                                         )}
                                     </div>
