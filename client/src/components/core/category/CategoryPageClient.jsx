@@ -7,6 +7,13 @@ import SubCategoryTabs from "./SubCategoryTabs";
 import { getCategories, getSubCategoriesByCategory } from "@/services/categories.service";
 import { getProducts } from "@/services/products.service";
 
+const toArray = (value) => {
+  if (Array.isArray(value)) return value;
+  if (Array.isArray(value?.data)) return value.data;
+  if (Array.isArray(value?.items)) return value.items;
+  return [];
+};
+
 export default function CategoryPageClient({ categoryId = null }) {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
@@ -19,17 +26,24 @@ export default function CategoryPageClient({ categoryId = null }) {
       setIsLoading(true);
       try {
         const [categoryRes, productRes] = await Promise.all([getCategories(), getProducts()]);
+        const allCategories = toArray(categoryRes);
+        const allProducts = toArray(productRes);
 
-        const allCategories = Array.isArray(categoryRes) ? categoryRes : [];
         const activeCategory = categoryId
           ? allCategories.find((item) => item._id === categoryId)
-          : allCategories[0];
+          : null;
 
         setCategories(allCategories);
 
+        if (!categoryId) {
+          setSubCategories([]);
+          setProducts(allProducts);
+          return;
+        }
+
         if (!activeCategory?._id) {
           setSubCategories([]);
-          setProducts(Array.isArray(productRes) ? productRes : []);
+          setProducts(allProducts);
           return;
         }
 
@@ -37,10 +51,9 @@ export default function CategoryPageClient({ categoryId = null }) {
           getSubCategoriesByCategory(activeCategory._id),
         ]);
 
-        const mappedSubcategories = Array.isArray(subCategoryRes) ? subCategoryRes : [];
+        const mappedSubcategories = toArray(subCategoryRes);
         setSubCategories(mappedSubcategories);
 
-        const allProducts = Array.isArray(productRes) ? productRes : [];
         const filteredByCategory = allProducts.filter((product) => {
           const singleCategory = product?.category?._id || product?.category;
           const manyCategories = Array.isArray(product?.categories)
@@ -63,8 +76,14 @@ export default function CategoryPageClient({ categoryId = null }) {
   }, [categoryId]);
 
   const activeCategory = useMemo(() => {
+    if (!categoryId) {
+      return {
+        name: "All Products",
+        description: "Browse our complete elevator product range across all categories.",
+      };
+    }
+
     if (!categories.length) return null;
-    if (!categoryId) return categories[0];
     return categories.find((item) => item._id === categoryId) || categories[0];
   }, [categories, categoryId]);
 

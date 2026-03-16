@@ -12,7 +12,7 @@ const articles = [
     image:
       "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
     readTime: "5 min read",
-    href: "/blog/choosing-right-home-elevator",
+    href: "/blogs",
     cta: "View More",
   },
   {
@@ -23,7 +23,7 @@ const articles = [
     image:
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
     readTime: "7 min read",
-    href: "/blog/hydraulic-vs-screw-drive",
+    href: "/blogs",
     cta: "Discover this project",
   },
   {
@@ -34,7 +34,7 @@ const articles = [
     image:
       "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=800&q=80",
     readTime: "6 min read",
-    href: "/blog/safety-standards-modern-elevators",
+    href: "/blogs",
     cta: "Discover this project",
   },
 ];
