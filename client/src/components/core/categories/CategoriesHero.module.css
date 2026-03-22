@@ -1,0 +1,205 @@
+/* ── Hero wrapper ── */
+.hero {
+  width: 100%;
+  min-height: clamp(380px, 48vh, 520px);
+  background: #102239;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+  padding-top: 72px; /* navbar offset */
+}
+
+/* Subtle radial gold glow behind text */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -10%;
+  width: 65%;
+  height: 220%;
+  background: radial-gradient(
+    ellipse,
+    rgba(220, 165, 90, 0.13) 0%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+/* ── Text side ── */
+.textSide {
+  flex: 1 1 0;
+  padding: 56px 60px 64px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+  justify-content: center;
+}
+
+/* ── Eyebrow ── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* ── Heading ── */
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.2vw, 78px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.headingAccent {
+  color: var(--color-accent);
+}
+
+/* ── Description ── */
+.description {
+  font-size: clamp(13.5px, 1.25vw, 15.5px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.75;
+  margin: 0;
+  max-width: 420px;
+}
+
+/* ── Stats ── */
+.statsRow {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statNum {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.5vw, 44px);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.statLbl {
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.statSep {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+/* ── Mosaic side ── */
+.mosaicSide {
+  flex: 0 0 42%;
+  position: relative;
+  overflow: hidden;
+}
+
+.mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 100%;
+  gap: 3px;
+}
+
+.mosaicCell {
+  position: relative;
+  overflow: hidden;
+}
+
+.mosaicOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 34, 57, 0.38);
+  transition: background 0.4s ease;
+  z-index: 1;
+}
+
+.mosaicCell:hover .mosaicOverlay {
+  background: rgba(16, 34, 57, 0.18);
+}
+
+.mosaicImg {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 8s ease;
+}
+
+.mosaicCell:hover .mosaicImg {
+  transform: scale(1.06);
+}
+
+/* Gold accent vertical line at mosaic left edge */
+.mosaicAccent {
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--color-accent) 40%,
+    var(--color-accent) 60%,
+    transparent
+  );
+  z-index: 3;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .mosaicSide {
+    display: none;
+  }
+
+  .textSide {
+    padding: 52px 32px 52px 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: auto;
+    padding-top: 64px;
+    padding-bottom: 8px;
+  }
+
+  .textSide {
+    padding: 44px 20px 44px 20px;
+    gap: 20px;
+  }
+}

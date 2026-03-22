@@ -1,0 +1,362 @@
+/* ── Page section ── */
+.gridSection {
+  background: #f4f4f1;
+  padding: 72px 0 96px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Featured spotlight ── */
+.featuredWrap {
+  margin-bottom: 72px;
+}
+
+.featuredEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #b0742e;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.featuredDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b0742e;
+  flex-shrink: 0;
+}
+
+/* Featured card — wide cinematic banner */
+.featuredCard {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 7;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 16px 56px rgba(10, 29, 53, 0.18);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.featuredCard:hover {
+  box-shadow: 0 28px 80px rgba(10, 29, 53, 0.26);
+  transform: translateY(-3px);
+}
+
+.featuredImgWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.featuredImg {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.04);
+  transition: transform 10s ease;
+}
+
+.featuredCard:hover .featuredImg {
+  transform: scale(1.0);
+}
+
+/* Overlays */
+.featuredOverlayLeft {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 22, 42, 0.88) 0%,
+    rgba(10, 22, 42, 0.55) 55%,
+    transparent 100%
+  );
+}
+
+.featuredOverlayBottom {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    transparent 30%,
+    rgba(10, 22, 42, 0.45) 100%
+  );
+}
+
+/* Content */
+.featuredContent {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 52px;
+  gap: 12px;
+}
+
+.featuredMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.featuredTag {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #102239;
+  background: #dca55a;
+  border-radius: 5px;
+  padding: 3px 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.featuredProductCount {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.featuredName {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0;
+  max-width: 600px;
+}
+
+.featuredDesc {
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.58);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 480px;
+}
+
+.featuredCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #dca55a;
+  margin-top: 4px;
+  transition: gap 0.2s ease;
+}
+
+.featuredCtaArrow {
+  color: #dca55a;
+  transition: transform 0.2s ease;
+}
+
+.featuredCard:hover .featuredCta {
+  gap: 12px;
+}
+
+.featuredCard:hover .featuredCtaArrow {
+  transform: translateX(5px);
+}
+
+/* ── All categories section ── */
+.allSection {
+  margin-top: 0;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.sectionCount {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+/* ── Card grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── Empty state ── */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.emptyRing {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 1.5px dashed #d0d0cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.emptyDesc {
+  font-size: 14px;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+/* ── Skeleton loading ── */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position: 600px 0; }
+}
+
+.skeletonBase {
+  background: linear-gradient(90deg, #e8e8e4 25%, #f0f0ec 50%, #e8e8e4 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 6px;
+}
+
+/* Hero skeleton */
+.heroSkeleton {
+  width: 100%;
+  height: clamp(380px, 48vh, 520px);
+  background: #102239;
+  opacity: 0.6;
+}
+
+/* Featured skeleton */
+.featuredSkeleton {
+  width: 100%;
+  aspect-ratio: 21 / 7;
+  border-radius: 18px;
+  margin-bottom: 72px;
+  background: linear-gradient(90deg, #e8e8e4 25%, #f0f0ec 50%, #e8e8e4 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* Card skeleton */
+.skeletonCard {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1.5px solid rgba(16, 34, 57, 0.06);
+}
+
+.skeletonImg {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(90deg, #e8e8e4 25%, #f0f0ec 50%, #e8e8e4 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.skeletonBody {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skeletonLine {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e8e8e4 25%, #f0f0ec 50%, #e8e8e4 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+.lineShort  { width: 45%; height: 18px; }
+.lineLong   { width: 90%; }
+.lineMed    { width: 65%; }
+.lineTitle  { width: 200px; height: 22px; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .featuredCard {
+    aspect-ratio: 16 / 6;
+  }
+}
+
+@media (max-width: 768px) {
+  .gridSection {
+    padding: 52px 0 72px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .featuredCard {
+    aspect-ratio: 4 / 3;
+  }
+
+  .featuredContent {
+    padding: 28px 28px;
+  }
+
+  .featuredWrap {
+    margin-bottom: 48px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .featuredCard {
+    aspect-ratio: 3 / 2;
+  }
+
+  .featuredContent {
+    padding: 20px 22px;
+  }
+}
