@@ -55,13 +55,15 @@ export default function ProductOverview({ product }) {
     name = "Product",
     description = "A world-class vertical mobility solution designed for modern residential and commercial architecture.",
     image,
+    images = [],
     features = DEFAULT_FEATURES,
   } = product || {};
 
+  // Use real images from DB first, then fallbacks
   const galleryImgs = [
     image || FALLBACK_IMGS[0],
-    FALLBACK_IMGS[1],
-    FALLBACK_IMGS[2],
+    images[0] || FALLBACK_IMGS[1],
+    images[1] || FALLBACK_IMGS[2],
   ];
 
   return (

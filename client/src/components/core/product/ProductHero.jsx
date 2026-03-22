@@ -15,9 +15,16 @@ export default function ProductHero({ product }) {
     speed,
     stops,
     category,
+    categories = [],
     subCategory,
+    subCategories = [],
     isFeatured,
   } = product || {};
+
+  // Resolve primary category (single ref first, then first in array)
+  const primaryCategory = category || (categories.length > 0 ? categories[0] : null);
+  // Resolve primary subcategory
+  const primarySubCategory = subCategory || (subCategories.length > 0 ? subCategories[0] : null);
 
   const highlights = [
     capacity && { label: "Capacity", value: capacity },
@@ -46,15 +53,21 @@ export default function ProductHero({ product }) {
         <Link href="/" className={styles.bcLink}>Home</Link>
         <span className={styles.bcSep}>/</span>
         <Link href="/products" className={styles.bcLink}>Products</Link>
-        {subCategory?.name && (
+        {primaryCategory?._id && (
           <>
             <span className={styles.bcSep}>/</span>
             <Link
-              href={`/products/${category?.slug || ""}`}
+              href={`/categories/${primaryCategory._id}`}
               className={styles.bcLink}
             >
-              {subCategory.name}
+              {primaryCategory.name}
             </Link>
+          </>
+        )}
+        {primarySubCategory?.name && (
+          <>
+            <span className={styles.bcSep}>/</span>
+            <span className={styles.bcLink}>{primarySubCategory.name}</span>
           </>
         )}
         <span className={styles.bcSep}>/</span>
@@ -74,8 +87,11 @@ export default function ProductHero({ product }) {
                 Featured
               </span>
             )}
-            {subCategory?.name && (
-              <span className={styles.tagCat}>{subCategory.name}</span>
+            {primaryCategory?.name && (
+              <span className={styles.tagCat}>{primaryCategory.name}</span>
+            )}
+            {primarySubCategory?.name && (
+              <span className={styles.tagCat}>{primarySubCategory.name}</span>
             )}
           </div>
 

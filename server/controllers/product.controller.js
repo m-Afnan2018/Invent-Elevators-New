@@ -26,9 +26,12 @@ export const getAllProducts = async (_req, res) => {
 export const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
-      .populate("category categories", "name")
+      .populate("category categories", "name slug")
       .populate("subCategory subCategories", "name")
-      .populate("components");
+      .populate({
+        path: "components",
+        populate: { path: "componentType", select: "name" },
+      });
 
     if (!product || !product.isActive) {
       return res.status(404).json({ success: false, message: "Product not found" });

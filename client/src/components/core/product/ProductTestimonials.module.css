@@ -117,6 +117,10 @@
   gap: 16px;
 }
 
+.avatarInitials {
+  flex-shrink: 0;
+}
+
 .avatarWrap {
   position: relative;
   width: 56px;

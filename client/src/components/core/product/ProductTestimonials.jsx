@@ -4,6 +4,50 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import styles from "./ProductTestimonials.module.css";
 
+// Generate initials avatar colour from name
+function getInitialsColor(name = "") {
+  const colours = ["#b0742e", "#8f5d1f", "#6b4316", "#d4904a", "#a06828"];
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return colours[Math.abs(hash) % colours.length];
+}
+
+function getInitials(name = "") {
+  return name.split(" ").slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
+}
+
+function Avatar({ src, name, size = 56 }) {
+  const [failed, setFailed] = useState(!src);
+  if (!src || failed) {
+    return (
+      <div
+        className={styles.avatarInitials}
+        style={{
+          width: size,
+          height: size,
+          background: getInitialsColor(name),
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexShrink: 0,
+          fontSize: size * 0.35,
+          fontWeight: 700,
+          color: "#fff",
+          letterSpacing: "0.03em",
+        }}
+      >
+        {getInitials(name)}
+      </div>
+    );
+  }
+  return (
+    <div className={styles.avatarWrap} style={{ width: size, height: size }}>
+      <Image src={src} alt={name} fill sizes={`${size}px`} className={styles.avatar} onError={() => setFailed(true)} />
+    </div>
+  );
+}
+
 const AVATAR_FALLBACKS = [
   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80",
   "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=80",
@@ -136,16 +180,8 @@ export default function ProductTestimonials({ product }) {
               <p className={styles.quote}>&ldquo;{current.message}&rdquo;</p>
 
               <div className={styles.author}>
-                {/* Avatar */}
-                <div className={styles.avatarWrap}>
-                  <Image
-                    src={current.avatar || AVATAR_FALLBACKS[active % AVATAR_FALLBACKS.length]}
-                    alt={current.name}
-                    fill
-                    sizes="56px"
-                    className={styles.avatar}
-                  />
-                </div>
+                {/* Avatar — uses image if present, falls back to initials */}
+                <Avatar src={current.avatar} name={current.name} size={56} />
 
                 <div className={styles.authorInfo}>
                   <StarRating rating={current.rating || 5} />
@@ -208,15 +244,7 @@ export default function ProductTestimonials({ product }) {
                   }`}
                   onClick={() => goTo(i)}
                 >
-                  <div className={styles.stackAvatarWrap}>
-                    <Image
-                      src={t.avatar || AVATAR_FALLBACKS[i % AVATAR_FALLBACKS.length]}
-                      alt={t.name}
-                      fill
-                      sizes="48px"
-                      className={styles.stackAvatar}
-                    />
-                  </div>
+                  <Avatar src={t.avatar} name={t.name} size={40} />
                   <div className={styles.stackInfo}>
                     <span className={styles.stackName}>{t.name}</span>
                     <span className={styles.stackRole}>{t.role}</span>

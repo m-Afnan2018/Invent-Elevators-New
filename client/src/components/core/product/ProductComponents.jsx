@@ -92,8 +92,17 @@ export default function ProductComponents({ product }) {
         <div className={styles.grid}>
           {components.map((comp, i) => {
             const img = comp.image || FALLBACK_IMAGES[i % FALLBACK_IMAGES.length];
-            const specEntries = Object.entries(comp.specs || {}).slice(0, 3);
-            const typeName = comp.componentType?.name || "Component";
+            // Merge specs + filledData, show up to 4 entries
+            const mergedSpecs = {
+              ...(comp.specs || {}),
+              ...(comp.filledData || {}),
+            };
+            const specEntries = Object.entries(mergedSpecs).slice(0, 4);
+            // componentType may be a populated object or a raw ObjectId string
+            const typeName =
+              typeof comp.componentType === "object" && comp.componentType !== null
+                ? comp.componentType.name
+                : "Component";
 
             return (
               <article key={comp._id || i} className={styles.card}>

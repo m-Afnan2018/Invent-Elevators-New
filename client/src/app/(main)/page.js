@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import styles from "./page.module.css";
 import { getCategories } from "@/services/categories.service";
@@ -153,7 +154,10 @@ export default function Home() {
   }, [categories]);
 
   const featuredProducts = useMemo(() => {
-    const dynamicProducts = products.filter((product) => product?._id && product?.name).slice(0, 4);
+    const validProducts = products.filter((p) => p?._id && p?.name);
+    // Prefer isFeatured products, fall back to any active products
+    const featured = validProducts.filter((p) => p.isFeatured);
+    const dynamicProducts = (featured.length ? featured : validProducts).slice(0, 4);
     return dynamicProducts.length ? dynamicProducts : FALLBACK_PRODUCTS;
   }, [products]);
 
@@ -237,10 +241,25 @@ export default function Home() {
           <div className={styles.gridFour}>
             {featuredProducts.map((product) => (
               <Link key={product._id} href={`/products/${product._id}`} className={styles.productCard}>
-                <img src={product.image || FALLBACK_IMAGE} alt={product.name} />
-                <div>
+                <div className={styles.productImgWrap}>
+                  <Image
+                    src={product.image || FALLBACK_IMAGE}
+                    alt={product.name}
+                    fill
+                    sizes="(max-width:680px) 50vw, 25vw"
+                    className={styles.productImg}
+                  />
+                </div>
+                <div className={styles.productCardBody}>
                   <h3>{product.name}</h3>
-                  <p>{product.description || "Precision engineered for reliability and comfort."}</p>
+                  {(product.capacity || product.speed || product.stops) && (
+                    <div className={styles.productMeta}>
+                      {product.capacity && <span>{product.capacity}</span>}
+                      {product.speed && <span>{product.speed}</span>}
+                      {product.stops && <span>{product.stops} stops</span>}
+                    </div>
+                  )}
+                  <p>{product.description ? product.description.slice(0, 80) + (product.description.length > 80 ? "…" : "") : "Precision engineered for reliability and comfort."}</p>
                 </div>
               </Link>
             ))}
@@ -277,9 +296,27 @@ export default function Home() {
           </div>
           <div className={styles.gridThree}>
             {latestBlogs.map((blog) => (
-              <Link key={blog._id} href="/blogs" className={styles.blogCard}>
-                <h3>{blog.title}</h3>
-                <p>{blog.excerpt || blog.shortDescription || "Latest updates from our engineering and installation team."}</p>
+              <Link
+                key={blog._id}
+                href={blog.slug ? `/blog/${blog.slug}` : `/blog/${blog._id}`}
+                className={styles.blogCard}
+              >
+                {blog.coverImage && (
+                  <div className={styles.blogImgWrap}>
+                    <Image
+                      src={blog.coverImage}
+                      alt={blog.title}
+                      fill
+                      sizes="(max-width:680px) 100vw, 33vw"
+                      className={styles.blogImg}
+                    />
+                  </div>
+                )}
+                <div className={styles.blogCardBody}>
+                  {blog.category && <span className={styles.blogTag}>{blog.category}</span>}
+                  <h3>{blog.title}</h3>
+                  <p>{blog.excerpt || blog.shortDescription || "Latest updates from our engineering and installation team."}</p>
+                </div>
               </Link>
             ))}
           </div>
