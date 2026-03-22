@@ -18,13 +18,12 @@ const apiConnector = axios.create({
 // Request Interceptor
 apiConnector.interceptors.request.use(
   (config) => {
-    // You can add custom headers here if needed
-    // For example, if you want to add a token from localStorage:
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
-    
+    // For FormData (file uploads), remove the default Content-Type so the
+    // browser can set it automatically with the correct multipart boundary.
+    if (config.data instanceof FormData) {
+      delete config.headers['Content-Type'];
+    }
+
     if (isDev) {
       console.log(`🚀 API Request: ${config.method?.toUpperCase()} ${config.url}`);
     }

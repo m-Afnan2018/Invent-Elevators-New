@@ -25,6 +25,7 @@ import Image from 'next/image';
 import { getProjects, createProject, updateProject, deleteProject } from '@/services/projects.service';
 import { getProducts } from '@/services/products.service';
 import { getCategories } from '@/services/categories.service';
+import { uploadImage, uploadMultipleImages } from '@/services/upload.service';
 
 const STATUS_OPTIONS = [
     { value: 'quote', label: 'Quote', color: '#94a3b8' },
@@ -43,6 +44,7 @@ const ProjectsPage = () => {
     const [editingProject, setEditingProject] = useState(null);
     const [featuredImagePreview, setFeaturedImagePreview] = useState('');
     const [galleryPreviews, setGalleryPreviews] = useState([]);
+    const [isUploading, setIsUploading] = useState(false);
     const [newCategory, setNewCategory] = useState('');
 
     const [formData, setFormData] = useState({
@@ -145,19 +147,22 @@ const ProjectsPage = () => {
         setFormData({ ...formData, linkedProducts: selected });
     };
 
-    const handleFeaturedImageChange = (e) => {
+    const handleFeaturedImageChange = async (e) => {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setFeaturedImagePreview(reader.result);
-                setFormData({ ...formData, featuredImage: reader.result });
-            };
-            reader.readAsDataURL(file);
+        if (!file) return;
+        setIsUploading(true);
+        try {
+            const url = await uploadImage(file);
+            setFeaturedImagePreview(url);
+            setFormData((prev) => ({ ...prev, featuredImage: url }));
+        } catch (err) {
+            alert(err?.message || 'Image upload failed. Please try again.');
+        } finally {
+            setIsUploading(false);
         }
     };
 
-    const handleGalleryImagesChange = (e) => {
+    const handleGalleryImagesChange = async (e) => {
         const files = Array.from(e.target.files);
         const remainingSlots = 20 - formData.galleryImages.length;
 
@@ -166,25 +171,19 @@ const ProjectsPage = () => {
             return;
         }
 
-        const newImages = [];
-        const newPreviews = [];
-
-        files.forEach((file) => {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                newImages.push(reader.result);
-                newPreviews.push(reader.result);
-
-                if (newImages.length === files.length) {
-                    setFormData({
-                        ...formData,
-                        galleryImages: [...formData.galleryImages, ...newImages],
-                    });
-                    setGalleryPreviews([...galleryPreviews, ...newPreviews]);
-                }
-            };
-            reader.readAsDataURL(file);
-        });
+        setIsUploading(true);
+        try {
+            const urls = await uploadMultipleImages(files);
+            setFormData((prev) => ({
+                ...prev,
+                galleryImages: [...prev.galleryImages, ...urls],
+            }));
+            setGalleryPreviews((prev) => [...prev, ...urls]);
+        } catch (err) {
+            alert(err?.message || 'Gallery upload failed. Please try again.');
+        } finally {
+            setIsUploading(false);
+        }
     };
 
     const removeGalleryImage = (index) => {
@@ -945,8 +944,8 @@ const ProjectsPage = () => {
                                     <button type="button" className={styles.cancelButton} onClick={closeModal}>
                                         Cancel
                                     </button>
-                                    <button type="submit" className={styles.submitButton}>
-                                        {editingProject ? 'Update Project' : 'Create Project'}
+                                    <button type="submit" className={styles.submitButton} disabled={isUploading}>
+                                        {isUploading ? 'Uploading…' : (editingProject ? 'Update Project' : 'Create Project')}
                                     </button>
                                 </div>
                             </form>

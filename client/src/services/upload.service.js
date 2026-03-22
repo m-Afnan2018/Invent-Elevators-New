@@ -1,79 +1,71 @@
 // services/upload.service.js
-// File Upload API service
+// File Upload API service — uploads directly to Cloudinary via the backend.
+// Returns Cloudinary HTTPS URLs, never base64 strings.
 
 import apiConnector from '@/lib/apiConnector';
 import { ENDPOINTS } from '@/lib/constants';
 
 /**
- * Upload single file
- * @param {File} file - File object
- * @returns {Promise} Upload response with file URL
- */
-export const uploadFile = async (file) => {
-  try {
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const response = await apiConnector.post(ENDPOINTS.UPLOAD, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    return response.data || response;
-  } catch (error) {
-    throw error;
-  }
-};
-
-/**
- * Upload multiple files
- * @param {FileList|Array} files - Array of file objects
- * @returns {Promise} Upload response with array of file URLs
- */
-export const uploadMultipleFiles = async (files) => {
-  try {
-    const formData = new FormData();
-    
-    // Append all files
-    Array.from(files).forEach((file) => {
-      formData.append('files', file);
-    });
-
-    const response = await apiConnector.post(ENDPOINTS.UPLOAD, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    return response.data || response;
-  } catch (error) {
-    throw error;
-  }
-};
-
-/**
- * Upload image with preview
- * @param {File} file - Image file
- * @returns {Promise} Upload response with image URL
+ * Upload a single image file.
+ * FormData field name must match backend multer config: "image"
+ *
+ * @param {File} file - Image File object
+ * @returns {Promise<string>} Cloudinary secure_url
  */
 export const uploadImage = async (file) => {
-  try {
-    // Validate if file is an image
-    if (!file.type.startsWith('image/')) {
-      throw new Error('File must be an image');
-    }
-
-    return await uploadFile(file);
-  } catch (error) {
-    throw error;
+  if (!file.type.startsWith('image/')) {
+    throw new Error('File must be an image');
   }
+
+  const formData = new FormData();
+  formData.append('image', file); // field name matches multer.single("image")
+
+  // Content-Type is deleted by the apiConnector interceptor for FormData
+  const response = await apiConnector.post(ENDPOINTS.UPLOAD, formData);
+
+  // response shape: { success, data: { url, public_id } }
+  const url = response?.data?.url;
+  if (!url) throw new Error('Upload failed — no URL returned');
+  return url;
 };
 
 /**
- * Convert file to Base64 (for preview before upload)
- * @param {File} file - File object
- * @returns {Promise<string>} Base64 string
+ * Upload multiple image files (up to 20).
+ * FormData field name must match backend multer config: "images"
+ *
+ * @param {File[]|FileList} files - Array of image File objects
+ * @returns {Promise<string[]>} Array of Cloudinary secure_urls
+ */
+export const uploadMultipleImages = async (files) => {
+  const fileArray = Array.from(files);
+  if (!fileArray.length) return [];
+
+  const formData = new FormData();
+  fileArray.forEach((f) => formData.append('images', f)); // field name matches multer.array("images")
+
+  const response = await apiConnector.post(`${ENDPOINTS.UPLOAD}/multiple`, formData);
+
+  // response shape: { success, data: [{ url, public_id }, ...] }
+  const results = response?.data;
+  if (!Array.isArray(results)) throw new Error('Upload failed — unexpected response');
+  return results.map((r) => r.url);
+};
+
+/**
+ * Delete an image from Cloudinary by public_id.
+ * @param {string} publicId
+ * @returns {Promise<void>}
+ */
+export const deleteImage = async (publicId) => {
+  await apiConnector.delete(ENDPOINTS.UPLOAD, { data: { public_id: publicId } });
+};
+
+/**
+ * Convert a file to a local base64 data URL (for instant preview before upload).
+ * Does NOT upload anything — purely local.
+ *
+ * @param {File} file
+ * @returns {Promise<string>} base64 data URL
  */
 export const fileToBase64 = (file) => {
   return new Promise((resolve, reject) => {

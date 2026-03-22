@@ -19,6 +19,7 @@ import styles from './page.module.css';
 import { getProducts, createProduct, updateProduct, deleteProduct } from '@/services/products.service';
 import { getCategories, getSubCategories } from '@/services/categories.service';
 import { getComponents } from '@/services/components.service';
+import { uploadImage, uploadMultipleImages } from '@/services/upload.service';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -39,6 +40,7 @@ const ProductsPage = () => {
         components: [],
     });
     const [imagePreview, setImagePreview] = useState('');
+    const [isUploading, setIsUploading] = useState(false);
     const [saveError, setSaveError] = useState('');
     const imageInputRef = useRef(null);
 
@@ -119,23 +121,20 @@ const ProductsPage = () => {
         setFormData({ ...formData, [field]: selected });
     };
 
-    const handleImageChange = (e) => {
+    const handleImageChange = async (e) => {
         const files = Array.from(e.target.files || []);
         if (!files.length) return;
-
-        Promise.all(
-            files.map(
-                (file) =>
-                    new Promise((resolve) => {
-                        const reader = new FileReader();
-                        reader.onloadend = () => resolve(reader.result);
-                        reader.readAsDataURL(file);
-                    })
-            )
-        ).then((encodedImages) => {
-            setImagePreview(encodedImages[0]);
-            setFormData({ ...formData, image: encodedImages[0], images: encodedImages });
-        });
+        setIsUploading(true);
+        setSaveError('');
+        try {
+            const urls = await uploadMultipleImages(files);
+            setImagePreview(urls[0]);
+            setFormData((prev) => ({ ...prev, image: urls[0], images: urls }));
+        } catch (err) {
+            setSaveError(err?.message || 'Image upload failed. Please try again.');
+        } finally {
+            setIsUploading(false);
+        }
     };
 
 
@@ -557,8 +556,8 @@ const ProductsPage = () => {
                                     >
                                         Cancel
                                     </button>
-                                    <button type="submit" className={styles.submitButton}>
-                                        {editingProduct ? 'Update Product' : 'Create Product'}
+                                    <button type="submit" className={styles.submitButton} disabled={isUploading}>
+                                        {isUploading ? 'Uploading…' : (editingProduct ? 'Update Product' : 'Create Product')}
                                     </button>
                                 </div>
                             </form>

@@ -23,6 +23,7 @@ import {
 import styles from './page.module.css';
 import Image from 'next/image';
 import { getBlogs, createBlog, updateBlog, deleteBlog } from '@/services/blogs.service';
+import { uploadImage } from '@/services/upload.service';
 
 const STATUS_OPTIONS = [
     { value: 'draft', label: 'Draft', icon: RiDraftLine },
@@ -39,6 +40,7 @@ const BlogsPage = () => {
     const [editingBlog, setEditingBlog] = useState(null);
     const [imagePreview, setImagePreview] = useState('');
     const [ogImagePreview, setOgImagePreview] = useState('');
+    const [isUploading, setIsUploading] = useState(false);
     const [formData, setFormData] = useState({
         title: '',
         slug: '',
@@ -99,20 +101,23 @@ const BlogsPage = () => {
         setFormData({ ...formData, content: html });
     };
 
-    const handleImageChange = (e, field) => {
+    const handleImageChange = async (e, field) => {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                if (field === 'featuredImage') {
-                    setImagePreview(reader.result);
-                    setFormData({ ...formData, featuredImage: reader.result });
-                } else if (field === 'ogImage') {
-                    setOgImagePreview(reader.result);
-                    setFormData({ ...formData, ogImage: reader.result });
-                }
-            };
-            reader.readAsDataURL(file);
+        if (!file) return;
+        setIsUploading(true);
+        try {
+            const url = await uploadImage(file);
+            if (field === 'featuredImage') {
+                setImagePreview(url);
+                setFormData((prev) => ({ ...prev, featuredImage: url }));
+            } else if (field === 'ogImage') {
+                setOgImagePreview(url);
+                setFormData((prev) => ({ ...prev, ogImage: url }));
+            }
+        } catch (err) {
+            console.error('Image upload failed:', err);
+        } finally {
+            setIsUploading(false);
         }
     };
 
@@ -730,8 +735,8 @@ const BlogsPage = () => {
                                     <button type="button" className={styles.cancelButton} onClick={closeModal}>
                                         Cancel
                                     </button>
-                                    <button type="submit" className={styles.submitButton}>
-                                        {editingBlog ? 'Update Blog' : 'Create Blog'}
+                                    <button type="submit" className={styles.submitButton} disabled={isUploading}>
+                                        {isUploading ? 'Uploading…' : (editingBlog ? 'Update Blog' : 'Create Blog')}
                                     </button>
                                 </div>
                             </form>

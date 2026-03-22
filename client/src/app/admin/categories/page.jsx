@@ -30,6 +30,7 @@ import {
     updateSubCategory,
     deleteSubCategory,
 } from '@/services/categories.service';
+import { uploadImage } from '@/services/upload.service';
 
 const CategoriesPage = () => {
     const [categories, setCategories] = useState([]);
@@ -41,6 +42,7 @@ const CategoriesPage = () => {
     const [parentCategoryId, setParentCategoryId] = useState(null);
     const [expandedCategories, setExpandedCategories] = useState([]);
     const [iconPreview, setIconPreview] = useState('');
+    const [isUploading, setIsUploading] = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -98,15 +100,18 @@ const CategoriesPage = () => {
         }
     }
 
-    const handleIconChange = (e) => {
+    const handleIconChange = async (e) => {
         const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setIconPreview(reader.result);
-                setFormData({ ...formData, icon: reader.result });
-            };
-            reader.readAsDataURL(file);
+        if (!file) return;
+        setIsUploading(true);
+        try {
+            const url = await uploadImage(file);
+            setIconPreview(url);
+            setFormData((prev) => ({ ...prev, icon: url }));
+        } catch (err) {
+            toast.error(err?.message || 'Image upload failed. Please try again.');
+        } finally {
+            setIsUploading(false);
         }
     };
 
@@ -740,8 +745,8 @@ const CategoriesPage = () => {
                                     <button type="button" className={styles.cancelButton} onClick={closeModal}>
                                         Cancel
                                     </button>
-                                    <button type="submit" className={styles.submitButton}>
-                                        {editingCategory ? 'Update Category' : 'Create Category'}
+                                    <button type="submit" className={styles.submitButton} disabled={isUploading}>
+                                        {isUploading ? 'Uploading…' : (editingCategory ? 'Update Category' : 'Create Category')}
                                     </button>
                                 </div>
                             </form>
