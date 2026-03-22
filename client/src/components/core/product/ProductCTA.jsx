@@ -99,12 +99,12 @@ export default function ProductCTA({ product }) {
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </Link>
-            <a href="tel:+910000000000" className={styles.ctaSecondary}>
+            <Link href="/contact" className={styles.ctaSecondary}>
               <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
                 <path d="M3 2h3.5l1.5 3.5-2 1.2a9.1 9.1 0 0 0 4.3 4.3l1.2-2L15 10.5V14A1 1 0 0 1 14 15C6.8 15 2 9.2 2 3a1 1 0 0 1 1-1z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
               </svg>
-              Call Our Experts
-            </a>
+              Talk to an Expert
+            </Link>
           </div>
         </div>
 
@@ -144,20 +144,21 @@ export default function ProductCTA({ product }) {
                 </svg>
               </a>
 
-              <a href="tel:+910000000000" className={styles.contactOption}>
+              <Link href="/contact" className={styles.contactOption}>
                 <div className={styles.contactOptionIcon}>
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M3 2.5h3.5L8 6 6 7.2a9 9 0 0 0 4.8 4.8L12 10l3.5 1.5V15A1 1 0 0 1 14.5 16C7.5 16 2 10.5 2 3.5A1 1 0 0 1 3 2.5z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
+                    <path d="M3 4h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z" stroke="currentColor" strokeWidth="1.5"/>
+                    <path d="M2 5l7 5 7-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
                   </svg>
                 </div>
                 <div className={styles.contactOptionText}>
-                  <span className={styles.contactOptionLabel}>Call us</span>
-                  <span className={styles.contactOptionValue}>+91 00000 00000</span>
+                  <span className={styles.contactOptionLabel}>Contact form</span>
+                  <span className={styles.contactOptionValue}>Send us your enquiry</span>
                 </div>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={styles.contactOptionArrow}>
                   <path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
-              </a>
+              </Link>
 
               <a href="/brochure.pdf" download className={styles.contactOption}>
                 <div className={styles.contactOptionIcon}>

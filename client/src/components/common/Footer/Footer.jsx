@@ -118,7 +118,7 @@ export default function Footer() {
             <h4 className={styles.colHeading}>Get in Touch</h4>
             <ul className={styles.linkList}>
               <li><a href="mailto:info@inventelevator.com" className={styles.footerLink}>info@inventelevator.com</a></li>
-              <li><a href="tel:+4600000000" className={styles.footerLink}>+46 00 000 000</a></li>
+              <li><a href="/contact" className={styles.footerLink}>Contact Us</a></li>
             </ul>
             <div className={styles.cookieWrap}>
               <h4 className={styles.colHeading} style={{ marginTop: "1.5rem" }}>Preferences</h4>

@@ -56,6 +56,12 @@ export default function BlogSlugPage() {
     if (slug) loadBlog();
   }, [slug]);
 
+  useEffect(() => {
+    if (post?.title) {
+      document.title = `${post.title} | Invent Elevator`;
+    }
+  }, [post?.title]);
+
   const contentHtml = useMemo(() => {
     if (!post?.content) return "";
     if (typeof post.content === "string") return sanitizeHtml(post.content);

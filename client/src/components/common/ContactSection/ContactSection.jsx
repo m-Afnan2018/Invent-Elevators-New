@@ -49,6 +49,7 @@ export default function ContactSection() {
       });
 
       setSubmitted(true);
+      setForm({ firstname: "", lastname: "", phone: "", email: "", country: "", message: "", agreed: false });
       toast.success("Thanks! Your request has been submitted.");
     } catch (_error) {
       toast.error("Could not submit right now. Please try again.");
@@ -156,18 +157,15 @@ export default function ContactSection() {
                 {/* Phone */}
                 <div className={styles.fieldGroup}>
                   <label className={styles.label} htmlFor="phone">Phone number</label>
-                  <div className={styles.phoneWrap}>
-                    <span className={styles.phonePrefix}>+46</span>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      placeholder="00000000"
-                      className={`${styles.input} ${styles.phoneInput}`}
-                      value={form.phone}
-                      onChange={handleChange}
-                    />
-                  </div>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+91 98765 43210"
+                    className={styles.input}
+                    value={form.phone}
+                    onChange={handleChange}
+                  />
                 </div>
 
                 {/* Email */}

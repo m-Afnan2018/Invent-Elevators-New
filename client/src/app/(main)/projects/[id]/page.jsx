@@ -34,6 +34,12 @@ export default function ProjectDetailsPage() {
     loadProject();
   }, [id]);
 
+  useEffect(() => {
+    if (project?.title || project?.name) {
+      document.title = `${project.title || project.name} | Invent Elevator`;
+    }
+  }, [project?.title, project?.name]);
+
   if (isLoading) {
     return (
       <main className={styles.main}>

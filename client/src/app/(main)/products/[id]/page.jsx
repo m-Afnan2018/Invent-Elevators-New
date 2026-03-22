@@ -7,6 +7,27 @@ import ProductCTA from "@/components/core/product/ProductCTA";
 import ProductSectionNav from "@/components/core/product/ProductSectionNav";
 import { getProductById } from "@/services/products.service";
 
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  try {
+    const product = await getProductById(resolvedParams?.id);
+    const name = product?.name || "Product";
+    const description = product?.description || product?.shortDescription || `Explore ${name} — a premium lift solution by Invent Elevator.`;
+    const image = product?.image || product?.images?.[0];
+    return {
+      title: name,
+      description,
+      openGraph: {
+        title: `${name} | Invent Elevator`,
+        description,
+        ...(image && { images: [{ url: image }] }),
+      },
+    };
+  } catch {
+    return { title: "Product | Invent Elevator" };
+  }
+}
+
 export default async function ProductDetailPage({ params }) {
   const resolvedParams = await params;
   let product = null;
