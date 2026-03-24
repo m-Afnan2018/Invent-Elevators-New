@@ -172,7 +172,7 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.navInner}>
         <Link href="/" className={styles.logo} onClick={() => setMenuOpen(false)}>
-          <Image src="/logo-invent-png-without-bg-1.png" alt="Invent Elevator" width={140} height={48} priority />
+          <Image src="/logo-invent-png-without-bg-1.png" alt="Invent Elevator" width={160} height={44} priority style={{ width: "auto", height: "44px", objectFit: "contain" }} />
         </Link>
 
         <ul className={styles.navLinks}>
