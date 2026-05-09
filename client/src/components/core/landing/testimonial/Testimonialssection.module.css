@@ -1,0 +1,296 @@
+/* ─────────────────────────────────────────────
+   TestimonialsSection.module.css
+   ───────────────────────────────────────────── */
+
+/* ── Section ───────────────────────────────── */
+.section {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #c9a96e 0%, #8b6e47 40%, #6b5235 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 72px 40px 80px;
+  box-sizing: border-box;
+}
+
+/* ── Header ────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 52px;
+  max-width: 680px;
+}
+
+.title {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0 0 18px;
+}
+
+.subtitle {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(0.8rem, 1vw, 0.92rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+/* ── Card ──────────────────────────────────── */
+.card {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  width: 100%;
+  max-width: 1060px;
+  min-height: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.22);
+}
+
+/* ── Left: feature image ────────────────────── */
+
+.imageWrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  margin: 0px;
+}
+
+/* ✅ ADDED: white rounded border overlay */
+.imageWrap::after {
+  content: "";
+  position: absolute;
+  inset: 20px; /* controls spacing from edges */
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 2;
+  margin-right: 15px;
+}
+
+.featureImage {
+  width: 404px;
+  height: 473px;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  /* border-radius: 16px; */
+}
+
+/* ── Right: content ─────────────────────────── */
+.content {
+  /* padding: 44px 44px 36px; */
+  padding: 44px 60px 36px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* ── Stars ─────────────────────────────────── */
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.star {
+  font-size: 1.4rem;
+  color: #d4a017;
+  line-height: 1;
+}
+
+.ratingText {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.82rem;
+  color: #aaaaaa;
+  margin-left: 6px;
+}
+
+/* ── Reviewer info ──────────────────────────── */
+.reviewerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reviewerName {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #b5893a;
+  font-style: italic;
+}
+
+.reviewerLocation {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  letter-spacing: 0.02em;
+}
+
+/* ── Review text ────────────────────────────── */
+.reviewText {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  color: #444444;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Avatar strip ───────────────────────────── */
+.avatarStrip {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.avatarBtn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  background: #e0d6c8;
+  margin-left: -10px;
+  position: relative;
+  transition: transform 0.2s ease, border-color 0.2s ease, z-index 0s;
+  z-index: 1;
+}
+
+.avatarBtn:first-child {
+  margin-left: 0;
+}
+
+.avatarBtn:hover {
+  transform: translateY(-4px) scale(1.08);
+  z-index: 10;
+  border-color: #b5893a;
+}
+
+/* Active avatar: lifted + gold ring */
+.avatarActive {
+  border-color: #b5893a;
+  transform: translateY(-5px) scale(1.1);
+  z-index: 10;
+  box-shadow: 0 4px 14px rgba(181, 137, 58, 0.45);
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Fade animation ─────────────────────────── */
+.fadeIn {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.fadeOut {
+  animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* ── Auto-progress bar under active avatar ─── */
+.avatarActive::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #b5893a;
+  border-radius: 0 0 50% 50%;
+  animation: progress 4s linear forwards;
+}
+
+@keyframes progress {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── Responsive ────────────────────────────── */
+@media (max-width: 900px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .imageWrap {
+    height: 300px;
+    margin: 12px 12px 0;
+  }
+
+  .content {
+    padding: 28px 28px 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .section {
+    padding: 48px 16px 56px;
+  }
+
+  .card {
+    border-radius: 16px;
+  }
+
+  .avatarBtn {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* ── Reduced motion ────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .fadeIn,
+  .fadeOut {
+    animation: none;
+  }
+
+  .avatarActive::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .imageWrap::after {
+    
+    inset: 20px; /* controls spacing from edges */
+    margin-right: 0;
+  }
+}

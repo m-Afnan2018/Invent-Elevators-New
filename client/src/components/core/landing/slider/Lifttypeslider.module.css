@@ -1,0 +1,269 @@
+/* ─────────────────────────────────────────────
+   LiftTypeSlider.module.css
+   ───────────────────────────────────────────── */
+
+/* ── Outer wrapper ─────────────────────────── */
+.wrapper {
+  width: 100%;
+  padding: 40px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  /* matches the lavender-tinted page bg in the design */
+}
+
+/* ── Card ──────────────────────────────────── */
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* ── Left panel ────────────────────────────── */
+.left {
+  padding: 52px 52px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Animated content block ────────────────── */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Slide in from below (default resting state after animation) */
+.slideIn {
+  animation: slideInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Slide out upward (going to next/down) */
+.slideOutUp {
+  animation: slideOutUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Slide out downward (going to prev/up) */
+.slideOutDown {
+  animation: slideOutDown 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Type label ────────────────────────────── */
+.typeLabel {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+/* ── Title ─────────────────────────────────── */
+.title {
+  font-family: "Pl", "Georgia", "Times New Roman", serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.titleGold {
+  color: #b59a6a;
+  /* font-style: italic; */
+}
+
+.titleWhite {
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* ── Description ───────────────────────────── */
+.description {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #a0a0a0;
+  max-width: 420px;
+  margin: 0;
+}
+
+/* ── Controls row ──────────────────────────── */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* ── Arrow buttons ─────────────────────────── */
+.arrowBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.arrowBtn:hover {
+  border-color: #b59a6a;
+  background: rgba(181, 154, 106, 0.12);
+  transform: scale(1.06);
+}
+
+.arrowBtn:active {
+  transform: scale(0.96);
+}
+
+/* ── Dot indicators ────────────────────────── */
+.dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.dot {
+  width: 28px;
+  height: 6px;
+  border-radius: 3px;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, width 0.25s ease;
+}
+
+.dotActive {
+  background: #b59a6a;
+  width: 36px;
+}
+
+/* ── Right panel: image ─────────────────────── */
+.right {
+  position: relative;
+  overflow: hidden;
+}
+
+.image {
+  width: 355px;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+  margin-left: 100px;
+}
+
+.imgFadeIn {
+  animation: imgFadeIn 0.55s ease forwards;
+}
+
+.imgFadeOut {
+  animation: imgFadeOut 0.3s ease forwards;
+}
+
+/* ── Keyframes ─────────────────────────────── */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+@keyframes imgFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes imgFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+/* ── Responsive ────────────────────────────── */
+@media (max-width: 768px) {
+  
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 280px;
+  }
+
+  .left {
+    padding: 36px 28px 28px;
+  }
+
+  .right {
+    height: 280px;
+  }
+  .image{
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* ── Reduced motion ────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+  .slideIn,
+  .slideOutUp,
+  .slideOutDown,
+  .imgFadeIn,
+  .imgFadeOut {
+    animation: none;
+  }
+}

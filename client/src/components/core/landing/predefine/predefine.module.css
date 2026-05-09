@@ -1,0 +1,12 @@
+.predefine {
+  position: relative;
+  width: 100%;
+  min-height: 500px; /* Adjust height as needed */
+  aspect-ratio: 16 / 9;
+  max-height: 800px;
+}
+
+.bannerImage {
+  object-fit: cover;
+  object-position: center;
+}

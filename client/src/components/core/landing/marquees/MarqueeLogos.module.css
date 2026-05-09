@@ -1,0 +1,126 @@
+/* ─────────────────────────────────────────────
+   MarqueeLogos.module.css
+   ───────────────────────────────────────────── */
+
+.section {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  /* Subtle left/right fade masks */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* ── Row wrapper ───────────────────────────── */
+.rowWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Scrolling track ───────────────────────── */
+.track {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Top row: slides toward the left */
+.trackLeft {
+  animation: scrollLeft 30s linear infinite;
+}
+
+/* Bottom row: slides toward the right */
+.trackRight {
+  animation: scrollRight 30s linear infinite;
+}
+
+/* Pause on hover for accessibility / UX */
+.section:hover .track {
+  animation-play-state: paused;
+}
+
+/* ── Individual logo card ──────────────────── */
+.logoCard {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
+  padding: 0 16px;
+
+  /* Subtle separator */
+  border-right: 1px solid #e8e8f0;
+}
+
+.logoCard:last-child {
+  border-right: none;
+}
+
+/* ── Logo image ────────────────────────────── */
+.logoImg {
+  max-height: 52px;
+  max-width: 160px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+
+  /* Desaturate at rest; colour on hover */
+  filter: grayscale(30%) opacity(0.85);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.logoCard:hover .logoImg {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.06);
+}
+
+/* ── Keyframes ─────────────────────────────── */
+
+/* 
+  scrollLeft moves the track from 0 → -33.333%
+  (one full set of logos, since we tripled the list).
+*/
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-33.333%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ── Reduced-motion accessibility ─────────── */
+@media (prefers-reduced-motion: reduce) {
+  .trackLeft,
+  .trackRight {
+    animation: none;
+  }
+}

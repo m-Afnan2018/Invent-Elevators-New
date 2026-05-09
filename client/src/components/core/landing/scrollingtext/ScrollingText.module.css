@@ -1,0 +1,104 @@
+/* ─────────────────────────────────────────────
+   ScrollingText.module.css
+   ───────────────────────────────────────────── */
+
+/* ── Section wrapper ───────────────────────── */
+.section {
+  width: 100%;
+  background: #ffffff;
+  padding: 80px 24px 100px;
+  overflow: hidden;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Each line ─────────────────────────────── */
+.line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 6px;
+
+  /* Typography */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(2.6rem, 6vw, 5.8rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  text-align: center;
+
+  /* No off-screen hidden state since we changed to just a scroll-color transform */
+}
+
+/* ── Segment ───────────────────────────────── */
+.segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Text colour variants ──────────────────── */
+.word {
+  display: inline;
+}
+
+/* ── Inline thumbnail images ───────────────── */
+.imgWrap {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.inlineImg {
+  /* Scale with the font size */
+  width: clamp(99px, 5.5vw, 88px);
+  height: clamp(57px, 4.2vw, 66px);
+  object-fit: cover;
+  border-radius: 6px;
+  vertical-align: middle;
+
+  /* Slight outline like in the design */
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Reduced-motion ────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    transition: none;
+  }
+  
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 56px 16px 72px;
+  }
+
+  .inner {
+    gap: 10px;
+  }
+
+  .line {
+    font-size: clamp(1.6rem, 7vw, 2.4rem); /* smaller & readable */
+    line-height: 1.2;
+    gap: 6px;
+  }
+
+  .segment {
+    gap: 6px;
+  }
+
+  .inlineImg {
+    width: clamp(52px, 14vw, 72px);
+    height: clamp(34px, 10vw, 48px);
+    border-radius: 4px;
+  }
+}
