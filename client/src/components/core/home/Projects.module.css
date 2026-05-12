@@ -1,0 +1,136 @@
+/* ── Section ── */
+.projectSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem !important;
+}
+
+.section {
+  background: #fff;
+  padding: 0;
+}
+
+.heading {
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  text-align: left;
+  font-size: 2.1rem;
+  font-weight: 700;
+}
+
+/* ── 2-column grid, full width, no gap between columns ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* Thin blue-ish left border between row groups visible in reference */
+  border: 1px solid #e0e0e0;
+}
+
+/* ── Card ── */
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  border-bottom: 1px solid #e0e0e0;
+  /* Alternate: right card gets a left border to separate columns */
+  border-right: 1px solid #e0e0e0;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover {
+  opacity: 0.88;
+}
+
+/* Remove right border on right-column cards (every 2nd) */
+.card:nth-child(even) {
+  border-right: none;
+}
+
+/* ── Image wrapper ── */
+.imgWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #ccc;
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .img {
+  transform: scale(1.04);
+}
+
+/* ── Price tag — bottom-right of image ── */
+.price {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+/* ── Text body below image ── */
+.body {
+  padding: 18px 20px 24px;
+  background: #fff;
+}
+
+.title {
+  font-size: 1.55rem;
+  font-weight: 600;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #1a1a1a;
+  margin: 0 0 10px;
+  line-height: 1.2;
+}
+
+.desc {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #444;
+  line-height: 1.65;
+  margin: 0;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+.viewMoreBtn {
+  margin: auto;
+  padding: 1rem;
+  background: white;
+  border: 1px solid black;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.viewMoreBtn:hover {
+  color: white;
+  background-color: #1a1a1a;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+    border-left: 3px solid #2a6db5;
+  }
+
+  .card {
+    border-right: none;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+}

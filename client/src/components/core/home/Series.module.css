@@ -1,0 +1,222 @@
+/* ── Section ── */
+.section {
+    padding: 72px 0 48px;
+    background: white;
+    overflow: hidden;
+    /* clips the carousel's right overflow */
+}
+
+/* ── Top row: left text + carousel side by side ── */
+.topRow {
+    display: flex;
+    align-items: flex-start;
+    /* left panel has fixed padding, carousel starts after */
+    padding-left: 72px;
+    gap: 0;
+    margin-bottom: 32px;
+}
+
+/* ── Left text panel ── */
+.leftPanel {
+    flex-shrink: 0;
+    width: 220px;
+    margin-right: 48px;
+    padding-top: 4px;
+}
+
+.sectionTitle {
+    font-size: 2.1rem;
+    font-weight: 600;
+    font-family: var(--font-aeonik), "DM Sans", sans-serif;
+    color: #0f1b2d;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+}
+
+.sectionSubtitle {
+    font-size: 0.875rem;
+    font-weight: 400;
+    font-family: var(--font-aeonik), "DM Sans", sans-serif;
+    color: #555;
+    line-height: 1.65;
+    margin: 0;
+}
+
+/* ── Carousel outer ── */
+.carouselOuter {
+    flex: 1;
+    min-width: 0;
+    /* overflow: hidden keeps cards clipped at the section edge */
+    overflow: hidden;
+}
+
+.carouselTrack {
+    display: flex;
+    gap: 20px;
+    /* Native scroll — browser handles smooth animation, no pixel math */
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.carouselTrack::-webkit-scrollbar {
+    display: none;
+}
+
+/* ── Individual card ── */
+.catCard {
+    flex: 0 0 calc(30% - 10px);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    cursor: pointer;
+    scroll-snap-align: start;
+}
+
+/* Image wrapper — tall aspect ratio like the reference */
+.catImgWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    /* portrait, matching reference */
+    overflow: hidden;
+    border-radius: 0px;
+    background: #d8d8d2;
+}
+
+.catImg {
+    object-fit: cover;
+    opacity: 1;
+    will-change: transform, opacity;
+    transition: opacity 0.35s ease,
+                transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.catCard:hover .catImg {
+    opacity: 1;
+    transform: scale(1.04);
+}
+
+/* Label below image — underlined text + arrow, like reference */
+.catLabel {
+    margin-top: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.catName {
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: var(--font-aeonik), "DM Sans", sans-serif;
+    color: #0f1b2d;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+}
+
+/* ── Bottom nav ── */
+.carouselFooter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 72px;
+}
+
+.navBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #999;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, color 0.2s;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.navBtn:hover:not(:disabled) {
+    border-color: #0f1b2d;
+    color: #0f1b2d;
+}
+
+.navBtn:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.dots {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+}
+
+.dot {
+    height: 2px;
+    width: 36px;
+    border-radius: 1px;
+    background: #bbb;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.25s ease, width 0.3s ease;
+}
+
+.dotActive {
+    background: #0f1b2d;
+    width: 52px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .catCard {
+        flex: 0 0 calc(42% - 10px);
+    }
+
+    .leftPanel {
+        width: 180px;
+        margin-right: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 48px 0 36px;
+    }
+
+    .topRow {
+        flex-direction: column;
+        padding-left: 24px;
+        gap: 28px;
+    }
+
+    .leftPanel {
+        width: 100%;
+        margin-right: 0;
+        padding-right: 24px;
+    }
+
+    .sectionTitle {
+        font-size: 1.7rem;
+    }
+
+    .catCard {
+        flex: 0 0 72vw;
+    }
+
+    .carouselFooter {
+        padding: 0 24px;
+    }
+}

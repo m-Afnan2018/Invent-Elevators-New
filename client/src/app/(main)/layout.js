@@ -14,7 +14,7 @@ export default function MainLayout({ children }) {
     <div className={styles.publicSiteShell}>
       <Navbar />
       <div className={styles.pageContent}>{children}</div>
-      <ContactSection />
+      {/* <ContactSection /> */}
       <Footer />
     </div>
   );

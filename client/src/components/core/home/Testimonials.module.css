@@ -1,0 +1,214 @@
+/* ── Section ── */
+.section {
+  background: white;
+  padding: 32px 48px 80px;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ── Top bar: label | counter | nav buttons ── */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 56px;
+}
+
+.label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+.diamond {
+  font-size: 0.6rem;
+  color: #1a1a1a;
+}
+
+.counter {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: #666;
+  margin: 0;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  /* centered absolutely so it sits in the true middle */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px;
+  animation: counterFade 0.3s ease both;
+}
+
+/* Nav buttons — top-right, square outlined */
+.navBtns {
+  display: flex;
+  gap: 0;
+}
+
+.navBtn {
+  width: 52px;
+  height: 52px;
+  border: 1px solid #b0b0aa;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+
+.navBtn:first-child {
+  border-right: none;
+}
+
+.navBtn:hover {
+  background: #1a1a1a;
+  color: #eeeee8;
+}
+
+/* ── Body: portrait left + quote right ── */
+.body {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  animation: testimonialIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Portrait ── */
+.portrait {
+  flex-shrink: 0;
+  width: 180px;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: #ccc;
+  /* grayscale like reference */
+  filter: grayscale(100%);
+}
+
+.portraitImg {
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* ── Quote side ── */
+.quoteWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-top: 0;
+}
+
+/* Big opening quotation mark */
+.openQuote {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  margin-bottom: -16px;
+  display: block;
+  /* Sits to the left of the text, inline */
+  float: left;
+  margin-right: 12px;
+  margin-top: 8px;
+}
+
+/* The quote itself — massive, bold, condensed */
+.quote {
+  font-size: clamp(1.8rem, 3.2vw, 3.4rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 40px;
+  margin-left: 100px;
+  line-height: 1.18;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  letter-spacing: -0.02em;
+  /* text flows around the floated quote mark */
+}
+
+/* Attribution */
+.attribution {
+  clear: both;
+  padding-top: 8px;
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+.role {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #777;
+  margin: 0;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+/* ── Animations ── */
+@keyframes testimonialIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes counterFade {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .section {
+    padding: 28px 24px 56px;
+  }
+
+  .body {
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .portrait {
+    width: 120px;
+    height: 148px;
+  }
+
+  .quote {
+    font-size: 1.6rem;
+  }
+
+  .counter {
+    top: 36px;
+  }
+}

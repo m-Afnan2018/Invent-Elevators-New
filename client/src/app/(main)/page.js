@@ -9,6 +9,12 @@ import { getProducts } from "@/services/products.service";
 import { getProjects } from "@/services/projects.service";
 import { getBlogs } from "@/services/blogs.service";
 import { extractCollection } from "@/lib/apiResponse";
+import Series from "@/components/core/home/Series";
+import { GlobalMarkets } from "@/components/core/home/GlobalMarkets";
+import TypesGrid from "@/components/core/home/TypesGrid";
+import Projects from "@/components/core/home/Projects";
+import Testimonials from "@/components/core/home/Testimonials";
+import FAQ from "@/components/core/home/FAQ";
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
@@ -107,6 +113,21 @@ const FALLBACK_PROJECTS = [
     title: "Hospitality & Restaurant Chain", location: "Sharjah, UAE",
     description: "Dumbwaiter systems for seamless kitchen-to-floor service.",
   },
+  {
+    _id: "p4", __fallback: true,
+    title: "Luxury Villa Complex", location: "Dubai, UAE",
+    description: "4 custom home lifts installed across premium residential villas.",
+  },
+  {
+    _id: "p5", __fallback: true,
+    title: "Corporate Office Tower", location: "Abu Dhabi, UAE",
+    description: "High-speed passenger elevators with destination control system.",
+  },
+  {
+    _id: "p6", __fallback: true,
+    title: "Hospitality & Restaurant Chain", location: "Sharjah, UAE",
+    description: "Dumbwaiter systems for seamless kitchen-to-floor service.",
+  },
 ];
 
 const FALLBACK_BLOGS = [
@@ -119,7 +140,7 @@ const WHY_FEATURES = [
   {
     icon: (
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     title: "500+ Design Variations",
@@ -128,8 +149,8 @@ const WHY_FEATURES = [
   {
     icon: (
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
     ),
     title: "10+ Years Expertise",
@@ -138,8 +159,8 @@ const WHY_FEATURES = [
   {
     icon: (
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" strokeWidth="1.8" />
       </svg>
     ),
     title: "International Safety Standards",
@@ -148,8 +169,8 @@ const WHY_FEATURES = [
   {
     icon: (
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     title: "Residential & Commercial",
@@ -158,7 +179,7 @@ const WHY_FEATURES = [
   {
     icon: (
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     title: "Energy Efficient",
@@ -167,9 +188,9 @@ const WHY_FEATURES = [
   {
     icon: (
       <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
     title: "15+ Trusted Partners",
@@ -189,10 +210,29 @@ export default function Home() {
   const [blogs, setBlogs] = useState([]);
   const [heroIdx, setHeroIdx] = useState(0);
   const heroTimer = useRef(null);
+  const parallaxRef = useRef(null);
 
   useEffect(() => {
     heroTimer.current = setInterval(() => setHeroIdx((i) => (i + 1) % HERO_IMAGES.length), 6000);
     return () => clearInterval(heroTimer.current);
+  }, []);
+
+  useEffect(() => {
+    let rafId = null;
+    const onScroll = () => {
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        if (parallaxRef.current) {
+          parallaxRef.current.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+        }
+        rafId = null;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   useEffect(() => {
@@ -208,7 +248,7 @@ export default function Home() {
         setProducts(extractCollection(productRes));
         setProjects(extractCollection(projectRes));
         setBlogs(extractCollection(blogRes));
-      } catch (_e) {}
+      } catch (_e) { }
     };
     loadHomeData();
   }, []);
@@ -226,7 +266,7 @@ export default function Home() {
   }, [products]);
 
   const featuredProjects = useMemo(() => {
-    const valid = projects.filter((p) => p?._id && p?.title).slice(0, 3);
+    const valid = projects.filter((p) => p?._id && p?.title).slice(0, 6);
     return valid.length ? valid : FALLBACK_PROJECTS;
   }, [projects]);
 
@@ -238,7 +278,7 @@ export default function Home() {
   const stats = [
     { value: "100+", label: "Projects Delivered" },
     { value: "500+", label: "Design Variations" },
-    { value: "10+",  label: "Years of Expertise" },
+    { value: "10+", label: "Years of Expertise" },
     { value: "4.8★", label: "Google Rating" },
   ];
 
@@ -247,39 +287,20 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <section className={styles.hero}>
-        {HERO_IMAGES.map((src, i) => (
-          <div key={src} className={`${styles.heroBg} ${i === heroIdx ? styles.heroBgActive : ""}`}>
-            <Image src={src} alt="Invent Elevator" fill sizes="100vw" className={styles.heroBgImg} priority={i === 0} />
-          </div>
-        ))}
+        <div ref={parallaxRef} className={styles.heroBgWrap}>
+          {HERO_IMAGES.map((src, i) => (
+            <div key={src} className={`${styles.heroBg} ${i === heroIdx ? styles.heroBgActive : ""}`}>
+              <Image src={src} alt="Invent Elevator" fill sizes="100vw" className={styles.heroBgImg} priority={i === 0} />
+            </div>
+          ))}
+        </div>
         <div className={styles.heroOverlay} />
         <div className={styles.container}>
           <div className={styles.heroContent}>
-            <span className={styles.eyebrow}>Engineered in the UAE · Trusted Across Projects</span>
             <h1 className={styles.heroH1}>
               Premium Elevator Systems<br />
               <span className={styles.heroAccent}>Designed for Modern Architecture</span>
             </h1>
-            <p className={styles.heroDesc}>
-              From bespoke home lifts to high-performance commercial elevators — we deliver
-              safe, silent, and elegantly engineered vertical mobility solutions tailored to
-              every space.
-            </p>
-            <div className={styles.heroActions}>
-              <a href="tel:+971585723553" className={styles.primaryBtn}>
-                <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M3 2h3.5L8 5.5l-2 1.2a9 9 0 004.3 4.3l1.2-2L15 10.5V14a1 1 0 01-1 1C6.8 15 2 9.2 2 3a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>
-                Call Us Now
-              </a>
-              <Link href="/contact" className={styles.secondaryBtn}>Get a Free Quote →</Link>
-            </div>
-            <div className={styles.statsRow}>
-              {stats.map((s) => (
-                <div key={s.label} className={styles.statPill}>
-                  <strong>{s.value}</strong>
-                  <span>{s.label}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
         {/* Scroll indicator */}
@@ -289,7 +310,7 @@ export default function Home() {
       </section>
 
       {/* ── Marquee Strip ── */}
-      <div className={styles.marqueeWrap} aria-hidden="true">
+      {/* <div className={styles.marqueeWrap} aria-hidden="true">
         <div className={styles.marqueeTrack}>
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
             <span key={i} className={styles.marqueeItem}>
@@ -298,191 +319,85 @@ export default function Home() {
             </span>
           ))}
         </div>
-      </div>
+      </div>* /}
 
       {/* ── Categories ── */}
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles.sectionHead}>
-            <div>
-              <p className={styles.sectionEyebrow}>What We Offer</p>
-              <h2 className={styles.sectionTitle}>Complete Lift Solutions</h2>
-            </div>
-            <Link href="/categories" className={styles.viewAll}>View All Solutions →</Link>
-          </div>
-          <div className={styles.categoriesGrid}>
-            {activeCategories.map((cat) => (
-              <Link
-                key={cat._id}
-                href={cat.__fallback ? "/categories" : `/categories/${cat._id}`}
-                className={styles.catCard}
-              >
-                <div className={styles.catImgWrap}>
-                  <Image
-                    src={cat.image || FALLBACK_IMAGE}
-                    alt={cat.name}
-                    fill
-                    sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-                    className={styles.catImg}
-                  />
-                  <div className={styles.catOverlay} />
-                </div>
-                <div className={styles.catBody}>
-                  <h3 className={styles.catName}>{cat.name}</h3>
-                  <p className={styles.catDesc}>{cat.description || "Precision engineered for reliability"}</p>
-                  <span className={styles.catLink}>Explore →</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
+      <section className={styles.section} style={{ padding: 0 }}>
+        <Series activeCategories={activeCategories} />
       </section>
 
-      {/* ── Why Choose ── */}
-      <section className={styles.whySection}>
-        <div className={styles.container}>
-          <div className={styles.sectionHead}>
-            <div>
-              <p className={styles.sectionEyebrow}>Why Choose Invent</p>
-              <h2 className={styles.sectionTitle}>Elevating Spaces with Precision,<br className={styles.brDesktop} /> Safety & Design Excellence</h2>
-            </div>
-          </div>
-          <div className={styles.whyGrid}>
-            {WHY_FEATURES.map((f) => (
-              <div key={f.title} className={styles.whyCard}>
-                <div className={styles.whyIcon}>{f.icon}</div>
-                <h3 className={styles.whyTitle}>{f.title}</h3>
-                <p className={styles.whyDesc}>{f.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── Featured Products ── */}
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles.sectionHead}>
-            <div>
-              <p className={styles.sectionEyebrow}>Our Products</p>
-              <h2 className={styles.sectionTitle}>Featured Lift Systems</h2>
-            </div>
-            <Link href="/products" className={styles.viewAll}>All Products →</Link>
-          </div>
-          <div className={styles.productsGrid}>
-            {featuredProducts.map((product) => (
-              <Link
-                key={product._id}
-                href={product.__fallback ? "/products" : `/products/${product._id}`}
-                className={styles.productCard}
-              >
-                <div className={styles.productImgWrap}>
-                  <Image
-                    src={product.image || product.images?.[0] || FALLBACK_IMAGE}
-                    alt={product.name}
-                    fill
-                    sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 25vw"
-                    className={styles.productImg}
-                  />
-                  {product.isFeatured && (
-                    <span className={styles.featuredBadge}>Featured</span>
-                  )}
-                </div>
-                <div className={styles.productBody}>
-                  <h3 className={styles.productName}>{product.name}</h3>
-                  {(product.capacity || product.speed || product.stops) && (
-                    <div className={styles.productSpecs}>
-                      {product.capacity && <span>{product.capacity}</span>}
-                      {product.speed && <span>{product.speed}</span>}
-                      {product.stops && <span>{product.stops} stops</span>}
-                    </div>
-                  )}
-                  <p className={styles.productDesc}>
-                    {(product.description || product.shortDescription || "Precision engineered for reliability and comfort.").slice(0, 90)}
-                    {(product.description || "").length > 90 ? "…" : ""}
-                  </p>
-                  <span className={styles.productCta}>View Details →</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TypesGrid series={[
+        { _id: "1", name: "Heritage", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1547630824-eed1be6a27b0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+        { _id: "2", name: "Horizon", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1631248979010-6775b0c88180?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+        { _id: "3", name: "Orbit", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1547630824-eed1be6a27b0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+        { _id: "4", name: "Aero/Slim", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1631248979010-6775b0c88180?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+        { _id: "5", name: "Atelier", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1547630824-eed1be6a27b0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+      ]} />
 
-      {/* ── CTA Banner ── */}
-      <section className={styles.ctaBanner}>
-        <div className={styles.ctaBannerBg}>
-          <Image
-            src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=80"
-            alt="Invent Elevator"
-            fill
-            sizes="100vw"
-            className={styles.ctaBannerImg}
-          />
-        </div>
-        <div className={styles.ctaBannerOverlay} />
-        <div className={styles.container}>
-          <div className={styles.ctaBannerContent}>
-            <p className={styles.ctaBannerEyebrow}>Ready to Start?</p>
-            <h2 className={styles.ctaBannerTitle}>Planning a Lift Installation?</h2>
-            <p className={styles.ctaBannerDesc}>
-              Fill in your requirements and our engineering team will recommend the ideal
-              lift model, specification, and installation plan — at no cost.
-            </p>
-            <div className={styles.ctaBannerActions}>
-              <Link href="/contact" className={styles.ctaBannerPrimary}>Get a Free Quote</Link>
-              <a href="tel:+971585723553" className={styles.ctaBannerSecondary}>
-                <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M2.5 2H6l1.5 3.5-2 1.2a8 8 0 003.8 3.8l1.2-2L14 10v3.5a1 1 0 01-1 1C6.2 14.5 1.5 9.8 1.5 3a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round"/></svg>
-                +971 58 572 3553
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+
+      <GlobalMarkets />
 
       {/* ── Projects ── */}
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles.sectionHead}>
-            <div>
-              <p className={styles.sectionEyebrow}>Our Work</p>
-              <h2 className={styles.sectionTitle}>Projects Delivered</h2>
-            </div>
-            <Link href="/projects" className={styles.viewAll}>See All Projects →</Link>
-          </div>
-          <div className={styles.projectsGrid}>
-            {featuredProjects.map((project, i) => (
-              <Link
-                key={project._id}
-                href={project.__fallback ? "/projects" : `/projects/${project._id}`}
-                className={styles.projectCard}
-              >
-                <div className={styles.projectImgWrap}>
-                  <Image
-                    src={project.image || project.images?.[0] || `https://images.unsplash.com/photo-${["1486406146926-c627a92ad1ab", "1460317442991-0ec209397118", "1519494026892-80bbd2d6fd0d"][i % 3]}?auto=format&fit=crop&w=900&q=80`}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width:640px) 100vw, 33vw"
-                    className={styles.projectImg}
-                  />
-                  <div className={styles.projectImgOverlay} />
-                </div>
-                <div className={styles.projectBody}>
-                  <h3 className={styles.projectTitle}>{project.title}</h3>
-                  {project.location && <p className={styles.projectLocation}>📍 {project.location}</p>}
-                  <p className={styles.projectDesc}>
-                    {(project.description || "Custom vertical mobility solution.").slice(0, 100)}
-                    {(project.description || "").length > 100 ? "…" : ""}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Projects featuredProjects={featuredProjects} />
+
+      {/* Testimonials */}
+      <Testimonials testimonials={[
+        {
+          name: "Rajesh Mehta",
+          role: "Director, Mehta Constructions",
+          quote: "Invent Elevators transformed our residential project. The installation was seamless, and the after-sales support has been exceptional. Highly recommended for any high-rise development.",
+          image: "https://images.unsplash.com/photo-1560250097-0b93528c311a",
+        },
+        {
+          name: "Priya Sharma",
+          role: "Facility Manager, Oberoi Realty",
+          quote: "We've installed over 12 units across our commercial properties. The build quality and modern aesthetics perfectly complement our premium spaces. Zero downtime in two years.",
+          image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+        },
+        {
+          name: "Arjun Nair",
+          role: "Principal Architect, Nair & Associates",
+          quote: "As an architect, I value both form and function. Invent Elevators delivers on both fronts — their customization options are unmatched and the engineering is world-class.",
+          image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+        },
+        {
+          name: "Sunita Agarwal",
+          role: "CEO, Agarwal Group Hospitality",
+          quote: "Our hotel guests frequently compliment the lifts. Smooth, quiet, and elegant — exactly what a five-star property demands. Invent Elevators exceeded every expectation.",
+          image: "https://images.unsplash.com/photo-1580489944761-15a19d654956",
+        },
+      ]} />
+
+      <FAQ faqs={[
+        {
+          q: "What types of elevators does Invent Elevators offer?",
+          a: "We offer a complete range of lift solutions including Home Lifts, Passenger Lifts, Car Lifts, and Dumbwaiters. Each product is customizable to suit residential, commercial, and industrial requirements."
+        },
+        {
+          q: "How long does the installation process take?",
+          a: "Installation typically takes 3–7 days depending on the lift type and site conditions. Our team conducts a thorough site assessment beforehand to ensure a smooth and timely installation with minimal disruption."
+        },
+        {
+          q: "Do you provide after-sales service and maintenance?",
+          a: "Yes. We offer comprehensive Annual Maintenance Contracts (AMC) covering routine inspections, preventive maintenance, and emergency breakdown support. Our technicians are available 365 days a year."
+        },
+        {
+          q: "Are your elevators compliant with Indian safety standards?",
+          a: "Absolutely. All our lifts are designed and installed in compliance with the National Building Code of India (NBC) and relevant BIS standards, ensuring complete safety for all users."
+        },
+        {
+          q: "Can the lift design be customized to match my interiors?",
+          a: "Yes. We offer extensive customization options including cabin finishes, flooring, lighting, door styles, and control panels — allowing the lift to seamlessly blend with your home or building's aesthetics."
+        },
+        {
+          q: "What is the typical lifespan of an Invent Elevator?",
+          a: "With proper maintenance, our elevators are built to last 20–25 years. We use high-grade components and industry-leading technology to ensure long-term reliability and performance."
+        },
+      ]} />
 
       {/* ── Blog ── */}
-      <section className={`${styles.section} ${styles.blogSection}`}>
+      {/* <section className={`${styles.section} ${styles.blogSection}`}>
         <div className={styles.container}>
           <div className={styles.sectionHead}>
             <div>
@@ -521,7 +436,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
     </main>
   );
