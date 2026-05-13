@@ -197,6 +197,7 @@
   }
 
   .body {
+    align-items: center;
     flex-direction: column;
     gap: 28px;
   }
@@ -207,10 +208,16 @@
   }
 
   .quote {
+    margin: auto;
     font-size: 1.6rem;
   }
 
+  .attribution{
+    margin-left: auto;
+    margin-top: 1rem;
+  }
+
   .counter {
-    top: 36px;
+    top: 18px;
   }
 }

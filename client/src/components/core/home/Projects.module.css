@@ -126,7 +126,7 @@
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr;
-    border-left: 3px solid #2a6db5;
+      border: 1px solid #e0e0e0;
   }
 
   .card {

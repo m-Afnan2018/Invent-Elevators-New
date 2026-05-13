@@ -228,20 +228,20 @@
     background: rgb(157 161 154);
 }
 
-/* Marker Positions - Adjust these based on your map */
-.marker[data-location="middle-east"] {
-    top: 50%;
-    left: 50%;
-}
-
-.marker[data-location="asia"] {
-    top: 40%;
-    right: 23%;
-}
-
-.marker[data-location="africa"] {
+/* Marker positions — UAE map */
+.marker[data-location="abu-dhabi"] {
     top: 62%;
-    left: 34%;
+    left: 22%;
+}
+
+.marker[data-location="dubai"] {
+    top: 38%;
+    left: 58%;
+}
+
+.marker[data-location="sharjah"] {
+    top: 28%;
+    left: 68%;
 }
 
 
@@ -260,143 +260,63 @@
     }
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .supportContent {
-        flex-direction: column;
-        text-align: center;
-        align-items: center;
-    }
+/* ── Responsive ── */
 
+/* ── Responsive ── */
+
+/* Tablet — stack to single column */
+@media (max-width: 1024px) {
     .contentWrapper {
         grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-
-    .textContent {
-        text-align: left;
-    }
-
-    .regionsList {
-        flex-wrap: wrap;
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        align-items: center;
+        gap: 2.5rem;
     }
 
     .mapContainer {
         width: 100%;
-        max-width: 700px;
+        max-width: 600px;
         margin: 0 auto;
     }
 }
 
+/* Phone — stack vertically */
 @media (max-width: 768px) {
-    .supportBanner {
-        padding: 2.5rem 5%;
-    }
-
-    .supportContent h2 {
-        font-size: 1rem;
-        text-align: center;
-    }
-
-    .supportBtn {
-        width: 100%;
-        max-width: 300px;
-    }
-
     .marketsSection {
-        padding: 4rem 5%;
+        padding: 2.5rem 1.25rem;
+    }
+
+    .contentWrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .textContent h2 {
-        font-size: 1.875rem;
-    }
-
-    .regionsList {
-        flex-wrap: wrap;
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* .region:not(:last-child)::after {
-        display: none;
-    } */
-
-    /* Adjust marker sizes for mobile */
-    .pin {
-        width: 24px;
-        height: 24px;
-    }
-
-    .pin::after {
-        width: 10px;
-        height: 10px;
-    }
-
-    .label {
-        font-size: 0.75rem;
-        padding: 0.2rem 0.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .supportBanner {
-        padding: 2rem 4%;
-    }
-
-    .supportContent h2 {
-        font-size: 1.25rem;
-    }
-
-    .supportContent p {
-        font-size: 0.9rem;
-    }
-
-    .supportBtn {
-        padding: 0.875rem 2rem;
-        font-size: 0.85rem;
-    }
-
-    .marketsSection {
-        padding: 3rem 4%;
-    }
-
-    .textContent h2 {
-        font-size: 0.875rem;
-        text-align: center;
+        font-size: 1.6rem;
     }
 
     .description,
     .footerText {
-        font-size: 0.95rem;
+        font-size: 0.84rem;
     }
 
     .mapContainer {
-        aspect-ratio: 1 / 1;
+        width: 100%;
+        max-width: none;
+        aspect-ratio: 4 / 3;
     }
 
-    /* Hide labels on very small screens to avoid overlap */
+    .pin {
+        width: 20px;
+        height: 20px;
+    }
+
+    .pin::after {
+        width: 8px;
+        height: 8px;
+    }
+
     .label {
-        display: none;
-    }
-
-    .marker::after {
-        content: attr(data-location);
         font-size: 0.7rem;
-        position: absolute;
-        top: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        white-space: nowrap;
-        background: rgba(255, 255, 255, 0.9);
         padding: 0.15rem 0.4rem;
-        border-radius: 3px;
-        text-transform: capitalize;
     }
 }
 

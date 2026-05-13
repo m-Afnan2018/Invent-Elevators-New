@@ -924,6 +924,11 @@
 }
 
 @media (max-width: 640px) {
+  .miniContainer{
+    margin-left: 0;
+    width: 90vw;
+  }
+  
   .hero {
     min-height: 100svh;
   }

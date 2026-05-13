@@ -1,3 +1,20 @@
-.heading{
+.heading {
     padding: 1rem;
+}
+
+.allDetails {
+    margin: 1rem;
+    display: flex;
+    gap: 60px;
+    padding: '40px';
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .allDetails {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
+        overflow: scroll;
+    }
 }
