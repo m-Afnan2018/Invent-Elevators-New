@@ -54,9 +54,10 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background:
+  background: linear-gradient(115deg, #0412264a 0%, #081c37a3 55%, #040f20d6 100%), radial-gradient(at 80% 10%, #b0742e59 0%, #0000 50%);
+  /* background:
     linear-gradient(115deg, rgba(4, 18, 38, 0.92) 0%, rgba(8, 28, 55, 0.80) 55%, rgba(4, 15, 32, 0.88) 100%),
-    radial-gradient(ellipse at 80% 10%, rgba(176, 116, 46, 0.35) 0%, transparent 50%);
+    radial-gradient(ellipse at 80% 10%, rgba(176, 116, 46, 0.35) 0%, transparent 50%); */
   z-index: 1;
 }
 

@@ -20,9 +20,9 @@ const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=80",
-  "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1800&q=80",
+  "/hero/hero-1.jpg",
+  "/hero/hero-2.jpg",
+  "/hero/hero-3.jpg",
 ];
 
 const FALLBACK_CATEGORIES = [
@@ -347,25 +347,25 @@ export default function Home() {
           name: "Rajesh Mehta",
           role: "Director, Mehta Constructions",
           quote: "Invent Elevators transformed our residential project. The installation was seamless, and the after-sales support has been exceptional. Highly recommended for any high-rise development.",
-          image: "https://images.unsplash.com/photo-1560250097-0b93528c311a",
+          image: "/testimonials/user-1.webp",
         },
         {
           name: "Priya Sharma",
           role: "Facility Manager, Oberoi Realty",
           quote: "We've installed over 12 units across our commercial properties. The build quality and modern aesthetics perfectly complement our premium spaces. Zero downtime in two years.",
-          image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2",
+          image: "/testimonials/user-2.webp",
         },
         {
           name: "Arjun Nair",
           role: "Principal Architect, Nair & Associates",
           quote: "As an architect, I value both form and function. Invent Elevators delivers on both fronts — their customization options are unmatched and the engineering is world-class.",
-          image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e",
+          image: "/testimonials/user-3.webp",
         },
         {
           name: "Sunita Agarwal",
           role: "CEO, Agarwal Group Hospitality",
           quote: "Our hotel guests frequently compliment the lifts. Smooth, quiet, and elegant — exactly what a five-star property demands. Invent Elevators exceeded every expectation.",
-          image: "https://images.unsplash.com/photo-1580489944761-15a19d654956",
+          image: "/testimonials/user-4.webp",
         },
       ]} />
 

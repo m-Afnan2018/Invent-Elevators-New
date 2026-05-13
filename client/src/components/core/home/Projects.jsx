@@ -4,10 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FALLBACK_IMAGES = [
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80",
+  "/projects/project-1.webp",
+  "/projects/project-2.webp",
+  "/projects/project-3.webp",
 ];
 
 export default function Projects({ featuredProjects = [] }) {
