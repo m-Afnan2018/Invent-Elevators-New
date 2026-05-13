@@ -67,8 +67,10 @@ export default function Footer() {
         <div className={styles.column}>
           <h4 className={styles.columnTitle}>Contact Us</h4>
           <ul className={styles.linkList}>
-            <li><span className={styles.link}>305-336-7195</span></li>
-            <li><span className={styles.link}>4770 Biscayne Blvd. Ste 600, Miami, FL 33137</span></li>
+            <li><span className={styles.link}>+971-58-5723553</span></li>
+            <li><span className={styles.link}>info@inventelevator.com</span></li>
+            <li><span className={styles.link}>W-4, Behind Emirates Industrial City HQ,
+Al Sajja Industrial Area, Sharjah, UAE</span></li>
           </ul>
           <div className={styles.socialIcons}>
             <a href="#" className={styles.socialBtn} aria-label="WhatsApp">
