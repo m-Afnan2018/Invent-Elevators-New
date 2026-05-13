@@ -14,6 +14,28 @@
 .container {
   width: min(1280px, 92%);
   margin: 0 auto;
+  margin-top: auto;
+}
+
+.miniContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 50px;
+  width: 50vw;
+  margin-left: 40vw;
+  z-index: 1;
+  border-top: 1px solid #ffffff45;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
+.miniContainer>p {
+  width: 220px;
+  color: white;
+  font-weight: 900;
+  /* text-align: justify; */
+  font-family: var(--font-aeonik) !important;
 }
 
 /* ── Hero ── */
@@ -23,6 +45,10 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+}
+
+.heroSection {
+  flex-direction: column;
 }
 
 .heroBgWrap {

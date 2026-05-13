@@ -15,6 +15,7 @@ import TypesGrid from "@/components/core/home/TypesGrid";
 import Projects from "@/components/core/home/Projects";
 import Testimonials from "@/components/core/home/Testimonials";
 import FAQ from "@/components/core/home/FAQ";
+import Global from "@/components/core/home/Global";
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
@@ -31,42 +32,42 @@ const FALLBACK_CATEGORIES = [
     __fallback: true,
     name: "Home Lifts",
     description: "Luxury mobility for modern living",
-    image: "/lifts/home-lift.jpeg",
+    image: "/lifts/home.png",
   },
   {
     _id: "passenger-lifts",
     __fallback: true,
     name: "Passenger Lifts",
     description: "Engineered for high-performance movement",
-    image: "/lifts/passenger-lift.jpeg",
+    image: "/lifts/passenger.png",
   },
   {
     _id: "car-lifts",
     __fallback: true,
     name: "Car Lifts",
     description: "Precision lifting for vehicle transportation",
-    image: "/lifts/car-lift.jpeg",
+    image: "/lifts/car.png",
   },
   {
     _id: "dumbwaiters",
     __fallback: true,
     name: "Dumbwaiters",
     description: "Compact efficiency for seamless service",
-    image: "/lifts/dumb-lift.jpeg",
+    image: "/lifts/dumbwaiter.png",
   },
   {
     _id: "chair-lifts",
     __fallback: true,
     name: "Chair Lifts",
     description: "Safe & comfortable accessibility",
-    image: "/lifts/dumb-lift.jpeg",
+    image: "/lifts/chair.png",
   },
   {
     _id: "pod-lifts",
     __fallback: true,
     name: "Pod Lifts",
     description: "Architectural elegance in motion",
-    image: "/lifts/pod-lift.jpeg",
+    image: "/lifts/pod.png",
   },
 ];
 
@@ -286,7 +287,7 @@ export default function Home() {
     <main className={styles.page}>
 
       {/* ── Hero ── */}
-      <section className={styles.hero}>
+      <section className={`${styles.hero} ${styles.heroSection}`}>
         <div ref={parallaxRef} className={styles.heroBgWrap}>
           {HERO_IMAGES.map((src, i) => (
             <div key={src} className={`${styles.heroBg} ${i === heroIdx ? styles.heroBgActive : ""}`}>
@@ -302,6 +303,11 @@ export default function Home() {
               <span className={styles.heroAccent}>Designed for Modern Architecture</span>
             </h1>
           </div>
+        </div>
+        <div className={styles.miniContainer}>
+          <p>Glazing specialists</p>
+          <p>We design and install bespoke glass systems for ambitious architectural projects. Every pane reflects our commitment to clarity, quality, and collaboration.
+          </p>
         </div>
         {/* Scroll indicator */}
         <div className={styles.scrollHint}>
@@ -328,15 +334,16 @@ export default function Home() {
 
 
       <TypesGrid series={[
-        { _id: "1", name: "Heritage", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1547630824-eed1be6a27b0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-        { _id: "2", name: "Horizon", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1631248979010-6775b0c88180?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-        { _id: "3", name: "Orbit", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1547630824-eed1be6a27b0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-        { _id: "4", name: "Aero/Slim", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1631248979010-6775b0c88180?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
-        { _id: "5", name: "Atelier", subtitle: "European/Japanese", url: 'https://images.unsplash.com/photo-1547630824-eed1be6a27b0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' },
+        { _id: "1", name: "Heritage", subtitle: "European/Japanese", url: '/series/heritage.png' },
+        { _id: "2", name: "Horizon", subtitle: "European/Japanese", url: '/series/horizon.png' },
+        { _id: "3", name: "Orbit", subtitle: "European/Japanese", url: '/series/orbit.png' },
+        { _id: "4", name: "Aero/Slim", subtitle: "European/Japanese", url: '/series/aero-slim.png' },
+        { _id: "5", name: "Atelier", subtitle: "European/Japanese", url: '/series/atelier.png' },
       ]} />
 
 
-      <GlobalMarkets />
+      <Global />
+      {/* <GlobalMarkets /> */}
 
       {/* ── Projects ── */}
       <Projects featuredProjects={featuredProjects} />

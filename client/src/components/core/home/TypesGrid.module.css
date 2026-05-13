@@ -5,6 +5,23 @@
   border-bottom: 1px solid rgb(200, 196, 188);
 }
 
+.heading {
+  text-align: center;
+  z-index: 10;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  padding: 1rem;
+  position: absolute;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: auto;
+}
+
+.heading>h2 {
+  letter-spacing: 0.05em;
+}
+
 /* .typesSection::before {
   content: '';
   position: absolute;
@@ -169,4 +186,3 @@
     padding: 44px 20px;
   }
 }
-

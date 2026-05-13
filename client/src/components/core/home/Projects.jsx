@@ -12,7 +12,7 @@ const FALLBACK_IMAGES = [
 export default function Projects({ featuredProjects = [] }) {
   return (
     <section className={`${styles.section} ${styles.projectSection}`}>
-      <h2 className={styles.heading}>Our Projects</h2>
+      <h2 className='{styles.heading} headings'>Our Projects</h2>
       <div className={styles.grid}>
         {featuredProjects.map((project, i) => (
           <Link

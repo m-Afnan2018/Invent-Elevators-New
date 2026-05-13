@@ -8,16 +8,20 @@ export default function TypesGrid({ series = [] }) {
   const row1 = series.slice(0, 3);
   const row2 = series.slice(3, 5);
 
-  const images = ['/series/series-1.webp',
-    '/series/series-2.webp',
-    '/series/series-3.webp',
-    '/series/series-4.webp',
-    '/series/series-5.webp'
+  const images = [
+    '/series/heritage.png',
+    '/series/horizon.png',
+    '/series/orbit.png',
+    '/series/aero-slim.png',
+    '/series/atelier.png',
   ];
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
     <section className={`${styles.section} ${styles.typesSection}`}>
+      <div className={styles.heading}>
+        <h2 className="headings">Our Series of Lifts</h2>
+      </div>
       {images.map((src, i) => (
         <Image
           key={src}
@@ -30,6 +34,7 @@ export default function TypesGrid({ series = [] }) {
           priority={i === 0}
         />
       ))}
+
       {/* Row 1 — 3 columns */}
       <div className={styles.row1}>
         {row1.map((item, i) => (
@@ -41,8 +46,8 @@ export default function TypesGrid({ series = [] }) {
             onMouseEnter={() => setHoveredIndex(i)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            <p className={styles.name} style={{color: hoveredIndex !== null ? 'white' : 'black'}}>{item.name}</p>
-            <p className={styles.sub} style={{color: hoveredIndex !== null ? 'white' : 'black'}}>{item.subtitle || "European/Japanese"}</p>
+            <p className={styles.name} style={{ color: hoveredIndex !== null ? 'white' : 'black' }}>{item.name}</p>
+            <p className={styles.sub} style={{ color: hoveredIndex !== null ? 'white' : 'black' }}>{item.subtitle || "European/Japanese"}</p>
           </Link>
         ))}
       </div>
@@ -60,8 +65,8 @@ export default function TypesGrid({ series = [] }) {
             onMouseEnter={() => setHoveredIndex(i + 3)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            <p className={styles.name} style={{color: hoveredIndex !== null ? 'white' : 'black'}}>{item.name}</p>
-            <p className={styles.sub} style={{color: hoveredIndex !== null ? 'white' : 'black'}}>{item.subtitle || "European/Japanese"}</p>
+            <p className={styles.name} style={{ color: hoveredIndex !== null ? 'white' : 'black' }}>{item.name}</p>
+            <p className={styles.sub} style={{ color: hoveredIndex !== null ? 'white' : 'black' }}>{item.subtitle || "European/Japanese"}</p>
           </Link>
         ))}
       </div>
