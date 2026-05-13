@@ -16,6 +16,7 @@ import Projects from "@/components/core/home/Projects";
 import Testimonials from "@/components/core/home/Testimonials";
 import FAQ from "@/components/core/home/FAQ";
 import Global from "@/components/core/home/Global";
+import ProcessSteps from "@/components/core/home/ProcessSteps";
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
@@ -101,33 +102,45 @@ const FALLBACK_PRODUCTS = [
 const FALLBACK_PROJECTS = [
   {
     _id: "p1", __fallback: true,
-    title: "Luxury Villa Complex", location: "Dubai, UAE",
-    description: "4 custom home lifts installed across premium residential villas.",
+    title: "Palm Jumeirah Signature Villa",
+    location: "Dubai, UAE",
+    description: "Bespoke panoramic home lift with floor-to-ceiling glass cabin installed in a waterfront villa on Palm Jumeirah, serving 4 floors with whisper-quiet operation.",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
   },
   {
     _id: "p2", __fallback: true,
-    title: "Corporate Office Tower", location: "Abu Dhabi, UAE",
-    description: "High-speed passenger elevators with destination control system.",
+    title: "ADNOC Headquarters Tower",
+    location: "Abu Dhabi, UAE",
+    description: "12 high-speed destination-control passenger elevators installed across a 45-floor corporate skyscraper, handling peak-hour traffic with intelligent dispatch systems.",
+    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80",
   },
   {
     _id: "p3", __fallback: true,
-    title: "Hospitality & Restaurant Chain", location: "Sharjah, UAE",
-    description: "Dumbwaiter systems for seamless kitchen-to-floor service.",
+    title: "City Centre Sharjah Expansion",
+    location: "Sharjah, UAE",
+    description: "8 heavy-duty commercial escalators and 6 panoramic glass elevators deployed across a multi-level retail mall with full accessibility compliance.",
+    image: "https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800&q=80",
   },
   {
     _id: "p4", __fallback: true,
-    title: "Luxury Villa Complex", location: "Dubai, UAE",
-    description: "4 custom home lifts installed across premium residential villas.",
+    title: "Downtown Dubai Luxury Residences",
+    location: "Dubai, UAE",
+    description: "Premium residential elevators with custom Italian marble interiors and smart home integration installed across a 32-storey high-rise tower.",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
   },
   {
     _id: "p5", __fallback: true,
-    title: "Corporate Office Tower", location: "Abu Dhabi, UAE",
-    description: "High-speed passenger elevators with destination control system.",
+    title: "Yas Island Resort & Spa",
+    location: "Abu Dhabi, UAE",
+    description: "Scenic observation lifts and service dumbwaiters installed throughout a 5-star beachfront resort, blending seamlessly with the property's architectural design.",
+    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=800&q=80",
   },
   {
     _id: "p6", __fallback: true,
-    title: "Hospitality & Restaurant Chain", location: "Sharjah, UAE",
-    description: "Dumbwaiter systems for seamless kitchen-to-floor service.",
+    title: "Al Majaz Waterfront Complex",
+    location: "Sharjah, UAE",
+    description: "Hydraulic freight elevators and passenger lifts fitted across a mixed-use waterfront development comprising retail outlets, offices, and dining promenades.",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
   },
 ];
 
@@ -344,6 +357,8 @@ export default function Home() {
 
       <Global />
       {/* <GlobalMarkets /> */}
+
+      <ProcessSteps/>
 
       {/* ── Projects ── */}
       <Projects featuredProjects={featuredProjects} />
