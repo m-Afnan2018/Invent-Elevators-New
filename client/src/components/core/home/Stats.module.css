@@ -1,0 +1,364 @@
+/* ─── Section ──────────────────────────────────────────── */
+.section {
+  padding: 120px 0;
+  background: #f7f5f2;
+  overflow: visible;
+  /* required for sticky to work */
+}
+
+/* ─── Grid container ────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 80px;
+  align-items: start;
+  /* both columns start at top */
+}
+
+/* ─── Left: normal scroll ───────────────────────────────── */
+.left {
+  opacity: 0;
+  transform: translateX(-28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.leftVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Header ────────────────────────────────────────────── */
+.headWrap {
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #b8914a;
+  margin: 0 0 14px;
+}
+
+.title {
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 16px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.subtitle {
+  font-size: 0.92rem;
+  color: #888;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 420px;
+}
+
+/* ─── Stats Stack ───────────────────────────────────────── */
+.statsStack {
+  display: flex;
+  flex-direction: column;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 30px 0;
+  border-bottom: 1px solid #e5e0d8;
+  position: relative;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp 0.5s ease forwards;
+  transition: background 0.2s;
+}
+
+.statItem:first-child {
+  border-top: 1px solid #e5e0d8;
+}
+
+/* Gold left accent on hover */
+.statItem::before {
+  content: "";
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 55%;
+  background: #b8914a;
+  border-radius: 2px;
+  transition: transform 0.28s ease;
+}
+
+.statItem:hover::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+.statItem:hover {
+  background: rgba(184, 145, 74, 0.04);
+  border-radius: 4px;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Stat Number ───────────────────────────────────────── */
+.statNumber {
+  font-size: clamp(2.6rem, 4vw, 3.6rem);
+  font-weight: 800;
+  color: #111;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  min-width: 130px;
+  display: flex;
+  align-items: baseline;
+  font-variant-numeric: tabular-nums;
+}
+
+.statSuffix {
+  font-size: 52%;
+  font-weight: 700;
+  color: #b8914a;
+  margin-left: 2px;
+}
+
+/* ─── Stat Text ─────────────────────────────────────────── */
+.statText {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 0.01em;
+}
+
+.statDesc {
+  font-size: 0.78rem;
+  color: #999;
+  line-height: 1.55;
+}
+
+/* ─── Right: STICKY ─────────────────────────────────────── */
+.rightSticky {
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  align-self: start;
+}
+
+/* ─── Reel Shell ────────────────────────────────────────── */
+.reelShell {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+}
+
+.reelVideo {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  /* border-radius: 18px; */
+}
+
+.reelVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reelGlow {
+  position: absolute;
+  inset: -50px;
+  background: radial-gradient(ellipse at center, rgba(184, 145, 74, 0.14) 0%, transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Phone Frame ───────────────────────────────────────── */
+.reelPhone {
+  position: relative;
+  width: 320px;
+  background: #1a1a1a;
+  border-radius: 44px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  /* box-shadow:
+    0 0 0 6px #e8e3db,
+    0 0 0 7px rgba(0, 0, 0, 0.06),
+    0 32px 64px rgba(0, 0, 0, 0.18),
+    0 8px 24px rgba(0, 0, 0, 0.1); */
+  padding: 16px 10px 20px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Notch + camera */
+.phoneNotch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 22px;
+  background: #1a1a1a;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.phoneCam {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2e2e2e;
+  border: 1.5px solid #3a3a3a;
+}
+
+/* Screen */
+.phoneScreen {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+}
+
+/* Home bar */
+.phoneHome {
+  width: 88px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* ─── Instagram embed ───────────────────────────────────── */
+.igEmbedWrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #000;
+}
+
+.igEmbedWrap>iframe {
+  height: 100%;
+}
+
+.igEmbedWrap :global(.instagram-media) {
+  width: 100% !important;
+  min-width: unset !important;
+  max-width: 100% !important;
+}
+
+/* ─── Instagram Badge ───────────────────────────────────── */
+.igBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1.5px solid #e0d9cf;
+  background: #fff;
+  color: #666;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background 0.22s, border-color 0.22s, color 0.22s, box-shadow 0.22s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.igBadge:hover {
+  background: #fff8ee;
+  border-color: #b8914a;
+  color: #b8914a;
+  box-shadow: 0 2px 12px rgba(184, 145, 74, 0.15);
+}
+
+.igIcon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* ─── Responsive ────────────────────────────────────────── */
+
+/* Tablet: phone moves below stats, no longer sticky */
+@media (max-width: 1024px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    gap: 64px;
+    padding: 0 28px;
+  }
+
+  .rightSticky {
+    position: static;
+    /* disable sticky on single column */
+    align-self: auto;
+  }
+
+  .statItem::before {
+    display: none;
+  }
+
+  .subtitle {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .container {
+    padding: 0 20px;
+    gap: 48px;
+  }
+
+  .headWrap {
+    margin-bottom: 36px;
+  }
+
+  .statItem {
+    gap: 20px;
+    padding: 22px 0;
+  }
+
+  .statNumber {
+    min-width: 95px;
+    font-size: 2.2rem;
+  }
+
+  .reelPhone {
+    width: 200px;
+    border-radius: 36px;
+  }
+}

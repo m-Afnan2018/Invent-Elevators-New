@@ -17,6 +17,11 @@ import Testimonials from "@/components/core/home/Testimonials";
 import FAQ from "@/components/core/home/FAQ";
 import Global from "@/components/core/home/Global";
 import ProcessSteps from "@/components/core/home/ProcessSteps";
+import MarqueeLogos from "@/components/core/home/MarqueeLogos";
+import BeforeAfter from "@/components/core/home/BeforeAfter";
+import Materials from "@/components/core/home/Materials";
+import StatsSection from "@/components/core/home/StatsSection";
+import Stats from "@/components/core/home/Stats";
 
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
@@ -320,6 +325,7 @@ export default function Home() {
         </div>
         {/* <div className={styles.heroOverlay} /> */}
         <div className={styles.heroOverlayBlack} />
+        <div className={styles.heroOverlayBlackStrip} />
         <div className={styles.container}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroH1}>
@@ -371,8 +377,23 @@ export default function Home() {
 
       <ProcessSteps />
 
+      <Materials />
+
+      {/* <StatsSection /> */}
+      <Stats />
+
       {/* ── Projects ── */}
       <Projects featuredProjects={featuredProjects} />
+
+      <BeforeAfter
+        beforeSrc="/images/before-after/before.png"
+        afterSrc="/images/before-after/after.jpeg"
+        beforeAlt="Before renovation"
+        afterAlt="After renovation"
+        defaultPosition={40} // optional, defaults to 50
+      />
+
+      <MarqueeLogos />
 
       {/* Testimonials */}
       <Testimonials testimonials={[

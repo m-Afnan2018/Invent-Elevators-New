@@ -1,0 +1,194 @@
+/* ─── Section ──────────────────────────────────────────── */
+.section {
+  padding: 96px 0;
+  background: white;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ─── Header ───────────────────────────────────────────── */
+.head {
+  margin: auto;
+  margin-bottom: 56px;
+  max-width: 80%;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #c8a96e;
+  margin: 0 0 12px;
+}
+
+.title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: black;
+  margin: 0 0 14px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: rgba(43, 41, 41, 0.45);
+  margin: 0;
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* ─── Grid ─────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+}
+
+/* ─── Card ─────────────────────────────────────────────── */
+.card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 0px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Image zoom on hover */
+.card:hover .img {
+  transform: scale(1.07);
+}
+
+.img {
+  object-fit: cover;
+  display: block;
+  transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* Persistent subtle gradient at bottom */
+.gradientBase {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.18) 45%,
+      transparent 100%);
+  z-index: 1;
+  transition: opacity 0.4s ease;
+}
+
+/* On hover, deepen the full overlay to reveal texture */
+.card:hover .gradientBase {
+  opacity: 0;
+}
+
+/* ─── Name ─────────────────────────────────────────────── */
+.nameWrap {
+  position: absolute;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.card:hover .nameWrap {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.content {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 6px 16px;
+  /* white-space: pre-wrap; */
+  margin: 0 1rem;
+  text-align: center;
+  background: none;
+  border: none;
+  font-size: 0.5rem;
+  line-height: 1.75;
+}
+
+/* ─── Responsive ───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .head {
+    margin-bottom: 36px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .card {
+    aspect-ratio: 3 / 4;
+    border-radius: 8px;
+  }
+
+  .name {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    padding: 5px 12px;
+  }
+
+  .nameWrap {
+    bottom: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+}

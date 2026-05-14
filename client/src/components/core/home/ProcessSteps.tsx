@@ -81,7 +81,7 @@ interface ProcessStepsProps {
 
 export default function ProcessSteps({ data }: ProcessStepsProps) {
     const heading    = data?.heading    ?? "How It Works";
-    const subheading = data?.subheading ?? "From your first call to your first ride — here's our process";
+    const subheading = data?.subheading ?? "A seamless end-to-end process designed to deliver luxury, precision, and peace of mind at every stage.";
     const steps      = data?.steps      ?? STEPS_DEFAULT;
 
     return (

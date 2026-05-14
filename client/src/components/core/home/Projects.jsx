@@ -13,6 +13,7 @@ export default function Projects({ featuredProjects = [] }) {
   return (
     <section className={`${styles.section} ${styles.projectSection}`}>
       <h2 className='{styles.heading} headings'>Our Projects</h2>
+      <p>We believe an elevator should feel like a natural extension of the architecture, enhancing elegance, functionality,<br/> and the overall luxury experience of the space.</p>
       <div className={styles.grid}>
         {featuredProjects.map((project, i) => (
           <Link

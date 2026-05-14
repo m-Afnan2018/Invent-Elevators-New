@@ -5,7 +5,7 @@
 .page {
   background: #f8f8f6;
   color: #0a0a0a;
-  overflow-x: hidden;
+  overflow-x: clip;
   /* Scope AeonikPro to homepage only */
   --font-primary: var(--font-aeonik), "DM Sans", "Inter", sans-serif;
   --font-display: var(--font-aeonik), "DM Sans", "Inter", sans-serif;
@@ -88,7 +88,7 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(115deg, #0412264a 0%, #081c37a3 55%, #040f20d6 100%), radial-gradient(at 80% 10%, #b0742e59 0%, #0000 50%);
+  background: radial-gradient(at 80% 10%, #b0742e59 0%, #0000 50%);
   /* background:
     linear-gradient(115deg, rgba(4, 18, 38, 0.92) 0%, rgba(8, 28, 55, 0.80) 55%, rgba(4, 15, 32, 0.88) 100%),
     radial-gradient(ellipse at 80% 10%, rgba(176, 116, 46, 0.35) 0%, transparent 50%); */
@@ -98,8 +98,20 @@
 .heroOverlayBlack {
   position: absolute;
   inset: 0;
-  background: radial-gradient(rgb(0 0 0 / 33%) -30%, rgb(255 255 255 / 0%) 50%);
+  /* background: linear-gradient(180deg, #041226eb 0%, #040f2000 20%), radial-gradient(#00000054 -30%, #fff0 50%); */
+  background: radial-gradient(#00000054 -30%, #fff0 50%);
   z-index: 1;
+}
+
+.heroOverlayBlackStrip {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(rgb(4 15 32 / 53%) 0%, rgb(4 18 38 / 0%) 70%);
+  width: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -70px;
+  height: 200px;
 }
 
 .hero .container {

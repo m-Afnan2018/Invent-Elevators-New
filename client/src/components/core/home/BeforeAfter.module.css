@@ -1,0 +1,192 @@
+.BeforeAfter{
+  width: 100%;
+  background-color: white;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+/* ─── Wrapper ──────────────────────────────────────────── */
+.wrapper {
+  position: relative;
+  margin: auto;
+  width: 60%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 12px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+
+  /* Entrance */
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.wrapper *{
+  transition: all 0ms;
+}
+
+.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── Image layers ─────────────────────────────────────── */
+.layer,
+.beforeLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.beforeLayer {
+  will-change: clip-path;
+  transition: clip-path 0ms;
+}
+
+.img {
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+/* ─── Labels ───────────────────────────────────────────── */
+.label {
+  position: absolute;
+  top: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.labelBefore {
+  left: 16px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.labelAfter {
+  right: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Divider ──────────────────────────────────────────── */
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.line {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 255, 255, 0.9) 8%,
+    rgba(255, 255, 255, 0.9) 92%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+}
+
+/* ─── Handle ───────────────────────────────────────────── */
+.handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  pointer-events: all;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.4),
+    0 0 0 0 rgba(255, 255, 255, 0);
+  outline: none;
+}
+
+.handle:hover {
+  background: rgba(20, 20, 20, 0.75);
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+
+.handleActive {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.05) !important;
+  background: rgba(30, 30, 30, 0.85) !important;
+  border-color: #fff !important;
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.55),
+    0 0 0 5px rgba(255, 255, 255, 0.12) !important;
+}
+
+.handleIcon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+/* ─── Responsive ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .wrapper {
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+  }
+
+  .handle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .handleIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .label {
+    font-size: 0.6rem;
+    padding: 4px 9px;
+    top: 12px;
+  }
+
+  .labelBefore {
+    left: 10px;
+  }
+
+  .labelAfter {
+    right: 10px;
+  }
+}

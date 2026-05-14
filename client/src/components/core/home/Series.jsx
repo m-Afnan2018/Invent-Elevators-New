@@ -44,7 +44,7 @@ export default function Series({ activeCategories = [] }) {
                         Complete Lift<br />Solutions
                     </h2>
                     <p className={styles.sectionSubtitle}>
-                        The perfect blend of industry-leading technology and regions less explored.
+                        The perfect blend of luxury design, advanced engineering, and seamless vertical mobility solutions crafted for modern UAE spaces.
                     </p>
                 </div>
 

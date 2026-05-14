@@ -5,8 +5,8 @@ const DestinationCard = ({
     image = null,
     country = 'Dubai',
     flag = '🇦🇪',
-    hotels = 2345,
-    packages = 54,
+    home = 2345,
+    car = 54,
     accentColor = '#7B2FBE', // purple tint for active card; pass any color
 }) => {
     return (
@@ -33,7 +33,7 @@ const DestinationCard = ({
                         {country} <span className={styles.flag}>{flag}</span>
                     </h2>
                     <p className={styles.stats}>
-                        {hotels.toLocaleString()} Hotels · {packages} Packages 
+                        {home.toLocaleString()} Home Lift · {car} Car Lift 
                     </p>
                 </div>
 

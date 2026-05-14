@@ -9,7 +9,7 @@ export default function Footer() {
       <div className={styles.logoSection}>
         <div className={styles.logoPlaceholder}>
           <div className={styles.logoIcon}>
-            <Image src={'/logo-invent-png-without-bg-1.png'} alt='logo' width={200} height={200} />
+            <Image src={'/logo-invent-png-without-bg-1.png'} alt='logo' width={120} height={120} />
           </div>
         </div>
       </div>

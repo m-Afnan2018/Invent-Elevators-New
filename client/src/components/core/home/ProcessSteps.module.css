@@ -91,13 +91,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #E5B869;
+  /* color: #E5B869; */
+  color: white;
   transition: color 0.3s ease;
 }
 
-/* .step:hover .icon {
-  color: #1a1a1a;
-} */
+.step:hover .icon {
+  /* color: #1a1a1a; */
+  color: #E5B869
+}
 
 .icon svg {
   width: 28px;

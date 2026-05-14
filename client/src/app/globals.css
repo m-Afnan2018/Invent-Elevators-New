@@ -23,7 +23,7 @@ html {
 html,
 body {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-family: var(--font-primary);
   background:
     radial-gradient(circle at top left, rgba(220, 165, 90, 0.15), transparent 28%),
