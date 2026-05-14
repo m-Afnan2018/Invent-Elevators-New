@@ -301,14 +301,25 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <section className={`${styles.hero} ${styles.heroSection}`}>
-        <div ref={parallaxRef} className={styles.heroBgWrap}>
+        {/* <div ref={parallaxRef} className={styles.heroBgWrap}>
           {HERO_IMAGES.map((src, i) => (
             <div key={src} className={`${styles.heroBg} ${i === heroIdx ? styles.heroBgActive : ""}`}>
               <Image src={src} alt="Invent Elevator" fill sizes="100vw" className={styles.heroBgImg} priority={i === 0} />
             </div>
           ))}
+        </div> */}
+        <div ref={parallaxRef} className={styles.heroBgWrap}>
+          <video
+            className={styles.heroBgVideo}
+            src="/hero/hero-video.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
         </div>
-        <div className={styles.heroOverlay} />
+        {/* <div className={styles.heroOverlay} /> */}
+        <div className={styles.heroOverlayBlack} />
         <div className={styles.container}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroH1}>
@@ -318,8 +329,8 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.miniContainer}>
-          <p>Glazing specialists</p>
-          <p>We design and install bespoke glass systems for ambitious architectural projects. Every pane reflects our commitment to clarity, quality, and collaboration.
+          <p>Elevator Specialists</p>
+          <p>We design and install bespoke elevator systems for modern residential and commercial spaces. Every solution reflects our commitment to luxury, safety, innovation, and seamless vertical mobility.
           </p>
         </div>
         {/* Scroll indicator */}
@@ -358,7 +369,7 @@ export default function Home() {
       <Global />
       {/* <GlobalMarkets /> */}
 
-      <ProcessSteps/>
+      <ProcessSteps />
 
       {/* ── Projects ── */}
       <Projects featuredProjects={featuredProjects} />
