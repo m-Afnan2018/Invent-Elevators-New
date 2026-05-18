@@ -1,0 +1,114 @@
+.wrapper {
+  width: 100%;
+  background: #1a1a1a;
+  padding: 72px 40px;
+  box-sizing: border-box;
+}
+
+.inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+}
+
+.text {
+  font-family: var(--font-verah);
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.85;
+  margin: 0;
+  letter-spacing: 0.1px;
+}
+
+/* CTA button — white pill with dark arrow badge */
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.3rem;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-montserrat);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+  width: fit-content;
+  text-transform: uppercase;
+}
+.ctaBtn,
+.ctaBtn * {
+  text-decoration: none !important;
+}
+.ctaBtn span:nth-child(1) {
+  margin-left: 15px;
+}
+
+.ctaBtn:hover {
+  background: #e5e5e5;
+  transform: scale(1.02);
+  color: #000000;
+}
+
+.ctaBtn:active {
+  transform: scale(0.98);
+}
+
+.ctaArrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #000000;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.arrowCircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  background: #000000;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  transform: rotate(-45deg);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .wrapper {
+      padding: 60px 24px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .wrapper {
+      padding: 48px 20px;
+  }
+
+  .text {
+      font-size: 1rem;
+  }
+}

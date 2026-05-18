@@ -1,0 +1,358 @@
+/* ============================================================
+   Footer.module.css — Invent Elevator Footer
+   ============================================================ */
+
+   .footer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    font-family: var(--font-gotham);
+    color: #ffffff;
+}
+
+/* ── Background ─────────────────────────────────────────── */
+.bgImage {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* ── Layout ──────────────────────────────────────────────── */
+.container {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 48px 28px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(32px, 5vw, 80px);
+    width: 100%;
+}
+
+/* ── Brand Column ────────────────────────────────────────── */
+.brandCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 0 0 50%;
+    width: 50%;
+    gap: 18px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.logo :global(img) {
+    width: 100px !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
+.tagline {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+    max-width: 220px;
+}
+
+.quoteBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 1px 1px 1px 26px;
+    background: #f3f3f3;
+    color: #1a1a1a;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    width: fit-content;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+    min-width: 150px;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.quoteBtn:hover {
+    background: #e9e6df;
+    transform: scale(1.02);
+}
+
+.quoteBtn:active {
+    transform: scale(0.98);
+}
+
+.arrowCircle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transform: rotate(-45deg);
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.quoteBtn:hover .arrowCircle {
+    transform: translateX(0.5px);
+    background: #000;
+}
+
+/* ── Right Side ──────────────────────────────────────────── */
+.rightSide {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: clamp(32px, 5vw, 80px);
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* ── Locations Column ────────────────────────────────────── */
+.locationsCol {
+    padding-top: 4px;
+    flex: 0 0 auto;
+}
+
+.locationList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.locationItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 14.5px;
+}
+
+.pinIcon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.cityName {
+    white-space: nowrap;
+}
+
+/* ── Contact Column ──────────────────────────────────────── */
+.contactCol {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 0 0 auto;
+}
+
+.contactTitle {
+    font-size: 22px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 4px;
+    letter-spacing: 0.01em;
+}
+
+.phone {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+}
+
+.phone:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.email {
+    display: block;
+    color: #ffffff;
+    text-decoration: underline;
+    font-size: 13.5px;
+    font-weight: 400;
+    transition: color 0.2s;
+}
+
+.email:hover {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.socialRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.socialIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    color: #ffffff;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.socialIcon:hover {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Divider ─────────────────────────────────────────────── */
+.divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.18);
+    margin: 48px 0 20px;
+}
+
+/* ── Bottom Bar ──────────────────────────────────────────── */
+.bottomBar {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+}
+
+.copyright {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+    text-align: center;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1100px) {
+    .container {
+        padding: 52px 32px 24px;
+    }
+
+    .brandCol {
+        width: 180px;
+    }
+}
+
+@media (max-width: 860px) {
+    .container {
+        padding: 48px 24px 24px;
+    }
+
+    .grid {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+    }
+
+    .brandCol {
+        width: 100%;
+        align-items: center;
+    }
+
+    .rightSide {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: nowrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 40px 20px 20px;
+    }
+
+    .grid {
+        gap: 32px;
+    }
+
+    .rightSide {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 32px;
+    }
+
+    .brandCol,
+    .locationsCol,
+    .contactCol {
+        align-items: center;
+        text-align: center;
+    }
+
+    .tagline {
+        max-width: 100%;
+    }
+
+    .quoteBtn {
+        margin: 0 auto;
+    }
+
+    /* .locationsCol {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .locationList {
+        width: fit-content;
+    } */
+    
+    .locationItem {
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .socialRow {
+        justify-content: center;
+    }
+
+    .contactTitle {
+        font-size: 20px;
+    }
+
+    .divider {
+        margin: 36px 0 16px;
+    }
+    .bottomBar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

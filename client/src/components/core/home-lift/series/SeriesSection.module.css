@@ -1,0 +1,202 @@
+.wrapper {
+  width: 100%;
+  padding: 60px 40px;
+  box-sizing: border-box;
+}
+
+/* ── Heading row ── */
+.headingRow {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 48px;
+}
+
+.heading {
+  font-family: var(--font-verah);
+  font-size: 34px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+/* ── Card ── */
+.card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 420px;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+/* image */
+.cardImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.04);
+}
+
+/* overlay */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  transition: background 0.4s ease;
+}
+
+.card:hover .overlay {
+  background: rgba(0, 0, 0, 0.78);
+}
+
+/* Default: name sits at bottom-left */
+.cardName {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Lato", Times, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+}
+
+.card:hover .cardName {
+  opacity: 0;
+}
+
+/* Hover: centred content fades in */
+.hoverContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 32px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 2;
+}
+
+.card:hover .hoverContent {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hoverName {
+  font-family: "Lato", Times, serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.hoverDesc {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 240px;
+}
+
+.knowMoreBtn {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin-top: 8px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover .knowMoreBtn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .wrapper {
+    padding: 48px 24px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .card {
+    height: 400px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 36px 16px;
+  }
+
+  .heading {
+    text-align: center;
+    white-space: normal;
+    font-size: 30px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 20px;
+    justify-items: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 340px;
+    height: 420px;
+  }
+
+  /* On mobile show only title */
+  .hoverContent {
+    opacity: 0;
+  }
+
+  .cardName {
+    opacity: 1;
+  }
+}
