@@ -21,12 +21,12 @@ const montserrat = Montserrat({
 const verah = localFont({
   src: [
     {
-      path: "../../../../public/fonts/Verah___.ttf",
+      path: "../../../public/fonts/Verah___.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../../../public/fonts/Verahb__.ttf",
+      path: "../../../public/fonts/Verahb__.ttf",
       weight: "700",
       style: "normal",
     },
@@ -37,17 +37,17 @@ const verah = localFont({
 const gotham = localFont({
   src: [
     {
-      path: "../../../../public/fonts/icielgothammediumregular.otf",
+      path: "../../../public/fonts/icielgothammediumregular.otf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../../../public/fonts/iCielGothamBold.ttf",
+      path: "../../../public/fonts/iCielGothamBold.ttf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../../../../public/fonts/icielgothamultraregular.otf",
+      path: "../../../public/fonts/icielgothamultraregular.otf",
       weight: "900",
       style: "normal",
     },
