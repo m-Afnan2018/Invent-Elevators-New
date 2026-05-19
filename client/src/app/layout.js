@@ -16,6 +16,58 @@ const aeonikMediumPro = localFont({
   display: "swap",
 });
 
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "700", "900"],
+});
+
+
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+})
+
+const verah = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/Verah___.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/Verahb__.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-verah",
+})
+
+const gotham = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/icielgothammediumregular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/iCielGothamBold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/icielgothamultraregular.otf",
+      weight: "900",
+      style: "normal",
+    },
+
+  ],
+  variable: "--font-gotham",
+})
+
 export const metadata = {
   title: {
     default: "Invent Elevator | Premium Vertical Mobility",
@@ -27,7 +79,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${aeonikPro.variable} ${aeonikMediumPro.variable}`}>
+    <html lang="en" className={`${aeonikPro.variable} ${montserrat.variable} ${gotham.variable} ${verah.variable} ${aeonikMediumPro.variable}`}>
       <body>
         <Toaster
           position="top-right"
