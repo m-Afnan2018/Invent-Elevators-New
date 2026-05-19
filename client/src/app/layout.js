@@ -1,5 +1,7 @@
 import "./globals.css";
 import localFont from "next/font/local";
+import { Montserrat } from "next/font/google";
+import { Lato } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 const aeonikPro = localFont({
