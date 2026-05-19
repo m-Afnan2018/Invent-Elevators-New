@@ -6,6 +6,16 @@
     #f6f8fb;
 }
 
+body,
+body :where(button, input, select, textarea, p, span, li, a, label, div, small) {
+  font-family: var(--font-aeonik) !important;
+}
+
+body :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-aeonik) !important;
+  letter-spacing: -0.01em;
+}
+
 .pageContent {
   position: relative;
 }
