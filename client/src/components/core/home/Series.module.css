@@ -2,8 +2,7 @@
 .section {
     padding: 72px 0 48px;
     background: white;
-    overflow: hidden;
-    /* clips the carousel's right overflow */
+    overflow-x: clip; /* clip never blocks child touch-scroll, unlike hidden */
 }
 
 /* ── Top row: left text + carousel side by side ── */
@@ -47,18 +46,17 @@
 .carouselOuter {
     flex: 1;
     min-width: 0;
-    /* overflow: hidden keeps cards clipped at the section edge */
-    overflow: hidden;
+    overflow-x: clip; /* clips bleed without blocking touch-scroll */
 }
 
 .carouselTrack {
     display: flex;
     gap: 20px;
-    /* Native scroll — browser handles smooth animation, no pixel math */
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch; /* smooth momentum scroll on iOS */
 }
 
 .carouselTrack::-webkit-scrollbar {
@@ -182,7 +180,7 @@
 /* ── Responsive ── */
 @media (max-width: 1024px) {
     .catCard {
-        flex: 0 0 calc(42% - 10px);
+        flex: 0 0 calc(44% - 10px);
     }
 
     .leftPanel {
@@ -199,7 +197,7 @@
     .topRow {
         flex-direction: column;
         padding-left: 24px;
-        gap: 28px;
+        gap: 24px;
     }
 
     .leftPanel {
@@ -209,14 +207,65 @@
     }
 
     .sectionTitle {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
     }
 
+    .sectionSubtitle {
+        font-size: 0.82rem;
+    }
+
+    /* 76vw card — next card peeks ~20vw giving a clear scroll hint */
     .catCard {
-        flex: 0 0 72vw;
+        flex: 0 0 76vw;
+    }
+
+    /* Right padding so last card doesn't slam into screen edge */
+    .carouselTrack {
+        padding-right: 24px;
     }
 
     .carouselFooter {
         padding: 0 24px;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 36px 0 28px;
+    }
+
+    .topRow {
+        padding-left: 16px;
+        gap: 20px;
+    }
+
+    .leftPanel {
+        padding-right: 16px;
+    }
+
+    .sectionTitle {
+        font-size: 1.4rem;
+    }
+
+    .catCard {
+        flex: 0 0 80vw;
+    }
+
+    .carouselTrack {
+        gap: 14px;
+        padding-right: 16px;
+    }
+
+    .carouselFooter {
+        padding: 0 16px;
+    }
+
+    .dot {
+        width: 28px;
+    }
+
+    .dotActive {
+        width: 42px;
     }
 }

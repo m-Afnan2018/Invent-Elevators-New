@@ -55,6 +55,7 @@ function LogoRow({ logos, direction }: LogoRowProps) {
 export default function MarqueeLogos() {
   return (
     <section className={styles.section}>
+      <h2 className="headings">Our Partners</h2>
       <LogoRow logos={topLogos} direction="left" />
       {/* <LogoRow logos={bottomLogos} direction="right" /> */}
     </section>

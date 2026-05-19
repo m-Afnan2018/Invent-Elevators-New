@@ -83,6 +83,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+
+/* Sits above the iframe — blocks all YouTube controls/clicks */
+.heroBgCover {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .heroOverlay {

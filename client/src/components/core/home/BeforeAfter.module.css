@@ -163,6 +163,7 @@
 @media (max-width: 640px) {
   .wrapper {
     aspect-ratio: 4 / 3;
+    width: 90%;
     border-radius: 8px;
   }
 

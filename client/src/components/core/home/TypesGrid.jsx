@@ -1,28 +1,29 @@
 "use client";
 import { useState } from "react";
 import styles from "./TypesGrid.module.css";
-import Link from "next/link";
 import Image from "next/image";
 
-export default function TypesGrid({ series = [] }) {
-  const row1 = series.slice(0, 3);
-  const row2 = series.slice(3, 5);
+const IMAGES = [
+  '/series/heritage.png',
+  '/series/horizon.png',
+  '/series/orbit.png',
+  '/series/aero-slim.png',
+];
 
-  const images = [
-    '/series/heritage.png',
-    '/series/horizon.png',
-    '/series/orbit.png',
-    '/series/aero-slim.png',
-    '/series/atelier.png',
-  ];
+export default function TypesGrid({ series = [] }) {
+  const items = series.slice(0, 4);
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
     <section className={`${styles.section} ${styles.typesSection}`}>
+
+      {/* Section heading */}
       <div className={styles.heading}>
         <h2 className="headings">Our Series of Lifts</h2>
       </div>
-      {images.map((src, i) => (
+
+      {/* Background images — revealed on hover (desktop only) */}
+      {IMAGES.map((src, i) => (
         <Image
           key={src}
           src={src}
@@ -35,41 +36,43 @@ export default function TypesGrid({ series = [] }) {
         />
       ))}
 
-      {/* Row 1 — 3 columns */}
-      <div className={styles.row1}>
-        {row1.map((item, i) => (
-          <Link
+      {/* Single row — all 4 items */}
+      <div className={styles.row}>
+        {items.map((item, i) => (
+          <div
             key={item._id || i}
-            href={item.href || `/series/${item._id}`}
-            className={`${styles.cell}`}
-            id={styles[`imagesId${i}`]}
+            className={styles.cell}
             onMouseEnter={() => setHoveredIndex(i)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            <p className={styles.name} style={{ color: hoveredIndex !== null ? 'white' : 'black' }}>{item.name}</p>
-            <p className={styles.sub} style={{ color: hoveredIndex !== null ? 'white' : 'black' }}>{item.subtitle || "European/Japanese"}</p>
-          </Link>
+            {/* Per-cell image — only visible on mobile (touch devices) */}
+            <div className={styles.cellImg}>
+              <Image
+                src={IMAGES[i]}
+                alt={item.name}
+                fill
+                sizes="50vw"
+                style={{ objectFit: "cover" }}
+              />
+              <div className={styles.cellImgOverlay} />
+            </div>
+
+            <p
+              className={styles.name}
+              style={{ color: hoveredIndex !== null ? "white" : "black" }}
+            >
+              {item.name}
+            </p>
+            <p
+              className={styles.sub}
+              style={{ color: hoveredIndex !== null ? "rgba(255,255,255,0.65)" : "#888" }}
+            >
+              {item.subtitle || "European/Japanese"}
+            </p>
+          </div>
         ))}
       </div>
 
-      {/* Horizontal divider */}
-      <div className={styles.hDivider} />
-
-      {/* Row 2 — 2 columns centered */}
-      <div className={styles.row2}>
-        {row2.map((item, i) => (
-          <Link
-            key={item._id || i}
-            href={item.href || `/series/${item._id}`}
-            className={styles.cell}
-            onMouseEnter={() => setHoveredIndex(i + 3)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <p className={styles.name} style={{ color: hoveredIndex !== null ? 'white' : 'black' }}>{item.name}</p>
-            <p className={styles.sub} style={{ color: hoveredIndex !== null ? 'white' : 'black' }}>{item.subtitle || "European/Japanese"}</p>
-          </Link>
-        ))}
-      </div>
     </section>
   );
 }

@@ -52,45 +52,17 @@
 .section {
   padding: 0 80px;
   background: #fff;
-  min-height: 100vh;
+  /* min-height: 100vh; */
 }
 
-/* ── Row 1: exactly 3 equal columns ── */
-.row1 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding-top: 20vh;
-  padding-bottom: 5vh;
-  position: relative;
-  z-index: 1;
-}
-
-/* ── Horizontal divider between rows ── */
-.hDivider {
-  height: 1px;
-  background: rgba(216, 216, 216, 0.5);
-  margin: 0;
-  position: relative;
-  z-index: 1;
-}
-
-/* ── Row 2: 2 items centered — use 4-col trick so 2 items occupy middle 2 ── */
-.row2 {
+/* ── Single row — 4 equal columns ── */
+.row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding-bottom: 20vh;
-  padding-top: 5vh;
+  padding-top: 22vh;
+  padding-bottom: 22vh;
   position: relative;
   z-index: 1;
-}
-
-/* Place 2 cells in columns 2 and 3 of the 4-col grid = centered */
-.row2 .cell:nth-child(1) {
-  grid-column: 2 / 3;
-}
-
-.row2 .cell:nth-child(2) {
-  grid-column: 3 / 4;
 }
 
 /* ── Cell base ── */
@@ -99,33 +71,45 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 85px 40px;
-  text-decoration: none;
-  transition: background 0.2s ease;
+  padding: 60px 32px;
   position: relative;
+  overflow: hidden;
+  cursor: default;
+  user-select: none;
 }
 
-
-/* ── Vertical dividers in row 1: after 1st and 2nd cell ── */
-.row1 .cell:not(:last-child)::after {
+/* Vertical dividers between cells */
+.cell:not(:last-child)::after {
   content: "";
   position: absolute;
   right: 0;
-  top: 0;
-  bottom: 0;
+  top: 15%;
+  bottom: 15%;
   width: 1px;
-  background: #d8d8d8;
+  background: rgba(216, 216, 216, 0.6);
+  z-index: 2;
 }
 
-/* ── Vertical divider in row 2: between the 2 centered cells ── */
-.row2 .cell:nth-child(1)::after {
-  content: "";
+/* ── Per-cell image (mobile only) ── */
+.cellImg {
+  display: none; /* hidden on desktop */
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: #d8d8d8;
+  inset: 0;
+  z-index: 0;
+}
+
+.cellImgOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* Text sits above the cell image */
+.name,
+.sub {
+  position: relative;
+  z-index: 2;
 }
 
 /* ── Typography — light weight uppercase, exactly like reference ── */
@@ -152,37 +136,85 @@
 }
 
 /* ── Responsive ── */
+
+/* Touch devices — per-cell images, no interaction */
+@media (hover: none) {
+  .cell {
+    pointer-events: none;
+  }
+
+  /* Show each cell's own image */
+  .cellImg {
+    display: block;
+  }
+
+  /* Hide the section-wide hover images */
+  .backgroungImages {
+    display: none;
+  }
+
+  /* Text always white over cell images */
+  .name {
+    color: white !important;
+  }
+
+  .sub {
+    color: rgba(255, 255, 255, 0.65) !important;
+  }
+}
+
+/* Mobile — 2×2 grid */
 @media (max-width: 768px) {
   .section {
-    padding: 0 24px;
+    padding: 0 0;
+    min-height: 60vh;
   }
 
-  .row1 {
-    grid-template-columns: repeat(2, 1fr);
+  .heading {
+    position: relative;
+    padding: 1.5rem 1.25rem 1rem;
+    font-size: 1.1rem;
+    background-color: #fff;
+    color: #1a1a1a;
   }
 
-  .row1 .cell:nth-child(3) {
-    grid-column: 1 / -1;
-    border-top: 1px solid #d8d8d8;
+  .row {
+    grid-template-columns: repeat(1, 1fr);
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
-  .row2 {
-    grid-template-columns: repeat(2, 1fr);
+  .cell {
+    min-height: 70vh;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
 
-  .row2 .cell:nth-child(1) {
-    grid-column: 1 / 2;
+  /* Vertical divider only between left and right cells */
+  .cell:nth-child(1)::after,
+  .cell:nth-child(3)::after {
+    top: 15%;
+    bottom: 15%;
+    background: rgba(255, 255, 255, 0.2);
   }
 
-  .row2 .cell:nth-child(2) {
-    grid-column: 2 / 3;
+  .cell:nth-child(2)::after,
+  .cell:nth-child(4)::after {
+    display: none;
   }
 
   .name {
     font-size: 1.1rem;
   }
+}
 
+@media (max-width: 480px) {
   .cell {
-    padding: 44px 20px;
+    padding: 32px 16px;
+  }
+
+  .name {
+    font-size: 1rem;
+    letter-spacing: 0.08em;
   }
 }

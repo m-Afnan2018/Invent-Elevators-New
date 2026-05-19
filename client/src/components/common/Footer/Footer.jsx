@@ -49,7 +49,7 @@ export default function Footer() {
             <li><Link href="/series/horizon" className={styles.link}>Horizon</Link></li>
             <li><Link href="/series/orbit" className={styles.link}>Orbit</Link></li>
             <li><Link href="/series/aero-slim" className={styles.link}>Aero / Slim</Link></li>
-            <li><Link href="/series/atelier" className={styles.link}>Atelier</Link></li>
+            {/* <li><Link href="/series/atelier" className={styles.link}>Atelier</Link></li> */}
           </ul>
         </div>
 

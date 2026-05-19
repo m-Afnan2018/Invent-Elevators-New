@@ -2,7 +2,7 @@
 import styles from "./Series.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState, useCallback } from "react"; // useCallback kept for goTo
+import { useRef, useState, useCallback, useEffect } from "react";
 
 const FALLBACK_IMAGE =
     "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=900&q=80";
@@ -10,9 +10,21 @@ const FALLBACK_IMAGE =
 export default function Series({ activeCategories = [] }) {
     const trackRef = useRef(null);
     const [current, setCurrent] = useState(0);
+    const [visibleCount, setVisibleCount] = useState(3);
 
-    const VISIBLE = 3;
-    const maxIndex = Math.max(0, activeCategories.length - VISIBLE);
+    /* Update visible card count on resize so dots stay accurate */
+    useEffect(() => {
+        const update = () => {
+            if (window.innerWidth <= 768) setVisibleCount(1);
+            else if (window.innerWidth <= 1024) setVisibleCount(2);
+            else setVisibleCount(3);
+        };
+        update();
+        window.addEventListener("resize", update);
+        return () => window.removeEventListener("resize", update);
+    }, []);
+
+    const maxIndex = Math.max(0, activeCategories.length - visibleCount);
 
     const goTo = useCallback(
         (idx) => {
