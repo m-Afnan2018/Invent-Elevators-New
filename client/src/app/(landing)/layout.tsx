@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { Lato } from "next/font/google";
 import localFont from "next/font/local"
-// import "./globals.css";
+import "./globals.css";
 
 
 const lato = Lato({
