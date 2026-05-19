@@ -24,7 +24,7 @@ html,
 body {
   width: 100%;
   overflow-x: clip;
-  font-family: var(--font-primary);
+  /* font-family: var(--font-primary); */
   background:
     radial-gradient(circle at top left, rgba(220, 165, 90, 0.15), transparent 28%),
     radial-gradient(circle at top right, rgba(52, 129, 235, 0.08), transparent 22%),
@@ -35,7 +35,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-body,
+/* body,
 body :where(button, input, select, textarea, p, span, li, a, label, div, small) {
   font-family: var(--font-aeonik) !important;
 }
@@ -43,7 +43,7 @@ body :where(button, input, select, textarea, p, span, li, a, label, div, small) 
 body :where(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-aeonik) !important;
   letter-spacing: -0.01em;
-}
+} */
 
 a {
   color: inherit;
