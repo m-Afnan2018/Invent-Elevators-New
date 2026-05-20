@@ -8,6 +8,7 @@ const API_BASE = "/api";
 
 export const API_ROUTES = {
   HEALTH: "/",
+  AUTH: `${API_BASE}/auth`,
   CATEGORIES: `${API_BASE}/categories`,
   SUB_CATEGORIES: `${API_BASE}/sub-categories`,
   COMPONENT_TYPES: `${API_BASE}/component-types`,

@@ -6,13 +6,13 @@ export const API_BASE_URL = rawBaseUrl.replace(/\/$/, '');
 
 export const ENDPOINTS = {
   AUTH: {
-    SIGNUP: '/auth/signup',
-    LOGIN: '/auth/login',
-    LOGOUT: '/auth/logout',
-    ME: '/auth/me',
-    DASHBOARD_ACCESS: '/auth/dashboard-access',
-    FORGOT_PASSWORD: '/auth/forgot-password',
-    RESET_PASSWORD: '/auth/reset-password',
+    SIGNUP: '/api/auth/signup',
+    LOGIN: '/api/auth/login',
+    LOGOUT: '/api/auth/logout',
+    ME: '/api/auth/me',
+    DASHBOARD_ACCESS: '/api/auth/dashboard-access',
+    FORGOT_PASSWORD: '/api/auth/forgot-password',
+    RESET_PASSWORD: '/api/auth/reset-password',
   },
   PRODUCTS: '/api/products',
   CATEGORIES: '/api/categories',

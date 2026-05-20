@@ -74,7 +74,7 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
-app.use("/auth", authRoutes);
+app.use(API_ROUTES.AUTH, authRoutes);
 app.use(API_ROUTES.CATEGORIES, categoryRoutes);
 app.use(API_ROUTES.SUB_CATEGORIES, subCategoryRoutes);
 app.use(API_ROUTES.COMPONENT_TYPES, componentTypeRoutes);
