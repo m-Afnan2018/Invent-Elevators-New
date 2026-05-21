@@ -20,6 +20,8 @@ export const API_ROUTES = {
   BLOGS: `${API_BASE}/blogs`,
   LEADS: `${API_BASE}/leads`,
   USERS: `${API_BASE}/users`,
+  JOBS: `${API_BASE}/jobs`,
+  JOB_APPLICATIONS: `${API_BASE}/job-applications`,
 };
 
 export default API_ROUTES;

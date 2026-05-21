@@ -1,0 +1,292 @@
+/* ─────────────────────────────────────────────
+   MarqueeLogos.module.css
+───────────────────────────────────────────── */
+
+.section {
+  width: 100%;
+  background: #ffffff;
+
+  padding: 56px 40px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+/* ── Heading ───────────────────────── */
+
+.headingRow {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  margin-bottom: 40px;
+}
+
+.heading {
+  font-family: var(--font-verah);
+
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 700;
+
+  color: #1a1a1a;
+
+  margin: 0;
+
+  text-align: center;
+}
+
+/* ─────────────────────────────────────
+   Desktop Grid
+───────────────────────────────────── */
+
+.desktopGrid {
+  width: 100%;
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 26px;
+}
+
+/* ── First Row → 5 logos ── */
+
+.logoRow {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 24px;
+}
+
+/* ── Second Row → 4 centered ── */
+
+.logoRow4 {
+  width: fit-content;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 24px;
+}
+
+/* ── Third Row → 3 centered ── */
+
+.logoRow3 {
+  width: fit-content;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+/* ─────────────────────────────────────
+   Cards
+───────────────────────────────────── */
+
+.logoCard {
+  width: 220px;
+  height: 120px;
+
+  border-radius: 24px;
+
+  /* background: #f7f4ef; */
+
+  border: 1px solid #ece7df;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.logoCard:hover {
+  transform: translateY(-5px);
+
+  background: #ffffff;
+
+  /* border-color: #d8c6a3; */
+}
+
+/* ─────────────────────────────────────
+   Logo Images
+───────────────────────────────────── */
+
+.logoImg {
+  max-width: 140px;
+  max-height: 52px;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+
+  filter: grayscale(20%) opacity(0.9);
+
+  transition:
+    filter 0.3s ease,
+    transform 0.3s ease;
+}
+
+.logoCard:hover .logoImg {
+  filter: grayscale(0%) opacity(1);
+
+  transform: scale(1.05);
+}
+
+/* ─────────────────────────────────────
+   Mobile Carousel
+───────────────────────────────────── */
+
+.mobileWrapper {
+  display: none;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  width: max-content;
+
+  will-change: transform;
+}
+
+.trackLeft {
+  animation: scrollLeft 22s linear infinite;
+}
+
+.mobileLogoCard {
+  width: 170px;
+  height: 90px;
+
+  border-radius: 18px;
+
+  /* background: #f7f4ef; */
+
+  border: 1px solid #ece7df;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────
+   Animation
+───────────────────────────────────── */
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ─────────────────────────────────────
+   Tablet
+───────────────────────────────────── */
+
+@media (max-width: 1200px) {
+
+  .logoCard {
+    width: 180px;
+    height: 110px;
+  }
+
+  .logoRow {
+    gap: 18px;
+  }
+
+  .logoRow4,
+  .logoRow3 {
+    gap: 18px;
+  }
+}
+
+/* ─────────────────────────────────────
+   Mobile
+───────────────────────────────────── */
+
+@media (max-width: 768px) {
+
+  .section {
+    padding: 40px 16px;
+  }
+
+  .headingRow {
+    margin-bottom: 28px;
+  }
+
+  /* Hide desktop grid */
+
+  .desktopGrid {
+    display: none;
+  }
+
+  /* Show mobile carousel */
+
+  .mobileWrapper {
+    display: block;
+
+    overflow: hidden;
+
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+  }
+
+  .mobileLogoCard {
+    width: 150px;
+    height: 84px;
+  }
+
+
+  .logoImg {
+    max-width: 110px;
+    max-height: 42px;
+  }
+}
+
+/* ─────────────────────────────────────
+   Reduced Motion
+───────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .trackLeft {
+    animation: none;
+  }
+}

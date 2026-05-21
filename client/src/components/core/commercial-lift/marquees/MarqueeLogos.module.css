@@ -1,0 +1,137 @@
+/* ─────────────────────────────────────────────
+   MarqueeLogos.module.css
+───────────────────────────────────────────── */
+
+.section {
+  width: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  padding: 48px 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+/* ── Heading row ── */
+.headingRow {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* add this */
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.heading {
+  font-family: var(--font-verah);
+  font-size: 34px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  white-space: nowrap;
+  text-align: center; /* add this */
+}
+
+/* ── Marquee fade masks (applied only to the track area) ── */
+.rowWrapper {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* ── Scrolling track ── */
+.track {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  width: max-content;
+  will-change: transform;
+}
+
+.trackLeft {
+  animation: scrollLeft 30s linear infinite;
+}
+
+.trackRight {
+  animation: scrollRight 30s linear infinite;
+}
+
+.section:hover .track {
+  animation-play-state: paused;
+}
+
+/* ── Individual logo card ── */
+.logoCard {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  padding: 0 16px;
+}
+
+.logoCard:last-child {
+  border-right: none;
+}
+
+/* ── Logo image ── */
+.logoImg {
+  max-height: 52px;
+  max-width: 160px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(30%) opacity(0.85);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.logoCard:hover .logoImg {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.06);
+}
+
+/* ── Keyframes ── */
+@keyframes scrollLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes scrollRight {
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .section {
+    padding: 36px 16px 24px;
+    gap: 24px;
+  }
+
+  .heading {
+    font-size: 30px;
+  }
+}
+
+/* ── Reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .trackLeft,
+  .trackRight {
+    animation: none;
+  }
+}

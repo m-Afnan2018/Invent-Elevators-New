@@ -16,6 +16,8 @@ import {
     RiMenuUnfoldLine,
     RiMoonLine,
     RiSunLine,
+    RiBriefcaseLine,
+    RiFileUserLine,
 } from 'react-icons/ri';
 import styles from './AdminLayout.module.css';
 import useAuthStore from '@/store/authStore';
@@ -72,6 +74,8 @@ const AdminLayout = ({ children }) => {
         { name: 'Lead Forms', icon: RiFileListLine, path: '/admin/leadforms' },
         { name: 'Blogs', icon: RiProjectorLine, path: '/admin/blogs' },
         { name: 'Projects', icon: RiProjectorLine, path: '/admin/projects' },
+        { name: 'Careers', icon: RiBriefcaseLine, path: '/admin/careers' },
+        { name: 'Applications', icon: RiFileUserLine, path: '/admin/applications' },
         { name: 'Users', icon: RiUserLine, path: '/admin/users' },
     ], [canAccessDashboard]);
 

@@ -1,0 +1,109 @@
+/* ─────────────────────────────────────────────
+   ScrollingText.module.css
+   ───────────────────────────────────────────── */
+
+/* ── Section wrapper ───────────────────────── */
+.section {
+  width: 100%;
+  background: #ffffff;
+  padding: 100px 24px 100px;
+  overflow: hidden;
+  height: 100dvh;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── Each line ─────────────────────────────── */
+.line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 6px;
+
+  /* Typography */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: clamp(2.6rem, 6vw, 5.8rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.08;
+  text-align: center;
+
+  /* No off-screen hidden state since we changed to just a scroll-color transform */
+}
+
+/* ── Segment ───────────────────────────────── */
+.segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── Text colour variants ──────────────────── */
+.word {
+  display: inline;
+}
+
+/* ── Inline thumbnail images ───────────────── */
+.imgWrap {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* .inlineImg {
+  /* Scale with the font size 
+  width: clamp(99px, 5.5vw, 88px);
+  height: clamp(57px, 4.2vw, 66px);
+  object-fit: cover;
+  border-radius: 6px;
+  vertical-align: middle;
+
+   Slight outline like in the design 
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.08);
+} */
+
+.inlineImg {
+  width: clamp(99px, 5.5vw, 88px);
+  height: clamp(57px, 4.2vw, 66px);
+  object-fit: cover;
+  border-radius: 6px;
+  vertical-align: middle;
+
+  box-shadow: 0 0 0 1.5px rgba(0, 0, 0, 0.08);
+
+  /* Smooth animation */
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+
+  /* Improve performance */
+  will-change: transform;
+}
+
+.imgWrap:hover .inlineImg {
+  transform: scale(1.35) rotate(-4deg);
+  z-index: 2;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+}
+
+.imgWrap {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  overflow: visible; /* allows scale outside */
+}
+
+/* ── Reduced-motion ────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    transition: none;
+  }
+}

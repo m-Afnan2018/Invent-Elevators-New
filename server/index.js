@@ -19,6 +19,8 @@ import attributeRoutes from "./routes/attribute.routes.js";
 import projectRoutes from "./routes/project.routes.js";
 import blogRoutes from "./routes/blog.routes.js";
 import leadRoutes from "./routes/lead.routes.js";
+import jobRoutes from "./routes/job.routes.js";
+import jobApplicationRoutes from "./routes/jobApplication.routes.js";
 import adminUserRoutes from "./routes/adminUser.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import connectDB from "./configs/db.js";
@@ -85,6 +87,8 @@ app.use(API_ROUTES.ATTRIBUTES, attributeRoutes);
 app.use(API_ROUTES.PROJECTS, projectRoutes);
 app.use(API_ROUTES.BLOGS, blogRoutes);
 app.use(API_ROUTES.LEADS, leadRoutes);
+app.use(API_ROUTES.JOBS, jobRoutes);
+app.use(API_ROUTES.JOB_APPLICATIONS, jobApplicationRoutes);
 app.use(API_ROUTES.USERS, adminUserRoutes);
 
 app.use((error, _req, res, _next) => {

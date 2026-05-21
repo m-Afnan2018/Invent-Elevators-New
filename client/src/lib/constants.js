@@ -1,6 +1,7 @@
 const DEFAULT_API_BASE_URL = 'http://localhost:5000';
 
 const rawBaseUrl = process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_BASE_URL;
+// const rawBaseUrl = 'https://inventelevator.com';
 
 export const API_BASE_URL = rawBaseUrl.replace(/\/$/, '');
 

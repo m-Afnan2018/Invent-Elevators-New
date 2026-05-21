@@ -1,0 +1,251 @@
+/* ============================================================
+   SafetySection.module.css
+   ============================================================ */
+
+   .wrapper {
+    width: 100%;
+    background: #f3f3f3;
+    padding: 80px 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  
+  /* ── Top row ── */
+  .topRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+  
+  .heading {
+    font-family: var(--font-verah);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    color: #0f0f0f;
+    margin: 0 auto;
+    line-height: 1.1;
+    max-width: 520px;
+    text-align: center;
+  }
+  
+  /* ── Cards grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  
+  /* ── Card ── */
+  .card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 0 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition:
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* ── Image wrapper ── */
+  .iconWrap {
+    position: relative;
+    z-index: 1;
+  
+    width: 100%;
+    height: 180px;
+  
+    overflow: hidden;
+  
+    background: #f2f2f2;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    flex-shrink: 0;
+  }
+  
+  /* ── Card image ── */
+  .cardImage {
+    object-fit: cover !important;
+    object-position: center top !important;
+  }
+  
+  /* ── Card text ── */
+  .cardContent {
+    position: relative;
+    padding: 0 24px;
+    z-index: 1;
+  
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  
+    flex: 1;
+  }
+  
+  .cardTitle {
+    font-family: var(--font-verah);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f0f0f;
+    margin: 0;
+    line-height: 1.25;
+  }
+  
+  .cardDesc {
+    font-family: var(--font-gotham);
+    font-size: 0.9rem;
+    color: #777;
+    line-height: 1.7;
+    margin: 0;
+  }
+  
+  /* ── Let's Talk button ── */
+  .cardBtn {
+    position: relative;
+    z-index: 1;
+  
+    align-self: flex-start;
+    margin-left: 24px;
+    margin-top: auto;
+  
+    display: inline-flex;
+    align-items: center;
+  
+    padding: 10px 20px 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+  
+    background: #1a1a1a;
+    color: #ffffff;
+  
+    font-family: var(--font-montserrat);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  
+    transition:
+      background 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  
+  .cardBtn::after {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 28px;
+    height: 28px;
+  
+    border-radius: 50%;
+  
+    background: #ffffff;
+    color: #1a1a1a;
+  
+    font-size: 0.85rem;
+  
+    margin-left: 12px;
+  
+    transition:
+      background 0.25s ease,
+      color 0.25s ease;
+  }
+  
+  .cardBtn:hover {
+    transform: scale(1.05);
+    /* box-shadow: 0 4px 16px rgba(201, 146, 42, 0.3); */
+  }
+  
+  .cardBtn:hover::after {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+  
+  .phoneIcon {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  /* ── Tablet ── */
+  @media (max-width: 1024px) {
+    .wrapper {
+      padding: 60px 24px;
+    }
+  
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+  
+    .topRow {
+      margin-bottom: 40px;
+    }
+  }
+  
+  /* ── Mobile ── */
+  @media (max-width: 640px) {
+    .wrapper {
+      padding: 48px 16px;
+    }
+  
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+  
+    .card {
+      padding: 0 0 20px;
+      gap: 16px;
+    }
+  
+    .iconWrap {
+      width: 100%;
+      height: 220px;
+    }
+  
+    .cardTitle {
+      font-size: 1rem;
+      text-align: center;
+    }
+  
+    .cardDesc {
+      text-align: center;
+      font-size: 0.82rem;
+    }
+  
+    .cardBtn {
+      align-self: center;
+      margin-left: 0;
+      padding: 8px 16px 8px 16px;
+      font-size: 0.68rem;
+    }
+  
+    .heading {
+      text-align: center;
+      font-size: 30px;
+    }
+  }

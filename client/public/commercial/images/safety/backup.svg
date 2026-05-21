@@ -1,0 +1,102 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Outer Circle -->
+  <circle cx="256" cy="256" r="220" stroke="#FFFFFF" stroke-width="14"/>
+  <circle cx="256" cy="256" r="208" stroke="#D4A64A" stroke-width="4"/>
+
+  <!-- Elevator -->
+  <rect x="170" y="110" width="172" height="240" rx="14"
+        fill="#111111"
+        stroke="#FFFFFF"
+        stroke-width="6"/>
+
+  <!-- Elevator Doors -->
+  <rect x="188" y="145" width="68" height="180"
+        fill="#F2F2F2"/>
+
+  <rect x="256" y="145" width="68" height="180"
+        fill="#DDDDDD"/>
+
+  <!-- Backup Battery -->
+  <rect x="65" y="280" width="95" height="120" rx="10"
+        fill="#111111"
+        stroke="#FFFFFF"
+        stroke-width="5"/>
+
+  <rect x="90" y="260" width="18" height="16" rx="3"
+        fill="#111111"/>
+
+  <rect x="118" y="260" width="18" height="16" rx="3"
+        fill="#111111"/>
+
+  <!-- Lightning -->
+  <path d="M115 305L92 350H115L102 382"
+        stroke="#D4A64A"
+        stroke-width="10"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Hydraulic Cylinder -->
+  <rect x="380" y="155" width="34" height="180" rx="10"
+        fill="#111111"
+        stroke="#FFFFFF"
+        stroke-width="5"/>
+
+  <rect x="390" y="110" width="14" height="70" rx="6"
+        fill="#D4A64A"/>
+
+  <!-- Safety Shield -->
+  <path d="M256 365L315 388V432C315 470 283 495 256 506C229 495 197 470 197 432V388L256 365Z"
+        fill="#111111"
+        stroke="#FFFFFF"
+        stroke-width="5"/>
+
+  <!-- Shield Check -->
+  <path d="M230 438L248 456L285 420"
+        stroke="#D4A64A"
+        stroke-width="12"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Circular Backup Arrows -->
+  <path d="M140 135C175 95 225 78 275 82"
+        stroke="#D4A64A"
+        stroke-width="6"
+        stroke-linecap="round"/>
+
+  <path d="M278 60L296 84L267 88"
+        stroke="#D4A64A"
+        stroke-width="6"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <path d="M372 135C340 95 290 78 240 82"
+        stroke="#FFFFFF"
+        stroke-width="5"
+        stroke-linecap="round"
+        opacity="0.8"/>
+
+  <path d="M235 60L217 84L246 88"
+        stroke="#FFFFFF"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        opacity="0.8"/>
+
+  <!-- Power Icon -->
+  <circle cx="256" cy="70" r="28"
+          fill="#111111"
+          stroke="#FFFFFF"
+          stroke-width="5"/>
+
+  <path d="M256 52V72"
+        stroke="#D4A64A"
+        stroke-width="6"
+        stroke-linecap="round"/>
+
+  <path d="M242 64C236 70 232 79 232 89C232 103 243 114 256 114C269 114 280 103 280 89C280 79 276 70 270 64"
+        stroke="#D4A64A"
+        stroke-width="5"
+        stroke-linecap="round"/>
+
+</svg>

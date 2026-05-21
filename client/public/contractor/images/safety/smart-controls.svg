@@ -1,0 +1,148 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- Outer Circle -->
+  <circle cx="256" cy="256" r="220" stroke="#FFFFFF" stroke-width="14"/>
+  <circle cx="256" cy="256" r="208" stroke="#D4A64A" stroke-width="4"/>
+
+  <!-- Main Smart Panel -->
+  <rect x="190" y="90" width="132" height="290" rx="14"
+        fill="#111111"
+        stroke="#FFFFFF"
+        stroke-width="6"/>
+
+  <!-- Display -->
+  <rect x="210" y="120" width="92" height="100" rx="8"
+        fill="#1A1A1A"
+        stroke="#D4A64A"
+        stroke-width="3"/>
+
+  <!-- Arrow -->
+  <path d="M256 138L280 168H264V196H248V168H232L256 138Z"
+        fill="#D4A64A"/>
+
+  <!-- Floor Numbers -->
+  <text x="256" y="250"
+        fill="#FFFFFF"
+        font-size="34"
+        font-family="Arial"
+        text-anchor="middle"
+        font-weight="bold">
+    18
+  </text>
+
+  <!-- Settings -->
+  <circle cx="256" cy="300" r="18"
+          stroke="#D4A64A"
+          stroke-width="6"/>
+
+  <path d="M256 270V246" stroke="#D4A64A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M226 285L206 275" stroke="#D4A64A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M286 285L306 275" stroke="#D4A64A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Left Keypad -->
+  <rect x="95" y="160" width="90" height="150" rx="12"
+        fill="#111111"
+        stroke="#FFFFFF"
+        stroke-width="5"/>
+
+  <!-- Keypad Lines -->
+  <line x1="125" y1="160" x2="125" y2="310" stroke="#444" stroke-width="2"/>
+  <line x1="155" y1="160" x2="155" y2="310" stroke="#444" stroke-width="2"/>
+
+  <line x1="95" y1="197" x2="185" y2="197" stroke="#444" stroke-width="2"/>
+  <line x1="95" y1="235" x2="185" y2="235" stroke="#444" stroke-width="2"/>
+  <line x1="95" y1="273" x2="185" y2="273" stroke="#444" stroke-width="2"/>
+
+  <!-- Numbers -->
+  <text x="140" y="190"
+        fill="#D4A64A"
+        font-size="24"
+        font-family="Arial"
+        text-anchor="middle">
+    4
+  </text>
+
+  <text x="140" y="228"
+        fill="#D4A64A"
+        font-size="24"
+        font-family="Arial"
+        text-anchor="middle">
+    2
+  </text>
+
+  <text x="140" y="266"
+        fill="#D4A64A"
+        font-size="24"
+        font-family="Arial"
+        text-anchor="middle">
+    3
+  </text>
+
+  <text x="140" y="304"
+        fill="#D4A64A"
+        font-size="24"
+        font-family="Arial"
+        text-anchor="middle">
+    1
+  </text>
+
+  <!-- Touch Hand -->
+  <circle cx="175" cy="245" r="18"
+          fill="#F2C86B"
+          stroke="#FFFFFF"
+          stroke-width="4"/>
+
+  <path d="M170 260L190 310"
+        stroke="#F2C86B"
+        stroke-width="16"
+        stroke-linecap="round"/>
+
+  <!-- Smartphone -->
+  <rect x="360" y="215" width="85" height="145" rx="14"
+        fill="#111111"
+        stroke="#FFFFFF"
+        stroke-width="5"
+        transform="rotate(8 360 215)"/>
+
+  <!-- Phone Graph -->
+  <path d="M385 285L400 265L420 290L440 245"
+        stroke="#D4A64A"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- WiFi -->
+  <path d="M120 115C140 95 170 95 190 115"
+        stroke="#D4A64A"
+        stroke-width="6"
+        stroke-linecap="round"/>
+
+  <path d="M130 130C145 115 165 115 180 130"
+        stroke="#D4A64A"
+        stroke-width="6"
+        stroke-linecap="round"/>
+
+  <circle cx="155" cy="145" r="5" fill="#D4A64A"/>
+
+  <path d="M340 145C360 125 390 125 410 145"
+        stroke="#D4A64A"
+        stroke-width="6"
+        stroke-linecap="round"/>
+
+  <path d="M350 160C365 145 385 145 400 160"
+        stroke="#D4A64A"
+        stroke-width="6"
+        stroke-linecap="round"/>
+
+  <circle cx="375" cy="175" r="5" fill="#D4A64A"/>
+
+  <!-- Circuit Lines -->
+  <path d="M220 380V420" stroke="#D4A64A" stroke-width="4"/>
+  <path d="M256 380V435" stroke="#D4A64A" stroke-width="4"/>
+  <path d="M292 380V420" stroke="#D4A64A" stroke-width="4"/>
+
+  <circle cx="220" cy="430" r="5" fill="#D4A64A"/>
+  <circle cx="256" cy="445" r="5" fill="#D4A64A"/>
+  <circle cx="292" cy="430" r="5" fill="#D4A64A"/>
+
+</svg>

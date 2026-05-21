@@ -1,0 +1,293 @@
+.wrapper {
+  width: 100%;
+  padding: 60px 0 48px;
+  box-sizing: border-box;
+  /* Fix: contain horizontal overflow without clipping scroll track */
+  overflow-x: clip;
+}
+
+/* ── Top row ── */
+.topRow {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 0 40px;
+  max-width: 1400px;
+  margin: 0 auto 48px;
+}
+
+.topLeft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  width: 100%;
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.heading {
+  font-family: var(--font-verah);
+  font-size: 34px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: #1a1a1a;
+}
+
+.bottomPart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.description {
+  font-size: 0.92rem;
+  color: #555555;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 560px;
+}
+
+/* CTA */
+.ctaBtn {
+  height: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  gap: 10px;
+  padding: 0.3rem;
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-montserrat);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+  width: fit-content;
+  text-transform: uppercase;
+}
+.ctaBtn,
+.ctaBtn * {
+  text-decoration: none !important;
+}
+.ctaBtn span:nth-child(1) {
+  margin-left: 15px;
+}
+
+.ctaBtn:hover {
+  background: #333333;
+  transform: scale(1.02);
+  color: #fff;
+}
+
+.ctaBtn:active {
+  transform: scale(0.98);
+}
+
+.arrowCircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #ffffff;
+  color: #000000;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  transform: rotate(-45deg);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+/* ── Carousel track ──
+   Fix: use scroll-padding instead of offsetLeft arithmetic for padding,
+   and contain width with a wrapping box-sizing trick so it never bleeds.
+*/
+.track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* Use scroll-padding so snap & JS scrollIntoView respect the visual offset */
+  scroll-padding-left: 40px;
+  /* padding-inline avoids adding to scrollWidth in modern browsers */
+  padding-inline: 40px;
+  /* Ensure no inherited overflow causes bleed */
+  box-sizing: border-box;
+  cursor: grab;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track:active {
+  cursor: grabbing;
+}
+
+/* ── Card ── */
+.card {
+  flex: 0 0 calc(50% - 52px);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+.imageBox {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cardLabel {
+  margin: 14px 0 0;
+  font-size: 0.92rem;
+  color: #1a1a1a;
+  font-weight: 400;
+}
+
+.cardIndex {
+  font-weight: 700;
+}
+
+/* ── Dots ── */
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.dot {
+  width: 36px;
+  height: 6px;
+  border-radius: 3px;
+  background: #d9d9d9;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, width 0.25s ease;
+}
+
+.dotActive {
+  background: #1a1a1a;
+  width: 48px;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1024px) {
+  .topRow {
+    flex-direction: column;
+    gap: 24px;
+    padding: 0 24px;
+  }
+
+  .ctaBtn {
+    align-self: flex-start;
+  }
+
+  .track {
+    padding-inline: 24px;
+    scroll-padding-left: 24px;
+  }
+
+  .card {
+    flex: 0 0 calc(60% - 36px);
+  }
+
+  .wrapper {
+    padding: 48px 0 36px;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .wrapper {
+    padding: 36px 0 28px;
+  }
+
+  .topRow {
+    padding: 0 16px;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .topLeft {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .heading {
+    white-space: normal;
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .bottomPart {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .description {
+    max-width: 100%;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  .ctaBtn {
+    align-self: center;
+  }
+
+  .track {
+    padding-inline: 16px;
+    scroll-padding-left: 16px;
+    gap: 16px;
+  }
+
+  .card {
+    flex: 0 0 85%;
+  }
+}
