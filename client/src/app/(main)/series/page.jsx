@@ -7,6 +7,7 @@ import { getProjects } from "@/services/projects.service";
 import { extractCollection } from "@/lib/apiResponse";
 import styles from "./page.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
+import TypesGrid from "@/components/core/home/TypesGrid";
 
 const FALLBACK_PROJECTS = [
   {
@@ -219,7 +220,7 @@ function ProjectCard({ project }) {
   );
 }
 
-export default function ProjectsPage() {
+export default function SeriesPage() {
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
@@ -277,15 +278,15 @@ export default function ProjectsPage() {
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
             <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          <span className={styles.heroBcActive}>Projects</span>
+          <span className={styles.heroBcActive}>Series</span>
         </nav>
 
         <div className={styles.heroInner}>
           <div className={styles.eyebrow}>
             <span className={styles.eyebrowDot} />
-            <span>Our Portfolio</span>
+            <span>Our Series</span>
           </div>
-          <h1 className={styles.heroTitle}>Projects Delivered</h1>
+          <h1 className={styles.heroTitle}>Our Series</h1>
           <p className={styles.heroDesc}>
             Explore completed lift installations and success stories across residential
             villas, commercial towers, hospitality venues, and healthcare facilities
@@ -302,60 +303,13 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* ── Category Tabs ── */}
-      <section className={styles.tabsSection}>
-        <div className={styles.container}>
-          <div className={styles.tabs}>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                className={`${styles.tab} ${activeCategory === cat ? styles.tabActive : ""}`}
-                onClick={() => setActiveCategory(cat)}
-              >
-                {cat}
-                {cat !== "All" && (
-                  <span className={styles.tabCount}>
-                    {allProjects.filter((p) => p.category === cat).length}
-                  </span>
-                )}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Projects Grid ── */}
-      <section className={styles.section}>
-        <div className={styles.container}>
-          {isLoading ? (
-            <div className={styles.grid}>
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className={styles.skeleton}>
-                  <div className={styles.skeletonImg} />
-                  <div className={styles.skeletonBody}>
-                    <div className={styles.skeletonLine} style={{ width: "70%" }} />
-                    <div className={styles.skeletonLine} style={{ width: "90%" }} />
-                    <div className={styles.skeletonLine} style={{ width: "50%" }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className={styles.grid}>
-              {showcaseProjects.map((project) => (
-                <ProjectCard key={project._id} project={project} />
-              ))}
-            </div>
-          )}
-
-          <div className={styles.ctaWrap}>
-            <p className={styles.ctaText}>Want to see more? Request our full project portfolio.</p>
-            <Link href="/contact" className={styles.cta}>
-              Request Portfolio →
-            </Link>
-          </div>
-        </div>
-      </section>
+      <TypesGrid series={[
+        { _id: "1", name: "Heritage", subtitle: "European/Japanese", url: '/series/heritage.png' },
+        { _id: "2", name: "Horizon", subtitle: "European/Japanese", url: '/series/horizon.png' },
+        { _id: "3", name: "Orbit", subtitle: "European/Japanese", url: '/series/orbit.png' },
+        { _id: "4", name: "Aero/Slim", subtitle: "European/Japanese", url: '/series/aero-slim.png' },
+        // { _id: "5", name: "Atelier", subtitle: "European/Japanese", url: '/series/atelier.png' },
+      ]} />
 
       <MarqueeLogos />
     </main>

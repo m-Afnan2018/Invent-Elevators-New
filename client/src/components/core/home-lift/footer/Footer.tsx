@@ -67,12 +67,10 @@ const ArrowIcon = () => (
 
 export default function Footer() {
   const locations = [
+    "Dubai",
     "Abu Dhabi",
     "Sharjah",
     "Ajman",
-    "Fujairah",
-    "Ras Ai Khaimah",
-    "Dubai",
   ];
 
   return (
@@ -158,17 +156,17 @@ export default function Footer() {
 </a>
 
             <div className={styles.socialRow}>
-              <span className={styles.socialIcon} aria-label="Instagram">
+              <a href="https://www.instagram.com/inventelevatorco" target="_blank" className={styles.socialIcon} aria-label="Instagram">
                 <InstagramIcon />
-              </span>
+              </a>
 
-              <span className={styles.socialIcon} aria-label="X">
+              <a href="https://x.com/inventelevator" target="_blank" className={styles.socialIcon} aria-label="X">
                 <XIcon />
-              </span>
+              </a>
 
-              <span className={styles.socialIcon} aria-label="Facebook">
+              <a href="https://www.facebook.com/inventelevatorco" target="_blank" className={styles.socialIcon} aria-label="Facebook">
                 <FacebookIcon />
-              </span>
+              </a>
             </div>
           </div>
         </div>

@@ -59,8 +59,9 @@
 .row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  min-height: 700px;
   padding-top: 22vh;
-  padding-bottom: 22vh;
+  padding-bottom: 18vh;
   position: relative;
   z-index: 1;
 }

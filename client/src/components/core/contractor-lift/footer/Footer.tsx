@@ -67,11 +67,10 @@ const ArrowIcon = () => (
 
 export default function Footer() {
   const locations = [
+    "Dubai",
     "Abu Dhabi",
     "Sharjah",
     "Ajman",
-    "Fujairah",
-    "Ras Ai Khaimah",
   ];
 
   return (
@@ -145,26 +144,29 @@ export default function Footer() {
           <div className={styles.contactCol}>
             <h3 className={styles.contactTitle}>Contact Us</h3>
 
-            <a href="tel:+971523753356" className={styles.phone}>
-              +971 52 375 3356
+            <a href="tel:+971585723553" className={styles.phone}>
+              +971-58-5723553 
             </a>
 
-            <a href="mailto:info@inventelevator.com" className={styles.email}>
-              info@inventelevator.com
-            </a>
+            <a
+  href="mailto:info@inventelevator.com"
+  className={styles.email}
+>
+  info@inventelevator.com
+</a>
 
             <div className={styles.socialRow}>
-              <span className={styles.socialIcon} aria-label="Instagram">
+              <a href="https://www.instagram.com/inventelevatorco" target="_blank" className={styles.socialIcon} aria-label="Instagram">
                 <InstagramIcon />
-              </span>
+              </a>
 
-              <span className={styles.socialIcon} aria-label="X">
+              <a href="https://x.com/inventelevator" target="_blank" className={styles.socialIcon} aria-label="X">
                 <XIcon />
-              </span>
+              </a>
 
-              <span className={styles.socialIcon} aria-label="Facebook">
+              <a href="https://www.facebook.com/inventelevatorco" target="_blank" className={styles.socialIcon} aria-label="Facebook">
                 <FacebookIcon />
-              </span>
+              </a>
             </div>
           </div>
         </div>
