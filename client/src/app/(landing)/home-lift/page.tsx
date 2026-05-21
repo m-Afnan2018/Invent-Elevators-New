@@ -26,6 +26,12 @@ import MarqueeSection from "@/components/core/home-lift/citymarquee/MarqueeSecti
 import NotificationBar from "@/components/core/home-lift/notificationbar/NotificationBar";
 import ProcessSteps from "@/components/core/home-lift/processsteps/ProcessSteps";
 import ContactForm from "@/components/core/home-lift/contactform/ContactForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home Lift | Invent Elevators",
+  description: "Elevate your home with Invent Elevators' premium home lifts — designed for comfort, safety, and seamless integration with modern interiors. Explore our range of residential elevators built for every home.",
+};
 
 export default function Home() {
   const current_theme: LandingType = "HOME";

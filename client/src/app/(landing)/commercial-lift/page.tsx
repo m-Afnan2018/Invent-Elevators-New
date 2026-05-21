@@ -28,6 +28,12 @@ import ProcessSteps from "@/components/core/commercial-lift/processsteps/Process
 import ContactForm from "@/components/core/commercial-lift/contactform/ContactForm";
 import IndustriesSection from "@/components/core/commercial-lift/industriessection/IndustriesSection";
 import SafetySection from "@/components/core/commercial-lift/safetysection/SafetySection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Commercial Lifts | Invent Elevators",
+  description: "Upgrade your commercial space with Invent Elevators' high-performance commercial lifts — designed for offices, malls, hotels, and multi-storey buildings. Combining durability, aesthetics, and smooth operation.",
+};
 
 export default function Home() {
   const current_theme: LandingType = "HOME";

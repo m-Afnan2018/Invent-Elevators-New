@@ -29,6 +29,12 @@ import ContactForm from "@/components/core/contractor-lift/contactform/ContactFo
 import IndustriesSection from "@/components/core/contractor-lift/industriessection/IndustriesSection";
 import SafetySection from "@/components/core/contractor-lift/safetysection/SafetySection";
 import CoverageSection from "@/components/core/contractor-lift/coveragesection/CoverageSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contractor Lifts | Invent Elevators",
+  description: "Reliable and heavy-duty contractor lifts from Invent Elevators — engineered for construction sites and industrial use. Built to handle demanding environments with maximum safety and efficiency.",
+};
 
 export default function Home() {
   const current_theme: LandingType = "HOME";
