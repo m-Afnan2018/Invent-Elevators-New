@@ -1,0 +1,233 @@
+/* ═══════════════════════════════════════════
+   LocationSection.module.css
+   ═══════════════════════════════════════════ */
+
+/* ── Section wrapper ── */
+.section {
+  width: 100%;
+  padding: 64px 0 48px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-top: 1px solid #e8e8e4;
+  overflow: hidden;
+}
+
+/* ── Constrained inner (for top row + view more) ── */
+.inner {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+}
+
+/* ── Top row: city info + map ── */
+.topRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 48px;
+}
+
+/* City info (left) */
+.cityInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cityName {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0d0d0d;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+.description {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.65;
+  max-width: 480px;
+  margin: 0;
+}
+
+/* Map box (right) */
+.mapBox {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #e8e8e4;
+}
+
+.mapPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: #e8e8e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapPlaceholder span {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #888;
+  letter-spacing: -0.01em;
+}
+
+.mapIframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ══════════════════════════════════════════
+   Auto-scrolling carousel
+   Cards are full-bleed (outside .inner)
+   Each card = 50vw → 2 visible at a time.
+   Track = 2×n cards, translateX(-50%) loops.
+══════════════════════════════════════════ */
+
+.carouselViewport {
+  overflow: hidden;
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 40px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.cardsTrack {
+  display: flex;
+  gap: 0;
+  will-change: transform;
+}
+
+/* ── Individual card (matches home page Projects style) ── */
+.card {
+  /* Each card = half the viewport → 2 cards visible.
+     padding-right instead of gap keeps 50% math exact. */
+  flex: none;
+  width: 50vw;
+  box-sizing: border-box;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  transition: opacity 0.2s;
+}
+
+.card:hover { opacity: 0.88; }
+
+.cardImageWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #e8e8e4;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .cardImage {
+  transform: scale(1.04);
+}
+
+.cardBody {
+  padding: 18px 20px 24px;
+  background: #fff;
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0 0 10px;
+  line-height: 1.25;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+.cardDesc {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.65;
+  margin: 0;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+/* ── View More button ── */
+.viewMoreRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.viewMoreBtn {
+  display: inline-block;
+  padding: 12px 48px;
+  border: 1.5px solid #0d0d0d;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0d0d0d;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+.viewMoreBtn:hover {
+  background: #0d0d0d;
+  color: #fff;
+}
+
+/* ══════════════════════════════
+   Responsive
+══════════════════════════════ */
+
+@media (max-width: 900px) {
+  .topRow {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .mapBox {
+    aspect-ratio: 16 / 7;
+  }
+
+  /* Show ~1 card on tablet */
+  .card {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 560px) {
+  .section {
+    padding: 40px 0 36px;
+  }
+
+  /* Full-width on mobile */
+  .card {
+    width: 90vw;
+  }
+
+  .cardsTrack {
+    animation-duration: 20s;
+  }
+}

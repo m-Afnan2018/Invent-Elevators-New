@@ -1,0 +1,185 @@
+/* ── Section ── */
+.section {
+  width: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+/* ── Carousel viewport ── */
+.viewport {
+  overflow: hidden;
+  width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── Scrolling track ── */
+.track {
+  display: flex;
+  gap: 0;
+  will-change: transform;
+}
+
+/* ── Each card: 40vw wide → ~2.5 visible ── */
+.card {
+  flex: none;
+  width: 40vw;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.image {
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+.card:hover .image {
+  transform: scale(1.04);
+}
+
+/* Zoom icon overlay on hover */
+.hoverOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+  pointer-events: none;
+}
+
+.card:hover .hoverOverlay {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.zoomIcon {
+  color: #ffffff;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.25s, transform 0.25s;
+  display: flex;
+}
+
+.card:hover .zoomIcon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ══════════════════════════════════════════
+   Lightbox
+══════════════════════════════════════════ */
+.lbOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lbFadeIn 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+@keyframes lbFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* The image container inside lightbox */
+.lbImageWrap {
+  position: relative;
+  width: min(90vw, 1200px);
+  height: min(85vh, 800px);
+  animation: lbSlideUp 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes lbSlideUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.lbImage {
+  object-fit: contain;
+}
+
+/* Close button */
+.lbClose {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 10001;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lbClose:hover { background: rgba(255, 255, 255, 0.25); }
+
+/* Prev / Next nav */
+.lbNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10001;
+  width: 52px;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lbNav:hover { background: rgba(255, 255, 255, 0.25); }
+
+.lbNavLeft  { left: 24px; }
+.lbNavRight { right: 24px; }
+
+/* Counter */
+.lbCounter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .card { width: 75vw; }
+  .lbNavLeft  { left: 12px; }
+  .lbNavRight { right: 12px; }
+  .lbNav { width: 40px; height: 40px; }
+}
+
+@media (max-width: 480px) {
+  .card { width: 85vw; }
+}

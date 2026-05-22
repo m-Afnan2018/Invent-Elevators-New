@@ -5,35 +5,6 @@
   min-height: 100vh;
 }
 
-/* ── Series section wrapper ── */
-.seriesSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.43);
-  padding-bottom: 5rem;
-}
-
-.viewProjectsBtn {
-  display: inline-block;
-  margin: 0 auto;
-  padding: 18px 36px;
-  background: #111111;
-  color: #ffffff;
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 3px;
-  transition: opacity 0.2s;
-}
-
-.viewProjectsBtn:hover {
-  opacity: 0.75;
-}
-
 /* ── Hero ── */
 .hero {
   position: relative;

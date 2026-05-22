@@ -1,97 +1,89 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import { getProjectById } from "@/services/projects.service";
+
+import ProjectHero from "@/components/core/projects/single/ProjectHero";
+import ProjectOverview from "@/components/core/projects/single/ProjectOverview";
+import ProjectRequirements from "@/components/core/projects/single/ProjectRequirements";
+import ProjectSolutions from "@/components/core/projects/single/ProjectSolutions";
+import ProjectGallery from "@/components/core/projects/single/ProjectGallery";
+import ProjectTestimonial from "@/components/core/projects/single/ProjectTestimonial";
+import ProjectBrandCta from "@/components/core/projects/single/ProjectBrandCta";
+
 import styles from "./page.module.css";
+import SiteVisitForm from "@/components/core/projects/single/SiteVisitForm";
 
 const FALLBACK_IMAGE =
-  "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80";
+  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=80";
 
 export default function ProjectDetailsPage() {
   const { id } = useParams();
   const [project, setProject] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadProject = async () => {
-      if (!id) {
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        const response = await getProjectById(id);
-        setProject(response || null);
-      } catch (_error) {
-        setProject(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadProject();
+    if (!id) { setLoading(false); return; }
+    getProjectById(id)
+      .then(res => setProject(res || null))
+      .catch(() => setProject(null))
+      .finally(() => setLoading(false));
   }, [id]);
 
   useEffect(() => {
-    if (project?.title || project?.name) {
-      document.title = `${project.title || project.name} | Invent Elevator`;
+    if (project?.title) {
+      document.title = `${project.title} | Invent Elevator`;
     }
-  }, [project?.title, project?.name]);
+  }, [project?.title]);
 
-  if (isLoading) {
+  if (loading) {
     return (
-      <main className={styles.main}>
-        <p className={styles.status}>Loading project details...</p>
+      <main className={styles.stateMain}>
+        <div className={styles.spinner} />
+        <p className={styles.stateText}>Loading project…</p>
       </main>
     );
   }
 
   if (!project?._id) {
     return (
-      <main className={styles.main}>
-        <p className={styles.status}>Project not found.</p>
+      <main className={styles.stateMain}>
+        <p className={styles.notFound}>Project not found.</p>
         <Link href="/projects" className={styles.backLink}>← Back to all projects</Link>
       </main>
     );
   }
 
+  const heroImage = project.featuredImage || project.image || FALLBACK_IMAGE;
+  const requirements = project.customSpecs?.requirements || [];
+
   return (
-    <main className={styles.main}>
-      <Link href="/projects" className={styles.backLink}>← Back to all projects</Link>
+    <main>
+      <ProjectHero
+        title={project.title}
+        location={project.location}
+        category={project.category}
+        image={heroImage}
+      />
 
-      <article className={styles.card}>
-        <div
-          className={styles.hero}
-          style={{ backgroundImage: `url(${project.featuredImage || project.image || FALLBACK_IMAGE})` }}
-        />
+      <ProjectOverview project={project} />
 
-        <div className={styles.content}>
-          <p className={styles.kicker}>{project.category || "Project Showcase"}</p>
-          <h1>{project.title || "Untitled Project"}</h1>
-          <p>{project.description || "Detailed project information will be shared shortly."}</p>
+      <ProjectRequirements requirements={requirements} />
 
-          <div className={styles.metaGrid}>
-            <div>
-              <span>Client</span>
-              <strong>{project.client || "Confidential"}</strong>
-            </div>
-            <div>
-              <span>Location</span>
-              <strong>{project.location || "Multiple locations"}</strong>
-            </div>
-            <div>
-              <span>Status</span>
-              <strong>{project.status || "Completed"}</strong>
-            </div>
-            <div>
-              <span>Completion</span>
-              <strong>{project.completionDate || "On request"}</strong>
-            </div>
-          </div>
-        </div>
-      </article>
+      <ProjectSolutions description={project.customSpecs?.solutionsDesc} />
+
+      <ProjectGallery
+        images={project.galleryImages}
+        featuredImage={project.featuredImage || project.image}
+      />
+
+      <ProjectTestimonial testimonials={project.testimonials} />
+
+      <SiteVisitForm />
+
+      {/* <ProjectBrandCta /> */}
     </main>
   );
 }

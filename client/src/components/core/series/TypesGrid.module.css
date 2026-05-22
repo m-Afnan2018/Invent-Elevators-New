@@ -1,0 +1,221 @@
+.typesSection {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgb(200, 196, 188);
+  border-bottom: 1px solid rgb(200, 196, 188);
+}
+
+.heading {
+  text-align: center;
+  z-index: 10;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  padding: 1rem;
+  position: absolute;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: auto;
+}
+
+.heading>h2 {
+  letter-spacing: 0.05em;
+}
+
+/* .typesSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  transition: transform 0.6s ease;
+  z-index: 0;
+}
+
+.typesSection:hover::before {
+  transform: scale(1.1);
+} */
+
+.backgroungImages {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.imageActive {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.section {
+  padding: 0 80px;
+  background: #fff;
+  /* min-height: 100vh; */
+}
+
+/* ── Single row — 4 equal columns ── */
+.row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  min-height: 700px;
+  padding-top: 22vh;
+  padding-bottom: 22vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Cell base ── */
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 32px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+  user-select: none;
+}
+
+/* Vertical dividers between cells */
+.cell:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: rgba(216, 216, 216, 0.6);
+  z-index: 2;
+}
+
+/* ── Per-cell image (mobile only) ── */
+.cellImg {
+  display: none; /* hidden on desktop */
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cellImgOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* Text sits above the cell image */
+.name,
+.sub {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Typography — light weight uppercase, exactly like reference ── */
+.name {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  margin: 0 0 10px;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  text-align: center;
+}
+
+
+.sub {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: #888;
+  margin: 0;
+  letter-spacing: 0.02em;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  text-align: center;
+}
+
+/* ── Responsive ── */
+
+/* Touch devices — per-cell images, no interaction */
+@media (hover: none) {
+  .cell {
+    pointer-events: none;
+  }
+
+  /* Show each cell's own image */
+  .cellImg {
+    display: block;
+  }
+
+  /* Hide the section-wide hover images */
+  .backgroungImages {
+    display: none;
+  }
+
+  /* Text always white over cell images */
+  .name {
+    color: white !important;
+  }
+
+  .sub {
+    color: rgba(255, 255, 255, 0.65) !important;
+  }
+}
+
+/* Mobile — 2×2 grid */
+@media (max-width: 768px) {
+  .section {
+    padding: 0 0;
+    min-height: 60vh;
+  }
+
+  .heading {
+    position: relative;
+    padding: 1.5rem 1.25rem 1rem;
+    font-size: 1.1rem;
+    background-color: #fff;
+    color: #1a1a1a;
+  }
+
+  .row {
+    grid-template-columns: repeat(1, 1fr);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .cell {
+    min-height: 70vh;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* Vertical divider only between left and right cells */
+  .cell:nth-child(1)::after,
+  .cell:nth-child(3)::after {
+    top: 15%;
+    bottom: 15%;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .cell:nth-child(2)::after,
+  .cell:nth-child(4)::after {
+    display: none;
+  }
+
+  .name {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cell {
+    padding: 32px 16px;
+  }
+
+  .name {
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+  }
+}

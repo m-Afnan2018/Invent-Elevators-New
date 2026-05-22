@@ -370,7 +370,7 @@ export default function Home() {
         { _id: "1", name: "Heritage", subtitle: "European/Japanese", url: '/series/heritage.png' },
         { _id: "2", name: "Horizon", subtitle: "European/Japanese", url: '/series/horizon.png' },
         { _id: "3", name: "Orbit", subtitle: "European/Japanese", url: '/series/orbit.png' },
-        { _id: "4", name: "Aero/Slim", subtitle: "European/Japanese", url: '/series/aero-slim.png' },
+        { _id: "4", name: "Aero", subtitle: "European/Japanese", url: '/series/aero-slim.png' },
         // { _id: "5", name: "Atelier", subtitle: "European/Japanese", url: '/series/atelier.png' },
       ]} />
 

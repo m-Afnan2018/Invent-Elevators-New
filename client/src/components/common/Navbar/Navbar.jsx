@@ -8,10 +8,12 @@ import styles from "./Navbar.module.css";
 
 const NAV_LINKS = [
     { label: "Home",       href: "/" },
+    { label: "Series",       href: "/series" },
     { label: "Categories", href: "/categories" },
+    { label: "Areas We Serve", href: "/area-we-serve" },
     { label: "Products",   href: "/products" },
     { label: "Projects",   href: "/projects" },
-    { label: "Insights",   href: "/blogs" },
+    { label: "Blogs",   href: "/blogs" },
     { label: "About",      href: "/about" },
     { label: "Contact",    href: "/contact" },
 ];

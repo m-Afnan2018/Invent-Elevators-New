@@ -1,0 +1,196 @@
+/* ═══════════════════════════════════════════
+   SiteVisitForm.module.css
+   ═══════════════════════════════════════════ */
+
+.section {
+  width: 100%;
+  background: #f0f0f0;
+  padding: 56px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* ── Headings ── */
+.miniHeading {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #888;
+  letter-spacing: 0.01em;
+  /* margin: 0 0 10px; */
+  margin: 0 0 36px;
+  text-align: center;
+}
+
+.mainHeading {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #0d0d0d;
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin: 0 0 16px;
+  line-height: 1.1;
+}
+
+.accent {
+  color: #5b5b5b;
+  font-weight: 800;
+}
+
+/* ── Form row ── */
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1060px;
+}
+
+/* ── Individual pill field ── */
+.field {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 999px;
+  padding: 0 18px;
+  height: 52px;
+  min-width: 160px;
+  flex: 1 1 160px;
+  max-width: 210px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field:focus-within {
+  border-color: #0d0d0d;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.icon {
+  flex-shrink: 0;
+  color: #999;
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #0d0d0d;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: #aaa;
+}
+
+/* Select reset */
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 20px; /* room for chevron */
+  color: #aaa; /* placeholder state */
+}
+
+.select:valid,
+.select option:not([value=""]) {
+  color: #0d0d0d;
+}
+
+/* Custom chevron for selects */
+.chevron {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Submit button ── */
+.submitBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 28px;
+  border-radius: 999px;
+  border: none;
+  background: #0d0d0d;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-family: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.submitBtn:hover {
+  background: #333;
+  transform: translateY(-1px);
+}
+
+.submitBtn:active {
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════
+   Responsive
+   ══════════════════════════════ */
+
+/* Stack to 2 columns on tablet */
+@media (max-width: 820px) {
+  .form {
+    gap: 12px;
+  }
+
+  .field {
+    flex: 1 1 calc(50% - 6px);
+    max-width: none;
+  }
+
+  .submitBtn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+/* Full width on mobile */
+@media (max-width: 480px) {
+  .section {
+    padding: 40px 16px 48px;
+  }
+
+  .field {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  .submitBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.errorMsg {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: #dc2626;
+  text-align: center;
+}

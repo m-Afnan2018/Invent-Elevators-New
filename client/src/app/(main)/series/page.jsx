@@ -7,7 +7,14 @@ import { getProjects } from "@/services/projects.service";
 import { extractCollection } from "@/lib/apiResponse";
 import styles from "./page.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
-import TypesGrid from "@/components/core/home/TypesGrid";
+import TypesGrid from "@/components/core/series/TypesGrid";
+import SeriesElevatorCard from "@/components/core/series/SeriesElevatorCard";
+import ElevatorProductPage from "@/components/core/series/ElevatorProductPage";
+import HeritageCard from "@/components/core/series/HeritageCard";
+import HorizonCard from "@/components/core/series/HorizonCard";
+import AeroSlimCard from "@/components/core/series/AeroSlimCard";
+import OrbitCard from "@/components/core/series/OrbitCard";
+import AtelierCard from "@/components/core/series/AtelierCard";
 
 const FALLBACK_PROJECTS = [
   {
@@ -304,12 +311,41 @@ export default function SeriesPage() {
       </section>
 
       <TypesGrid series={[
-        { _id: "1", name: "Heritage", subtitle: "European/Japanese", url: '/series/heritage.png' },
-        { _id: "2", name: "Horizon", subtitle: "European/Japanese", url: '/series/horizon.png' },
-        { _id: "3", name: "Orbit", subtitle: "European/Japanese", url: '/series/orbit.png' },
-        { _id: "4", name: "Aero/Slim", subtitle: "European/Japanese", url: '/series/aero-slim.png' },
+        { _id: "1", link: "heritage",  name: "Heritage", subtitle: "European/Japanese", url: '/series/heritage.png' },
+        { _id: "2", link: "horizon",  name: "Horizon", subtitle: "European/Japanese", url: '/series/horizon.png' },
+        { _id: "3", link: "orbit",  name: "Orbit", subtitle: "European/Japanese", url: '/series/orbit.png' },
+        { _id: "4", link: "aero",  name: "Aero", subtitle: "European/Japanese", url: '/series/aero-slim.png' },
         // { _id: "5", name: "Atelier", subtitle: "European/Japanese", url: '/series/atelier.png' },
       ]} />
+
+      <div className={styles.seriesSection} id="heritage">
+        <HeritageCard />
+        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+      </div>
+
+      <div className={styles.seriesSection} id="horizon">
+        <HorizonCard />
+        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+      </div>
+
+      <div className={styles.seriesSection} id="orbit">
+        <OrbitCard />
+        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+      </div>
+
+      <div className={styles.seriesSection} id="aero">
+        <AeroSlimCard />
+        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+      </div>
+
+      <div className={styles.seriesSection} id="atelier">
+        <AtelierCard />
+        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+      </div>
+
+      {/* <SeriesElevatorCard/>
+
+      <ElevatorProductPage/> */}
 
       <MarqueeLogos />
     </main>

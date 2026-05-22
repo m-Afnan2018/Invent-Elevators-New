@@ -1,0 +1,140 @@
+.section {
+  background: #ffffff;
+  padding: 72px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.container {
+  width: min(1280px, 92%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 45% 1fr;
+  gap: 72px;
+  align-items: flex-start;
+}
+
+/* ── Image ── */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #e8e8e8;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.imageWrap:hover .image {
+  transform: scale(1.03);
+}
+
+/* ── Details ── */
+.detailsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 8px;
+}
+
+.brand {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  /* color: #c8552a; */
+  color: black;
+  font-family: "Georgia", "Times New Roman", serif;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: baseline;
+}
+
+.row dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #999;
+  margin: 0;
+}
+
+.row dd {
+  font-size: 0.925rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.rowClient dd {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.65;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  width: fit-content;
+  background: rgba(0, 0, 0, 0.06);
+  color: #333;
+}
+
+.statusBadge.completed {
+  background: rgba(34, 197, 94, 0.12);
+  color: #15803d;
+}
+
+.statusBadge.ongoing {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
+}
+
+.statusBadge.planning {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+}
+
+.desc {
+  font-size: 0.925rem;
+  color: #555;
+  line-height: 1.78;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .imageWrap {
+    aspect-ratio: 16 / 9;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+}
