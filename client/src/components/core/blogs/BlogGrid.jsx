@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./BlogGrid.module.css";
 
-const MOCK_POSTS = [
+export const MOCK_POSTS = [
   {
     _id: "5",
     title: "Understanding Elevator Pit Requirements for Modern Buildings",
@@ -90,18 +90,13 @@ const ITEMS_PER_PAGE = 6;
 
 function formatDate(date) {
   if (!date) return "";
-  return new Date(date).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+  return new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
-// ── Single Blog Card ──
+/* ── Grid card ── */
 function BlogCard({ post }) {
   return (
     <Link href={post?.slug ? `/blog/${post.slug}` : "/blogs"} className={styles.card}>
-      {/* Image */}
       <div className={styles.imgWrap}>
         <Image
           src={post.coverImage || "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80"}
@@ -111,14 +106,10 @@ function BlogCard({ post }) {
           className={styles.img}
         />
         <div className={styles.imgOverlay} />
-        {post.category && (
-          <span className={styles.catBadge}>{post.category}</span>
-        )}
+        {post.category && <span className={styles.catBadge}>{post.category}</span>}
       </div>
 
-      {/* Content */}
       <div className={styles.content}>
-        {/* Read time */}
         {post.readTime && (
           <div className={styles.readTime}>
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
@@ -128,36 +119,25 @@ function BlogCard({ post }) {
             {post.readTime} min read
           </div>
         )}
-
         <h3 className={styles.title}>{post.title}</h3>
-
         {post.excerpt && (
           <p className={styles.excerpt}>
             {post.excerpt.length > 110 ? post.excerpt.slice(0, 110) + "…" : post.excerpt}
           </p>
         )}
-
-        {/* Tags */}
         {post.tags?.length > 0 && (
           <div className={styles.tags}>
-            {post.tags.slice(0, 2).map((t) => (
-              <span key={t} className={styles.tag}>{t}</span>
-            ))}
+            {post.tags.slice(0, 2).map((t) => <span key={t} className={styles.tag}>{t}</span>)}
           </div>
         )}
-
-        {/* Footer */}
         <div className={styles.footer}>
           <div className={styles.author}>
-            <div className={styles.authorAvatar}>
-              {post.author?.charAt(0).toUpperCase() || "I"}
-            </div>
+            <div className={styles.authorAvatar}>{post.author?.charAt(0).toUpperCase() || "I"}</div>
             <div className={styles.authorInfo}>
               <span className={styles.authorName}>{post.author}</span>
               <span className={styles.authorDate}>{formatDate(post.publishDate)}</span>
             </div>
           </div>
-
           <div className={styles.arrow}>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M2.5 7h9M8 3.5L11.5 7 8 10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -169,7 +149,69 @@ function BlogCard({ post }) {
   );
 }
 
-// ── Skeleton card ──
+/* ── Featured (horizontal) card — mirrors BlogFeatured card exactly ── */
+function FeaturedBlogCard({ post }) {
+  return (
+    <Link href={post?.slug ? `/blog/${post.slug}` : "/blogs"} className={styles.featCard}>
+
+      {/* Image — left ~58% */}
+      <div className={styles.featImgCol}>
+        <div className={styles.featImgWrap}>
+          <Image
+            src={post.coverImage || "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=85"}
+            alt={post.title}
+            fill
+            sizes="(max-width: 900px) 100vw, 58vw"
+            className={styles.featImg}
+          />
+          <div className={styles.featImgOverlay} />
+          {post.category && (
+            <span className={styles.featCategoryPill}>{post.category}</span>
+          )}
+          {post.readTime && (
+            <span className={styles.featReadTimeBadge}>
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1.3" />
+                <path d="M6 3.5V6l1.5 1.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+              </svg>
+              {post.readTime} min read
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Content — right ~42% */}
+      <div className={styles.featContentCol}>
+        {post.tags?.length > 0 && (
+          <div className={styles.tags}>
+            {post.tags.slice(0, 3).map((t) => <span key={t} className={styles.tag}>{t}</span>)}
+          </div>
+        )}
+        <h3 className={styles.featTitle}>{post.title}</h3>
+        {post.excerpt && <p className={styles.featExcerpt}>{post.excerpt}</p>}
+        <div className={styles.featMeta}>
+          <div className={styles.featAuthorAvatar}>
+            {post.author?.charAt(0).toUpperCase() || "I"}
+          </div>
+          <div className={styles.authorInfo}>
+            <span className={styles.authorName}>{post.author}</span>
+            <span className={styles.authorDate}>{formatDate(post.publishDate)}</span>
+          </div>
+        </div>
+        <div className={styles.featCta}>
+          <span className={styles.featCtaText}>Read Article</span>
+          <span className={styles.featCtaArrow}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M3.5 9h11M10 4.5L14.5 9 10 13.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </div>
+      </div>
+
+    </Link>
+  );
+}
+
 function SkeletonCard() {
   return (
     <div className={styles.skeleton}>
@@ -185,42 +227,55 @@ function SkeletonCard() {
   );
 }
 
-// ── Main Component ──
-export default function BlogGrid({ posts, searchQuery = "", isLoading = false }) {
+export default function BlogGrid({
+  posts,
+  searchQuery = "",
+  isLoading = false,
+  sidebarSearch = "",
+  activeTags = [],
+  onClearFilters,
+}) {
   const data = posts?.length > 0 ? posts : MOCK_POSTS;
   const [activeCategory, setActiveCategory] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [viewMode, setViewMode] = useState("grid");
 
-  // Build unique categories from posts
+  const effectiveQuery = sidebarSearch || searchQuery;
+
   const categories = useMemo(() => {
     const cats = [...new Set(data.map((p) => p.category).filter(Boolean))];
     return ["All", ...cats];
   }, [data]);
 
-  // Filter by category + search query
   const filtered = useMemo(() => {
     return data.filter((post) => {
       const matchCat = activeCategory === "All" || post.category === activeCategory;
-      const q = searchQuery.toLowerCase();
+      const matchTag =
+        activeTags.length === 0 ||
+        activeTags.some((t) => post.tags?.includes(t));
+      const q = effectiveQuery.toLowerCase();
       const matchSearch =
         !q ||
         post.title?.toLowerCase().includes(q) ||
         post.excerpt?.toLowerCase().includes(q) ||
         post.tags?.some((t) => t.toLowerCase().includes(q)) ||
         post.category?.toLowerCase().includes(q);
-      return matchCat && matchSearch;
+      return matchCat && matchTag && matchSearch;
     });
-  }, [data, activeCategory, searchQuery]);
+  }, [data, activeCategory, activeTags, effectiveQuery]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeCategory, activeTags, effectiveQuery]);
 
-  const shown = filtered.slice(0, visibleCount);
-  const hasMore = visibleCount < filtered.length;
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const shown = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
 
-        {/* ── Header + Filters ── */}
+        {/* Top Bar */}
         <div className={styles.topBar}>
           <div className={styles.topLeft}>
             <div className={styles.sectionLabel}>
@@ -233,22 +288,49 @@ export default function BlogGrid({ posts, searchQuery = "", isLoading = false })
               </span>
             )}
           </div>
-
-          {/* Category filter pills */}
-          <div className={styles.filters}>
-            {categories.map((cat) => (
+          <div className={styles.topRight}>
+            <div className={styles.filters}>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterActive : ""}`}
+                  onClick={() => { setActiveCategory(cat); setCurrentPage(1); }}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+            <div className={styles.viewToggle}>
+              {/* Grid view */}
               <button
-                key={cat}
-                className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterActive : ""}`}
-                onClick={() => setActiveCategory(cat)}
+                className={`${styles.toggleBtn} ${viewMode === "grid" ? styles.toggleBtnActive : ""}`}
+                onClick={() => setViewMode("grid")}
+                title="Grid view"
               >
-                {cat}
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                  <rect x="1" y="1" width="5.5" height="5.5" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="8.5" y="1" width="5.5" height="5.5" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="1" y="8.5" width="5.5" height="5.5" stroke="currentColor" strokeWidth="1.4" />
+                  <rect x="8.5" y="8.5" width="5.5" height="5.5" stroke="currentColor" strokeWidth="1.4" />
+                </svg>
               </button>
-            ))}
+              {/* Featured view */}
+              <button
+                className={`${styles.toggleBtn} ${viewMode === "featured" ? styles.toggleBtnActive : ""}`}
+                onClick={() => setViewMode("featured")}
+                title="Featured view"
+              >
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                  <rect x="1" y="1" width="5" height="13" stroke="currentColor" strokeWidth="1.4" />
+                  <line x1="8.5" y1="4" x2="14" y2="4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                  <line x1="8.5" y1="7.5" x2="14" y2="7.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                  <line x1="8.5" y1="11" x2="12" y2="11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* ── Grid / States ── */}
         {isLoading ? (
           <div className={styles.grid}>
             {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)}
@@ -262,44 +344,55 @@ export default function BlogGrid({ posts, searchQuery = "", isLoading = false })
               </svg>
             </div>
             <p className={styles.emptyTitle}>No articles found</p>
-            <p className={styles.emptyDesc}>
-              Try a different category or search term.
-            </p>
+            <p className={styles.emptyDesc}>Try a different category, tag, or search term.</p>
             <button
               className={styles.emptyReset}
-              onClick={() => { setActiveCategory("All"); }}
+              onClick={() => { setActiveCategory("All"); onClearFilters?.(); }}
             >
               Clear filters
             </button>
           </div>
         ) : (
           <>
-            <div className={styles.grid}>
-              {shown.map((post) => (
-                <BlogCard key={post._id} post={post} />
-              ))}
-            </div>
+            {viewMode === "grid" ? (
+              <div className={styles.grid}>
+                {shown.map((post) => <BlogCard key={post._id} post={post} />)}
+              </div>
+            ) : (
+              <div className={styles.featList}>
+                {shown.map((post) => <FeaturedBlogCard key={post._id} post={post} />)}
+              </div>
+            )}
 
-            {/* Load more */}
-            {hasMore && (
-              <div className={styles.loadMore}>
+            {totalPages > 1 && (
+              <div className={styles.pagination}>
                 <button
-                  className={styles.loadMoreBtn}
-                  onClick={() => setVisibleCount((v) => v + ITEMS_PER_PAGE)}
+                  className={styles.pageBtn}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
                 >
-                  Load more articles
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  ←
                 </button>
-                <span className={styles.loadMeta}>
-                  Showing {Math.min(visibleCount, filtered.length)} of {filtered.length}
-                </span>
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    className={`${styles.pageBtn} ${currentPage === page ? styles.pageBtnActive : ""}`}
+                    onClick={() => setCurrentPage(page)}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button
+                  className={styles.pageBtn}
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                >
+                  →
+                </button>
               </div>
             )}
           </>
         )}
-
       </div>
     </section>
   );

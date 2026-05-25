@@ -18,7 +18,7 @@ export default function Projects({ featuredProjects = [] }) {
         {featuredProjects.map((project, i) => (
           <Link
             key={project._id}
-            href={project.__fallback ? "/projects" : `/projects/${project._id}`}
+            href={project.__fallback ? "/projects" : `/single-project/${project._id}`}
             className={styles.card}
           >
             {/* Image */}

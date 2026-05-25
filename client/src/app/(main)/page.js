@@ -334,11 +334,11 @@ export default function Home() {
             </h1>
           </div>
         </div>
-        <div className={styles.miniContainer}>
+        {/* <div className={styles.miniContainer}>
           <p>Elevator Specialists</p>
           <p>We design and install bespoke elevator systems for modern residential and commercial spaces. Every solution reflects our commitment to luxury, safety, innovation, and seamless vertical mobility.
           </p>
-        </div>
+        </div> */}
         {/* Scroll indicator */}
         <div className={styles.scrollHint}>
           <div className={styles.scrollDot} />
@@ -362,17 +362,17 @@ export default function Home() {
         <Series activeCategories={activeCategories} />
       </section>
 
+      <TypesGrid series={[
+        { _id: "1", name: "Heritage", subtitle: "Essential/Elite", url: '/series/heritage.png' },
+        { _id: "2", name: "Horizon", subtitle: "Essential/Elite", url: '/series/horizon.png' },
+        { _id: "3", name: "Orbit", subtitle: "Essential/Elite", url: '/series/orbit.png' },
+        { _id: "4", name: "Aero", subtitle: "Essential/Elite", url: '/series/aero-slim.png' },
+        // { _id: "5", name: "Atelier", subtitle: "Essential/Elite", url: '/series/atelier.png' },
+      ]} />
 
       {/* ── Projects ── */}
       <Projects featuredProjects={featuredProjects} />
 
-      <TypesGrid series={[
-        { _id: "1", name: "Heritage", subtitle: "European/Japanese", url: '/series/heritage.png' },
-        { _id: "2", name: "Horizon", subtitle: "European/Japanese", url: '/series/horizon.png' },
-        { _id: "3", name: "Orbit", subtitle: "European/Japanese", url: '/series/orbit.png' },
-        { _id: "4", name: "Aero", subtitle: "European/Japanese", url: '/series/aero-slim.png' },
-        // { _id: "5", name: "Atelier", subtitle: "European/Japanese", url: '/series/atelier.png' },
-      ]} />
 
 
       <Global />

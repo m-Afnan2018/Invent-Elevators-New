@@ -14,7 +14,6 @@
 .container {
   width: min(1280px, 92%);
   margin: 0 auto;
-  margin-top: auto;
 }
 
 .miniContainer {
@@ -129,6 +128,7 @@
   position: relative;
   z-index: 2;
   padding-top: 9rem;
+  margin: auto;
   padding-bottom: 5rem;
 }
 

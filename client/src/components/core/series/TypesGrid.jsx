@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "./TypesGrid.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 const IMAGES = [
   '/series/heritage.png',
@@ -10,6 +11,9 @@ const IMAGES = [
   '/series/aero-slim.png',
 ];
 
+const DESIGN_OPTIONS = ["Select", "Signature", "Bespoke"];
+const SERIES_ANCHORS = ["heritage", "horizon", "orbit", "aero"];
+
 export default function TypesGrid({ series = [] }) {
   const items = series.slice(0, 4);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -17,12 +21,10 @@ export default function TypesGrid({ series = [] }) {
   return (
     <section className={`${styles.section} ${styles.typesSection}`}>
 
-      {/* Section heading */}
-      {/* <div className={styles.heading}>
-        <h2 className="headings">Our Series of Lifts</h2>
-      </div> */}
+      <div className={styles.heading}>
+        <h2 className="headings">Our Series of Home Lifts</h2>
+      </div>
 
-      {/* Background images — revealed on hover (desktop only) */}
       {IMAGES.map((src, i) => (
         <Image
           key={src}
@@ -30,48 +32,54 @@ export default function TypesGrid({ series = [] }) {
           alt=""
           fill
           sizes="100vw"
-          className={`${styles.backgroungImages} ${hoveredIndex === i ? styles.imageActive : ""}`}
+          className={`${styles.bgImage} ${hoveredIndex === i ? styles.imageActive : ""}`}
           style={{ objectFit: "cover" }}
           priority={i === 0}
         />
       ))}
 
-      {/* Single row — all 4 items */}
-      <div className={styles.row}>
-        {items.map((item, i) => (
-          <div
-            key={item._id || i}
-            className={styles.cell}
-            onMouseEnter={() => setHoveredIndex(i)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            {/* Per-cell image — only visible on mobile (touch devices) */}
-            <div className={styles.cellImg}>
-              <Image
-                src={IMAGES[i]}
-                alt={item.name}
-                fill
-                sizes="50vw"
-                style={{ objectFit: "cover" }}
-              />
-              <div className={styles.cellImgOverlay} />
-            </div>
+      <div className={`${styles.row} ${hoveredIndex !== null ? styles.rowHovered : ""}`}>
+        {items.map((item, i) => {
+          const isActive = hoveredIndex === i;
+          const isDimmed = hoveredIndex !== null && !isActive;
+          return (
+            <div
+              key={item._id || i}
+              className={`${styles.cell} ${isActive ? styles.cellActive : ""} ${isDimmed ? styles.cellDimmed : ""}`}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <div className={styles.cellImg}>
+                <Image src={IMAGES[i]} alt={item.name} fill sizes="100vw" style={{ objectFit: "cover" }} />
+                <div className={styles.cellImgOverlay} />
+              </div>
 
-            <p
-              onClick={() => document.getElementById(item.link).scrollIntoView({ behavior: 'smooth' })}
-              className={styles.name}
-              style={{ color: hoveredIndex !== null ? "white" : "black" }}
-            >
-              {item.name}
-            </p>
-            <p
-              className={styles.sub}
-              style={{ color: hoveredIndex !== null ? "rgba(255,255,255,0.65)" : "#888" }}
-            >
-              {item.subtitle || "European/Japanese"}
-            </p>
-          </div>
-        ))}
+              <div
+                className={styles.cellContent}
+                onMouseEnter={() => setHoveredIndex(i)}
+              >
+                <p className={styles.name}>{item.name}</p>
+                <p className={styles.sub}>{item.subtitle || "European/Japanese"}</p>
+
+                {/* Extra info — visible only on active cell */}
+                <div className={styles.hoverInfo}>
+                  {/* Tiers */}
+                  <div className={styles.tiers}>
+                    <Link href={`/series#${SERIES_ANCHORS[i]}`} className={styles.tier}>Essentials</Link>
+                    <span className={styles.tierDivider}>/</span>
+                    <Link href={`/series#${SERIES_ANCHORS[i]}`} className={styles.tier}>Elite</Link>
+                  </div>
+
+                  {/* Design options */}
+                  <div className={styles.designOptions}>
+                    {DESIGN_OPTIONS.map((opt) => (
+                      <Link key={opt} href={`/series#${SERIES_ANCHORS[i]}`} className={styles.designOpt}>{opt}</Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
 
     </section>

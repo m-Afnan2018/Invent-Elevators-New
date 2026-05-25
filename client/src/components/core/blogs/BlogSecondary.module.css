@@ -1,5 +1,5 @@
 .section {
-  background: #f4f4f1;
+  background: white;
   padding: 56px 0 0;
 }
 
@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
+  padding: 2rem 40px;
 }
 
 /* ── Section Label ── */
@@ -23,7 +24,7 @@
   width: 32px;
   height: 1.5px;
   background: #0a0a0a;
-  border-radius: 2px;
+  border-radius: 0;
   flex-shrink: 0;
 }
 
@@ -50,17 +51,17 @@
 .largeCard {
   display: block;
   text-decoration: none;
-  border-radius: 18px;
+  border-radius: 0;
   overflow: hidden;
   position: relative;
   min-height: 480px;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .largeCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 24px 64px rgba(0,0,0,0.14);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.14);
 }
 
 .largeImgWrap {
@@ -81,12 +82,10 @@
 .largeOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    0deg,
-    rgba(0,0,0,0.88) 0%,
-    rgba(0,0,0,0.45) 45%,
-    rgba(0,0,0,0.1) 100%
-  );
+  background: linear-gradient(0deg,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.45) 45%,
+      rgba(0, 0, 0, 0.1) 100%);
   z-index: 1;
 }
 
@@ -113,11 +112,11 @@
   font-size: 10.5px;
   font-weight: 600;
   color: #ffffff;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(6px);
   padding: 4px 11px;
-  border-radius: 20px;
+  border-radius: 0;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -129,7 +128,7 @@
   font-family: "Sora", "Segoe UI", sans-serif;
   font-size: 11px;
   font-weight: 400;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .largeTitle {
@@ -150,7 +149,7 @@
   font-family: "Sora", "Segoe UI", sans-serif;
   font-size: 13.5px;
   font-weight: 400;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255, 255, 255, 0.55);
   line-height: 1.65;
   margin: 0;
 }
@@ -166,11 +165,11 @@
   font-family: "Sora", "Segoe UI", sans-serif;
   font-size: 12px;
   font-weight: 600;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .largeDot {
-  color: rgba(255,255,255,0.25);
+  color: rgba(255, 255, 255, 0.25);
   font-size: 12px;
 }
 
@@ -178,7 +177,7 @@
   font-family: "Sora", "Segoe UI", sans-serif;
   font-size: 12px;
   font-weight: 400;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 /* ══════════════════════════════
@@ -194,11 +193,11 @@
 .smallCard {
   display: grid;
   grid-template-columns: 140px 1fr;
-  border-radius: 16px;
+  border-radius: 0;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   text-decoration: none;
   flex: 1;
   transition: box-shadow 0.35s ease, transform 0.35s ease;
@@ -206,7 +205,7 @@
 }
 
 .smallCard:hover {
-  box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
   transform: translateY(-3px);
 }
 
@@ -230,7 +229,7 @@
 .smallOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.2), transparent);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), transparent);
   z-index: 1;
 }
 
@@ -243,10 +242,10 @@
   font-size: 9.5px;
   font-weight: 600;
   color: #ffffff;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(6px);
   padding: 3px 8px;
-  border-radius: 10px;
+  border-radius: 0;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -324,7 +323,7 @@
   right: 14px;
   width: 28px;
   height: 28px;
-  border-radius: 8px;
+  border-radius: 0;
   background: #f4f4f1;
   display: flex;
   align-items: center;

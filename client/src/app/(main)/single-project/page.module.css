@@ -1,0 +1,72 @@
+/* ── Loading / Error states ── */
+.stateMain {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: #fff;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #e0e0e0;
+  border-top-color: #0a0a0a;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.stateText {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+.notFound {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0;
+}
+
+.backLink {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0a0a0a;
+  text-decoration: none;
+  border-bottom: 1px solid #0a0a0a;
+  padding-bottom: 2px;
+  transition: opacity 0.2s;
+}
+
+.backLink:hover {
+  opacity: 0.6;
+}
+
+.CTA {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CTA>button {
+  padding: 1rem;
+  background: white;
+  margin: auto;
+  cursor: pointer;
+  transition: background-color 200ms;
+}
+
+.CTA>button:hover{
+  background: black;
+  color: white;
+}

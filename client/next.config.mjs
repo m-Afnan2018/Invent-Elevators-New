@@ -6,6 +6,11 @@ const nextConfig = {
   reactCompiler: true,
   images: {
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'inventelevator.com',
+        pathname: '/uploads/**',
+      },
       { protocol: "https", hostname: "placehold.co" },
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "via.placeholder.com" },

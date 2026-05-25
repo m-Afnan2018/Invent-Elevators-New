@@ -107,7 +107,7 @@ function getImages(project) {
 
 function ProjectCard({ project }) {
   const images = useMemo(() => getImages(project), [project]);
-  const href = project.__fallback ? "/projects" : `/projects/${project._id}`;
+  const href = project.__fallback ? "/projects" : `/single-project/${project._id}`;
 
   const [hovered, setHovered] = useState(false);
   const [activeIdx, setActiveIdx] = useState(0);

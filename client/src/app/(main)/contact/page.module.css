@@ -1,58 +1,431 @@
 .page {
   width: 100%;
   min-height: 100vh;
-  background: #f6f8fb;
-}
-
-.supportStrip {
-  padding: 2.2rem 0 0.5rem;
-}
-
-.supportInner {
-  width: min(1180px, 92%);
-  margin: 0 auto;
   background: #fff;
-  border: 1px solid #e7edf4;
-  border-radius: 18px;
-  padding: 1.3rem 1.4rem;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ── Contact Section ── */
+.contactSection {
+  padding: 72px 0 100px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+/* ── Info Column ── */
+.infoCol {
   display: flex;
-  justify-content: space-between;
-  gap: 1.2rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.infoHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.infoLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.labelLine {
+  width: 28px;
+  height: 1.5px;
+  background: #0a0a0a;
+  flex-shrink: 0;
+}
+
+.labelText {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #0a0a0a;
+}
+
+.infoTitle {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: #0a0a0a;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.infoSub {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 14.5px;
+  color: #6b6b6b;
+  line-height: 1.72;
+  margin: 0;
+}
+
+/* Info Cards */
+.infoCards {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #e8e8e4;
+}
+
+.infoCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+  border-bottom: 1px solid #e8e8e4;
+  transition: background 0.2s;
+}
+
+.infoCard:last-child {
+  border-bottom: none;
+}
+
+.infoCard:hover {
+  background: #fafaf8;
+}
+
+.infoCardIcon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e8e8e4;
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.infoCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 2px;
+}
+
+.infoCardLabel {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+.infoCardValue {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #0a0a0a;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a.infoCardValue:hover {
+  color: #555;
+}
+
+/* FAQ Nudge */
+.faqNudge {
+  padding: 18px 22px;
+  border: 1px solid #e8e8e4;
+  background: #fafaf8;
+}
+
+.faqNudge p {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 13.5px;
+  color: #6b6b6b;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.faqLink {
+  color: #0a0a0a;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.faqLink:hover {
+  opacity: 0.65;
+}
+
+/* ── Form Column ── */
+.formCol {
+  border: 1px solid #e8e8e4;
+  background: #fff;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 44px 44px 40px;
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e8e8e4;
+}
+
+.formEyebrow {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin: 0;
+}
+
+.formTitle {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0a0a0a;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* Fields */
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.label {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0a0a0a;
+  letter-spacing: 0.02em;
+}
+
+.req {
+  color: #c0392b;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 13.5px;
+  color: #0a0a0a;
+  background: #fff;
+  border: 1px solid #e4e4e0;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: #bbb;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #0a0a0a;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* Select */
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap .select {
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+.selectChevron {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none;
+  display: flex;
   align-items: center;
 }
 
-.eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: #8f5d1f;
-}
-
-.supportInner h2 {
-  margin-top: 0.3rem;
-  font-size: clamp(1.3rem, 2vw, 1.9rem);
-}
-
-.supportInner p {
-  margin-top: 0.35rem;
-  color: #56657a;
-  line-height: 1.65;
-  max-width: 700px;
-}
-
-.links {
-  display: flex;
-  gap: 0.65rem;
-  flex-wrap: wrap;
-}
-
-.links a {
-  text-decoration: none;
-  border-radius: 999px;
-  border: 1px solid #d0d9e6;
-  padding: 0.58rem 1rem;
-  color: #0f2238;
+/* Submit */
+.submitBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 14px;
   font-weight: 600;
-  font-size: 0.84rem;
+  color: #fff;
+  background: #0a0a0a;
+  border: 1.5px solid #0a0a0a;
+  padding: 15px 32px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  align-self: flex-start;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #1e1e1e;
+  transform: translateY(-2px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.errorMsg {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 13px;
+  color: #c0392b;
+  background: #fff5f5;
+  border: 1px solid #f5c6c6;
+  padding: 10px 14px;
+  margin: 0;
+}
+
+.formNote {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 12px;
+  color: #aaa;
+  margin: -8px 0 0;
+}
+
+/* Success */
+.successBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 72px 44px;
+  text-align: center;
+  min-height: 460px;
+}
+
+.successIcon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e8e8e4;
+  background: #fafaf8;
+}
+
+.successTitle {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0a0a0a;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.successSub {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 14px;
+  color: #6b6b6b;
+  line-height: 1.7;
+  margin: 0;
+  max-width: 360px;
+}
+
+.successReset {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0a0a0a;
+  background: transparent;
+  border: 1.5px solid #e4e4e0;
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  margin-top: 8px;
+}
+
+.successReset:hover {
+  border-color: #0a0a0a;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 320px 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .form {
+    padding: 32px 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner { padding: 0 20px; }
+  .contactSection { padding: 48px 0 72px; }
+  .row2 { grid-template-columns: 1fr; }
+  .form { padding: 28px 20px; }
+  .submitBtn { width: 100%; justify-content: center; }
 }
