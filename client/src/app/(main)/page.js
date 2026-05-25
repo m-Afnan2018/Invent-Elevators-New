@@ -38,14 +38,14 @@ const FALLBACK_CATEGORIES = [
     __fallback: true,
     name: "Home Lifts",
     description: "Luxury mobility for modern living",
-    image: "/lifts/home-1.png",
+    image: "/images/categories/Home.png",
   },
   {
     _id: "passenger-lifts",
     __fallback: true,
     name: "Passenger Lifts",
     description: "Engineered for high-performance movement",
-    image: "/lifts/passengers-1.png",
+    image: "/images/categories/Passenger.png",
   },
   {
     _id: "car-lifts",
@@ -59,21 +59,21 @@ const FALLBACK_CATEGORIES = [
     __fallback: true,
     name: "Dumbwaiters",
     description: "Compact efficiency for seamless service",
-    image: "/lifts/dumbwaiter.png",
+    image: "/images/categories/Dumbwaiter.png",
   },
   {
     _id: "chair-lifts",
     __fallback: true,
     name: "Chair Lifts",
     description: "Safe & comfortable accessibility",
-    image: "/lifts/chair-1.png",
+    image: "/images/categories/Chair.png",
   },
   {
     _id: "pod-lifts",
     __fallback: true,
     name: "Pod Lifts",
     description: "Architectural elegance in motion",
-    image: "/lifts/pod-1.png",
+    image: "/images/categories/Pod.png",
   },
 ];
 

@@ -16,7 +16,7 @@ const images = [
 const specs = [
   {
     label: "Shaft",
-    value: "Steel Shaft",
+    value: "MS Metal Shaft",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <rect x="10" y="4" width="20" height="32" rx="2" stroke="currentColor" strokeWidth="2.2" />
@@ -27,7 +27,7 @@ const specs = [
   },
   {
     label: "Cabin",
-    value: "Full Glass Car",
+    value: "Glass Cabin Car",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <rect x="8" y="8" width="24" height="28" rx="2" stroke="currentColor" strokeWidth="2.2" />
@@ -38,8 +38,8 @@ const specs = [
     ),
   },
   {
-    label: "Colors",
-    value: "All RAL Colors",
+    label: "Design Levels",
+    value: "Select · Signature · Bespoke",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <circle cx="20" cy="20" r="13" stroke="currentColor" strokeWidth="2.2" />
@@ -53,8 +53,8 @@ const specs = [
 const capacityOptions = ["320 kg", "450 kg", "620 kg", "800 kg", "1000 kg", "1200 kg"];
 
 const machines = [
-  { label: "Elite (European)", code: "EE" },
-  { label: "Essential (Chinese/Japanese)", code: "EC" },
+  { label: "Essential (Global Model)", code: "T1" },
+  { label: "Elite (European)", code: "T2" },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -172,9 +172,10 @@ export default function HorizonCard() {
 
             <div className={styles.descriptionBlock}>
               <p className={styles.description}>
-                A panoramic lift with a steel shaft and an all-glass cabin car. Horizon opens
-                up your home's vertical journey — luminous, transparent, and available in the
-                full RAL color spectrum. Where architecture meets elevation.
+                A panoramic rectangular lift with an MS metal shaft and a glass cabin car.
+                Horizon brings light and transparency to your vertical journey — choose your
+                Technical Tier (Essential or Elite) and Design Level (Select, Signature, or Bespoke)
+                to define the shaft finish, cabin color, and control panel style.
               </p>
             </div>
 
@@ -183,19 +184,31 @@ export default function HorizonCard() {
               <p className={styles.dimensionsLabel}>Key Details</p>
               <div className={styles.dimensionRow}>
                 <span className={styles.dimLabel}>Shaft Type:</span>
-                <span className={styles.dimValue}>Steel Shaft</span>
+                <span className={styles.dimValue}>MS Metal Shaft (Painted / Powder Coated / Aluminium)</span>
               </div>
               <div className={styles.dimensionRow}>
                 <span className={styles.dimLabel}>Cabin:</span>
-                <span className={styles.dimValue}>Full Glass Car</span>
+                <span className={styles.dimValue}>Glass Cabin Car</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Color Options:</span>
-                <span className={styles.dimValue}>All RAL Colors</span>
+                <span className={styles.dimLabel}>Essential Tier (T1):</span>
+                <span className={styles.dimValue}>Global Model Motor, Standard Door Drive &amp; Guiderail</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Machine Options:</span>
-                <span className={styles.dimValue}>Elite (European), Essential (Chinese/Japanese)</span>
+                <span className={styles.dimLabel}>Elite Tier (T2):</span>
+                <span className={styles.dimValue}>European Motor, European Door Drive &amp; Guiderail</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Select Cabin:</span>
+                <span className={styles.dimValue}>Silver, Solid Door, Hand Rail, Spot Light</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Signature Cabin:</span>
+                <span className={styles.dimValue}>Bronze / Champagne Gold / Black, Glass Door, Diffused Lighting</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Bespoke Cabin:</span>
+                <span className={styles.dimValue}>Fully Custom, Aluminium Shaft Option, Touch Screen COP/LOP</span>
               </div>
             </div>
 

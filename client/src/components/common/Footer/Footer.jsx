@@ -73,10 +73,13 @@ export default function Footer() {
         <div className={styles.column}>
           <h4 className={styles.columnTitle}>Last Projects</h4>
           <ul className={styles.linkList}>
-            <li><span className={styles.link}>1000 89 St, Surfside</span></li>
-            <li><span className={styles.link}>1710 S. Bayshore Drive</span></li>
-            <li><span className={styles.link}>1716 S. Bayshore Drive</span></li>
-            <li><span className={styles.link}>Normandy Shores</span></li>
+            <li><span className={styles.link}>Villa 56, Al Furjan – Dubai</span></li>
+            <li><span className={styles.link}>Villa 06, Al Zeina Island – Abu Dhabi</span></li>
+            <li><span className={styles.link}>DECA Properties Head Office – Al Barsha, Dubai</span></li>
+            <li><span className={styles.link}>DNEC Office – KAFD, Riyadh, Saudi Arabia</span></li>
+            <li><span className={styles.link}>Emirates Hills E13 – Dubai</span></li>
+            <li><span className={styles.link}>NEERA Restaurant – Al Habtoor City, Dubai</span></li>
+            <li><span className={styles.link}>Villa 09 – Emirates Hills, Dubai</span></li>
           </ul>
         </div>
 
@@ -86,7 +89,7 @@ export default function Footer() {
           <ul className={styles.linkList}>
             <li><span className={styles.link}>+971-58-5723553</span></li>
             <li><span className={styles.link}>info@inventelevator.com</span></li>
-            <li><span className={styles.link}>Registered Office: Dubai<br/>Warehouse: Sharjah</span></li>
+            <li><span className={styles.link}>Registered Office:<span style={{ color: 'black' }}> Dubai</span><br />Warehouse:<span style={{ color: 'black' }}> Sharjah</span></span></li>
             {/* <li><span className={styles.link}>W-4, Behind Emirates Industrial City HQ,
               Al Sajja Industrial Area, Sharjah, UAE</span></li> */}
           </ul>

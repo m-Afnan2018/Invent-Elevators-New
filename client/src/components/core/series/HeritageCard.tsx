@@ -26,8 +26,8 @@ const specs = [
     ),
   },
   {
-    label: "Material",
-    value: "Stainless Steel SS 304",
+    label: "Design Levels",
+    value: "Select · Signature · Bespoke",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <path d="M20 6l10 8v12l-10 8-10-8V14z" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" />
@@ -36,8 +36,8 @@ const specs = [
     ),
   },
   {
-    label: "Finishes",
-    value: "Magnetic Black & Metallic Silver",
+    label: "Tiers",
+    value: "Essential · Elite",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <circle cx="20" cy="20" r="13" stroke="currentColor" strokeWidth="2.2" />
@@ -51,13 +51,14 @@ const specs = [
 const capacityOptions = ["320 kg", "450 kg", "620 kg", "800 kg", "1000 kg", "1200 kg"];
 
 const variants = [
-  { name: "Magnetic Black", code: "MB" },
-  { name: "Metallic Silver", code: "MS" },
+  { name: "Select", code: "L1" },
+  { name: "Signature", code: "L2" },
+  { name: "Bespoke", code: "L3" },
 ];
 
 const machines = [
-  { label: "Elite (European)", code: "EE" },
-  { label: "Essential (Chinese/Japanese)", code: "EC" },
+  { label: "Essential (Global Model)", code: "T1" },
+  { label: "Elite (European)", code: "T2" },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -180,10 +181,10 @@ export default function HeritageCard() {
 
             <div className={styles.descriptionBlock}>
               <p className={styles.description}>
-                A standard cabin lift installed inside your existing RCC shaft, finished entirely
-                in Stainless Steel (SS 304). Heritage blends structural integrity with refined
-                aesthetics — available in Magnetic Black and Metallic Silver, each engineered
-                to complement the finest interiors.
+                A standard cabin lift built inside your existing RCC or masonry shaft.
+                Heritage combines structural reliability with refined aesthetics — choose your
+                Technical Tier (Essential or Elite) and Design Level (Select, Signature, or Bespoke)
+                to match your building's requirements and your interior vision.
               </p>
             </div>
 
@@ -192,19 +193,31 @@ export default function HeritageCard() {
               <p className={styles.dimensionsLabel}>Dimensions</p>
               <div className={styles.dimensionRow}>
                 <span className={styles.dimLabel}>Shaft Type:</span>
-                <span className={styles.dimValue}>Client's RCC Shaft</span>
+                <span className={styles.dimValue}>Client's RCC / Masonry Shaft</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Cabin Material:</span>
-                <span className={styles.dimValue}>Stainless Steel SS 304</span>
+                <span className={styles.dimLabel}>Essential Tier (T1):</span>
+                <span className={styles.dimValue}>Global Model Motor, Standard Door Drive &amp; Guiderail</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Available Finishes:</span>
-                <span className={styles.dimValue}>Magnetic Black, Metallic Silver</span>
+                <span className={styles.dimLabel}>Elite Tier (T2):</span>
+                <span className={styles.dimValue}>European Motor, European Door Drive &amp; Guiderail</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Machine Options:</span>
-                <span className={styles.dimValue}>Elite (European), Essential (Chinese/Japanese)</span>
+                <span className={styles.dimLabel}>Design Levels:</span>
+                <span className={styles.dimValue}>Select (L1) · Signature (L2) · Bespoke (L3)</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Select Cabin:</span>
+                <span className={styles.dimValue}>Silver Mirror, Solid Door, Hand Rail</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Signature Cabin:</span>
+                <span className={styles.dimValue}>Bronze / Champagne Gold / Black, Glass Door</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Bespoke Cabin:</span>
+                <span className={styles.dimValue}>Fully Custom, Touch Screen COP/LOP</span>
               </div>
             </div>
 

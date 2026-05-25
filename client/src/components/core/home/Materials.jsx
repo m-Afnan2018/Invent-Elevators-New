@@ -7,7 +7,7 @@ const MATERIALS = [
   {
     id: "Panoramic",
     name: "Panoramic Glass",
-    image: "/series/aero-slim.png",
+    image: "/images/materials/aero.png",
     content: "Creates openness, elegance, and a modern architectural statement.",
   },
   {

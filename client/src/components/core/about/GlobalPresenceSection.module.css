@@ -1,191 +1,110 @@
-/* ============================================================
-   GlobalPresenceSection.module.css
-   ============================================================ */
-
 .section {
-  width: 100%;
-  background: #ffffff;
-  padding: 100px 0 0;
-  overflow: hidden;
+  background: #fff;
+  padding: 80px 0;
+  border-top: 1px solid #e8e8e4;
+  border-bottom: 1px solid #e8e8e4;
 }
 
-/* ---------- Top Two-Column Row ---------- */
-.container {
-  max-width: 1200px;
+.inner {
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 60px;
+  padding: 0 40px;
+}
+
+.eyebrow {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #aaa;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 40px;
+}
+
+/* ── Cities row: 3 city cards + description ── */
+.citiesRow {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
-  margin-bottom: 64px;
+  grid-template-columns: repeat(3, 1fr) 1.2fr;
+  gap: 0;
+  border: 1px solid #e8e8e4;
 }
 
-.left {
-  position: relative;
-}
-
-.left::before {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 3px;
-  background: #b0742e;
-  margin-bottom: 28px;
-  border-radius: 2px;
-}
-
-.heading {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: clamp(1.9rem, 3vw, 2.7rem);
-  font-weight: 400;
-  line-height: 1.22;
-  color: #0d1b2a;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.right {
-  padding-top: 42px;
-}
-
-.body {
-  font-family: "Helvetica Neue", "Arial", sans-serif;
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #4a5568;
-  margin: 0;
-  font-weight: 300;
-}
-
-/* ---------- Full-Width Image ---------- */
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  height: 520px;
-  overflow: hidden;
-}
-
-.image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 40%;
-  transform: scale(1.03);
-  transition: transform 0.8s ease;
-}
-
-.imageWrapper:hover .image {
-  transform: scale(1);
-}
-
-.imageOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(5, 12, 28, 0.75) 0%,
-    rgba(5, 12, 28, 0.2) 55%,
-    transparent 100%
-  );
-}
-
-/* ---------- Floating Stat Cards ---------- */
-.statsRow {
-  position: absolute;
-  bottom: 40px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 2px;
-  padding: 0 60px;
-}
-
-.statCard {
-  flex: 1;
-  max-width: 280px;
+.cityCard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 28px 20px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 4px;
-  transition: background 0.3s ease;
+  justify-content: center;
+  padding: 48px 20px 36px;
+  border-right: 1px solid #e8e8e4;
+  gap: 16px;
+  transition: background 0.2s;
 }
 
-.statCard:hover {
-  background: rgba(255, 255, 255, 0.14);
+.cityCard:hover {
+  background: #fafaf8;
 }
 
-.statNumber {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-size: 2.4rem;
-  font-weight: 400;
-  color: #ffffff;
-  line-height: 1;
-  letter-spacing: -0.02em;
+.cityIllustration {
+  color: #0a0a0a;
+  opacity: 0.7;
 }
 
-.statLabel {
-  font-family: "Helvetica Neue", "Arial", sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
+.cityName {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0a0a0a;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.6);
-  text-align: center;
+  margin: 0;
 }
 
-/* ---------- Responsive ---------- */
+/* ── Description col ── */
+.descCol {
+  padding: 40px 32px;
+  display: flex;
+  align-items: center;
+  border-right: none;
+}
+
+.descText {
+  font-family: "Sora", "Segoe UI", sans-serif;
+  font-size: 14.5px;
+  font-weight: 400;
+  color: #5a5a5a;
+  line-height: 1.78;
+  margin: 0;
+}
+
+/* ── Responsive ── */
 @media (max-width: 900px) {
-  .container {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 0 32px;
-    margin-bottom: 48px;
+  .citiesRow {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
   }
 
-  .right {
-    padding-top: 0;
+  .descCol {
+    grid-column: 1 / -1;
+    border-top: 1px solid #e8e8e4;
+    padding: 32px 20px;
   }
 
-  .imageWrapper {
-    height: 400px;
-  }
-
-  .statsRow {
-    flex-direction: column;
-    align-items: center;
-    padding: 0 32px;
-    gap: 8px;
-  }
-
-  .statCard {
-    max-width: 100%;
-    width: 100%;
+  .inner {
+    padding: 0 20px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 540px) {
+  .citiesRow {
+    grid-template-columns: 1fr;
+  }
+
+  .cityCard {
+    border-right: none;
+    border-bottom: 1px solid #e8e8e4;
+  }
+
   .section {
-    padding: 64px 0 0;
-  }
-
-  .container {
-    padding: 0 24px;
-  }
-
-  .imageWrapper {
-    height: 300px;
-  }
-
-  .statsRow {
-    padding: 0 24px;
-    bottom: 20px;
+    padding: 60px 0;
   }
 }

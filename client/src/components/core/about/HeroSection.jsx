@@ -5,13 +5,12 @@ import styles from "./HeroSection.module.css";
 export default function HeroSection() {
   return (
     <section className={styles.hero}>
-      {/* Background image */}
       <div className={styles.bgWrap}>
         <Image
           fill
           sizes="100vw"
-          src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=85&fit=crop"
-          alt="Modern building interior"
+          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1800&q=85&fit=crop"
+          alt="Luxury elevator interior"
           priority
           className={styles.bgImg}
         />
@@ -19,7 +18,6 @@ export default function HeroSection() {
       <div className={styles.overlayTop} />
       <div className={styles.overlayBottom} />
 
-      {/* Breadcrumb */}
       <nav className={styles.breadcrumb}>
         <Link href="/" className={styles.bcLink}>Home</Link>
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.bcChevron}>
@@ -28,38 +26,37 @@ export default function HeroSection() {
         <span className={styles.bcActive}>About Us</span>
       </nav>
 
-      {/* Content */}
       <div className={styles.content}>
         <div className={styles.eyebrow}>
           <span className={styles.eyebrowDot} />
-          <span>About Invent Elevator</span>
+          <span>Luxury Vertical Mobility</span>
         </div>
 
         <h1 className={styles.heading}>
-          High-quality Lift Solutions
-          <br />
-          Built for Modern Spaces
+          Elevating Luxury Living<br />Across UAE
         </h1>
 
         <p className={styles.description}>
-          From hydraulic cargo lifts and scissor lifts to custom car lifts and
-          passenger elevators — designed for safety, durability, and industrial
-          efficiency across the UAE and beyond.
+          Invent Elevator is a UAE-based luxury elevator company specializing in premium home lifts, commercial elevators, and bespoke vertical mobility solutions designed for modern villas, architectural spaces, and sophisticated interiors.
         </p>
 
         <div className={styles.actions}>
-          <a href="#products" className={styles.btnPrimary}>
-            Our Products
-          </a>
-          <a href="/brochure" className={styles.btnSecondary}>
-            Download Brochure
-          </a>
+          <Link href="/series" className={styles.btnPrimary}>
+            Explore Series
+          </Link>
+          <Link href="/contact" className={styles.btnSecondary}>
+            Book Consultation
+          </Link>
         </div>
+
+        <p className={styles.trustLine}>
+          We combine advanced engineering with refined aesthetics to create elevator experiences that seamlessly blend functionality, elegance, and innovation.
+
+        </p>
       </div>
 
-      {/* Scroll indicator */}
       <div className={styles.scrollWrap}>
-        <span className={styles.scrollLabel}>Explore our lift solutions</span>
+        <span className={styles.scrollLabel}>Scroll to explore</span>
         <div className={styles.scrollTrack}>
           <div className={styles.scrollThumb} />
         </div>

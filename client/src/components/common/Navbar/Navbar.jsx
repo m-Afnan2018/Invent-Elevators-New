@@ -14,7 +14,8 @@ const NAV_LINKS = [
     // { label: "Products",   href: "/products" },
     { label: "Projects",   href: "/projects" },
     { label: "Blogs",   href: "/blogs" },
-    { label: "About",      href: "/about" },
+    // { label: "About",      href: "/about" },
+    { label: "FAQ",      href: "/faq" },
     { label: "Contact",    href: "/contact" },
 ];
 
@@ -56,7 +57,7 @@ export default function Navbar() {
 
                 <Image width={100} height={100} src='/logo-invent-png-without-bg-1.png' alt="Invent Elevators" style={{height: '70px', objectFit: 'cover', width: 'auto', filter: 'brightness(0) invert(1)'}}/>
                 </Link>
-                <Link href="/contact" className={styles.topQuote}>↳ GET A QUOTE</Link>
+                <Link href="/contact" className={styles.topQuote}>↳ GET A FREE QUOTE</Link>
             </header>
 
             {/* ── Backdrop overlay ─────────────────────── */}

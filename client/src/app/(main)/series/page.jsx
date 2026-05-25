@@ -311,11 +311,10 @@ export default function SeriesPage() {
       </section>
 
       <TypesGrid series={[
-        { _id: "1", link: "heritage",  name: "Heritage", subtitle: "European/Japanese", url: '/series/heritage.png' },
-        { _id: "2", link: "horizon",  name: "Horizon", subtitle: "European/Japanese", url: '/series/horizon.png' },
-        { _id: "3", link: "orbit",  name: "Orbit", subtitle: "European/Japanese", url: '/series/orbit.png' },
-        { _id: "4", link: "aero",  name: "Aero", subtitle: "European/Japanese", url: '/series/aero-slim.png' },
-        // { _id: "5", name: "Atelier", subtitle: "European/Japanese", url: '/series/atelier.png' },
+        { _id: "1", link: "heritage", name: "Heritage", subtitle: "RCC Shaft · Essential & Elite",  url: '/series/heritage.png' },
+        { _id: "2", link: "horizon",  name: "Horizon",  subtitle: "MS Shaft · Glass Cabin Car",    url: '/series/horizon.png' },
+        { _id: "3", link: "orbit",    name: "Orbit",    subtitle: "Round Shaft · Curvature Cabin", url: '/series/orbit.png' },
+        { _id: "4", link: "aero",     name: "Aero",     subtitle: "No Pit · Slim Panoramic Lift",  url: '/series/aero-slim.png' },
       ]} />
 
       <div className={styles.seriesSection} id="heritage">

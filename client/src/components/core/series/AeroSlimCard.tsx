@@ -61,8 +61,8 @@ const specs = [
 const capacityOptions = ["320 kg", "450 kg", "620 kg", "800 kg", "1000 kg", "1200 kg"];
 
 const machines = [
-  { label: "Elite (European)", code: "EE" },
-  { label: "Essential (Chinese/Japanese)", code: "EC" },
+  { label: "Essential (Global Model)", code: "T1" },
+  { label: "Elite (European)", code: "T2" },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -195,10 +195,10 @@ export default function AeroSlimCard() {
 
             <div className={styles.descriptionBlock}>
               <p className={styles.description}>
-                A slim-profile panoramic lift engineered to fit where others cannot.
-                No pit required — Aero installs seamlessly into any home, combining
-                radical space efficiency with an open, airy glass aesthetic. The lift that
-                goes anywhere, without sacrificing anything.
+                A slim-profile panoramic lift that fits anywhere — no pit required.
+                Aero is engineered for space-constrained homes and retrofits, combining
+                compact design with an open glass aesthetic. Choose your Technical Tier
+                (Essential or Elite) and Design Level (Select, Signature, or Bespoke).
               </p>
             </div>
 
@@ -210,16 +210,28 @@ export default function AeroSlimCard() {
                 <span className={styles.dimValue}>None — fits anywhere</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Profile:</span>
-                <span className={styles.dimValue}>Slim Design</span>
+                <span className={styles.dimLabel}>Shaft:</span>
+                <span className={styles.dimValue}>MS (Painted / Powder Coated) or Aluminium</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Cabin View:</span>
-                <span className={styles.dimValue}>Panoramic</span>
+                <span className={styles.dimLabel}>Essential Tier (T1):</span>
+                <span className={styles.dimValue}>Global Model Motor, Standard Door Drive &amp; Guiderail</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Machine Options:</span>
-                <span className={styles.dimValue}>Elite (European), Essential (Chinese/Japanese)</span>
+                <span className={styles.dimLabel}>Elite Tier (T2):</span>
+                <span className={styles.dimValue}>European Motor, European Door Drive &amp; Guiderail</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Select Cabin:</span>
+                <span className={styles.dimValue}>Silver, Solid Door, Hand Rail, Spot Light</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Signature Cabin:</span>
+                <span className={styles.dimValue}>Bronze / Champagne Gold / Black, Glass Door, Diffused Lighting</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Bespoke Cabin:</span>
+                <span className={styles.dimValue}>Fully Custom, Touch Screen COP/LOP</span>
               </div>
             </div>
 

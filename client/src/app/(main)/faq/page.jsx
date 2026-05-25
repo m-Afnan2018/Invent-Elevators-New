@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./page.module.css";
 
 const FAQ_DATA = [
@@ -92,123 +93,119 @@ const FAQ_DATA = [
   },
 ];
 
-const ALL_CATS = ["All", ...FAQ_DATA.map((g) => g.category)];
+const ALL_CATS = FAQ_DATA.map((g) => g.category);
 
 export default function FAQPage() {
-  const [activeCat, setActiveCat] = useState("All");
-  const [openKey, setOpenKey] = useState(null);
+  const [activeCat, setActiveCat] = useState("General");
 
-  const visibleGroups =
-    activeCat === "All" ? FAQ_DATA : FAQ_DATA.filter((g) => g.category === activeCat);
-
-  const toggle = (key) => setOpenKey((prev) => (prev === key ? null : key));
+  const visibleItems =
+    activeCat === "General"
+      ? FAQ_DATA.flatMap((g) => g.items)
+      : FAQ_DATA.find((g) => g.category === activeCat)?.items || [];
 
   return (
     <main className={styles.page}>
 
       {/* ── Hero ── */}
       <section className={styles.hero}>
-        <div className={styles.inner}>
-          <nav className={styles.breadcrumb}>
-            <Link href="/" className={styles.bcLink}>Home</Link>
-            <span className={styles.bcSep}>›</span>
-            <span className={styles.bcCurrent}>FAQ</span>
-          </nav>
-          <div className={styles.heroLabel}>
-            <span className={styles.labelLine} />
-            <span className={styles.labelText}>Knowledge Base</span>
+        {/* Background image */}
+        <div className={styles.heroBgWrap}>
+          <Image
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80"
+            alt="FAQ — Invent Elevator"
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroBgImg}
+          />
+        </div>
+        <div className={styles.heroOverlayTop} />
+        <div className={styles.heroOverlayBottom} />
+
+        {/* Breadcrumb — absolute, top */}
+        <nav className={styles.heroBreadcrumb}>
+          <Link href="/" className={styles.heroBcLink}>Home</Link>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
+            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span className={styles.heroBcActive}>FAQ</span>
+        </nav>
+
+        {/* Content — anchored to bottom */}
+        <div className={styles.heroInner}>
+          <div className={styles.heroEyebrow}>
+            <span className={styles.eyebrowDot} />
+            <span>Knowledge Base</span>
           </div>
           <h1 className={styles.heroTitle}>Frequently Asked<br />Questions</h1>
-          <p className={styles.heroSub}>
+          <p className={styles.heroDesc}>
             Everything you need to know about our products, services, safety
             standards, and processes — answered clearly.
           </p>
           <div className={styles.heroStats}>
-            <div className={styles.stat}>
-              <span className={styles.statNum}>{FAQ_DATA.reduce((n, g) => n + g.items.length, 0)}</span>
-              <span className={styles.statLabel}>Questions answered</span>
+            <div className={styles.heroStat}>
+              <strong>{FAQ_DATA.reduce((n, g) => n + g.items.length, 0)}</strong>
+              <span>Questions answered</span>
             </div>
             <div className={styles.statDivider} />
-            <div className={styles.stat}>
-              <span className={styles.statNum}>{FAQ_DATA.length}</span>
-              <span className={styles.statLabel}>Topic categories</span>
+            <div className={styles.heroStat}>
+              <strong>{FAQ_DATA.length}</strong>
+              <span>Topic categories</span>
             </div>
             <div className={styles.statDivider} />
-            <div className={styles.stat}>
-              <span className={styles.statNum}>24h</span>
-              <span className={styles.statLabel}>Response time</span>
+            <div className={styles.heroStat}>
+              <strong>24h</strong>
+              <span>Response time</span>
             </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className={styles.heroScrollWrap}>
+          <span className={styles.heroScrollLabel}>Scroll to explore</span>
+          <div className={styles.heroScrollTrack}>
+            <div className={styles.heroScrollThumb} />
           </div>
         </div>
       </section>
 
-      {/* ── FAQ Body ── */}
+      {/* ── Tabs ── */}
+      <section className={styles.tabsSection}>
+        <div className={styles.inner}>
+          <div className={styles.tabs}>
+            {ALL_CATS.map((cat) => (
+              <button
+                key={cat}
+                className={`${styles.tab} ${activeCat === cat ? styles.tabActive : ""}`}
+                onClick={() => setActiveCat(cat)}
+              >
+                {cat}
+                {cat !== "General" && (
+                  <span className={styles.tabCount}>
+                    {FAQ_DATA.find((g) => g.category === cat)?.items.length}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ List ── */}
       <section className={styles.faqSection}>
         <div className={styles.inner}>
-          <div className={styles.layout}>
-
-            {/* Sticky sidebar */}
-            <aside className={styles.sidebar}>
-              <p className={styles.sidebarTitle}>Categories</p>
-              <nav className={styles.sidebarNav}>
-                {ALL_CATS.map((cat) => (
-                  <button
-                    key={cat}
-                    className={`${styles.sideBtn} ${activeCat === cat ? styles.sideBtnActive : ""}`}
-                    onClick={() => { setActiveCat(cat); setOpenKey(null); }}
-                  >
-                    <span>{cat}</span>
-                    {cat !== "All" && (
-                      <span className={styles.sideBtnCount}>
-                        {FAQ_DATA.find((g) => g.category === cat)?.items.length}
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </nav>
-            </aside>
-
-            {/* Accordion */}
-            <div className={styles.content}>
-              {visibleGroups.map((group) => (
-                <div key={group.category} className={styles.group}>
-                  <div className={styles.groupHeader}>
-                    <span className={styles.groupLabel}>{group.category}</span>
-                    <span className={styles.groupCount}>{group.items.length} questions</span>
-                  </div>
-                  <ul className={styles.faqList}>
-                    {group.items.map((item, idx) => {
-                      const key = `${group.category}-${idx}`;
-                      const isOpen = openKey === key;
-                      return (
-                        <li key={key} className={`${styles.faqItem} ${isOpen ? styles.faqItemOpen : ""}`}>
-                          <button
-                            className={styles.faqBtn}
-                            onClick={() => toggle(key)}
-                            aria-expanded={isOpen}
-                          >
-                            <span className={styles.faqQ}>{item.q}</span>
-                            <span className={`${styles.faqIcon} ${isOpen ? styles.faqIconOpen : ""}`}>
-                              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                <path
-                                  d={isOpen ? "M3 10l5-5 5 5" : "M3 6l5 5 5-5"}
-                                  stroke="currentColor" strokeWidth="1.6"
-                                  strokeLinecap="round" strokeLinejoin="round"
-                                />
-                              </svg>
-                            </span>
-                          </button>
-                          <div className={`${styles.faqBody} ${isOpen ? styles.faqBodyOpen : ""}`}>
-                            <p className={styles.faqA}>{item.a}</p>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ul>
+          <div className={styles.list}>
+            {visibleItems.map((item, i) => (
+              <div key={i} className={styles.item}>
+                <div className={styles.itemLeft}>
+                  <h3 className={styles.itemQ}>{item.q}</h3>
+                  <p className={styles.itemA}>{item.a}</p>
                 </div>
-              ))}
-            </div>
-
+                <span className={styles.itemNumber}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -220,7 +217,7 @@ export default function FAQPage() {
             <p className={styles.ctaEyebrow}>Still have questions?</p>
             <h2 className={styles.ctaTitle}>Our team is ready to help</h2>
             <p className={styles.ctaSub}>
-              Can't find what you're looking for? Reach out and we'll get back to you within 24 hours.
+              Can&apos;t find what you&apos;re looking for? Reach out and we&apos;ll get back to you within 24 hours.
             </p>
           </div>
           <div className={styles.ctaActions}>

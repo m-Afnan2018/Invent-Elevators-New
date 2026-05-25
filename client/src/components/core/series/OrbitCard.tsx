@@ -52,13 +52,14 @@ const specs = [
 const capacityOptions = ["320 kg", "450 kg", "620 kg", "800 kg", "1000 kg", "1200 kg"];
 
 const variants = [
-  { name: "Glass Cabin", code: "GL" },
-  { name: "Fibre Sheet", code: "FS" },
+  { name: "Select", code: "L1" },
+  { name: "Signature", code: "L2" },
+  { name: "Bespoke", code: "L3" },
 ];
 
 const machines = [
-  { label: "Elite (European)", code: "EE" },
-  { label: "Essential (Chinese/Japanese)", code: "EC" },
+  { label: "Essential (Global Model)", code: "T1" },
+  { label: "Elite (European)", code: "T2" },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -175,10 +176,10 @@ export default function OrbitCard() {
 
             <div className={styles.descriptionBlock}>
               <p className={styles.description}>
-                A round lift with a steel or aluminium shaft and a curvature cabin.
-                Choose between a glass cabin for luminous transparency or a fibre sheet
-                cabin for a sculpted, opaque finish. Available across the full RAL color
-                spectrum — Orbit makes the lift a centrepiece, not an afterthought.
+                A distinctive round lift with a steel or aluminium shaft and a curvature cabin.
+                Orbit makes the elevator the centrepiece of your space — choose your Technical
+                Tier (Essential or Elite) and Design Level (Select, Signature, or Bespoke)
+                for the right finish, door style, and control panel.
               </p>
             </div>
 
@@ -187,23 +188,31 @@ export default function OrbitCard() {
               <p className={styles.dimensionsLabel}>Key Details</p>
               <div className={styles.dimensionRow}>
                 <span className={styles.dimLabel}>Shaft Options:</span>
-                <span className={styles.dimValue}>Steel or Aluminium</span>
+                <span className={styles.dimValue}>Steel (Painted / Powder Coated) or Aluminium</span>
               </div>
               <div className={styles.dimensionRow}>
                 <span className={styles.dimLabel}>Cabin Shape:</span>
                 <span className={styles.dimValue}>Round / Curvature</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Cabin Variants:</span>
-                <span className={styles.dimValue}>Glass (GL), Fibre Sheet (FS)</span>
+                <span className={styles.dimLabel}>Essential Tier (T1):</span>
+                <span className={styles.dimValue}>Global Model Motor, Standard Door Drive &amp; Guiderail</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Color Options:</span>
-                <span className={styles.dimValue}>All RAL Colors</span>
+                <span className={styles.dimLabel}>Elite Tier (T2):</span>
+                <span className={styles.dimValue}>European Motor, European Door Drive &amp; Guiderail</span>
               </div>
               <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Machine Options:</span>
-                <span className={styles.dimValue}>Elite (European), Essential (Chinese/Japanese)</span>
+                <span className={styles.dimLabel}>Select Cabin:</span>
+                <span className={styles.dimValue}>Silver, Solid Door, Hand Rail, Spot Light</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Signature Cabin:</span>
+                <span className={styles.dimValue}>Bronze / Champagne Gold / Black, Glass Door, Diffused Lighting</span>
+              </div>
+              <div className={styles.dimensionRow}>
+                <span className={styles.dimLabel}>Bespoke Cabin:</span>
+                <span className={styles.dimValue}>Fully Custom, Touch Screen COP/LOP</span>
               </div>
             </div>
 

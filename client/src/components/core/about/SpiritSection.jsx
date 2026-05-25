@@ -1,75 +1,76 @@
 "use client";
-import Image from "next/image";
 import styles from "./SpiritSection.module.css";
+
+const PILLARS = [
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="4" y="4" width="20" height="20" rx="2" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M4 10h20M10 4v6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="14" cy="18" r="3" stroke="currentColor" strokeWidth="1.4" opacity="0.6" />
+      </svg>
+    ),
+    label: "Architectural\nHarmony",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 3l2.4 5.2 5.6 0.5-4.1 3.9 1.1 5.6L14 15.5l-5 2.7 1.1-5.6L6 8.7l5.6-0.5z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      </svg>
+    ),
+    label: "Luxury\nAesthetics",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="10" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M14 8v6l4 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    ),
+    label: "Premium\nCraftsmanship",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <path d="M14 4C9 4 5 8 5 13c0 3.5 2 6.5 5 8v3h8v-3c3-1.5 5-4.5 5-8 0-5-4-9-9-9z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      </svg>
+    ),
+    label: "Personalised\nExperiences",
+  },
+  {
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <rect x="11" y="4" width="6" height="20" rx="2" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M6 10h5M17 10h5M6 18h5M17 18h5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.6" />
+        <rect x="13" y="11" width="2" height="6" rx="0.5" fill="currentColor" opacity="0.3" />
+      </svg>
+    ),
+    label: "Intelligent\nEngineering",
+  },
+];
 
 export default function SpiritSection() {
   return (
     <section className={styles.section}>
-      {/* Background image with overlay */}
-      <div className={styles.bgWrapper}>
-        <Image
-          width={1000}
-          height={1000}
-          src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=1800&q=85&fit=crop"
-          alt="Industrial warehouse with forklift"
-          className={styles.bgImage}
-        />
-        <div className={styles.overlay} />
-      </div>
-
       <div className={styles.container}>
-        {/* Left: large decorative quote / accent */}
         <div className={styles.left}>
-          <div className={styles.accentLine} />
-          <p className={styles.pullQuote}>
-            &quot;Innovation is not just about technology — it is about improving
-            everyday movement within buildings.&quot;
+          <p className={styles.eyebrow}>Our Philosophy</p>
+          <h2 className={styles.heading}>Designed Beyond Functionality</h2>
+          <p className={styles.body}>
+            At Invent Elevator, we believe elevators are more than mobility
+            systems — they are an extension of architecture and lifestyle.
+            Every elevator is thoughtfully designed to enhance interiors,
+            elevate experiences, and integrate seamlessly into modern spaces.
           </p>
-          <div className={styles.tagRow}>
-            <span className={styles.tag}>Est. 2005</span>
-            <span className={styles.tagDot} />
-            <span className={styles.tag}>Engineering-Led</span>
-            <span className={styles.tagDot} />
-            <span className={styles.tag}>Global Reach</span>
-          </div>
         </div>
 
-        {/* Right: content */}
-        <div className={styles.right}>
-          <p className={styles.eyebrow}>Our Philosophy</p>
-          <h2 className={styles.heading}>The Spirit of Invent Elevator</h2>
-          <div className={styles.divider} />
-          <p className={styles.body}>
-            It all started with a vision to simplify vertical mobility and make
-            modern lift solutions more accessible, efficient, and reliable. What
-            began as a focused engineering initiative has grown into a trusted
-            elevator solutions provider serving residential and commercial spaces.
-          </p>
-          <p className={styles.body}>
-            At Invent Elevator, innovation is not just about technology — it is
-            about improving everyday movement within buildings. Our commitment to
-            precision, safety, and performance continues to drive everything we
-            build. Discover what makes Invent Elevator a forward-thinking lift
-            company built for modern architecture.
-          </p>
-
-          {/* Metrics row */}
-          <div className={styles.metrics}>
-            <div className={styles.metric}>
-              <span className={styles.metricNumber}>98%</span>
-              <span className={styles.metricLabel}>Client Satisfaction</span>
+        <div className={styles.pillars}>
+          {PILLARS.map((p) => (
+            <div key={p.label} className={styles.pillar}>
+              <div className={styles.pillarIcon}>{p.icon}</div>
+              <p className={styles.pillarLabel}>{p.label}</p>
             </div>
-            <div className={styles.metricDivider} />
-            <div className={styles.metric}>
-              <span className={styles.metricNumber}>500+</span>
-              <span className={styles.metricLabel}>Projects Delivered</span>
-            </div>
-            <div className={styles.metricDivider} />
-            <div className={styles.metric}>
-              <span className={styles.metricNumber}>20+</span>
-              <span className={styles.metricLabel}>Industry Awards</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
