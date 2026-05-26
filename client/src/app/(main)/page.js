@@ -363,10 +363,10 @@ export default function Home() {
       </section>
 
       <TypesGrid series={[
-        { _id: "1", name: "Heritage", subtitle: "Essential/Elite", url: '/series/heritage.png' },
-        { _id: "2", name: "Horizon", subtitle: "Essential/Elite", url: '/series/horizon.png' },
-        { _id: "3", name: "Orbit", subtitle: "Essential/Elite", url: '/series/orbit.png' },
-        { _id: "4", name: "Aero", subtitle: "Essential/Elite", url: '/series/aero-slim.png' },
+        { _id: "1", name: "Heritage", subtitle: "Reinforced Concrete Shaft · Essential & Elite", url: '/series/heritage.png' },
+        { _id: "2", name: "Horizon", subtitle: "MS Shaft · Glass Cabin Car", url: '/series/horizon.png' },
+        { _id: "3", name: "Orbit", subtitle: "Round Shaft · Curvature Cabin", url: '/series/orbit.png' },
+        { _id: "4", name: "Aero", subtitle: "No Pit · Slim Panoramic Lift", url: '/series/aero-slim.png' },
         // { _id: "5", name: "Atelier", subtitle: "Essential/Elite", url: '/series/atelier.png' },
       ]} />
 
