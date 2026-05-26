@@ -34,6 +34,35 @@
   opacity: 0.75;
 }
 
+.seriesBtnRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.viewSeriesBtn {
+  display: inline-block;
+  padding: 18px 36px;
+  background: transparent;
+  color: #111111;
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 3px;
+  border: 2px solid #111111;
+  transition: background 0.2s, color 0.2s;
+}
+
+.viewSeriesBtn:hover {
+  background: #111111;
+  color: #ffffff;
+}
+
 /* ── Hero ── */
 .hero {
   position: relative;

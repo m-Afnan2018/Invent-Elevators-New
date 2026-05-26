@@ -15,8 +15,8 @@ const images = [
 
 const specs = [
   {
-    label: "Shaft",
-    value: "Client's RCC Shaft",
+    label: "Select Cabin",
+    value: "Silver Mirror, Solid Door, Hand Rail",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <rect x="10" y="4" width="20" height="32" rx="2" stroke="currentColor" strokeWidth="2.2" />
@@ -26,8 +26,8 @@ const specs = [
     ),
   },
   {
-    label: "Design Levels",
-    value: "Select · Signature · Bespoke",
+    label: "Signature Cabin",
+    value: "Bronze / Champagne Gold / Black, Glass Door",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <path d="M20 6l10 8v12l-10 8-10-8V14z" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" />
@@ -36,8 +36,8 @@ const specs = [
     ),
   },
   {
-    label: "Tiers",
-    value: "Essential · Elite",
+    label: "Bespoke Cabin",
+    value: "Fully Custom, Touch Screen COP/LOP",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <circle cx="20" cy="20" r="13" stroke="currentColor" strokeWidth="2.2" />
@@ -59,6 +59,30 @@ const variants = [
 const machines = [
   { label: "Essential (Global Model)", code: "T1" },
   { label: "Elite (European)", code: "T2" },
+];
+
+const tiers = [
+  {
+    label: "Essential",
+    code: "T1",
+    value: "Global Model Motor, Standard Door Drive & Guiderail",
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
+        <circle cx="20" cy="20" r="7" stroke="currentColor" strokeWidth="2.2" />
+        <path d="M20 4v4M20 32v4M4 20h4M32 20h4M7.5 7.5l2.8 2.8M29.7 29.7l2.8 2.8M7.5 32.5l2.8-2.8M29.7 10.3l2.8-2.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5" />
+      </svg>
+    ),
+  },
+  {
+    label: "Elite",
+    code: "T2",
+    value: "European Motor, European Door Drive & Guiderail",
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
+        <path d="M20 6l3.09 9.51H33l-8.09 5.88 3.09 9.51L20 26.02l-8 4.88 3.09-9.51L7 15.51h9.91z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" fill="currentColor" fillOpacity="0.12" />
+      </svg>
+    ),
+  },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -195,33 +219,20 @@ export default function HeritageCard() {
                 <span className={styles.dimLabel}>Shaft Type:</span>
                 <span className={styles.dimValue}>Client's RCC / Masonry Shaft</span>
               </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Essential Tier (T1):</span>
-                <span className={styles.dimValue}>Global Model Motor, Standard Door Drive &amp; Guiderail</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Elite Tier (T2):</span>
-                <span className={styles.dimValue}>European Motor, European Door Drive &amp; Guiderail</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Design Levels:</span>
-                <span className={styles.dimValue}>Select (L1) · Signature (L2) · Bespoke (L3)</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Select Cabin:</span>
-                <span className={styles.dimValue}>Silver Mirror, Solid Door, Hand Rail</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Signature Cabin:</span>
-                <span className={styles.dimValue}>Bronze / Champagne Gold / Black, Glass Door</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Bespoke Cabin:</span>
-                <span className={styles.dimValue}>Fully Custom, Touch Screen COP/LOP</span>
-              </div>
             </div>
 
-            {/* Spec Cards */}
+            {/* Tier Boxes */}
+            <div className={styles.tiersGrid}>
+              {tiers.map((tier) => (
+                <div key={tier.code} className={styles.specCard}>
+                  <div className={styles.specIconWrapper}>{tier.icon}</div>
+                  <p className={styles.specLabel}>{tier.label} <span style={{ opacity: 0.5, fontSize: '0.85em' }}>({tier.code})</span></p>
+                  <p className={styles.specValue}>{tier.value}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Cabin Style Boxes */}
             <div className={styles.specsGrid}>
               {specs.map((spec) => (
                 <div key={spec.label} className={styles.specCard}>

@@ -1,5 +1,5 @@
 .section {
-  background: #f4f4f1;
+  background: #ffffff;
   padding: 72px 0 120px;
   min-height: 60vh;
 }
@@ -43,7 +43,7 @@
   color: #888;
   background: #eaeae6;
   padding: 4px 12px;
-  border-radius: 20px;
+  border-radius: 0;
   letter-spacing: 0.01em;
 }
 
@@ -57,12 +57,12 @@
 /* ── Product Card ── */
 .card {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0,0,0,0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   transition: box-shadow 0.4s ease, transform 0.4s ease;
   position: relative;
 }
@@ -129,7 +129,7 @@
   color: #ffffff;
   background: #0a0a0a;
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 0;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -143,7 +143,7 @@
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 0;
   border: 1px solid rgba(0, 0, 0, 0.06);
   margin-left: auto;
 }
@@ -189,7 +189,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: #f0f0ec;
-  border-radius: 10px;
+  border-radius: 0;
   overflow: hidden;
   border: 1px solid #f0f0ec;
 }
@@ -229,20 +229,22 @@
   justify-content: space-between;
   gap: 10px;
   padding: 12px 18px;
-  background: #b0742e;
+  background: #0a0a0a;
   color: #ffffff;
   text-decoration: none;
   font-family: "Sora", "Segoe UI", sans-serif;
   font-size: 13px;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 0;
+  border: 2px solid #0a0a0a;
   letter-spacing: 0.01em;
-  transition: background 0.25s ease, transform 0.2s ease;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
   width: 100%;
 }
 
 .cta:hover {
-  background: #9a6427;
+  background: #ffffff;
+  color: #0a0a0a;
 }
 
 .ctaArrow {
@@ -252,20 +254,20 @@
   width: 26px;
   height: 26px;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
+  border-radius: 0;
   flex-shrink: 0;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .cta:hover .ctaArrow {
   transform: translateX(3px);
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 /* ── Skeleton ── */
 .skeleton {
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 0;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.04);
 }
@@ -287,7 +289,7 @@
 
 .skeletonLine {
   height: 13px;
-  border-radius: 6px;
+  border-radius: 0;
   background: linear-gradient(90deg, #f0f0ee 25%, #e8e8e3 50%, #f0f0ee 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite linear;
@@ -299,7 +301,7 @@
 
 .skeletonSpecs {
   height: 56px;
-  border-radius: 10px;
+  border-radius: 0;
   background: linear-gradient(90deg, #f0f0ee 25%, #e8e8e3 50%, #f0f0ee 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite linear;
@@ -307,7 +309,7 @@
 
 .skeletonCta {
   height: 44px;
-  border-radius: 10px;
+  border-radius: 0;
   background: linear-gradient(90deg, #f0f0ee 25%, #e8e8e3 50%, #f0f0ee 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite linear;
@@ -375,19 +377,17 @@
   font-weight: 600;
   color: #0a0a0a;
   background: #ffffff;
-  border: 1.5px solid #ddddd8;
-  border-radius: 30px;
+  border: 1.5px solid #0a0a0a;
+  border-radius: 0;
   padding: 13px 32px;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   transition: all 0.25s ease;
 }
 
 .loadMoreBtn:hover {
-  background: #b0742e;
+  background: #0a0a0a;
   color: #ffffff;
-  border-color: #b0742e;
-  box-shadow: 0 8px 24px rgba(176,116,46,0.22);
+  border-color: #0a0a0a;
   transform: translateY(-2px);
 }
 

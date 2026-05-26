@@ -58,6 +58,8 @@ export default function Series({ activeCategories = [] }) {
                     <p className={styles.sectionSubtitle}>
                         The perfect blend of luxury design, advanced engineering, and seamless vertical mobility solutions crafted for modern UAE spaces.
                     </p>
+                    <div style={{height: '5rem'}}/>
+                    <Link href={'/categories'} className={styles.mainBtn}>View All Categories</Link>
                 </div>
 
                 {/* Carousel */}

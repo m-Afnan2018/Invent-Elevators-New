@@ -72,7 +72,7 @@ const ContactHero = () => {
           to guide you with reliable and premium mobility solutions.
         </p>
 
-        <div className={styles.contactChips}>
+        {/* <div className={styles.contactChips}>
           {CONTACT_ITEMS.map((item) => (
             <a key={item.href} href={item.href} className={styles.contactChip}>
               <span className={styles.chipIcon}>{item.icon}</span>
@@ -82,13 +82,13 @@ const ContactHero = () => {
               </span>
             </a>
           ))}
-        </div>
+        </div> */}
 
-        <div className={styles.facts}>
+        {/* <div className={styles.facts}>
           {quickFacts.map((fact) => (
             <span key={fact}>✓ {fact}</span>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Scroll indicator */}

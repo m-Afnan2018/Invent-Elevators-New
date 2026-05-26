@@ -15,8 +15,8 @@ const images = [
 
 const specs = [
   {
-    label: "Shaft",
-    value: "MS Metal Shaft",
+    label: "Select",
+    value: "Silver, Solid Door, Hand Rail, Spot Light",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <rect x="10" y="4" width="20" height="32" rx="2" stroke="currentColor" strokeWidth="2.2" />
@@ -26,25 +26,47 @@ const specs = [
     ),
   },
   {
-    label: "Cabin",
-    value: "Glass Cabin Car",
+    label: "Signature",
+    value: "Bronze / Champagne Gold / Black, Glass Door, Diffused Lighting",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
-        <rect x="8" y="8" width="24" height="28" rx="2" stroke="currentColor" strokeWidth="2.2" />
-        <path d="M14 8v28M26 8v28" stroke="currentColor" strokeWidth="1.2" opacity="0.35" />
-        <path d="M8 20h24" stroke="currentColor" strokeWidth="1.2" opacity="0.35" />
-        <circle cx="20" cy="20" r="3" stroke="currentColor" strokeWidth="1.8" />
+        <path d="M20 6l10 8v12l-10 8-10-8V14z" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" />
+        <path d="M20 6v28M10 14l10 8 10-8" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
       </svg>
     ),
   },
   {
-    label: "Design Levels",
-    value: "Select · Signature · Bespoke",
+    label: "Bespoke",
+    value: "Fully Custom, Aluminium Shaft Option, Touch Screen COP/LOP",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
         <circle cx="20" cy="20" r="13" stroke="currentColor" strokeWidth="2.2" />
-        <path d="M20 7v26M7 20h26" stroke="currentColor" strokeWidth="1.4" opacity="0.35" />
-        <circle cx="20" cy="20" r="4.5" fill="currentColor" opacity="0.22" />
+        <path d="M20 7v26M7 20h26" stroke="currentColor" strokeWidth="1.5" opacity="0.35" />
+        <circle cx="20" cy="20" r="5" fill="currentColor" opacity="0.2" />
+      </svg>
+    ),
+  },
+];
+
+const tiers = [
+  {
+    label: "Essential",
+    code: "T1",
+    value: "Global Model Motor, Standard Door Drive & Guiderail",
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
+        <circle cx="20" cy="20" r="7" stroke="currentColor" strokeWidth="2.2" />
+        <path d="M20 4v4M20 32v4M4 20h4M32 20h4M7.5 7.5l2.8 2.8M29.7 29.7l2.8 2.8M7.5 32.5l2.8-2.8M29.7 10.3l2.8-2.8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.5" />
+      </svg>
+    ),
+  },
+  {
+    label: "Elite",
+    code: "T2",
+    value: "European Motor, European Door Drive & Guiderail",
+    icon: (
+      <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
+        <path d="M20 6l3.09 9.51H33l-8.09 5.88 3.09 9.51L20 26.02l-8 4.88 3.09-9.51L7 15.51h9.91z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" fill="currentColor" fillOpacity="0.12" />
       </svg>
     ),
   },
@@ -190,29 +212,20 @@ export default function HorizonCard() {
                 <span className={styles.dimLabel}>Cabin:</span>
                 <span className={styles.dimValue}>Glass Cabin Car</span>
               </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Essential Tier (T1):</span>
-                <span className={styles.dimValue}>Global Model Motor, Standard Door Drive &amp; Guiderail</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Elite Tier (T2):</span>
-                <span className={styles.dimValue}>European Motor, European Door Drive &amp; Guiderail</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Select Cabin:</span>
-                <span className={styles.dimValue}>Silver, Solid Door, Hand Rail, Spot Light</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Signature Cabin:</span>
-                <span className={styles.dimValue}>Bronze / Champagne Gold / Black, Glass Door, Diffused Lighting</span>
-              </div>
-              <div className={styles.dimensionRow}>
-                <span className={styles.dimLabel}>Bespoke Cabin:</span>
-                <span className={styles.dimValue}>Fully Custom, Aluminium Shaft Option, Touch Screen COP/LOP</span>
-              </div>
             </div>
 
-            {/* Spec cards */}
+            {/* Tier Boxes */}
+            <div className={styles.tiersGrid}>
+              {tiers.map((tier) => (
+                <div key={tier.code} className={styles.specCard}>
+                  <div className={styles.specIconWrapper}>{tier.icon}</div>
+                  <p className={styles.specLabel}>{tier.label} <span style={{ opacity: 0.5, fontSize: '0.85em' }}>({tier.code})</span></p>
+                  <p className={styles.specValue}>{tier.value}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Cabin Style Boxes */}
             <div className={styles.specsGrid}>
               {specs.map((spec) => (
                 <div key={spec.label} className={styles.specCard}>

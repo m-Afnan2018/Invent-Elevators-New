@@ -3,35 +3,109 @@
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import CategoriesHero from "./CategoriesHero";
-import CategoryCard from "./CategoryCard";
 import styles from "./CategoriesBrowse.module.css";
 import { getCategories } from "@/services/categories.service";
 import { getProducts } from "@/services/products.service";
 import { extractCollection } from "@/lib/apiResponse";
+import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
 
-const FALLBACK_FEATURED =
-  "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80";
+const FALLBACK_CATEGORIES = [
+  {
+    _id: "home-lifts",
+    __fallback: true,
+    name: "Home Lifts",
+    description:
+      "Custom residential elevator solutions designed for private villas and luxury apartments across the UAE.",
+    image: "/projects/downtown.png",
+  },
+  {
+    _id: "commercial-elevators",
+    __fallback: true,
+    name: "Commercial Elevators",
+    description:
+      "High-capacity passenger lifts engineered for offices, retail malls, and commercial towers.",
+    image: "/projects/adnoc.png",
+  },
+  {
+    _id: "car-lifts",
+    __fallback: true,
+    name: "Car Lifts",
+    description:
+      "Heavy-duty vehicle lift systems built for limited-space parking structures and showrooms.",
+    image: "/projects/yas-island.png",
+  },
+  {
+    _id: "hospital-lifts",
+    __fallback: true,
+    name: "Healthcare Lifts",
+    description:
+      "Bed and stretcher elevator systems with emergency power backup for uninterrupted medical operations.",
+    image: "/projects/palm-jumeirah.png",
+  },
+  {
+    _id: "dumbwaiters",
+    __fallback: true,
+    name: "Dumbwaiters",
+    description:
+      "Compact service lifts for seamless food and goods transport between floors in hospitality venues.",
+    image: "/projects/city-centre.png",
+  },
+  {
+    _id: "panoramic-lifts",
+    __fallback: true,
+    name: "Panoramic Lifts",
+    description:
+      "Glass-enclosed scenic elevators that elevate architectural beauty while delivering smooth vertical mobility.",
+    image: "/projects/al-majaz.png",
+  },
+];
 
-// ── Skeleton pieces ──────────────────────────────────────────
-function SkeletonCard() {
+function CategoryCard({ category, productCount = 0 }) {
+  const href = `/categories/${category._id}`;
+  const fallbackImg =
+    "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80";
+
+  const [hovered, setHovered] = useState(false);
+
   return (
-    <div className={styles.skeletonCard}>
-      <div className={styles.skeletonImg} />
-      <div className={styles.skeletonBody}>
-        <div className={`${styles.skeletonLine} ${styles.lineShort}`} />
-        <div className={`${styles.skeletonLine} ${styles.lineLong}`} />
-        <div className={`${styles.skeletonLine} ${styles.lineMed}`} />
+    <Link
+      href={href}
+      className={styles.card}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className={styles.cardImgWrap}>
+        <Image
+          src={category.image || fallbackImg}
+          alt={category.name}
+          fill
+          sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+          className={`${styles.cardImg} ${hovered ? styles.cardImgHovered : ""}`}
+        />
+        <div className={styles.cardImgOverlay} />
+        <span className={styles.countBadge}>
+          {productCount > 0 ? `${productCount} Products` : "View Collection"}
+        </span>
       </div>
-    </div>
+
+      <div className={styles.cardBody}>
+        <div className={styles.cardTop}>
+          <h3 className={styles.cardTitle}>{category.name}</h3>
+          <span className={styles.cardLink}>Browse</span>
+        </div>
+        <p className={styles.cardDesc}>
+          {(category.description || "").slice(0, 110)}
+          {(category.description || "").length > 110 ? "…" : ""}
+        </p>
+      </div>
+    </Link>
   );
 }
 
-// ── Main component ───────────────────────────────────────────
 export default function CategoriesBrowse() {
-  const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
@@ -50,7 +124,6 @@ export default function CategoriesBrowse() {
     load();
   }, []);
 
-  // Compute product count per category id
   const productCountByCategory = useMemo(() => {
     const map = {};
     products.forEach((p) => {
@@ -65,198 +138,96 @@ export default function CategoriesBrowse() {
     return map;
   }, [products]);
 
-  const featured = categories[0] || null;
-  const rest = categories.slice(1);
-
-  // ── Skeleton loading state ──
-  if (isLoading) {
-    return (
-      <>
-        {/* Hero skeleton */}
-        <div className={styles.heroSkeleton} />
-
-        <section className={styles.gridSection}>
-          <div className={styles.container}>
-            {/* Featured skeleton */}
-            <div className={styles.featuredSkeleton} />
-
-            {/* Cards skeleton */}
-            <div className={styles.allSection}>
-              <div className={styles.sectionHeader}>
-                <div className={`${styles.skeletonLine} ${styles.lineTitle}`} />
-              </div>
-              <div className={styles.grid}>
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <SkeletonCard key={i} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  }
-
-  // ── Empty state ──
-  if (categories.length === 0) {
-    return (
-      <>
-        <CategoriesHero categories={[]} totalProducts={0} />
-        <section className={styles.gridSection}>
-          <div className={styles.container}>
-            <div className={styles.empty}>
-              <div className={styles.emptyRing}>
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path
-                    d="M10 22V14l6-4 6 4v8"
-                    stroke="#ccc"
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                  />
-                  <rect
-                    x="13"
-                    y="16"
-                    width="6"
-                    height="6"
-                    rx="1"
-                    stroke="#ccc"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-              </div>
-              <p className={styles.emptyTitle}>No categories yet</p>
-              <p className={styles.emptyDesc}>
-                Check back soon for our product collections.
-              </p>
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  }
+  const allCategories = useMemo(() => {
+    return categories.length ? categories : FALLBACK_CATEGORIES;
+  }, [categories]);
 
   return (
-    <>
-      <CategoriesHero
-        categories={categories}
-        totalProducts={products.length}
-      />
+    <main className={styles.main}>
+      {/* ── Hero ── */}
+      <section className={styles.hero}>
+        <div className={styles.heroBgWrap}>
+          <Image
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80"
+            alt="Elevator categories"
+            fill
+            priority
+            sizes="100vw"
+            className={styles.heroBgImg}
+          />
+        </div>
+        <div className={styles.heroOverlayTop} />
+        <div className={styles.heroOverlayBottom} />
 
-      <section className={styles.gridSection}>
-        <div className={styles.container}>
+        {/* Breadcrumb */}
+        <nav className={styles.heroBreadcrumb}>
+          <Link href="/" className={styles.heroBcLink}>Home</Link>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
+            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span className={styles.heroBcActive}>Categories</span>
+        </nav>
 
-          {/* ── Featured spotlight banner ── */}
-          {featured && (
-            <div className={styles.featuredWrap}>
-              <div className={styles.featuredEyebrow}>
-                <span className={styles.featuredDot} />
-                <span>Spotlight Collection</span>
-              </div>
+        <div className={styles.heroInner}>
+          <div className={styles.eyebrow}>
+            <span className={styles.eyebrowDot} />
+            <span>Our Products</span>
+          </div>
+          <h1 className={styles.heroTitle}>Elevator Categories</h1>
+          <p className={styles.heroDesc}>
+            Explore our complete range of elevator solutions — from bespoke home
+            lifts and high-speed commercial elevators to specialist healthcare and
+            car lift systems, engineered for the UAE.
+          </p>
+        </div>
 
-              <Link
-                href={`/categories/${featured._id}`}
-                className={styles.featuredCard}
-              >
-                {/* Background image */}
-                <div className={styles.featuredImgWrap}>
-                  <Image
-                    src={featured.image || FALLBACK_FEATURED}
-                    alt={featured.name}
-                    fill
-                    sizes="100vw"
-                    className={styles.featuredImg}
-                    priority
-                  />
-                </div>
-
-                {/* Overlays */}
-                <div className={styles.featuredOverlayLeft} />
-                <div className={styles.featuredOverlayBottom} />
-
-                {/* Content */}
-                <div className={styles.featuredContent}>
-                  <div className={styles.featuredMeta}>
-                    <span className={styles.featuredTag}>Featured</span>
-                    {productCountByCategory[featured._id] > 0 && (
-                      <span className={styles.featuredProductCount}>
-                        {productCountByCategory[featured._id]} products
-                      </span>
-                    )}
-                  </div>
-
-                  <h2 className={styles.featuredName}>{featured.name}</h2>
-
-                  {featured.description && (
-                    <p className={styles.featuredDesc}>
-                      {featured.description.length > 140
-                        ? featured.description.slice(0, 140) + "…"
-                        : featured.description}
-                    </p>
-                  )}
-
-                  <div className={styles.featuredCta}>
-                    <span>Browse Collection</span>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      className={styles.featuredCtaArrow}
-                    >
-                      <path
-                        d="M3 8h10M9 3.5L13.5 8 9 12.5"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          )}
-
-          {/* ── All categories grid ── */}
-          {rest.length > 0 && (
-            <div className={styles.allSection}>
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>All Collections</h2>
-                <span className={styles.sectionCount}>
-                  {categories.length} categories
-                </span>
-              </div>
-
-              <div className={styles.grid}>
-                {rest.map((cat) => (
-                  <CategoryCard
-                    key={cat._id}
-                    category={cat}
-                    productCount={productCountByCategory[cat._id] || 0}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Edge case: only one category — show it as a card too */}
-          {categories.length === 1 && featured && (
-            <div className={styles.allSection}>
-              <div className={styles.sectionHeader}>
-                <h2 className={styles.sectionTitle}>All Collections</h2>
-                <span className={styles.sectionCount}>1 category</span>
-              </div>
-              <div className={styles.grid}>
-                <CategoryCard
-                  category={featured}
-                  productCount={productCountByCategory[featured._id] || 0}
-                />
-              </div>
-            </div>
-          )}
-
+        {/* Scroll indicator */}
+        <div className={styles.heroScrollWrap}>
+          <span className={styles.heroScrollLabel}>Scroll to explore</span>
+          <div className={styles.heroScrollTrack}>
+            <div className={styles.heroScrollThumb} />
+          </div>
         </div>
       </section>
-    </>
+
+      {/* ── Categories Grid ── */}
+      <section className={styles.section}>
+        <div className={styles.container}>
+          {isLoading ? (
+            <div className={styles.grid}>
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className={styles.skeleton}>
+                  <div className={styles.skeletonImg} />
+                  <div className={styles.skeletonBody}>
+                    <div className={styles.skeletonLine} style={{ width: "70%" }} />
+                    <div className={styles.skeletonLine} style={{ width: "90%" }} />
+                    <div className={styles.skeletonLine} style={{ width: "50%" }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.grid}>
+              {allCategories.map((cat) => (
+                <CategoryCard
+                  key={cat._id}
+                  category={cat}
+                  productCount={productCountByCategory[cat._id] || 0}
+                />
+              ))}
+            </div>
+          )}
+
+          <div className={styles.ctaWrap}>
+            <p className={styles.ctaText}>Looking for a custom elevator solution?</p>
+            <Link href="/contact" className={styles.cta}>
+              Book a Consultation →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <MarqueeLogos />
+    </main>
   );
 }

@@ -319,28 +319,40 @@ export default function SeriesPage() {
 
       <div className={styles.seriesSection} id="heritage">
         <HeritageCard />
-        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+        <div className={styles.seriesBtnRow}>
+          <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+          <Link href="/series/heritage" className={styles.viewSeriesBtn}>Explore Series</Link>
+        </div>
       </div>
 
       <div className={styles.seriesSection} id="horizon">
         <HorizonCard />
-        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+        <div className={styles.seriesBtnRow}>
+          <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+          <Link href="/series/horizon" className={styles.viewSeriesBtn}>Explore Series</Link>
+        </div>
       </div>
 
       <div className={styles.seriesSection} id="orbit">
         <OrbitCard />
-        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+        <div className={styles.seriesBtnRow}>
+          <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+          <Link href="/series/orbit" className={styles.viewSeriesBtn}>Explore Series</Link>
+        </div>
       </div>
 
       <div className={styles.seriesSection} id="aero">
         <AeroSlimCard />
-        <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+        <div className={styles.seriesBtnRow}>
+          <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
+          <Link href="/series/aero" className={styles.viewSeriesBtn}>Explore Series</Link>
+        </div>
       </div>
 
-      <div className={styles.seriesSection} id="atelier">
+      {/* <div className={styles.seriesSection} id="atelier">
         <AtelierCard />
         <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
-      </div>
+      </div> */}
 
       {/* <SeriesElevatorCard/>
 

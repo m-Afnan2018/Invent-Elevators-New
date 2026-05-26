@@ -376,6 +376,12 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
+.tiersGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
 .specIconWrapper {
   width: 52px;
   height: 52px;
