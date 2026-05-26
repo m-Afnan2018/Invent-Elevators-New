@@ -268,7 +268,7 @@ export default function SeriesPage() {
         {/* Background image */}
         <div className={styles.heroBgWrap}>
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80"
+            src="/projects/adnoc.png"
             alt="Modern building projects"
             fill
             priority
@@ -311,7 +311,7 @@ export default function SeriesPage() {
       </section>
 
       <TypesGrid series={[
-        { _id: "1", link: "heritage", name: "Heritage", subtitle: "RCC Shaft · Essential & Elite",  url: '/series/heritage.png' },
+        { _id: "1", link: "heritage", name: "Heritage", subtitle: "Reinforced Concrete Shaft · Essential & Elite",  url: '/series/heritage.png' },
         { _id: "2", link: "horizon",  name: "Horizon",  subtitle: "MS Shaft · Glass Cabin Car",    url: '/series/horizon.png' },
         { _id: "3", link: "orbit",    name: "Orbit",    subtitle: "Round Shaft · Curvature Cabin", url: '/series/orbit.png' },
         { _id: "4", link: "aero",     name: "Aero",     subtitle: "No Pit · Slim Panoramic Lift",  url: '/series/aero-slim.png' },
