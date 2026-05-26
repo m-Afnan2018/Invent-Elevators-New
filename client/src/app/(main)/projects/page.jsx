@@ -260,7 +260,7 @@ export default function ProjectsPage() {
         {/* Background image */}
         <div className={styles.heroBgWrap}>
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80"
+            src="/projects/palm-jumeirah.png"
             alt="Modern building projects"
             fill
             priority

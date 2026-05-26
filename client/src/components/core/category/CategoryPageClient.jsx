@@ -8,7 +8,8 @@ import { extractCollection } from "@/lib/apiResponse";
 import styles from "./CategoryPageClient.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
 
-const FALLBACK_BG = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80";
+// const FALLBACK_BG = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80";
+const FALLBACK_BG = "/projects/city-centre.png";
 
 const FEATURES = [
   {

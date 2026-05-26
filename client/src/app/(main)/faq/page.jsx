@@ -111,7 +111,7 @@ export default function FAQPage() {
         {/* Background image */}
         <div className={styles.heroBgWrap}>
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80"
+            src="/projects/yas-island.png"
             alt="FAQ — Invent Elevator"
             fill
             priority

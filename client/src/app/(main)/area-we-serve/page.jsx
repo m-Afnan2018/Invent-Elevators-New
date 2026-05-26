@@ -168,7 +168,7 @@ export default function AreaWeServePage() {
       <section className={styles.hero}>
         <div className={styles.heroBgWrap}>
           <Image
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80"
+            src="/projects/downtown.png"
             alt="UAE skyline"
             fill
             priority
