@@ -13,9 +13,9 @@ const NAV_LINKS = [
     { label: "Areas We Serve", href: "/area-we-serve" },
     // { label: "Products",   href: "/products" },
     { label: "Projects",   href: "/projects" },
-    { label: "Blogs",   href: "/blogs" },
+    // { label: "Blogs",   href: "/blogs" },
     // { label: "About",      href: "/about" },
-    { label: "FAQ",      href: "/faq" },
+    // { label: "FAQ",      href: "/faq" },
     { label: "Contact",    href: "/contact" },
 ];
 
@@ -112,8 +112,9 @@ export default function Navbar() {
                     </div>
                     <div className={styles.infoCol}>
                         <Link href="/about"    className={styles.infoLink} tabIndex={isOpen ? 0 : -1} onClick={close}>About Us</Link>
-                        <Link href="/projects" className={styles.infoLink} tabIndex={isOpen ? 0 : -1} onClick={close}>Our Projects</Link>
-                        <Link href="/blogs"    className={styles.infoLink} tabIndex={isOpen ? 0 : -1} onClick={close}>Latest Insights</Link>
+                        {/* <Link href="/projects" className={styles.infoLink} tabIndex={isOpen ? 0 : -1} onClick={close}>Our Projects</Link> */}
+                        <Link href="/faq" className={styles.infoLink} tabIndex={isOpen ? 0 : -1} onClick={close}>FAQ</Link>
+                        <Link href="/blogs"    className={styles.infoLink} tabIndex={isOpen ? 0 : -1} onClick={close}>Blogs</Link>
                     </div>
                 </div>
 
