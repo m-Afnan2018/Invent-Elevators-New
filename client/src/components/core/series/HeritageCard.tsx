@@ -57,14 +57,14 @@ const variants = [
 ];
 
 const machines = [
-  { label: "Essential (Global Model)", code: "T1" },
-  { label: "Elite (European)", code: "T2" },
+  { label: "Essential (Global Model)", code: "EC" },
+  { label: "Elite (European)", code: "EE" },
 ];
 
 const tiers = [
   {
     label: "Essential",
-    code: "T1",
+    code: "EC",
     value: "Global Model Motor, Standard Door Drive & Guiderail",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
@@ -75,7 +75,7 @@ const tiers = [
   },
   {
     label: "Elite",
-    code: "T2",
+    code: "EE",
     value: "European Motor, European Door Drive & Guiderail",
     icon: (
       <svg viewBox="0 0 40 40" fill="none" width="26" height="26">
@@ -222,17 +222,19 @@ export default function HeritageCard() {
             </div>
 
             {/* Tier Boxes */}
+            {/*<p className={styles.gridSectionLabel}>Technical Tier</p>*/}
             <div className={styles.tiersGrid}>
               {tiers.map((tier) => (
-                <div key={tier.code} className={styles.specCard}>
-                  <div className={styles.specIconWrapper}>{tier.icon}</div>
-                  <p className={styles.specLabel}>{tier.label} <span style={{ opacity: 0.5, fontSize: '0.85em' }}>({tier.code})</span></p>
-                  <p className={styles.specValue}>{tier.value}</p>
+                <div key={tier.code} className={styles.tierSpecCard}>
+                  <div className={styles.tierSpecIconWrapper}>{tier.icon}</div>
+                  <p className={styles.tierSpecLabel}>{tier.label} <span style={{ opacity: 0.5, fontSize: '0.85em' }}>({tier.code})</span></p>
+                  <p className={styles.tierSpecValue}>{tier.value}</p>
                 </div>
               ))}
             </div>
 
             {/* Cabin Style Boxes */}
+           {/* <p className={styles.gridSectionLabel}>Design Level</p>*/}
             <div className={styles.specsGrid}>
               {specs.map((spec) => (
                 <div key={spec.label} className={styles.specCard}>

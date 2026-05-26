@@ -62,11 +62,11 @@ export default function CraftedAroundYourHome({ cabinStyles }) {
           <div key={tier.tag} className={styles.card}>
             {/* Left: text */}
             <div className={styles.content}>
-              <span className={styles.tag}>{tier.tag}</span>
-              <h3 className={styles.title}>
+              <h3 className={styles.tag}>
                 {tier.title.split("\n").map((line, i) => (
                   <span key={i}>{line}<br /></span>
                 ))}
+              <span className={styles.title}>{tier.tag}</span>
               </h3>
               <ul className={styles.features}>
                 {tier.features.map((f) => (
