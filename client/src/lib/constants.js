@@ -25,6 +25,8 @@ export const ENDPOINTS = {
   LEADS: '/api/leads',
   USERS: '/api/users',
   UPLOAD: '/api/upload',
+  FAQS: '/api/faqs',
+  TESTIMONIALS: '/api/testimonials',
 };
 
 export const HTTP_STATUS = {

@@ -215,6 +215,7 @@ export default function HorizonCard() {
             </div>
 
             {/* Tier Boxes */}
+            <p className={styles.gridSectionLabel}>Technical Tier</p>
             <div className={styles.tiersGrid}>
               {tiers.map((tier) => (
                 <div key={tier.code} className={styles.tierSpecCard}>
@@ -226,6 +227,7 @@ export default function HorizonCard() {
             </div>
 
             {/* Cabin Style Boxes */}
+            <p className={styles.gridSectionLabel}>Design Level</p>
             <div className={styles.specsGrid}>
               {specs.map((spec) => (
                 <div key={spec.label} className={styles.specCard}>

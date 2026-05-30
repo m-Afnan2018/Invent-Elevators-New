@@ -22,6 +22,8 @@ export const API_ROUTES = {
   USERS: `${API_BASE}/users`,
   JOBS: `${API_BASE}/jobs`,
   JOB_APPLICATIONS: `${API_BASE}/job-applications`,
+  FAQS: `${API_BASE}/faqs`,
+  TESTIMONIALS: `${API_BASE}/testimonials`,
 };
 
 export default API_ROUTES;

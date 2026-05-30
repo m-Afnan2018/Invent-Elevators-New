@@ -5,19 +5,20 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import {
     RiDashboardLine,
-    RiProductHuntLine,
     RiStackLine,
-    RiPuzzleLine,
-    RiPagesLine,
-    RiFileListLine,
     RiProjectorLine,
+    RiFileListLine,
+    RiArticleLine,
+    RiBriefcaseLine,
+    RiFileUserLine,
+    RiQuestionLine,
+    RiChatQuoteLine,
     RiUserLine,
+    RiSettingsLine,
     RiMenuFoldLine,
     RiMenuUnfoldLine,
     RiMoonLine,
     RiSunLine,
-    RiBriefcaseLine,
-    RiFileUserLine,
 } from 'react-icons/ri';
 import styles from './AdminLayout.module.css';
 import useAuthStore from '@/store/authStore';
@@ -65,18 +66,17 @@ const AdminLayout = ({ children }) => {
         (Array.isArray(user?.permissions) && user.permissions.includes('dashboard_view'));
 
     const menuItems = useMemo(() => [
-        ...(canAccessDashboard ? [{ name: 'Dashboard', icon: RiDashboardLine, path: '/admin/dashboard' }] : []),
-        { name: 'Products', icon: RiProductHuntLine, path: '/admin/products' },
-        { name: 'Categories', icon: RiStackLine, path: '/admin/categories' },
-        { name: 'Sub Categories', icon: RiStackLine, path: '/admin/sub-categories' },
-        { name: 'Attributes', icon: RiPuzzleLine, path: '/admin/attributes' },
-        { name: 'Components', icon: RiPagesLine, path: '/admin/components' },
-        { name: 'Lead Forms', icon: RiFileListLine, path: '/admin/leadforms' },
-        { name: 'Blogs', icon: RiProjectorLine, path: '/admin/blogs' },
-        { name: 'Projects', icon: RiProjectorLine, path: '/admin/projects' },
-        { name: 'Careers', icon: RiBriefcaseLine, path: '/admin/careers' },
-        { name: 'Applications', icon: RiFileUserLine, path: '/admin/applications' },
-        { name: 'Users', icon: RiUserLine, path: '/admin/users' },
+        ...(canAccessDashboard ? [{ name: 'Dashboard',     icon: RiDashboardLine,    path: '/admin/dashboard' }] : []),
+        { name: 'Projects',     icon: RiProjectorLine, path: '/admin/projects' },
+        { name: 'Inquiries',    icon: RiFileListLine,  path: '/admin/leadforms' },
+        { name: 'Blogs',        icon: RiArticleLine,   path: '/admin/blogs' },
+        { name: 'FAQs',         icon: RiQuestionLine,  path: '/admin/faqs' },
+        { name: 'Testimonials', icon: RiChatQuoteLine, path: '/admin/testimonials' },
+        { name: 'Careers',      icon: RiBriefcaseLine, path: '/admin/careers' },
+        { name: 'Applications', icon: RiFileUserLine,  path: '/admin/applications' },
+        { name: 'Categories',   icon: RiStackLine,     path: '/admin/categories' },
+        { name: 'Users',        icon: RiUserLine,      path: '/admin/users' },
+        { name: 'Settings',     icon: RiSettingsLine,  path: '/admin/settings' },
     ], [canAccessDashboard]);
 
     const handleLogout = async () => {

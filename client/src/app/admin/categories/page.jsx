@@ -41,14 +41,16 @@ const CategoriesPage = () => {
     const [isSubCategory, setIsSubCategory] = useState(false);
     const [parentCategoryId, setParentCategoryId] = useState(null);
     const [expandedCategories, setExpandedCategories] = useState([]);
-    const [iconPreview, setIconPreview] = useState('');
-    const [isUploading, setIsUploading] = useState(false);
+    const [iconPreview,  setIconPreview]  = useState('');
+    const [imagePreview, setImagePreview] = useState('');
+    const [isUploading,  setIsUploading]  = useState(false);
 
     const [formData, setFormData] = useState({
         name: '',
         description: '',
         slug: '',
         icon: '',
+        image: '',
         status: 'active',
         order: 0,
         // SEO Fields
@@ -115,6 +117,21 @@ const CategoriesPage = () => {
         }
     };
 
+    const handleImageChange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        setIsUploading(true);
+        try {
+            const url = await uploadImage(file, 'categories');
+            setImagePreview(url);
+            setFormData((prev) => ({ ...prev, image: url }));
+        } catch (err) {
+            toast.error(err?.message || 'Image upload failed. Please try again.');
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
     const toggleExpand = (categoryId) => {
         if (expandedCategories.includes(categoryId)) {
             setExpandedCategories(expandedCategories.filter((id) => id !== categoryId));
@@ -133,14 +150,16 @@ const CategoriesPage = () => {
                 name: category.name,
                 description: category.description,
                 slug: category.slug,
-                icon: category.icon,
+                icon: category.icon || '',
+                image: category.image || '',
                 status: category.status,
                 order: category.order,
-                metaTitle: category.metaTitle,
-                metaDescription: category.metaDescription,
+                metaTitle: category.metaTitle || '',
+                metaDescription: category.metaDescription || '',
                 metaKeywords: Array.isArray(category.metaKeywords) ? category.metaKeywords.join(', ') : (category.metaKeywords || ''),
             });
-            setIconPreview(category.icon);
+            setIconPreview(category.icon || '');
+            setImagePreview(category.image || '');
         } else {
             setEditingCategory(null);
             setIsSubCategory(isSubCat);
@@ -150,6 +169,7 @@ const CategoriesPage = () => {
                 description: '',
                 slug: '',
                 icon: '',
+                image: '',
                 status: 'active',
                 order: 0,
                 metaTitle: '',
@@ -157,6 +177,7 @@ const CategoriesPage = () => {
                 metaKeywords: '',
             });
             setIconPreview('');
+            setImagePreview('');
         }
         setIsModalOpen(true);
     };
@@ -367,13 +388,17 @@ const CategoriesPage = () => {
                                             </td>
                                             <td>
                                                 <div className={styles.categoryCell}>
-                                                    <Image
-                                                        width={1000}
-                                                        height={1000}
-                                                        src={category.icon}
-                                                        alt={category.name}
-                                                        className={styles.categoryIcon}
-                                                    />
+                                                    {(category.image || category.icon) ? (
+                                                        <Image
+                                                            width={48}
+                                                            height={48}
+                                                            src={category.image || category.icon}
+                                                            alt={category.name}
+                                                            className={styles.categoryIcon}
+                                                        />
+                                                    ) : (
+                                                        <div className={styles.categoryIconPlaceholder} />
+                                                    )}
                                                     <div>
                                                         <div className={styles.categoryName}>{category.name}</div>
                                                         <div className={styles.categoryDescription}>
@@ -451,13 +476,17 @@ const CategoriesPage = () => {
                                                     <td>
                                                         <div className={styles.categoryCell}>
                                                             <RiSubtractLine className={styles.subIcon} />
-                                                            <Image
-                                                                width={1000}
-                                                                height={1000}
-                                                                src={subCat.icon}
-                                                                alt={subCat.name}
-                                                                className={styles.categoryIcon}
-                                                            />
+                                                            {(subCat.image || subCat.icon) ? (
+                                                                <Image
+                                                                    width={48}
+                                                                    height={48}
+                                                                    src={subCat.image || subCat.icon}
+                                                                    alt={subCat.name}
+                                                                    className={styles.categoryIcon}
+                                                                />
+                                                            ) : (
+                                                                <div className={styles.categoryIconPlaceholder} />
+                                                            )}
                                                             <div>
                                                                 <div className={styles.categoryName}>{subCat.name}</div>
                                                                 <div className={styles.categoryDescription}>
@@ -531,13 +560,17 @@ const CategoriesPage = () => {
                         {filteredCategories.map((category) => (
                             <div key={category._id} className={styles.card}>
                                 <div className={styles.cardHeader}>
-                                    <Image
-                                        width={1000}
-                                        height={1000}
-                                        src={category.icon}
-                                        alt={category.name}
-                                        className={styles.cardIcon}
-                                    />
+                                    {(category.image || category.icon) ? (
+                                        <Image
+                                            width={200}
+                                            height={120}
+                                            src={category.image || category.icon}
+                                            alt={category.name}
+                                            className={styles.cardIcon}
+                                        />
+                                    ) : (
+                                        <div className={styles.cardIconPlaceholder} />
+                                    )}
                                     <span
                                         className={`${styles.statusBadge} ${category.status === 'active' ? styles.active : styles.inactive
                                             }`}
@@ -559,7 +592,9 @@ const CategoriesPage = () => {
                                             </div>
                                             {category.subCategories.map((sub) => (
                                                 <div key={sub._id} className={styles.subCategoryItem}>
-                                                    <Image width={1000} height={1000} src={sub.icon} alt={sub.name} className={styles.subCategoryIcon} />
+                                                    {(sub.image || sub.icon) && (
+                                                        <Image width={32} height={32} src={sub.image || sub.icon} alt={sub.name} className={styles.subCategoryIcon} />
+                                                    )}
                                                     <span>{sub.name}</span>
                                                 </div>
                                             ))}
@@ -672,28 +707,70 @@ const CategoriesPage = () => {
                                     </div>
                                 </div>
 
-                                {/* Icon */}
+                                {/* Images */}
                                 <div className={styles.formSection}>
-                                    <h3 className={styles.sectionTitle}>Icon/Image</h3>
-                                    <div className={styles.imageUpload}>
-                                        <input
-                                            type="file"
-                                            id="iconUpload"
-                                            accept="image/*"
-                                            onChange={handleIconChange}
-                                            className={styles.fileInput}
-                                        />
-                                        <label htmlFor="iconUpload" className={styles.uploadLabel}>
-                                            {iconPreview ? (
-                                                <Image width={1000} height={1000} src={iconPreview} alt="Icon" className={styles.iconPreview} />
-                                            ) : (
-                                                <>
-                                                    <RiUploadCloudLine className={styles.uploadIcon} />
-                                                    <span>Upload category icon</span>
-                                                </>
-                                            )}
-                                        </label>
+                                    <h3 className={styles.sectionTitle}>Images</h3>
+
+                                    {/* Icon (small, for table/card list) */}
+                                    <div className={styles.formGroup}>
+                                        <label>Icon <span className={styles.labelHint}>(small — shown in lists)</span></label>
+                                        <div className={styles.imageUpload}>
+                                            <input
+                                                type="file"
+                                                id="iconUpload"
+                                                accept="image/*"
+                                                onChange={handleIconChange}
+                                                className={styles.fileInput}
+                                            />
+                                            <label htmlFor="iconUpload" className={styles.uploadLabel}>
+                                                {iconPreview ? (
+                                                    <Image width={200} height={200} src={iconPreview} alt="Icon preview" className={styles.iconPreview} />
+                                                ) : (
+                                                    <>
+                                                        <RiUploadCloudLine className={styles.uploadIcon} />
+                                                        <span>Upload icon</span>
+                                                    </>
+                                                )}
+                                            </label>
+                                        </div>
+                                        {iconPreview && (
+                                            <button type="button" className={styles.clearImgBtn} onClick={() => { setIconPreview(''); setFormData(p => ({ ...p, icon: '' })); }}>
+                                                Remove icon
+                                            </button>
+                                        )}
                                     </div>
+
+                                    {/* Hero Image (full-size, used by TypesGrid background) */}
+                                    <div className={styles.formGroup}>
+                                        <label>Hero Image <span className={styles.labelHint}>(full-size — used as TypesGrid background)</span></label>
+                                        <div className={`${styles.imageUpload} ${styles.imageUploadHero}`}>
+                                            <input
+                                                type="file"
+                                                id="imageUpload"
+                                                accept="image/*"
+                                                onChange={handleImageChange}
+                                                className={styles.fileInput}
+                                            />
+                                            <label htmlFor="imageUpload" className={`${styles.uploadLabel} ${styles.uploadLabelHero}`}>
+                                                {imagePreview ? (
+                                                    <Image width={800} height={450} src={imagePreview} alt="Hero image preview" className={styles.heroPreview} />
+                                                ) : (
+                                                    <>
+                                                        <RiUploadCloudLine className={styles.uploadIcon} />
+                                                        <span>Upload hero image</span>
+                                                        <small>Recommended: 1920×1080 or wider</small>
+                                                    </>
+                                                )}
+                                            </label>
+                                        </div>
+                                        {imagePreview && (
+                                            <button type="button" className={styles.clearImgBtn} onClick={() => { setImagePreview(''); setFormData(p => ({ ...p, image: '' })); }}>
+                                                Remove image
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {isUploading && <p className={styles.uploadingText}>Uploading…</p>}
                                 </div>
 
                                 {/* SEO Settings */}

@@ -1,0 +1,71 @@
+.page { min-height: 100%; }
+.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.title { font-size: 2rem; font-weight: 700; color: var(--text-primary); margin: 0 0 0.25rem; }
+.subtitle { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+
+.addBtn { display: flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.addBtn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+.toolbar { margin-bottom: 1.5rem; }
+.searchWrap { position: relative; max-width: 480px; }
+.searchIcon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1.1rem; pointer-events: none; }
+.searchInput { width: 100%; padding: 0.75rem 1rem 0.75rem 3rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--bg-secondary); color: var(--text-primary); font-size: 0.9rem; transition: all 0.2s; }
+.searchInput:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+
+.loading { text-align: center; padding: 3rem; color: var(--text-muted); }
+.empty { display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; color: var(--text-muted); padding: 3rem; }
+.empty p { margin: 0; }
+
+.tableWrap { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 0.75rem; overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; min-width: 700px; }
+.table thead { background: var(--bg-tertiary); }
+.table th { padding: 0.9rem 1rem; text-align: left; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+.table tbody tr { border-top: 1px solid var(--border-color); transition: background 0.15s; }
+.table tbody tr:hover { background: var(--bg-tertiary); }
+.table td { padding: 0.85rem 1rem; font-size: 0.9rem; color: var(--text-primary); vertical-align: middle; }
+
+.tdNum { width: 48px; color: var(--text-muted); font-size: 0.85rem; }
+.tdCenter { text-align: center; }
+.tdQuestion { max-width: 420px; }
+.questionText { font-weight: 600; margin: 0 0 4px; line-height: 1.4; }
+.answerPreview { margin: 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; }
+.catBadge { display: inline-block; padding: 0.25rem 0.65rem; background: rgba(59,130,246,0.12); color: #3b82f6; border-radius: 1rem; font-size: 0.78rem; font-weight: 600; }
+
+.toggleBtn { padding: 0.3rem 0.8rem; border: none; border-radius: 1rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.active   { background: rgba(16,185,129,0.12); color: #10b981; }
+.inactive { background: rgba(239,68,68,0.12);  color: #ef4444; }
+
+.actions { display: flex; gap: 0.5rem; }
+.editBtn, .deleteBtn { padding: 0.45rem; border-radius: 0.375rem; cursor: pointer; display: flex; align-items: center; font-size: 1rem; transition: all 0.2s; border: 1px solid; }
+.editBtn   { border-color: var(--accent); color: var(--accent); background: transparent; }
+.editBtn:hover { background: var(--accent); color: #fff; }
+.deleteBtn { border-color: var(--danger); color: var(--danger); background: transparent; }
+.deleteBtn:hover { background: var(--danger); color: #fff; }
+
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.72); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; animation: fadeIn 0.2s ease; }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+.modal { background: var(--bg-secondary); border-radius: 1rem; width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto; border: 1px solid var(--border-color); animation: slideUp 0.25s ease; }
+@keyframes slideUp { from { transform: translateY(16px); opacity: 0 } to { transform: translateY(0); opacity: 1 } }
+
+.modalHeader { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; background: var(--bg-secondary); z-index: 5; }
+.modalHeader h2 { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin: 0; }
+.closeBtn { background: none; border: none; color: var(--text-secondary); font-size: 1.6rem; cursor: pointer; padding: 0.25rem; border-radius: 0.375rem; display: flex; }
+.closeBtn:hover { background: var(--bg-tertiary); }
+
+.form { padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.field { display: flex; flex-direction: column; gap: 0.4rem; }
+.field label { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
+.field input, .field select, .field textarea { padding: 0.7rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: var(--bg-primary); color: var(--text-primary); font-size: 0.875rem; font-family: inherit; transition: border-color 0.2s; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+.field textarea { resize: vertical; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.checkRow { display: flex; align-items: center; }
+.checkLabel { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); cursor: pointer; }
+.checkLabel input { width: 16px; height: 16px; cursor: pointer; }
+
+.modalFooter { display: flex; gap: 1rem; justify-content: flex-end; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+.cancelBtn { padding: 0.7rem 1.5rem; border: 1px solid var(--border-color); border-radius: 0.5rem; background: transparent; color: var(--text-secondary); font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+.cancelBtn:hover { background: var(--bg-tertiary); }
+.saveBtn { padding: 0.7rem 1.5rem; border: none; border-radius: 0.5rem; background: var(--accent); color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.saveBtn:hover:not(:disabled) { background: var(--accent-hover); }
+.saveBtn:disabled { opacity: 0.6; cursor: not-allowed; }
