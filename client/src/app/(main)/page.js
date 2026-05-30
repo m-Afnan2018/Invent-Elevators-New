@@ -362,13 +362,12 @@ export default function Home() {
         <Series activeCategories={activeCategories} />
       </section>
 
-      <TypesGrid series={activeCategories.map((c) => ({
-        _id:      c._id,
-        name:     c.name,
-        subtitle: c.description || "",
-        url:      c.image || c.icon || "",
-        link:     c.slug  || c.name?.toLowerCase().replace(/\s+/g, '-') || "",
-      }))} />
+      <TypesGrid series={[
+        { _id: "1", name: "Heritage", subtitle: "Reinforced Concrete Shaft · Essential & Elite", url: '/series/heritage.png', link: 'heritage' },
+        { _id: "2", name: "Horizon",  subtitle: "MS Shaft · Glass Cabin Car",                    url: '/series/horizon.png',  link: 'horizon'  },
+        { _id: "3", name: "Orbit",    subtitle: "Round Shaft · Curvature Cabin",                 url: '/series/orbit.png',    link: 'orbit'    },
+        { _id: "4", name: "Aero",     subtitle: "No Pit · Slim Panoramic Lift",                  url: '/series/aero-slim.png',link: 'aero'     },
+      ]} />
 
       {/* ── Projects ── */}
       <Projects featuredProjects={featuredProjects} />
