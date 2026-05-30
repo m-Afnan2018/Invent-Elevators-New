@@ -1,0 +1,151 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.finishesPanel,
+.tiersPanel {
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.finishesPanel { background: #ffffff; border-right: 1px solid #ebebeb; }
+.tiersPanel    { background: #faf9f6; }
+
+.panelEyebrow {
+  font-family: "Sora", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #aaaaaa;
+  margin: 0;
+}
+
+.panelHeading {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(18px, 1.8vw, 26px);
+  font-weight: 700;
+  color: #0a0a0a;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.swatchGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 16px;
+}
+
+.swatchItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+.swatchItem:hover .swatch { transform: scale(1.06); }
+
+.swatchName {
+  font-family: "Sora", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: #666;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tierCards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tierCard {
+  padding: 22px 24px;
+  background: #f0ede6;
+  border: 1px solid #e5e0d5;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tierCardDark {
+  background: #0c0c0a;
+  border-color: #0c0c0a;
+}
+
+.tierHead { display: flex; flex-direction: column; gap: 3px; }
+
+.tierName {
+  font-family: "Sora", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #C4A253;
+}
+
+.tierSub {
+  font-family: "Sora", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #777;
+}
+.tierCardDark .tierSub { color: rgba(255,255,255,0.5); }
+
+.tierList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tierItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: "Sora", sans-serif;
+  font-size: 12.5px;
+  color: #4a4a4a;
+  line-height: 1.5;
+}
+.tierCardDark .tierItem { color: rgba(255,255,255,0.75); }
+
+.checkIcon { color: #C4A253; flex-shrink: 0; margin-top: 2px; }
+
+@media (max-width: 1100px) {
+  .finishesPanel, .tiersPanel { padding: 56px 44px; }
+}
+
+@media (max-width: 900px) {
+  .section { grid-template-columns: 1fr; }
+  .finishesPanel { border-right: none; border-bottom: 1px solid #ebebeb; }
+  .finishesPanel, .tiersPanel { padding: 48px 40px; }
+  .swatchGrid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .finishesPanel, .tiersPanel { padding: 44px 24px; }
+  .swatchGrid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .tierCard { padding: 18px 18px; }
+}
+
+@media (max-width: 480px) {
+  .finishesPanel, .tiersPanel { padding: 40px 20px; }
+  .swatchGrid { grid-template-columns: repeat(3, 1fr); }
+  .panelHeading { font-size: 20px; }
+  .tierItem { font-size: 12px; }
+}

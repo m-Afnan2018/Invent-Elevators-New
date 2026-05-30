@@ -25,6 +25,7 @@ export default function Series({ activeCategories = [] }) {
     }, []);
 
     const maxIndex = Math.max(0, activeCategories.length - visibleCount);
+    const touchStartX = useRef(null);
 
     const goTo = useCallback(
         (idx) => {
@@ -34,7 +35,6 @@ export default function Series({ activeCategories = [] }) {
             const track = trackRef.current;
             if (!track) return;
 
-            // Measure the first card + gap to get one "step" exactly
             const cards = track.children;
             if (!cards[0]) return;
 
@@ -45,6 +45,35 @@ export default function Series({ activeCategories = [] }) {
         },
         [maxIndex]
     );
+
+    /* Sync dot/arrow state when user swipes natively */
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
+
+        const onScroll = () => {
+            const cards = track.children;
+            if (!cards[0]) return;
+            const gap = parseFloat(getComputedStyle(track).gap) || 20;
+            const stepWidth = cards[0].getBoundingClientRect().width + gap;
+            const idx = Math.round(track.scrollLeft / stepWidth);
+            setCurrent(Math.max(0, Math.min(idx, maxIndex)));
+        };
+
+        track.addEventListener("scroll", onScroll, { passive: true });
+        return () => track.removeEventListener("scroll", onScroll);
+    }, [maxIndex]);
+
+    const handleTouchStart = useCallback((e) => {
+        touchStartX.current = e.touches[0].clientX;
+    }, []);
+
+    const handleTouchEnd = useCallback((e) => {
+        if (touchStartX.current === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX.current;
+        touchStartX.current = null;
+        if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+    }, [current, goTo]);
 
     return (
         <section className={styles.section}>
@@ -64,7 +93,12 @@ export default function Series({ activeCategories = [] }) {
 
                 {/* Carousel */}
                 <div className={styles.carouselOuter}>
-                    <div className={styles.carouselTrack} ref={trackRef}>
+                    <div
+                        className={styles.carouselTrack}
+                        ref={trackRef}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
+                    >
                         {activeCategories.map((cat, i) => (
                             <Link
                                 key={cat._id}

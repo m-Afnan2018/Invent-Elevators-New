@@ -2,8 +2,7 @@
 .section {
     padding: 72px 0 48px;
     background: white;
-    overflow-x: clip;
-    /* clip never blocks child touch-scroll, unlike hidden */
+    overflow-x: hidden;
 }
 
 .mainBtn {
@@ -61,8 +60,7 @@
 .carouselOuter {
     flex: 1;
     min-width: 0;
-    overflow-x: clip;
-    /* clips bleed without blocking touch-scroll */
+    overflow: hidden;
 }
 
 .carouselTrack {
@@ -73,7 +71,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    /* smooth momentum scroll on iOS */
+    touch-action: pan-x;
 }
 
 .carouselTrack::-webkit-scrollbar {

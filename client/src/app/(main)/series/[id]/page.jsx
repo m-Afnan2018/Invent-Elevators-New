@@ -8,6 +8,12 @@ import styles from "./page.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
 import WhereHorizonFitsBest from "@/components/core/series/WhereHorizonFitsBest";
 import CraftedAroundYourHome from "@/components/core/series/CraftedAroundYourHome";
+import SeriesHeroSplit from "@/components/core/series/SeriesHeroSplit";
+import SeriesFeatureStatement from "@/components/core/series/SeriesFeatureStatement";
+import SeriesFeatureIcons from "@/components/core/series/SeriesFeatureIcons";
+import SeriesFinishesTiers from "@/components/core/series/SeriesFinishesTiers";
+import SeriesTechOverview from "@/components/core/series/SeriesTechOverview";
+import SeriesCTABanner from "@/components/core/series/SeriesCTABanner";
 
 /* ── Static Series Data ── */
 const SERIES_DATA = {
@@ -171,6 +177,23 @@ const SERIES_DATA = {
       { label: "Retail Centres", image: "/projects/city-centre.png" },
       { label: "Corporate Lobbies", image: "/projects/adnoc.png" },
       { label: "Waterfront Residences", image: "/projects/al-majaz.png" },
+    ],
+    features: [
+      { icon: "glass",     label: "Panoramic Glass",       desc: "Uninterrupted views throughout the full journey." },
+      { icon: "structure", label: "Self-Supported",        desc: "Minimal structural intervention, faster installation." },
+      { icon: "drive",     label: "Gearless Drive",        desc: "Quiet, smooth and energy-efficient performance." },
+      { icon: "door",      label: "Automatic Doors",       desc: "Seamless and safe access with premium auto doors." },
+      { icon: "energy",    label: "Energy Efficient",      desc: "Reduces power consumption without compromise." },
+      { icon: "control",   label: "Smart Controls",        desc: "Modern interfaces and intelligent functionality." },
+    ],
+    techSpecs: [
+      { icon: "person",    label: "2 – 6",         sub: "Persons" },
+      { icon: "height",    label: "Up to 18 m",    sub: "Travel Height" },
+      { icon: "stops",     label: "Up to 6",       sub: "Stops" },
+      { icon: "traction",  label: "Gearless",      sub: "Traction" },
+      { icon: "door",      label: "Automatic",     sub: "Door" },
+      { icon: "structure", label: "MS Shaft",      sub: "Structure" },
+      { icon: "glass",     label: "Panoramic",     sub: "Glass Cabin" },
     ],
   },
   orbit: {
@@ -466,155 +489,30 @@ export default function SingleSeriesPage() {
   return (
     <main className={styles.main}>
 
-      {/* ── HERO ── */}
-      <section className={styles.hero}>
-        <div className={styles.heroBgWrap}>
-          <Image src={series.heroImage} alt={series.name} fill priority sizes="100vw" className={styles.heroBgImg} />
-        </div>
-        <div className={styles.heroOverlay} />
+      {/* 1. Split hero — dark left panel + full image right */}
+      <SeriesHeroSplit series={series} />
 
-        <nav className={styles.heroBreadcrumb}>
-          <Link href="/" className={styles.heroBcLink}>Home</Link>
-          <span className={styles.heroBcSep}>/</span>
-          <Link href="/series" className={styles.heroBcLink}>Series</Link>
-          <span className={styles.heroBcSep}>/</span>
-          <span className={styles.heroBcActive}>{series.name}</span>
-        </nav>
+      {/* 2. Feature statement — large image + text */}
+      <SeriesFeatureStatement series={series} />
 
-        <div className={styles.heroInner}>
-          <span className={styles.heroCode}>{series.code} Series</span>
-          {series.pitFree && <span className={styles.heroPitFree}>Pit-Free</span>}
-          <h1 className={styles.heroName}>{series.name}</h1>
-          <p className={styles.heroTagline}>{series.tagline}</p>
-        </div>
-      </section>
+      {/* 3. Feature icons row */}
+      <SeriesFeatureIcons features={series.features} />
 
-      {/* ── SHOWCASE ── */}
-      <section className={styles.showcase}>
-        <Gallery images={series.images} />
+      {/* 4. Crafted Around Your Home — cabin styles */}
+      <div id="crafted">
+        <CraftedAroundYourHome cabinStyles={series.cabinStyles} />
+      </div>
 
-        <div className={styles.infoCol}>
-          <h2 className={styles.infoTagline}>{`${series.name} - ${series.code} - Series`}</h2>
-          {/* <h2 className={styles.infoTagline}>{series.tagline}</h2> */}
-          <p className={styles.infoDesc}>{series.description}</p>
+      {/* 5. Finishes (left) + Technology tiers (right) */}
+      <SeriesFinishesTiers finishes={series.finishes} tiers={series.tiers} />
 
-          <div className={styles.specsGrid}>
-            {series.details.map((d) => (
-              <div key={d.label} className={styles.specItem}>
-                <span className={styles.specLabel}>{d.label}</span>
-                <span className={styles.specValue}>{d.value}</span>
-              </div>
-            ))}
-          </div>
+      {/* 6. Technical overview icon row */}
+      <SeriesTechOverview specs={series.techSpecs} />
 
-          <div className={styles.infoBtns}>
-            <Link href="/contact" className={styles.btnPrimary}>
-              Request a Quote
-              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                <path d="M2 6.5h9M8 2.5l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-            <Link href="/contact" className={styles.btnOutline}>Book Consultation</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TECHNOLOGY TIERS ── */}
-      <section className={styles.section}>
-        <div className={styles.sectionWrap}>
-          <p className={styles.eyebrow}>Our Technical Specs</p>
-          <h2 className={styles.sectionTitle}>Essential & Elite</h2>
-          <div className={styles.tiersGrid}>
-            {series.tiers.map((t) => {
-              const Icon = TIER_ICONS[t.name] ?? DiamondIcon;
-              return (
-              <div key={t.name} className={styles.tierCard}>
-                <div className={styles.tierIconWrap}>
-                  <Icon />
-                </div>
-                <div className={styles.tierHeader}>
-                  <span className={styles.tierBadge}>{t.name}</span>
-                  <span className={styles.tierSubtitle}>{t.subtitle}</span>
-                </div>
-                <ul className={styles.tierList}>
-                  {t.bullets.map((b) => (
-                    <li key={b} className={styles.tierItem}>
-                      <Check />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CABIN STYLES ── */}
-      {/* <section className={styles.section}>
-        <div className={styles.sectionWrap}>
-          <p className={styles.eyebrow}>Design Level</p>
-          <h2 className={styles.sectionTitle}>Select, Signature & Bespoke</h2>
-          <div className={styles.cabinGrid}>
-            {series.cabinStyles.map((c) => (
-              <div key={c.name} className={styles.cabinCard}>
-                <div className={styles.cabinImgWrap}>
-                  <Image src={c.image} alt={c.name} fill sizes="(max-width:768px) 100vw, 33vw" className={styles.cabinImg} />
-                  <div className={styles.cabinImgOverlay} />
-                </div>
-                <div className={styles.cabinBody}>
-                  <span className={styles.cabinBadge}>{c.name}</span>
-                  <h3 className={styles.cabinLabel}>{c.label}</h3>
-                  <p className={styles.cabinDesc}>{c.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-      <CraftedAroundYourHome cabinStyles={series.cabinStyles} />
-
-      {/* ── PREMIUM FINISHES ── */}
-      <section className={styles.finishesSection}>
-        <div className={styles.sectionWrap}>
-          <p className={styles.eyebrow}>Premium Finishes</p>
-          <h2 className={styles.sectionTitle}>Coated to Perfection</h2>
-          <div className={styles.finishesGrid}>
-            {series.finishes.map((f) => (
-              <div key={f.name} className={styles.finishItem}>
-                <div className={styles.finishSwatch} style={{ background: f.color }} />
-                <span className={styles.finishName}>{f.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHERE IT FITS BEST ── */}
-      {/* <section className={styles.appsSection}>
-        <div className={styles.sectionWrap}>
-          <p className={styles.eyebrow}>Where {series.name} Fits Best</p>
-          <div className={styles.appsGrid}>
-            {series.applications.map((a) => (
-              <div key={a.label} className={styles.appCard}>
-                <div className={styles.appImgWrap}>
-                  <Image src={a.image} alt={a.label} fill sizes="(max-width:768px) 50vw, 25vw" className={styles.appImg} />
-                  <div className={styles.appOverlay} />
-                </div>
-                <span className={styles.appLabel}>{a.label}</span>
-              </div>
-            ))}
-          </div>
-          <div className={styles.appsCta}>
-            <Link href="/projects" className={styles.btnOutlineDark}>View Projects</Link>
-          </div>
-        </div>
-      </section> */}
-
+      {/* 7. Where it fits best — marquee cards */}
       <WhereHorizonFitsBest seriesName={series.name} applications={series.applications} />
 
-      {/* ── OTHER SERIES ── */}
+      {/* 8. Other series */}
       <section className={styles.othersSection}>
         <div className={styles.sectionWrap}>
           <p className={styles.eyebrow}>Explore More</p>
@@ -636,6 +534,9 @@ export default function SingleSeriesPage() {
           </div>
         </div>
       </section>
+
+      {/* 9. Dark CTA banner */}
+      <SeriesCTABanner seriesName={series.name} />
 
       <MarqueeLogos />
     </main>
