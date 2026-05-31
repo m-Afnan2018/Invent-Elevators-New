@@ -60,22 +60,16 @@
 .carouselOuter {
     flex: 1;
     min-width: 0;
-    overflow: hidden;
+    overflow: hidden;   /* clips cards; touch events handled via transform, not scroll */
 }
 
 .carouselTrack {
     display: flex;
     gap: 20px;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
-}
-
-.carouselTrack::-webkit-scrollbar {
-    display: none;
+    /* No overflow-x: scroll — position is driven by transform: translateX() */
+    will-change: transform;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 /* ── Individual card ── */
@@ -85,7 +79,6 @@
     flex-direction: column;
     text-decoration: none;
     cursor: pointer;
-    scroll-snap-align: start;
 }
 
 /* Image wrapper — tall aspect ratio like the reference */
@@ -229,14 +222,8 @@
         font-size: 0.82rem;
     }
 
-    /* 76vw card — next card peeks ~20vw giving a clear scroll hint */
     .catCard {
         flex: 0 0 76vw;
-    }
-
-    /* Right padding so last card doesn't slam into screen edge */
-    .carouselTrack {
-        padding-right: 24px;
     }
 
     .carouselFooter {
@@ -269,7 +256,6 @@
 
     .carouselTrack {
         gap: 14px;
-        padding-right: 16px;
     }
 
     .carouselFooter {

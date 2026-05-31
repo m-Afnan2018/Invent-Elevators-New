@@ -158,7 +158,7 @@ export default function TypesGrid({ series = [] }) {
                     {(isTouch ? mobileCursors[i] : showCursor) && <span className={styles.cursor} />}
                   </p>
 
-                  <div className={styles.tiers}>
+                  {/* <div className={styles.tiers}>
                     <Link href={`/series#${anchor}`} className={styles.tier}>Essentials</Link>
                     <span className={styles.tierDivider}>/</span>
                     <Link href={`/series#${anchor}`} className={styles.tier}>Elite</Link>
@@ -168,7 +168,7 @@ export default function TypesGrid({ series = [] }) {
                     {DESIGN_OPTIONS.map((opt) => (
                       <Link key={opt} href={`/series#${anchor}`} className={styles.designOpt}>{opt}</Link>
                     ))}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
