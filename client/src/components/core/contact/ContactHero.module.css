@@ -253,7 +253,9 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .hero {
-    max-height: 600px;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: none;
   }
 
   .breadcrumb {
