@@ -101,7 +101,7 @@
 .whyCard:hover { border-color: #111111; transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); }
 .whyIcon { font-size: 2rem; display: block; margin-bottom: 1rem; }
 .whyTitle { font-size: 1.05rem; font-weight: 700; color: #0a0a0a; margin: 0 0 0.6rem; }
-.whyDesc { font-size: 0.875rem; color: #666666; line-height: 1.7; margin: 0; }
+.whyDesc { line-height: 1.7; margin: 0; }
 
 /* ── Openings Section ───────────────────────────────────────────── */
 .openings { background: #f8f8f6; padding: 88px 0; }

@@ -9,18 +9,18 @@ export default function Spirit() {
         <div className={styles.contentCol}>
           <h2 className={styles.heading}>The Spirit of Invent Elevator</h2>
           <div className={styles.bodyGroup}>
-            <p className={styles.body}>
+            <p className={`${styles.body} para`}>
               It all started with a vision — to simplify vertical mobility and make modern
               lift solutions more accessible, efficient, and reliable. What began as a
               focused engineering initiative has grown into a trusted elevator solutions
               provider serving residential and commercial spaces.
             </p>
-            <p className={styles.body}>
+            <p className={`${styles.body} para`}>
               At Invent Elevator, innovation is not just about technology — it is about
               improving everyday movement within buildings. Our commitment to precision,
               safety, and performance continues to drive everything we build.
             </p>
-            <p className={styles.body}>
+            <p className={`${styles.body} para`}>
               Discover what makes Invent Elevator a forward-thinking lift company built
               for modern architecture.
             </p>

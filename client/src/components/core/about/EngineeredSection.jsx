@@ -83,7 +83,7 @@ export default function EngineeredSection() {
             <em className={styles.headingEm}>Engineered for Modern Living</em>
           </h2>
           <div className={styles.divider} />
-          <p className={styles.body}>
+          <p className={`${styles.body} para`}>
             The journey of Invent Elevator began with a simple vision — to deliver
             smart, space-efficient, and reliable lift solutions for modern buildings.
             Today, we continue to grow as a forward-thinking elevator company while

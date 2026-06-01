@@ -55,7 +55,7 @@ export default function PeopleSection() {
         <div className={styles.textCol}>
           <p className={styles.eyebrow}>Crafted by Architects &amp; Developers</p>
           <h2 className={styles.heading}>Trusted by UAE&apos;s Leading Developers</h2>
-          <p className={styles.body}>
+          <p className={`${styles.body} para`}>
             Invent Elevator collaborates closely with architects, interior designers,
             builders, and developers to create seamless luxury-grade elevator
             experiences tailored for modern UAE projects.

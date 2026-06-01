@@ -218,7 +218,7 @@ export default function CareersPage() {
               <div key={w.title} className={styles.whyCard}>
                 <span className={styles.whyIcon}>{w.icon}</span>
                 <h3 className={styles.whyTitle}>{w.title}</h3>
-                <p className={styles.whyDesc}>{w.desc}</p>
+                <p className={`${styles.whyDesc} para`}>{w.desc}</p>
               </div>
             ))}
           </div>

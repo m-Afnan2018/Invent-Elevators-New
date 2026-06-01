@@ -64,11 +64,11 @@ export default function HeritageSection() {
         <div className={styles.contentCol}>
           <p className={styles.eyebrow}>About Invent Elevator</p>
           <h2 className='headings {styles.heading}' style={{textAlign:'left'}}>Designed Beyond Functionality</h2>
-          <p className={styles.body}>
+          <p className={`${styles.body} para`}>
             At Invent Elevator, we believe elevators are more than mobility systems — they are an extension of architecture and lifestyle. Every elevator is thoughtfully designed to enhance interiors, elevate experiences, and integrate seamlessly into modern spaces.
 
           </p>
-          <p className={styles.body}>
+          <p className={`${styles.body} para`}>
             We combine advanced engineering with refined aesthetics to create
             elevator experiences that seamlessly blend functionality, elegance,
             and innovation.

@@ -111,9 +111,9 @@
 }
 
 .desc {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: 400;
-  color: #444;
+  color: #777777;
   line-height: 1.65;
   margin: 0;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;

@@ -22,18 +22,18 @@ export default function People() {
         <div className={styles.contentCol}>
           <h2 className={styles.heading}>It&apos;s All About the People</h2>
           <div className={styles.bodyGroup}>
-            <p className={styles.body}>
+            <p className={`${styles.body} para`}>
               Behind every successful lift installation is a dedicated team of engineers,
               technicians, and support professionals. At Invent Elevator, our people are
               our strongest foundation.
             </p>
-            <p className={styles.body}>
+            <p className={`${styles.body} para`}>
               From design and manufacturing to installation and after-sales service, our
               team works with passion, responsibility, and attention to detail. Their
               expertise ensures that every elevator system delivers long-term reliability,
               safety, and smooth performance.
             </p>
-            <p className={styles.body}>
+            <p className={`${styles.body} para`}>
               We believe great technology is powered by great people — and that commitment
               reflects in every project we deliver.
             </p>

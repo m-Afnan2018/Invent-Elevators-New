@@ -363,10 +363,10 @@ export default function Home() {
       </section>
 
       <TypesGrid series={[
-        { _id: "1", name: "Heritage", subtitle: "Reinforced Concrete Shaft · Essential & Elite", url: '/series/heritage.png', link: 'heritage' },
-        { _id: "2", name: "Horizon",  subtitle: "MS Shaft · Glass Cabin Car",                    url: '/series/horizon.png',  link: 'horizon'  },
-        { _id: "3", name: "Orbit",    subtitle: "Round Shaft · Curvature Cabin",                 url: '/series/orbit.png',    link: 'orbit'    },
-        { _id: "4", name: "Aero",     subtitle: "No Pit · Slim Panoramic Lift",                  url: '/series/aero-slim.png',link: 'aero'     },
+        { _id: "1", name: "Heritage", subtitle: "A refined elevator collection crafted for distinguished residences, blending timeless elegance with sophisticated engineering and seamless architectural integration.", url: '/series/heritage.png', link: 'heritage' },
+        { _id: "2", name: "Horizon",  subtitle: "An exquisite panoramic glass elevator experience that elevates interiors with breathtaking transparency, contemporary luxury, and architectural grandeur.",                    url: '/series/horizon.png',  link: 'horizon'  },
+        { _id: "3", name: "Orbit",    subtitle: "A sculptural circular elevator designed as a statement of prestige, combining iconic design, panoramic views, and uncompromising luxury.",                 url: '/series/orbit.png',    link: 'orbit'    },
+        { _id: "4", name: "Aero",     subtitle: "An ultra-modern, space-conscious lift solution that delivers effortless luxury, innovative design, and seamless integration into the most sophisticated living environments.",                  url: '/series/aero-slim.png',link: 'aero'     },
       ]} />
 
       {/* ── Projects ── */}

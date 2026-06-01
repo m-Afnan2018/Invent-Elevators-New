@@ -70,7 +70,7 @@ export default function GlobalPresenceSection() {
           ))}
 
           <div className={styles.descCol}>
-            <p className={styles.descText}>
+            <p className={`${styles.descText} para`}>
               We proudly provide premium elevator solutions across the UAE,
               delivering luxury vertical mobility experiences for villas,
               residences, commercial spaces, and architectural projects.
