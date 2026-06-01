@@ -20,7 +20,7 @@
 .card:hover { border-color: var(--accent); }
 
 .cardTop { display: flex; align-items: flex-start; gap: 0.85rem; }
-.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--bg-tertiary); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; overflow: hidden; }
+.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--bg-tertiary); color: var(--text-muted); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; overflow: hidden; position: relative; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .cardInfo { flex: 1; min-width: 0; }
 .cardName { font-weight: 700; font-size: 0.95rem; color: var(--text-primary); margin: 0 0 2px; }
@@ -73,3 +73,18 @@
 .saveBtn { padding: 0.7rem 1.5rem; border: none; border-radius: 0.5rem; background: var(--accent); color: #fff; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
 .saveBtn:hover:not(:disabled) { background: var(--accent-hover); }
 .saveBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Media toggle & upload ── */
+.mediaToggle { display: flex; gap: 0; border: 1px solid var(--border-color); border-radius: .5rem; overflow: hidden; width: fit-content; }
+.mediaBtn { display: flex; align-items: center; gap: .35rem; padding: .5rem 1.1rem; background: transparent; border: none; color: var(--text-secondary); font-size: .85rem; font-weight: 500; cursor: pointer; font-family: inherit; transition: background .2s, color .2s; }
+.mediaBtnActive { background: var(--accent); color: #fff; font-weight: 700; }
+
+.mediaInputRow { display: flex; gap: .5rem; align-items: center; }
+.mediaInputRow input { flex: 1; }
+.uploadBtn { display: inline-flex; align-items: center; justify-content: center; padding: .6rem .8rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: .45rem; color: var(--text-secondary); font-size: 1rem; cursor: pointer; flex-shrink: 0; transition: background .2s; }
+.uploadBtn:hover { background: var(--border-color); }
+.mediaPreview { margin-top: .5rem; max-width: 100%; max-height: 120px; object-fit: cover; border-radius: .375rem; border: 1px solid var(--border-color); display: block; }
+
+/* Video in card */
+.avatarVideo { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.videoBadge { position: absolute; bottom: -2px; right: -2px; background: var(--accent); color: #fff; border-radius: 50%; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: .6rem; }

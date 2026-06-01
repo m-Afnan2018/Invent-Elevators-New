@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./page.module.css";
 import { getCategories } from "@/services/categories.service";
+import { getTestimonials } from "@/services/testimonials.service";
 import { getProducts } from "@/services/products.service";
 import { getProjects } from "@/services/projects.service";
 import { getBlogs } from "@/services/blogs.service";
@@ -224,6 +225,7 @@ const MARQUEE_ITEMS = [
 
 export default function Home() {
   const [categories, setCategories] = useState([]);
+  const [apiTestimonials, setApiTestimonials] = useState([]);
   const [products, setProducts] = useState([]);
   const [projects, setProjects] = useState([]);
   const [blogs, setBlogs] = useState([]);
@@ -257,16 +259,21 @@ export default function Home() {
   useEffect(() => {
     const loadHomeData = async () => {
       try {
-        const [categoryRes, productRes, projectRes, blogRes] = await Promise.all([
+        const [categoryRes, productRes, projectRes, blogRes, testimonialRes] = await Promise.all([
           getCategories(),
           getProducts(),
           getProjects(),
           getBlogs(),
+          getTestimonials().catch(() => []),
         ]);
         setCategories(extractCollection(categoryRes, ["categories"]));
         setProducts(extractCollection(productRes));
         setProjects(extractCollection(projectRes));
         setBlogs(extractCollection(blogRes));
+        if (Array.isArray(testimonialRes)) {
+          const active = testimonialRes.filter(t => t.isActive !== false && t.isFeatured);
+          if (active.length > 0) setApiTestimonials(active);
+        }
       } catch (_e) { }
     };
     loadHomeData();
@@ -398,8 +405,8 @@ export default function Home() {
 
       <MarqueeLogos />
 
-      {/* Testimonials */}
-      <Testimonials testimonials={[
+      {/* Testimonials — live from admin if isFeatured, else static fallback */}
+      <Testimonials testimonials={apiTestimonials.length > 0 ? apiTestimonials : [
         {
           name: "Rajesh Mehta",
           role: "Director, Mehta Constructions",

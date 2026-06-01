@@ -15,6 +15,8 @@ export default function Testimonials({ testimonials = [] }) {
   if (!total) return null;
 
   const t = testimonials[current];
+  const hasVideo = !!t.video;
+  const imgSrc   = t.image || t.avatar || FALLBACK;
 
   return (
     <section className={styles.section}>
@@ -28,35 +30,45 @@ export default function Testimonials({ testimonials = [] }) {
           {String(total).padStart(2, "0")}
         </p>
         <div className={styles.navBtns}>
-          <button className={styles.navBtn} onClick={prev} aria-label="Previous">
-            ←
-          </button>
-          <button className={styles.navBtn} onClick={next} aria-label="Next">
-            →
-          </button>
+          <button className={styles.navBtn} onClick={prev} aria-label="Previous">←</button>
+          <button className={styles.navBtn} onClick={next} aria-label="Next">→</button>
         </div>
       </div>
 
       {/* ── Main content ── */}
       <div key={current} className={styles.body}>
-        {/* Left: portrait */}
+        {/* Left: video takes priority over image */}
         <div className={styles.portrait}>
-          <Image
-            src={t.image || FALLBACK}
-            alt={t.name}
-            fill
-            sizes="200px"
-            className={styles.portraitImg}
-          />
+          {hasVideo ? (
+            <video
+              src={t.video}
+              className={styles.portraitVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          ) : (
+            <Image
+              src={imgSrc}
+              alt={t.name}
+              fill
+              sizes="200px"
+              className={styles.portraitImg}
+            />
+          )}
         </div>
 
         {/* Right: quote + attribution */}
         <div className={styles.quoteWrap}>
-          {/* <span className={styles.openQuote}>"</span> */}
-          <blockquote className={styles.quote}><span className={styles.openQuote}>"</span>{t.quote}</blockquote>
+          <blockquote className={styles.quote}>
+            <span className={styles.openQuote}>"</span>{t.quote}
+          </blockquote>
           <div className={styles.attribution}>
             <p className={styles.name}>{t.name}</p>
-            <p className={styles.role}>{t.role}</p>
+            <p className={styles.role}>
+              {[t.role, t.company].filter(Boolean).join(" · ")}
+            </p>
           </div>
         </div>
       </div>
