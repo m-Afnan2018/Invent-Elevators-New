@@ -968,7 +968,8 @@
   }
 
   .hero {
-    min-height: 100svh;
+    height: 100dvh;
+    min-height: 100dvh;
   }
 
   .heroH1 {

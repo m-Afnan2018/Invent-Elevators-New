@@ -441,6 +441,7 @@
 }
 
 @media (max-width: 640px) {
+  .hero { height: 100dvh; min-height: 100dvh; max-height: none; }
   .inner { padding: 0 20px; }
   .heroInner { padding: 0 20px 60px; }
   .heroBreadcrumb { padding: 0 20px; top: 72px; }

@@ -227,8 +227,12 @@
   .cancelBtn, .submitBtn { width: 100%; }
 }
 
+@media (max-width: 640px) {
+  .hero { height: 100dvh; min-height: 100dvh; }
+}
+
 @media (max-width: 480px) {
-  .hero { min-height: 70vh; }
+  .hero { height: 100dvh; min-height: 100dvh; }
   .heroH1 { font-size: 2rem; }
   .applyBtn { width: 100%; text-align: center; margin-left: 0; }
 }
