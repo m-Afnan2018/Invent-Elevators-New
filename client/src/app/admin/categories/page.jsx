@@ -757,8 +757,7 @@ const CategoriesPage = () => {
                                                 ) : (
                                                     <>
                                                         <RiUploadCloudLine className={styles.uploadIcon} />
-                                                        <span>Upload hero image</span>
-                                                        <small>Recommended: 1920×1080 or wider</small>
+                                                        <span>Upload image</span>
                                                     </>
                                                 )}
                                             </label>

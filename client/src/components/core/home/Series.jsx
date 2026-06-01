@@ -163,7 +163,7 @@ export default function Series({ activeCategories = [] }) {
                             >
                                 <div className={styles.catImgWrap}>
                                     <Image
-                                        src={cat.image || FALLBACK_IMAGE}
+                                        src={cat.image || cat.icon || FALLBACK_IMAGE}
                                         alt={cat.name}
                                         fill
                                         sizes="(max-width:640px) 80vw, 25vw"

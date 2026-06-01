@@ -273,7 +273,11 @@ export default function Home() {
   }, []);
 
   const activeCategories = useMemo(() => {
-    const valid = categories.filter((c) => c?._id && c?.name && c?.isActive !== false).slice(0, 6);
+    const valid = categories.filter((c) =>
+      c?._id && c?.name &&
+      c?.status !== 'inactive' &&
+      c?.isActive !== false
+    ).slice(0, 6);
     return valid.length ? valid : FALLBACK_CATEGORIES;
   }, [categories]);
 
