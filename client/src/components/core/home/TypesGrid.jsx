@@ -4,7 +4,6 @@ import styles from "./TypesGrid.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-/* ── Fallbacks when category data doesn't supply a value ── */
 const FALLBACK_IMAGES = [
   '/series/heritage.png',
   '/series/horizon.png',
@@ -18,18 +17,22 @@ const FALLBACK_DESCRIPTIONS = [
   "Pit-free, slim panoramic lift. Minimal footprint, maximum presence.",
 ];
 const FALLBACK_ANCHORS = ["heritage", "horizon", "orbit", "aero"];
-const DESIGN_OPTIONS   = ["Select", "Signature", "Bespoke"];
-const TYPING_SPEED     = 28;
+const TYPING_SPEED = 28;
 
 export default function TypesGrid({ series = [] }) {
-  const items = series.slice(0, 4);
+  /* Stabilise items — inline array in parent JSX changes reference every render */
+  const seriesKey = series.map(s => s._id || s.name).join(",");
+  const items = useMemo(
+    () => series.slice(0, 4),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [seriesKey]
+  );
 
-  /* Derived arrays — prop data first, fallback by index */
   const bgImages     = useMemo(() => items.map((it, i) => it.url      || FALLBACK_IMAGES[i]       || ''), [items]);
   const descriptions = useMemo(() => items.map((it, i) => it.subtitle || FALLBACK_DESCRIPTIONS[i] || ''), [items]);
   const anchors      = useMemo(() => items.map((it, i) => it.link     || FALLBACK_ANCHORS[i]      || it.name?.toLowerCase().replace(/\s+/g, '-') || '#'), [items]);
 
-  /* ref so IO callbacks always see latest descriptions even after async load */
+  /* Stable ref so effects never re-run just because the array got a new reference */
   const descRef = useRef(descriptions);
   descRef.current = descriptions;
 
@@ -42,9 +45,13 @@ export default function TypesGrid({ series = [] }) {
   useEffect(() => {
     clearInterval(intervalRef.current);
     setTypedText("");
-    if (hoveredIndex === null) { setShowCursor(false); return; }
 
-    const full = descriptions[hoveredIndex] ?? "";
+    if (hoveredIndex === null) {
+      setShowCursor(false);
+      return;
+    }
+
+    const full = descRef.current[hoveredIndex] ?? "";
     let pos = 0;
     setShowCursor(true);
 
@@ -59,10 +66,13 @@ export default function TypesGrid({ series = [] }) {
       }, TYPING_SPEED);
     }, 180);
 
-    return () => { clearTimeout(delay); clearInterval(intervalRef.current); };
-  }, [hoveredIndex, descriptions]);
+    return () => {
+      clearTimeout(delay);
+      clearInterval(intervalRef.current);
+    };
+  }, [hoveredIndex]); // ← only hoveredIndex; descRef is a stable ref
 
-  /* ── Mobile per-cell typewriter ── */
+  /* ── Mobile per-cell typewriter (IntersectionObserver) ── */
   const [isTouch,       setIsTouch]       = useState(false);
   const [mobileTyped,   setMobileTyped]   = useState(["", "", "", ""]);
   const [mobileCursors, setMobileCursors] = useState([false, false, false, false]);
@@ -73,7 +83,6 @@ export default function TypesGrid({ series = [] }) {
     setIsTouch(window.matchMedia("(hover: none)").matches);
   }, []);
 
-  /* Re-run when touch detected OR when items populate (categories async load) */
   useEffect(() => {
     if (!isTouch || items.length === 0) return;
 
@@ -115,10 +124,10 @@ export default function TypesGrid({ series = [] }) {
         <h2 className="headings">Our Series of Home Lifts</h2>
       </div>
 
-      {/* Background images from category data */}
+      {/* Desktop: shared background images that cross-fade on hover */}
       {bgImages.map((src, i) => src && (
         <Image
-          key={`${src}-${i}`}
+          key={`bg-${i}`}
           src={src}
           alt=""
           fill
@@ -137,14 +146,24 @@ export default function TypesGrid({ series = [] }) {
           const bgSrc    = bgImages[i] || '';
 
           return (
-            <div
+            <Link
               key={item._id || i}
+              href={`/series/${anchor}`}
               ref={el => { cellRefs.current[i] = el; }}
               className={`${styles.cell} ${isActive ? styles.cellActive : ""} ${isDimmed ? styles.cellDimmed : ""}`}
               onMouseLeave={() => setHoveredIndex(null)}
             >
+              {/* Per-cell image — visible on touch via CSS */}
               <div className={styles.cellImg}>
-                {bgSrc && <Image src={bgSrc} alt={item.name} fill sizes="100vw" style={{ objectFit: "cover" }} />}
+                {bgSrc && (
+                  <Image
+                    src={bgSrc}
+                    alt={item.name}
+                    fill
+                    sizes="(max-width:768px) 100vw, 50vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                )}
                 <div className={styles.cellImgOverlay} />
               </div>
 
@@ -157,21 +176,9 @@ export default function TypesGrid({ series = [] }) {
                     {isTouch ? mobileTyped[i] : typedText}
                     {(isTouch ? mobileCursors[i] : showCursor) && <span className={styles.cursor} />}
                   </p>
-
-                  {/* <div className={styles.tiers}>
-                    <Link href={`/series#${anchor}`} className={styles.tier}>Essentials</Link>
-                    <span className={styles.tierDivider}>/</span>
-                    <Link href={`/series#${anchor}`} className={styles.tier}>Elite</Link>
-                  </div>
-
-                  <div className={styles.designOptions}>
-                    {DESIGN_OPTIONS.map((opt) => (
-                      <Link key={opt} href={`/series#${anchor}`} className={styles.designOpt}>{opt}</Link>
-                    ))}
-                  </div> */}
                 </div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

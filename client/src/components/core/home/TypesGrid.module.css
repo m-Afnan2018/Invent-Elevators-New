@@ -66,6 +66,8 @@
   overflow: hidden;
   cursor: default;
   user-select: none;
+  text-decoration: none;
+  color: inherit;
   transition:
     flex 0.85s cubic-bezier(0.4, 0, 0.2, 1),
     padding 0.85s cubic-bezier(0.4, 0, 0.2, 1);
@@ -154,6 +156,7 @@
 }
 
 .sub {
+  display: none;
   font-size: 0.82rem;
   font-weight: 400;
   color: #888;
@@ -295,72 +298,120 @@
   z-index: 2;
 }
 
-/* ── Touch devices ── */
+/* ─────────────────────────────────────────────
+   TOUCH DEVICES — simple image-card grid
+   No hover, no animations, no pointer tricks
+───────────────────────────────────────────── */
 @media (hover: none) {
-  .cell { pointer-events: none; }
-  .cellImg { display: block; }
-  .bgImage { display: none; }
+  /* Section resets */
+  .section       { padding: 0; }
+  .typesSection  { overflow: visible; }
 
-  .cellActive,
-  .cellDimmed {
-    flex: 1;
-    padding: 60px 32px;
-  }
-
-  .cellActive .cellContent,
-  .cellDimmed .cellContent {
-    transform: none;
-    opacity: 1;
-  }
-
-  .name { color: white !important; }
-  .sub  { color: rgba(255,255,255,0.65) !important; }
-
-  /* Always show hoverInfo on mobile — no hover needed */
-  .hoverInfo {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-}
-
-/* ── Mobile ── */
-@media (max-width: 768px) {
-  .section { padding: 0; }
-
+  /* Heading: back to normal document flow */
   .heading {
     position: relative;
-    padding: 1.5rem 1.25rem 1rem;
+    padding: 1.5rem 1rem 1.25rem;
     font-size: 1.1rem;
-    background-color: #fff;
+    background: #fff;
     color: #1a1a1a;
   }
 
+  /* Hide the shared full-section background images */
+  .bgImage { display: none; }
+
+  /* ── Single-column card grid ── */
   .row {
-    flex-direction: column;
-    padding-top: 0;
-    padding-bottom: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3px;
+    min-height: unset;
+    padding: 0;
   }
 
+  /* Each cell = a tappable image card */
   .cell,
   .cellActive,
   .cellDimmed {
-    flex: none !important;
-    min-height: 70vh;
-    padding: 40px 20px !important;
-    transition: none;
+    flex: unset !important;
+    min-height: unset;
+    aspect-ratio: 16 / 9;
+    padding: 0 !important;
+    position: relative;
+    overflow: hidden;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: none !important;
+  }
+
+  /* Show the per-cell background image */
+  .cellImg { display: block; }
+
+  /* Gradient overlay — dark at bottom for text legibility */
+  .cellImgOverlay {
+    background: linear-gradient(
+      180deg,
+      transparent 35%,
+      rgba(0, 0, 0, 0.72) 100%
+    );
+  }
+
+  /* Content pinned to bottom-left of card */
+  .cellContent {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 18px 20px;
+    transform: none !important;
+    cursor: pointer;
   }
 
   .cellActive .cellContent,
   .cellDimmed .cellContent {
-    transform: none;
-    opacity: 1;
+    transform: none !important;
   }
 
-  .name { font-size: 1.1rem; }
+  /* Typography */
+  .name {
+    font-size: 1.3rem !important;
+    letter-spacing: 0.06em;
+    color: #fff !important;
+    margin: 0 0 4px;
+    text-align: left;
+  }
+
+  .sub {
+    display: block;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.7) !important;
+    opacity: 1 !important;
+    text-align: left;
+    margin: 0;
+  }
+
+  /* Show hoverInfo (typewriter runs via IntersectionObserver) */
+  .hoverInfo {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    margin-top: 10px;
+  }
+  .cell::after { display: none; }
+
+  .rowHovered .name { color: #fff; }
+  .rowHovered .sub  { opacity: 1 !important; }
 }
 
-@media (max-width: 480px) {
-  .cell { padding: 32px 16px !important; }
-  .name { font-size: 1rem; letter-spacing: 0.08em; }
+/* Portrait phones: taller cards */
+@media (hover: none) and (max-width: 480px) {
+  .cell,
+  .cellActive,
+  .cellDimmed {
+    aspect-ratio: 4 / 3;
+  }
+  .name { font-size: 1.15rem !important; }
 }
