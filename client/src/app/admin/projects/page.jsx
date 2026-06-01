@@ -49,6 +49,7 @@ const ProjectsPage = () => {
 
     const [formData, setFormData] = useState({
         title: '',
+        slug: '',
         description: '',
         client: '',
         location: '',
@@ -58,7 +59,6 @@ const ProjectsPage = () => {
         featuredImage: '',
         galleryImages: [],
         isFeatured: false,
-        // Tech Specs
         linkedProducts: [],
         customSpecs: {
             capacity: '',
@@ -68,8 +68,12 @@ const ProjectsPage = () => {
             driveType: '',
             otherSpecs: '',
         },
-        // Testimonials
         testimonials: [],
+        // SEO / Metadata
+        metaTitle: '',
+        metaDescription: '',
+        metaKeywords: '',
+        ogImage: '',
     });
 
     const [currentTestimonial, setCurrentTestimonial] = useState({
@@ -246,6 +250,7 @@ const ProjectsPage = () => {
             setEditingProject(project);
             setFormData({
                 title: project.title,
+                slug: project.slug || '',
                 description: project.description,
                 client: project.client,
                 location: project.location,
@@ -258,6 +263,10 @@ const ProjectsPage = () => {
                 linkedProducts: project.linkedProducts,
                 customSpecs: project.customSpecs,
                 testimonials: project.testimonials,
+                metaTitle: project.metaTitle || '',
+                metaDescription: project.metaDescription || '',
+                metaKeywords: Array.isArray(project.metaKeywords) ? project.metaKeywords.join(', ') : (project.metaKeywords || ''),
+                ogImage: project.ogImage || '',
             });
             setFeaturedImagePreview(project.featuredImage);
             setGalleryPreviews(project.galleryImages);
@@ -265,6 +274,7 @@ const ProjectsPage = () => {
             setEditingProject(null);
             setFormData({
                 title: '',
+                slug: '',
                 description: '',
                 client: '',
                 location: '',
@@ -284,6 +294,10 @@ const ProjectsPage = () => {
                     otherSpecs: '',
                 },
                 testimonials: [],
+                metaTitle: '',
+                metaDescription: '',
+                metaKeywords: '',
+                ogImage: '',
             });
             setFeaturedImagePreview('');
             setGalleryPreviews([]);
@@ -942,6 +956,61 @@ const ProjectsPage = () => {
                                             ))}
                                         </div>
                                     )}
+                                </div>
+
+                                {/* SEO / Metadata */}
+                                <div className={styles.formSection}>
+                                    <h3 className={styles.sectionTitle}>SEO / Metadata</h3>
+                                    <div className={styles.formGroup}>
+                                        <label>URL Slug</label>
+                                        <input
+                                            type="text"
+                                            value={formData.slug}
+                                            onChange={e => setFormData({ ...formData, slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/(^-|-$)/g, '') })}
+                                            placeholder="auto-generated-from-title"
+                                        />
+                                        <small className={styles.helpText}>Page URL: /projects/{formData.slug || 'your-slug'}</small>
+                                    </div>
+                                    <div className={styles.formGroup}>
+                                        <label>Meta Title</label>
+                                        <input
+                                            type="text"
+                                            value={formData.metaTitle}
+                                            onChange={e => setFormData({ ...formData, metaTitle: e.target.value })}
+                                            placeholder="SEO title (defaults to project title)"
+                                            maxLength={60}
+                                        />
+                                        <small className={styles.helpText}>{formData.metaTitle.length}/60 characters</small>
+                                    </div>
+                                    <div className={styles.formGroup}>
+                                        <label>Meta Description</label>
+                                        <textarea
+                                            value={formData.metaDescription}
+                                            onChange={e => setFormData({ ...formData, metaDescription: e.target.value })}
+                                            placeholder="SEO description shown in search results (160 chars max)"
+                                            rows="3"
+                                            maxLength={160}
+                                        />
+                                        <small className={styles.helpText}>{formData.metaDescription.length}/160 characters</small>
+                                    </div>
+                                    <div className={styles.formGroup}>
+                                        <label>Meta Keywords</label>
+                                        <input
+                                            type="text"
+                                            value={formData.metaKeywords}
+                                            onChange={e => setFormData({ ...formData, metaKeywords: e.target.value })}
+                                            placeholder="keyword1, keyword2, keyword3"
+                                        />
+                                    </div>
+                                    <div className={styles.formGroup}>
+                                        <label>OG Image URL</label>
+                                        <input
+                                            type="text"
+                                            value={formData.ogImage}
+                                            onChange={e => setFormData({ ...formData, ogImage: e.target.value })}
+                                            placeholder="Social share image URL (defaults to featured image)"
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className={styles.modalActions}>

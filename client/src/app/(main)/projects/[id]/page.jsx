@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { getProjectById } from "@/services/projects.service";
+import { getProjectBySlug } from "@/services/projects.service";
 
 import ProjectHero from "@/components/core/projects/single/ProjectHero";
 import ProjectOverview from "@/components/core/projects/single/ProjectOverview";
@@ -26,7 +26,7 @@ export default function ProjectDetailsPage() {
 
   useEffect(() => {
     if (!id) { setLoading(false); return; }
-    getProjectById(id)
+    getProjectBySlug(id)
       .then(res => setProject(res || null))
       .catch(() => setProject(null))
       .finally(() => setLoading(false));
@@ -34,9 +34,14 @@ export default function ProjectDetailsPage() {
 
   useEffect(() => {
     if (project?.title) {
-      document.title = `${project.title} | Invent Elevator`;
+      document.title = project.metaTitle || `${project.title} | Invent Elevator`;
     }
-  }, [project?.title]);
+    if (project?.metaDescription) {
+      let meta = document.querySelector('meta[name="description"]');
+      if (!meta) { meta = document.createElement('meta'); meta.name = 'description'; document.head.appendChild(meta); }
+      meta.content = project.metaDescription;
+    }
+  }, [project?.title, project?.metaTitle, project?.metaDescription]);
 
   if (loading) {
     return (

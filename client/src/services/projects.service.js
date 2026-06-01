@@ -58,3 +58,12 @@ export const getProjectsByStatus = async (status) => {
     throw error;
   }
 };
+
+export const getProjectBySlug = async (slug) => {
+  try {
+    const response = await apiGet(`${ENDPOINTS.PROJECTS}/slug/${slug}`);
+    return extractData(response);
+  } catch (error) {
+    throw error;
+  }
+};
