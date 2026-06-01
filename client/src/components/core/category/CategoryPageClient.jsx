@@ -8,106 +8,37 @@ import { extractCollection } from "@/lib/apiResponse";
 import styles from "./CategoryPageClient.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
 
-// const FALLBACK_BG = "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1800&q=80";
 const FALLBACK_BG = "/projects/city-centre.png";
 
-const FEATURES = [
-  {
-    title: "Precision Engineering",
-    desc: "Every unit is built to exacting tolerances — smooth, silent, and reliable for decades of daily use.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" width="22" height="22">
-        <circle cx="16" cy="16" r="10" stroke="currentColor" strokeWidth="1.8" />
-        <circle cx="16" cy="16" r="4" fill="currentColor" opacity="0.25" />
-        <path d="M16 6v4M16 22v4M6 16h4M22 16h4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Custom Design",
-    desc: "Select from our curated finish tiers — Select, Signature, or Bespoke — to complement any interior.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" width="22" height="22">
-        <rect x="4" y="4" width="24" height="24" rx="1" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M4 12h24M12 12v16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-        <rect x="16" y="18" width="7" height="5" stroke="currentColor" strokeWidth="1.4" />
-      </svg>
-    ),
-  },
-  {
-    title: "Safety Certified",
-    desc: "All systems comply with international safety standards including EN 81 and local UAE regulations.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" width="22" height="22">
-        <path d="M16 3L5 8v8c0 6.08 4.72 11.76 11 13 6.28-1.24 11-6.92 11-13V8L16 3z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-        <path d="M11 16l3.5 3.5L21 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Energy Efficient",
-    desc: "Regenerative drive systems recover kinetic energy on descent, reducing power consumption by up to 40%.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" width="22" height="22">
-        <path d="M18 4L8 18h14L12 28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Silent Operation",
-    desc: "Advanced counterweight systems and premium bearings ensure whisper-quiet performance at all speeds.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" width="22" height="22">
-        <path d="M10 12H6a1 1 0 00-1 1v6a1 1 0 001 1h4l7 5V7l-7 5z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-        <path d="M21 10a8 8 0 010 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" opacity="0.45" />
-        <path d="M24 7a13 13 0 010 18" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" opacity="0.2" />
-      </svg>
-    ),
-  },
-  {
-    title: "After-Sales Support",
-    desc: "Dedicated service teams across the UAE ensure rapid response, scheduled maintenance, and genuine parts.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none" width="22" height="22">
-        <circle cx="16" cy="10" r="5" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M6 26c0-5.52 4.48-10 10-10s10 4.48 10 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-        <path d="M22 22l2 2 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
+const DEFAULT_FEATURES = [
+  { title: "Precision Engineering", desc: "Every unit is built to exacting tolerances — smooth, silent, and reliable for decades of daily use." },
+  { title: "Custom Design",         desc: "Select from curated finish tiers — Select, Signature, or Bespoke — to complement any interior." },
+  { title: "Safety Certified",      desc: "All systems comply with international safety standards including EN 81 and local UAE regulations." },
+  { title: "Energy Efficient",      desc: "Regenerative drive systems recover kinetic energy on descent, reducing power consumption by up to 40%." },
+  { title: "Silent Operation",      desc: "Advanced counterweight systems and premium bearings ensure whisper-quiet performance at all speeds." },
+  { title: "After-Sales Support",   desc: "Dedicated service teams across the UAE ensure rapid response, scheduled maintenance, and genuine parts." },
 ];
 
-const ABOUT_META = [
-  {
-    label: "Machine Options",
-    value: "Essential (Global) · Elite (European)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-        <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" opacity="0.5" />
-      </svg>
-    ),
-  },
-  {
-    label: "Design Levels",
-    value: "Select · Signature · Bespoke",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-        <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    label: "Drive System",
-    value: "Traction · Hydraulic · MRL",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
-        <rect x="7" y="2" width="10" height="20" rx="1" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M7 9h10M7 15h10" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 2" />
-        <rect x="9.5" y="11" width="5" height="4" rx="0.5" fill="currentColor" opacity="0.2" />
-      </svg>
-    ),
-  },
+const DEFAULT_ABOUT_META = [
+  { label: "Machine Options", value: "Essential (Global) · Elite (European)" },
+  { label: "Design Levels",   value: "Select · Signature · Bespoke" },
+  { label: "Drive System",    value: "Traction · Hydraulic · MRL" },
+];
+
+const DEFAULT_STATS = [
+  { value: "500+", label: "Installations" },
+  { value: "10+",  label: "Years Experience" },
+  { value: "98%",  label: "Client Satisfaction" },
+  { value: "3x",   label: "Faster Installation" },
+];
+
+const FEATURE_ICONS = [
+  <svg key="0" viewBox="0 0 28 28" fill="none" width="20" height="20"><circle cx="14" cy="14" r="9" stroke="currentColor" strokeWidth="1.6"/><circle cx="14" cy="14" r="3.5" fill="currentColor" opacity=".25"/><path d="M14 5v3M14 20v3M5 14h3M20 14h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>,
+  <svg key="1" viewBox="0 0 28 28" fill="none" width="20" height="20"><rect x="4" y="4" width="20" height="20" rx="1" stroke="currentColor" strokeWidth="1.6"/><path d="M4 11h20M11 11v13" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>,
+  <svg key="2" viewBox="0 0 28 28" fill="none" width="20" height="20"><path d="M14 2L4 7v7c0 5.5 4.3 10.6 10 12 5.7-1.4 10-6.5 10-12V7L14 2z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M9 14l3.5 3.5L19 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+  <svg key="3" viewBox="0 0 28 28" fill="none" width="20" height="20"><path d="M17 3L7 16h14L11 25" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+  <svg key="4" viewBox="0 0 28 28" fill="none" width="20" height="20"><path d="M9 11H5a1 1 0 00-1 1v5a1 1 0 001 1h4l6 4.5V6.5L9 11z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/><path d="M19 9a7 7 0 010 10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" opacity=".4"/></svg>,
+  <svg key="5" viewBox="0 0 28 28" fill="none" width="20" height="20"><circle cx="14" cy="9" r="4.5" stroke="currentColor" strokeWidth="1.6"/><path d="M5 23c0-4.97 4.03-9 9-9s9 4.03 9 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>,
 ];
 
 export default function CategoryPageClient({ categoryId = null }) {
@@ -129,150 +60,196 @@ export default function CategoryPageClient({ categoryId = null }) {
     load();
   }, [categoryId]);
 
-  const heroImage = category?.image       || FALLBACK_BG;
-  const name      = category?.name        || "Elevator Solutions";
-  const desc      = category?.description ||
-    "Engineered for every environment — explore our complete range of vertical mobility solutions.";
+  if (isLoading) return <div className={styles.skeleton} />;
 
-  /* CMS fields — use DB values if present, else fall back to static defaults */
-  const cmsAboutMeta  = category?.aboutMeta?.length ? category.aboutMeta : ABOUT_META;
-  const cmsFeatures   = category?.features?.length  ? category.features  : FEATURES;
-  const cmsCtaEyebrow = category?.ctaEyebrow || "Get Started";
-  const cmsCtaTitle   = category?.ctaTitle   || "Ready to Elevate Your Space?";
-  const cmsCtaDesc    = category?.ctaDesc    ||
-    "Our team of specialists is ready to guide you from initial consultation through installation — tailored to your building, your timeline, and your vision.";
-
-  if (isLoading) {
-    return <div className={styles.skeletonHero} />;
-  }
+  const heroImage       = category?.image            || FALLBACK_BG;
+  const name            = category?.name             || "Elevator Solutions";
+  const desc            = category?.description      || "Engineered for every environment — premium vertical mobility solutions crafted for residential, commercial, and specialist applications across the UAE.";
+  const cmsAboutMeta    = category?.aboutMeta?.length   ? category.aboutMeta   : DEFAULT_ABOUT_META;
+  const cmsFeatures     = category?.features?.length    ? category.features    : DEFAULT_FEATURES;
+  const cmsTestimonial  = category?.testimonial?.quote  ? category.testimonial : null;
+  const cmsGallery      = category?.galleryImages?.length ? category.galleryImages : [];
+  const cmsApps         = category?.applications?.length  ? category.applications  : [];
+  const cmsStats        = category?.stats?.length         ? category.stats         : DEFAULT_STATS;
+  const cmsCtaEyebrow   = category?.ctaEyebrow || "Get Started";
+  const cmsCtaTitle     = category?.ctaTitle   || "Ready to Elevate Your Space?";
+  const cmsCtaDesc      = category?.ctaDesc    || "Our team of specialists is ready to guide you from initial consultation through installation — tailored to your building, your timeline, and your vision.";
 
   return (
     <main className={styles.main}>
 
-      {/* ── Hero ── */}
+      {/* ── 1. HERO ── */}
       <section className={styles.hero}>
-        <div className={styles.heroBgWrap}>
+        <div className={styles.heroBg}>
           <Image src={heroImage} alt={name} fill priority sizes="100vw" className={styles.heroBgImg} />
         </div>
-        <div className={styles.heroOverlayTop} />
-        <div className={styles.heroOverlayBottom} />
-
-        <nav className={styles.heroBreadcrumb}>
-          <Link href="/" className={styles.heroBcLink}>Home</Link>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
-            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <Link href="/categories" className={styles.heroBcLink}>Categories</Link>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
-            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span className={styles.heroBcActive}>{name}</span>
+        <div className={styles.heroOverlay} />
+        <nav className={styles.breadcrumb}>
+          <Link href="/" className={styles.bcLink}>Home</Link>
+          <span className={styles.bcSep}>›</span>
+          <Link href="/categories" className={styles.bcLink}>Categories</Link>
+          <span className={styles.bcSep}>›</span>
+          <span className={styles.bcActive}>{name}</span>
         </nav>
-
-        <div className={styles.heroInner}>
-          <div className={styles.eyebrow}>
-            <span className={styles.eyebrowDot} />
-            <span>Our Solutions</span>
-          </div>
+        <div className={styles.heroContent}>
+          <p className={styles.heroEyebrow}>Our Solutions</p>
           <h1 className={styles.heroTitle}>{name}</h1>
           <p className={styles.heroDesc}>{desc}</p>
-        </div>
-
-        <div className={styles.heroScrollWrap}>
-          <span className={styles.heroScrollLabel}>Scroll to explore</span>
-          <div className={styles.heroScrollTrack}>
-            <div className={styles.heroScrollThumb} />
-          </div>
+          <Link href="/contact" className={styles.heroCta}>
+            Get a Quote
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </Link>
         </div>
       </section>
 
-      {/* ── About Split ── */}
-      <section className={styles.about}>
-        <div className={styles.aboutInner}>
-
-          {/* Image */}
-          <div className={styles.aboutImgWrap}>
-            <Image src={heroImage} alt={name} fill sizes="(max-width:1024px) 100vw, 50vw" className={styles.aboutImg} />
-            <div className={styles.aboutImgOverlay} />
-          </div>
-
-          {/* Info */}
-          <div className={styles.aboutInfo}>
-            <p className={styles.aboutEyebrow}>About This Category</p>
-
-            <h2 className={styles.aboutTitle}>
-              {name} <span>Collection</span>
-            </h2>
-
-            <div className={styles.aboutDivider} />
-
-            <p className={styles.aboutDesc}>{desc}</p>
-
-            <div className={styles.aboutMeta}>
-              {cmsAboutMeta.map((m) => (
-                <div key={m.label} className={styles.aboutMetaRow}>
-                  <div className={styles.aboutMetaIcon}>{m.icon}</div>
-                  <div className={styles.aboutMetaText}>
-                    <span className={styles.aboutMetaLabel}>{m.label}</span>
-                    <span className={styles.aboutMetaValue}>{m.value}</span>
-                  </div>
+      {/* ── 2. COLLECTION SPLIT ── */}
+      <section className={styles.collection}>
+        <div className={styles.collectionImg}>
+          <Image src={heroImage} alt={name} fill sizes="(max-width:900px) 100vw, 42vw" className={styles.collectionImgInner} />
+        </div>
+        <div className={styles.collectionInfo}>
+          <p className={styles.collectionEyebrow}>Category Overview</p>
+          <h2 className={styles.collectionTitle}>
+            {name} <span className={styles.collectionTitleLight}>Collection</span>
+          </h2>
+          <ul className={styles.specList}>
+            {cmsAboutMeta.map((m, i) => (
+              <li key={i} className={styles.specRow}>
+                <span className={styles.specCheck}>✓</span>
+                <div className={styles.specText}>
+                  <span className={styles.specLabel}>{m.label}</span>
+                  <span className={styles.specValue}>{m.value}</span>
                 </div>
-              ))}
-            </div>
-
-            <Link href="/contact" className={styles.aboutCta}>
-              Request a Quote
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-          </div>
+              </li>
+            ))}
+          </ul>
+          <p className={styles.collectionDesc}>{desc}</p>
+          <Link href="#gallery" className={styles.collectionCta}>
+            Browse Products
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </Link>
         </div>
       </section>
 
-      {/* ── Features Grid ── */}
+      {/* ── 3. FEATURES ── */}
       <section className={styles.features}>
         <div className={styles.featuresInner}>
-          <div className={styles.featuresHeader}>
+          <div className={styles.featuresLeft}>
             <p className={styles.featuresEyebrow}>Why Invent Elevator</p>
             <h2 className={styles.featuresTitle}>Built for Performance.<br />Designed for Life.</h2>
           </div>
-
           <div className={styles.featuresGrid}>
             {cmsFeatures.map((f, i) => (
-              <div key={f.title || i} className={styles.featureCard}>
-                {f.icon && <div className={styles.featureIconWrap}>{f.icon}</div>}
-                <h3 className={styles.featureTitle}>{f.title}</h3>
-                <p className={styles.featureDesc}>{f.desc}</p>
+              <div key={i} className={styles.featureCard}>
+                <div className={styles.featureIcon}>{FEATURE_ICONS[i % FEATURE_ICONS.length]}</div>
+                <h3 className={styles.featureCardTitle}>{f.title}</h3>
+                <p className={styles.featureCardDesc}>{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA Banner ── */}
-      <section className={styles.ctaBanner}>
+      {/* ── 4. TESTIMONIAL ── */}
+      {cmsTestimonial && (
+        <section className={styles.testimonial}>
+          <div className={styles.testimonialMedia}>
+            {cmsTestimonial.video ? (
+              <video src={cmsTestimonial.video} className={styles.testimonialMediaInner} autoPlay muted loop playsInline />
+            ) : (
+              <Image src={cmsTestimonial.image || FALLBACK_BG} alt={cmsTestimonial.name || "Client"} fill sizes="340px" className={styles.testimonialMediaInner} />
+            )}
+          </div>
+          <div className={styles.testimonialBody}>
+            <span className={styles.testimonialOpenQuote}>"</span>
+            <blockquote className={styles.testimonialQuote}>{cmsTestimonial.quote}</blockquote>
+            <div className={styles.testimonialAttrib}>
+              <span className={styles.testimonialName}>{cmsTestimonial.name}</span>
+              {cmsTestimonial.role && <span className={styles.testimonialRole}>{cmsTestimonial.role}</span>}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 5. GALLERY ── */}
+      {cmsGallery.length > 0 && (
+        <section className={styles.gallery} id="gallery">
+          <div className={styles.galleryRow}>
+            {cmsGallery.map((img, i) => (
+              <div key={i} className={styles.galleryItem}>
+                <Image src={img} alt={`${name} ${i + 1}`} fill sizes="25vw" className={styles.galleryImg} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ── 6. APPLICATIONS ── */}
+      {cmsApps.length > 0 && (
+        <section className={styles.apps}>
+          <div className={styles.appsInner}>
+            <div className={styles.appsLeft}>
+              <p className={styles.appsEyebrow}>Use Cases</p>
+              <h2 className={styles.appsTitle}>Where {name}<br />Fits Best</h2>
+              <Link href="/contact" className={styles.appsCta}>
+                Find Out More
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+            </div>
+            <div className={styles.appsGrid}>
+              {cmsApps.slice(0, 4).map((a, i) => (
+                <div key={i} className={styles.appCard}>
+                  <div className={styles.appCardImg}>
+                    <Image src={a.image || FALLBACK_BG} alt={a.label} fill sizes="(max-width:768px) 90vw, 28vw" className={styles.appCardImgInner} />
+                    <div className={styles.appCardOverlay} />
+                    <p className={styles.appCardLabel}>{a.label}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── 7. STATS ── */}
+      <section className={styles.stats}>
+        <div className={styles.statsInner}>
+          {cmsStats.map((s, i) => (
+            <div key={i} className={styles.statItem}>
+              <span className={styles.statValue}>{s.value}</span>
+              <span className={styles.statLabel}>{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── 8. PARTNERS ── */}
+      <MarqueeLogos />
+
+      {/* ── 9. CTA BANNER ── */}
+      <section className={styles.cta}>
         <div className={styles.ctaInner}>
           <div className={styles.ctaLeft}>
             <p className={styles.ctaEyebrow}>{cmsCtaEyebrow}</p>
             <h2 className={styles.ctaTitle}>{cmsCtaTitle}</h2>
             <p className={styles.ctaDesc}>{cmsCtaDesc}</p>
           </div>
-          <div className={styles.ctaButtons}>
+          <div className={styles.ctaBtns}>
             <Link href="/contact" className={styles.ctaBtnPrimary}>
               Book a Consultation
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </Link>
-            <Link href="/series" className={styles.ctaBtnOutline}>
-              Explore Our Series
-            </Link>
+            <Link href="/series" className={styles.ctaBtnOutline}>Explore Our Series</Link>
           </div>
         </div>
       </section>
 
-      <MarqueeLogos />
     </main>
   );
 }

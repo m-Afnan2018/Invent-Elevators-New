@@ -57,3 +57,14 @@
 .addBtn:hover { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,.05); }
 .delBtn { padding: .45rem; border: 1px solid var(--danger); border-radius: .375rem; background: transparent; color: var(--danger); cursor: pointer; display: flex; font-size: 1rem; transition: all .2s; flex-shrink: 0; }
 .delBtn:hover { background: var(--danger); color: #fff; }
+
+/* ── Extra classes for extended CMS tabs ── */
+.uploadingText { font-size: .82rem; color: var(--accent); flex: 1; }
+.mediaToggle { display: flex; gap: 0; border: 1px solid var(--border-color); border-radius: .5rem; overflow: hidden; width: fit-content; }
+.mediaBtn { display: flex; align-items: center; gap: .35rem; padding: .5rem 1.1rem; background: transparent; border: none; color: var(--text-secondary); font-size: .85rem; font-weight: 500; cursor: pointer; font-family: inherit; transition: background .2s, color .2s; }
+.mediaBtnActive { background: var(--accent); color: #fff; font-weight: 700; }
+.imgRow { display: flex; gap: .5rem; align-items: center; }
+.imgRow input { flex: 1; }
+.uploadBtn { display: inline-flex; align-items: center; justify-content: center; padding: .6rem .8rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: .45rem; color: var(--text-secondary); font-size: 1rem; cursor: pointer; flex-shrink: 0; transition: background .2s; }
+.uploadBtn:hover { background: var(--border-color); }
+.imgPreview { margin-top: .5rem; max-width: 100%; max-height: 120px; object-fit: cover; border-radius: .35rem; border: 1px solid var(--border-color); display: block; }

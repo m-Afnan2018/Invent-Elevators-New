@@ -14,18 +14,23 @@ const categorySchema = new mongoose.Schema(
     metaKeywords: [{ type: String, trim: true }],
     parentId: { type: mongoose.Schema.Types.ObjectId, ref: "Category", default: null },
     isActive: { type: Boolean, default: true },
-    /* ── CMS fields for the single category page ── */
-    aboutMeta: [{
-      label: { type: String },
-      value: { type: String },
-    }],
-    features: [{
-      title: { type: String },
-      desc:  { type: String },
-    }],
+    /* ── CMS fields ── */
+    aboutMeta: [{ label: { type: String }, value: { type: String } }],
+    features:  [{ title: { type: String }, desc:  { type: String } }],
     ctaEyebrow: { type: String },
     ctaTitle:   { type: String },
     ctaDesc:    { type: String },
+    /* ── Extended CMS fields for new layout ── */
+    testimonial: {
+      quote: { type: String },
+      name:  { type: String },
+      role:  { type: String },
+      image: { type: String },
+      video: { type: String },
+    },
+    galleryImages: [{ type: String }],
+    applications:  [{ label: { type: String }, image: { type: String } }],
+    stats: [{ value: { type: String }, label: { type: String } }],
   },
   { timestamps: true }
 );
