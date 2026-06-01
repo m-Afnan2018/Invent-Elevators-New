@@ -27,6 +27,7 @@ export const ENDPOINTS = {
   UPLOAD: '/api/upload',
   FAQS: '/api/faqs',
   TESTIMONIALS: '/api/testimonials',
+  SERIES_CMS: '/api/series',
 };
 
 export const HTTP_STATUS = {

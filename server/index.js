@@ -23,6 +23,7 @@ import jobRoutes from "./routes/job.routes.js";
 import jobApplicationRoutes from "./routes/jobApplication.routes.js";
 import faqRoutes from "./routes/faq.routes.js";
 import testimonialRoutes from "./routes/testimonial.routes.js";
+import seriesRoutes from "./routes/series.routes.js";
 import adminUserRoutes from "./routes/adminUser.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import connectDB from "./configs/db.js";
@@ -93,6 +94,7 @@ app.use(API_ROUTES.JOBS, jobRoutes);
 app.use(API_ROUTES.JOB_APPLICATIONS, jobApplicationRoutes);
 app.use(API_ROUTES.FAQS, faqRoutes);
 app.use(API_ROUTES.TESTIMONIALS, testimonialRoutes);
+app.use(API_ROUTES.SERIES, seriesRoutes);
 app.use(API_ROUTES.USERS, adminUserRoutes);
 
 app.use((error, _req, res, _next) => {

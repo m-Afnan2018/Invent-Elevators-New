@@ -24,6 +24,7 @@ export const API_ROUTES = {
   JOB_APPLICATIONS: `${API_BASE}/job-applications`,
   FAQS: `${API_BASE}/faqs`,
   TESTIMONIALS: `${API_BASE}/testimonials`,
+  SERIES: `${API_BASE}/series`,
 };
 
 export default API_ROUTES;

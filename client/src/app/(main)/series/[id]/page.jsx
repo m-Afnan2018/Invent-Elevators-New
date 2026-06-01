@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import { getSeriesByCode } from "@/services/series.service";
 import styles from "./page.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
 import WhereHorizonFitsBest from "@/components/core/series/WhereHorizonFitsBest";
@@ -468,12 +469,40 @@ function Gallery({ images }) {
   );
 }
 
+/* ── ID → Series code map ── */
+const ID_TO_CODE = { heritage: "HT", horizon: "HZ", orbit: "OB", aero: "AS" };
+
+/* Merge CMS data over static fallback — only non-empty CMS values win */
+function merge(fallback, cms) {
+  if (!cms) return fallback;
+  const result = { ...fallback };
+  const arrayKeys = ["images","details","tiers","cabinStyles","finishes","applications","features","techSpecs"];
+  for (const key of Object.keys(fallback)) {
+    const v = cms[key];
+    if (arrayKeys.includes(key)) {
+      if (Array.isArray(v) && v.length > 0) result[key] = v;
+    } else if (v !== undefined && v !== null && v !== "") {
+      result[key] = v;
+    }
+  }
+  return result;
+}
+
 /* ── Main Page ── */
 export default function SingleSeriesPage() {
   const { id } = useParams();
-  const series = SERIES_DATA[id];
+  const staticSeries = SERIES_DATA[id];
+  const [series, setSeries] = useState(staticSeries);
 
-  if (!series) {
+  useEffect(() => {
+    const code = ID_TO_CODE[id];
+    if (!code) return;
+    getSeriesByCode(code)
+      .then((cms) => setSeries(merge(staticSeries, cms)))
+      .catch(() => {}); // keep static fallback on error
+  }, [id]); // eslint-disable-line
+
+  if (!staticSeries) {
     return (
       <main className={styles.main}>
         <div className={styles.notFound}>
