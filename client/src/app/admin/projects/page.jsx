@@ -58,6 +58,7 @@ const ProjectsPage = () => {
         featuredImage: '',
         galleryImages: [],
         isFeatured: false,
+        showInFooter: false,
         linkedProducts: [],
         customSpecs: {
             capacity: '',
@@ -258,6 +259,7 @@ const ProjectsPage = () => {
                 featuredImage: project.featuredImage,
                 galleryImages: project.galleryImages,
                 isFeatured: project.isFeatured,
+                showInFooter: project.showInFooter || false,
                 linkedProducts: project.linkedProducts,
                 customSpecs: project.customSpecs,
                 testimonials: project.testimonials,
@@ -282,6 +284,7 @@ const ProjectsPage = () => {
                 featuredImage: '',
                 galleryImages: [],
                 isFeatured: false,
+        showInFooter: false,
                 linkedProducts: [],
                 customSpecs: {
                     capacity: '',
@@ -432,6 +435,9 @@ const ProjectsPage = () => {
                                                     <div className={styles.projectTitle}>{project.title}</div>
                                                     {project.isFeatured && (
                                                         <span className={styles.featuredBadge}>Featured</span>
+                                                    )}
+                                                    {project.showInFooter && (
+                                                        <span className={styles.footerBadge}>Footer</span>
                                                     )}
                                                 </div>
                                             </div>
@@ -669,6 +675,18 @@ const ProjectsPage = () => {
                                                 />
                                                 <span>Featured Project</span>
                                             </label>
+                                        </div>
+                                        <div className={styles.formGroup}>
+                                            <label className={styles.checkboxLabel}>
+                                                <input
+                                                    type="checkbox"
+                                                    name="showInFooter"
+                                                    checked={formData.showInFooter}
+                                                    onChange={handleInputChange}
+                                                />
+                                                <span>Show in Footer</span>
+                                            </label>
+                                            <small className={styles.helpText}>This project will appear in the "Last Projects" section of the footer.</small>
                                         </div>
                                     </div>
                                 </div>

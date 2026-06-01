@@ -1066,3 +1066,14 @@
   color: var(--text-muted);
   margin-top: 0.25rem;
 }
+
+.footerBadge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  background: rgba(99, 102, 241, 0.15);
+  color: #6366f1;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
