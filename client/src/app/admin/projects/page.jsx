@@ -13,8 +13,6 @@ import {
     RiFilterLine,
     RiUploadCloudLine,
     RiImageAddLine,
-    RiStarFill,
-    RiStarLine,
     RiBuildingLine,
     RiMapPinLine,
     RiCalendarLine,
@@ -82,8 +80,11 @@ const ProjectsPage = () => {
         company: '',
         role: '',
         message: '',
-        rating: 5,
+        mediaType: 'image', // 'image' | 'video'
+        image: '',
+        video: '',
     });
+    const [testimonialImgUploading, setTestimonialImgUploading] = useState(false);
     async function fetchProjects() {
         try {
             const data = await getProjects();
@@ -210,13 +211,6 @@ const ProjectsPage = () => {
         });
     };
 
-    const handleRatingChange = (rating) => {
-        setCurrentTestimonial({
-            ...currentTestimonial,
-            rating,
-        });
-    };
-
     const addTestimonial = () => {
         if (!currentTestimonial.name || !currentTestimonial.message) {
             alert('Please fill in name and message for the testimonial');
@@ -233,7 +227,6 @@ const ProjectsPage = () => {
             company: '',
             role: '',
             message: '',
-            rating: 5,
         });
     };
 
@@ -318,7 +311,6 @@ const ProjectsPage = () => {
             company: '',
             role: '',
             message: '',
-            rating: 5,
         });
     };
 
@@ -359,24 +351,6 @@ const ProjectsPage = () => {
     const filteredProjects = projects.filter((project) =>
         project.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
-    const renderStars = (rating, interactive = false, onChange = null) => {
-        return (
-            <div className={styles.stars}>
-                {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                        key={star}
-                        type="button"
-                        onClick={() => interactive && onChange && onChange(star)}
-                        className={`${styles.star} ${!interactive ? styles.readonly : ''}`}
-                        disabled={!interactive}
-                    >
-                        {star <= rating ? <RiStarFill /> : <RiStarLine />}
-                    </button>
-                ))}
-            </div>
-        );
-    };
 
     return (
         <section>
@@ -877,59 +851,52 @@ const ProjectsPage = () => {
                                         <div className={styles.formRow}>
                                             <div className={styles.formGroup}>
                                                 <label>Name *</label>
-                                                <input
-                                                    type="text"
-                                                    name="name"
-                                                    value={currentTestimonial.name}
-                                                    onChange={handleTestimonialChange}
-                                                    placeholder="Client name"
-                                                />
+                                                <input type="text" name="name" value={currentTestimonial.name} onChange={handleTestimonialChange} placeholder="Client name" />
                                             </div>
                                             <div className={styles.formGroup}>
                                                 <label>Company</label>
-                                                <input
-                                                    type="text"
-                                                    name="company"
-                                                    value={currentTestimonial.company}
-                                                    onChange={handleTestimonialChange}
-                                                    placeholder="Company name"
-                                                />
+                                                <input type="text" name="company" value={currentTestimonial.company} onChange={handleTestimonialChange} placeholder="Company name" />
                                             </div>
                                         </div>
-
-                                        <div className={styles.formRow}>
-                                            <div className={styles.formGroup}>
-                                                <label>Role</label>
-                                                <input
-                                                    type="text"
-                                                    name="role"
-                                                    value={currentTestimonial.role}
-                                                    onChange={handleTestimonialChange}
-                                                    placeholder="e.g., Project Manager"
-                                                />
-                                            </div>
-                                            <div className={styles.formGroup}>
-                                                <label>Rating *</label>
-                                                {renderStars(currentTestimonial.rating, true, handleRatingChange)}
-                                            </div>
-                                        </div>
-
                                         <div className={styles.formGroup}>
-                                            <label>Message *</label>
-                                            <textarea
-                                                name="message"
-                                                value={currentTestimonial.message}
-                                                onChange={handleTestimonialChange}
-                                                placeholder="Testimonial message"
-                                                rows="3"
-                                            />
+                                            <label>Role / Title</label>
+                                            <input type="text" name="role" value={currentTestimonial.role} onChange={handleTestimonialChange} placeholder="e.g., Villa Owner, Palm Jumeirah" />
+                                        </div>
+                                        <div className={styles.formGroup}>
+                                            <label>Quote *</label>
+                                            <textarea name="message" value={currentTestimonial.message} onChange={handleTestimonialChange} placeholder="Client testimonial quote…" rows="3" />
                                         </div>
 
-                                        <button
-                                            type="button"
-                                            onClick={addTestimonial}
-                                            className={styles.addTestimonialBtn}
-                                        >
+                                        {/* Media toggle */}
+                                        <div className={styles.formGroup}>
+                                            <label>Media</label>
+                                            <div className={styles.mediaToggle}>
+                                                <button type="button" className={`${styles.mediaToggleBtn} ${currentTestimonial.mediaType === 'image' ? styles.mediaToggleActive : ''}`} onClick={() => setCurrentTestimonial(p => ({...p, mediaType: 'image'}))}>Image</button>
+                                                <button type="button" className={`${styles.mediaToggleBtn} ${currentTestimonial.mediaType === 'video' ? styles.mediaToggleActive : ''}`} onClick={() => setCurrentTestimonial(p => ({...p, mediaType: 'video'}))}>Video</button>
+                                            </div>
+                                        </div>
+
+                                        {currentTestimonial.mediaType === 'image' ? (
+                                            <div className={styles.formGroup}>
+                                                <label>Client Image</label>
+                                                <div className={styles.testimonialMediaRow}>
+                                                    <input type="text" value={currentTestimonial.image} onChange={e => setCurrentTestimonial(p => ({...p, image: e.target.value}))} placeholder="Image URL or upload →" />
+                                                    <label className={`${styles.uploadSmallBtn} ${testimonialImgUploading ? 'uploadLoading' : ''}`}>
+                                                        <RiUploadCloudLine />
+                                                        <input type="file" accept="image/*" style={{display:'none'}} onChange={handleTestimonialImageUpload} />
+                                                    </label>
+                                                </div>
+                                                {currentTestimonial.image && <img src={currentTestimonial.image} alt="preview" className={styles.testimonialMediaPreview} />}
+                                            </div>
+                                        ) : (
+                                            <div className={styles.formGroup}>
+                                                <label>Video URL</label>
+                                                <input type="text" value={currentTestimonial.video} onChange={e => setCurrentTestimonial(p => ({...p, video: e.target.value}))} placeholder="https://… (mp4, webm, or hosted video URL)" />
+                                                {currentTestimonial.video && <video src={currentTestimonial.video} className={styles.testimonialMediaPreview} muted />}
+                                            </div>
+                                        )}
+
+                                        <button type="button" onClick={addTestimonial} className={styles.addTestimonialBtn}>
                                             <RiAddLine /> Add Testimonial
                                         </button>
                                     </div>
@@ -955,8 +922,12 @@ const ProjectsPage = () => {
                                                             <RiCloseLine />
                                                         </button>
                                                     </div>
-                                                    {renderStars(testimonial.rating, false)}
-                                                    <p className={styles.testimonialMessage}>{testimonial.message}</p>
+                                                    {(testimonial.video || testimonial.image) && (
+                                                        <span className={styles.testimonialMediaBadge}>
+                                                            {testimonial.video ? '🎥 Video' : '🖼 Image'}
+                                                        </span>
+                                                    )}
+                                                    <p className={styles.testimonialMessage}>{testimonial.message || testimonial.quote || testimonial.text}</p>
                                                 </div>
                                             ))}
                                         </div>
