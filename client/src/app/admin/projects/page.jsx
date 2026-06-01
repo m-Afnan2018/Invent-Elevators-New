@@ -20,6 +20,7 @@ import {
     RiCalendarLine,
     RiCheckboxCircleLine,
 } from 'react-icons/ri';
+import toast from 'react-hot-toast';
 import styles from './page.module.css';
 import Image from 'next/image';
 import { getProjects, createProject, updateProject, deleteProject } from '@/services/projects.service';
@@ -155,18 +156,21 @@ const ProjectsPage = () => {
         const file = e.target.files[0];
         if (!file) return;
         setIsUploading(true);
+        const _tid = toast.loading('Uploading image…');
         try {
             const url = await uploadImage(file, 'projects');
             setFeaturedImagePreview(url);
             setFormData((prev) => ({ ...prev, featuredImage: url }));
+            toast.success('Image uploaded!', { id: _tid });
         } catch (err) {
-            alert(err?.message || 'Image upload failed. Please try again.');
+            toast.error(err?.message || 'Image upload failed.', { id: _tid });
         } finally {
             setIsUploading(false);
         }
     };
 
     const handleGalleryImagesChange = async (e) => {
+        const _gid = toast.loading('Uploading images…');
         const files = Array.from(e.target.files);
         const remainingSlots = 20 - formData.galleryImages.length;
 
@@ -184,8 +188,9 @@ const ProjectsPage = () => {
             }));
             setGalleryPreviews((prev) => [...prev, ...urls]);
         } catch (err) {
-            alert(err?.message || 'Gallery upload failed. Please try again.');
+            toast.error(err?.message || 'Gallery upload failed.', { id: _gid });
         } finally {
+            toast.dismiss(_gid);
             setIsUploading(false);
         }
     };
@@ -709,7 +714,7 @@ const ProjectsPage = () => {
                                                 onChange={handleFeaturedImageChange}
                                                 className={styles.fileInput}
                                             />
-                                            <label htmlFor="featuredImageUpload" className={styles.uploadLabel}>
+                                            <label htmlFor="featuredImageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Upload featured image</span>
                                             </label>

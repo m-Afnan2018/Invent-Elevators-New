@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import toast from 'react-hot-toast';
 // import AdminLayout from '@/components/AdminLayout';
 import AdminLayout from '@/components/common/AdminLayout/AdminLayout';
 import TipTapEditor from '@/components/core/blogs/TipTapEditor';
@@ -105,6 +106,7 @@ const BlogsPage = () => {
         const file = e.target.files[0];
         if (!file) return;
         setIsUploading(true);
+        const _toastId = toast.loading('Uploading image…');
         try {
             const url = await uploadImage(file, 'blogs');
             if (field === 'featuredImage') {
@@ -585,7 +587,7 @@ const BlogsPage = () => {
                                                 className={styles.fileInput}
                                                 ref={featuredImageInputRef}
                                             />
-                                            <label htmlFor="featuredImageUpload" className={styles.uploadLabel}>
+                                            <label htmlFor="featuredImageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Click to upload featured image</span>
                                             </label>
@@ -711,7 +713,7 @@ const BlogsPage = () => {
                                                 className={styles.fileInput}
                                                 ref={ogImageInputRef}
                                             />
-                                            <label htmlFor="ogImageUpload" className={styles.uploadLabel}>
+                                            <label htmlFor="ogImageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Upload OG image (1200x630 recommended)</span>
                                             </label>

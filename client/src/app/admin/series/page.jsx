@@ -99,6 +99,7 @@ export default function SeriesCMSPage() {
     const file = e.target.files[0];
     if (!file) return;
     setUploading(true);
+    const _tid = toast.loading('Uploading image…');
     try {
       const url = await uploadImage(file, 'series');
       if (subField != null) {
@@ -106,8 +107,8 @@ export default function SeriesCMSPage() {
       } else {
         setForm(f => ({ ...f, [field]: url }));
       }
-    } catch { toast.error('Upload failed.'); }
-    finally { setUploading(false); }
+    } catch (err) { toast.error(err?.message || 'Upload failed.', { id: _tid }); }
+    finally { toast.dismiss(_tid); setUploading(false); }
   };
 
   const addItem    = (field, tpl) => setForm(f => ({ ...f, [field]: [...(f[field]||[]), tpl] }));
@@ -180,7 +181,7 @@ export default function SeriesCMSPage() {
                   <div className={styles.field}><label>Hero Image</label>
                     <div className={styles.imgRow}>
                       <input value={form.heroImage||''} onChange={e=>setForm(f=>({...f,heroImage:e.target.value}))} placeholder="URL or upload →" />
-                      <label className={styles.uploadBtn}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'heroImage')} /></label>
+                      <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'heroImage')} /></label>
                     </div>
                     {form.heroImage && <img src={form.heroImage} alt="" className={styles.imgPreview} />}
                   </div>
@@ -246,7 +247,7 @@ export default function SeriesCMSPage() {
                       <textarea rows={2} value={c.desc||''} onChange={e=>setItem('cabinStyles',i,'desc',e.target.value)} placeholder="Short description…" />
                       <div className={styles.imgRow}>
                         <input value={c.image||''} onChange={e=>setItem('cabinStyles',i,'image',e.target.value)} placeholder="Image URL" />
-                        <label className={styles.uploadBtn}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'cabinStyles',i,'image')} /></label>
+                        <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'cabinStyles',i,'image')} /></label>
                       </div>
                       {c.image && <img src={c.image} alt="" className={styles.imgPreview} />}
                     </div>
@@ -279,7 +280,7 @@ export default function SeriesCMSPage() {
                       </div>
                       <div className={styles.imgRow}>
                         <input value={a.image||''} onChange={e=>setItem('applications',i,'image',e.target.value)} placeholder="Image URL" />
-                        <label className={styles.uploadBtn}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'applications',i,'image')} /></label>
+                        <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'applications',i,'image')} /></label>
                       </div>
                       {a.image && <img src={a.image} alt="" className={styles.imgPreview} />}
                     </div>

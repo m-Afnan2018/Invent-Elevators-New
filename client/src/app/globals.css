@@ -91,3 +91,38 @@ select {
   color: #777777;
   line-height: 1.75;
 }
+
+/* ── Upload loading overlay (add class="uploadLoading" to any upload label) ── */
+@keyframes uploadSpin {
+  to { transform: rotate(360deg); }
+}
+
+.uploadLoading {
+  position: relative !important;
+  pointer-events: none !important;
+  cursor: wait !important;
+}
+
+.uploadLoading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: inherit;
+  z-index: 10;
+}
+
+.uploadLoading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: uploadSpin 0.65s linear infinite;
+  z-index: 11;
+}

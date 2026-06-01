@@ -106,12 +106,14 @@ const CategoriesPage = () => {
         const file = e.target.files[0];
         if (!file) return;
         setIsUploading(true);
+        const _tid = toast.loading('Uploading icon…');
         try {
             const url = await uploadImage(file, 'categories');
             setIconPreview(url);
             setFormData((prev) => ({ ...prev, icon: url }));
+            toast.success('Icon uploaded!', { id: _tid });
         } catch (err) {
-            toast.error(err?.message || 'Image upload failed. Please try again.');
+            toast.error(err?.message || 'Image upload failed.', { id: _tid });
         } finally {
             setIsUploading(false);
         }
@@ -121,12 +123,14 @@ const CategoriesPage = () => {
         const file = e.target.files[0];
         if (!file) return;
         setIsUploading(true);
+        const _tid2 = toast.loading('Uploading image…');
         try {
             const url = await uploadImage(file, 'categories');
             setImagePreview(url);
             setFormData((prev) => ({ ...prev, image: url }));
+            toast.success('Image uploaded!', { id: _tid2 });
         } catch (err) {
-            toast.error(err?.message || 'Image upload failed. Please try again.');
+            toast.error(err?.message || 'Image upload failed.', { id: _tid2 });
         } finally {
             setIsUploading(false);
         }
@@ -722,7 +726,7 @@ const CategoriesPage = () => {
                                                 onChange={handleIconChange}
                                                 className={styles.fileInput}
                                             />
-                                            <label htmlFor="iconUpload" className={styles.uploadLabel}>
+                                            <label htmlFor="iconUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 {iconPreview ? (
                                                     <Image width={200} height={200} src={iconPreview} alt="Icon preview" className={styles.iconPreview} />
                                                 ) : (
@@ -751,7 +755,7 @@ const CategoriesPage = () => {
                                                 onChange={handleImageChange}
                                                 className={styles.fileInput}
                                             />
-                                            <label htmlFor="imageUpload" className={`${styles.uploadLabel} ${styles.uploadLabelHero}`}>
+                                            <label htmlFor="imageUpload" className={`${styles.uploadLabel} ${styles.uploadLabelHero} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 {imagePreview ? (
                                                     <Image width={800} height={450} src={imagePreview} alt="Hero image preview" className={styles.heroPreview} />
                                                 ) : (

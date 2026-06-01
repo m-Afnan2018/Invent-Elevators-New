@@ -15,6 +15,7 @@ import {
     RiFilterLine,
     RiUploadCloudLine,
 } from 'react-icons/ri';
+import toast from 'react-hot-toast';
 import styles from './page.module.css';
 import { getProducts, createProduct, updateProduct, deleteProduct } from '@/services/products.service';
 import { getCategories, getSubCategories } from '@/services/categories.service';
@@ -464,7 +465,7 @@ const ProductsPage = () => {
                                             className={styles.fileInput}
                                             ref={imageInputRef}
                                         />
-                                        <label htmlFor="imageUpload" className={styles.uploadLabel}>
+                                        <label htmlFor="imageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                             <RiUploadCloudLine className={styles.uploadIcon} />
                                             <span>Click to upload image(s)</span>
                                         </label>
