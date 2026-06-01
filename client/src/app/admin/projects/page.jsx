@@ -426,13 +426,15 @@ const ProjectsPage = () => {
                                     <tr key={project._id}>
                                         <td>
                                             <div className={styles.projectCell}>
-                                                <Image
-                                                    width={1000}
-                                                    height={1000}
-                                                    src={project.featuredImage}
-                                                    alt={project.title}
-                                                    className={styles.projectThumbnail}
-                                                />
+                                                {project.featuredImage ? (
+                                                    <img
+                                                        src={project.featuredImage}
+                                                        alt={project.title}
+                                                        className={styles.projectThumbnail}
+                                                    />
+                                                ) : (
+                                                    <div className={styles.projectThumbnailPlaceholder} />
+                                                )}
                                                 <div>
                                                     <div className={styles.projectTitle}>{project.title}</div>
                                                     {project.isFeatured && (
@@ -485,13 +487,15 @@ const ProjectsPage = () => {
                         {filteredProjects.map((project) => (
                             <div key={project._id} className={styles.card}>
                                 <div className={styles.cardImageWrapper}>
-                                    <Image
-                                        width={1000}
-                                        height={1000}
-                                        src={project.featuredImage}
-                                        alt={project.title}
-                                        className={styles.cardImage}
-                                    />
+                                    {project.featuredImage ? (
+                                        <img
+                                            src={project.featuredImage}
+                                            alt={project.title}
+                                            className={styles.cardImage}
+                                        />
+                                    ) : (
+                                        <div className={styles.cardImagePlaceholder} />
+                                    )}
                                     {project.isFeatured && (
                                         <span className={styles.featuredLabel}>Featured</span>
                                     )}
