@@ -148,3 +148,12 @@ export const deleteSubCategory = async (id) => {
     throw error;
   }
 };
+
+export const updateCategoryCMS = async (id, cmsData) => {
+  try {
+    const response = await apiPut(`${ENDPOINTS.CATEGORIES}/${id}/cms`, cmsData);
+    return extractData(response);
+  } catch (error) {
+    throw error;
+  }
+};

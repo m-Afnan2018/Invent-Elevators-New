@@ -15,6 +15,7 @@ import {
     getCategoryById,
     updateCategory,
     deleteCategory,
+    updateCategoryCMS,
 } from "../controllers/category.controller.js";
 
 const router = express.Router();
@@ -37,5 +38,8 @@ router.put("/:id", requireAuth, updateCategory);
 
 // Disable category (soft delete)
 router.delete("/:id", requireAuth, deleteCategory);
+
+// Update CMS fields only
+router.put("/:id/cms", requireAuth, updateCategoryCMS);
 
 export default router;

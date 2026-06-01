@@ -129,11 +129,18 @@ export default function CategoryPageClient({ categoryId = null }) {
     load();
   }, [categoryId]);
 
-  const heroImage = category?.image || FALLBACK_BG;
-  const name = category?.name || "Elevator Solutions";
-  const desc =
-    category?.description ||
-    "Engineered for every environment — explore our complete range of vertical mobility solutions, crafted for residential, commercial, and specialist applications across the UAE.";
+  const heroImage = category?.image       || FALLBACK_BG;
+  const name      = category?.name        || "Elevator Solutions";
+  const desc      = category?.description ||
+    "Engineered for every environment — explore our complete range of vertical mobility solutions.";
+
+  /* CMS fields — use DB values if present, else fall back to static defaults */
+  const cmsAboutMeta  = category?.aboutMeta?.length ? category.aboutMeta : ABOUT_META;
+  const cmsFeatures   = category?.features?.length  ? category.features  : FEATURES;
+  const cmsCtaEyebrow = category?.ctaEyebrow || "Get Started";
+  const cmsCtaTitle   = category?.ctaTitle   || "Ready to Elevate Your Space?";
+  const cmsCtaDesc    = category?.ctaDesc    ||
+    "Our team of specialists is ready to guide you from initial consultation through installation — tailored to your building, your timeline, and your vision.";
 
   if (isLoading) {
     return <div className={styles.skeletonHero} />;
@@ -202,7 +209,7 @@ export default function CategoryPageClient({ categoryId = null }) {
             <p className={styles.aboutDesc}>{desc}</p>
 
             <div className={styles.aboutMeta}>
-              {ABOUT_META.map((m) => (
+              {cmsAboutMeta.map((m) => (
                 <div key={m.label} className={styles.aboutMetaRow}>
                   <div className={styles.aboutMetaIcon}>{m.icon}</div>
                   <div className={styles.aboutMetaText}>
@@ -232,9 +239,9 @@ export default function CategoryPageClient({ categoryId = null }) {
           </div>
 
           <div className={styles.featuresGrid}>
-            {FEATURES.map((f) => (
-              <div key={f.title} className={styles.featureCard}>
-                <div className={styles.featureIconWrap}>{f.icon}</div>
+            {cmsFeatures.map((f, i) => (
+              <div key={f.title || i} className={styles.featureCard}>
+                {f.icon && <div className={styles.featureIconWrap}>{f.icon}</div>}
                 <h3 className={styles.featureTitle}>{f.title}</h3>
                 <p className={styles.featureDesc}>{f.desc}</p>
               </div>
@@ -247,12 +254,9 @@ export default function CategoryPageClient({ categoryId = null }) {
       <section className={styles.ctaBanner}>
         <div className={styles.ctaInner}>
           <div className={styles.ctaLeft}>
-            <p className={styles.ctaEyebrow}>Get Started</p>
-            <h2 className={styles.ctaTitle}>Ready to Elevate Your Space?</h2>
-            <p className={styles.ctaDesc}>
-              Our team of specialists is ready to guide you from initial consultation
-              through installation — tailored to your building, your timeline, and your vision.
-            </p>
+            <p className={styles.ctaEyebrow}>{cmsCtaEyebrow}</p>
+            <h2 className={styles.ctaTitle}>{cmsCtaTitle}</h2>
+            <p className={styles.ctaDesc}>{cmsCtaDesc}</p>
           </div>
           <div className={styles.ctaButtons}>
             <Link href="/contact" className={styles.ctaBtnPrimary}>

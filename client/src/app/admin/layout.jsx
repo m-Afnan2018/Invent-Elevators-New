@@ -75,8 +75,9 @@ const AdminLayout = ({ children }) => {
         { name: 'Testimonials', icon: RiChatQuoteLine, path: '/admin/testimonials' },
         { name: 'Careers',      icon: RiBriefcaseLine, path: '/admin/careers' },
         { name: 'Applications', icon: RiFileUserLine,  path: '/admin/applications' },
-        { name: 'Series CMS',   icon: RiLayoutLine,    path: '/admin/series' },
-        { name: 'Categories',   icon: RiStackLine,     path: '/admin/categories' },
+        { name: 'Series CMS',     icon: RiLayoutLine,    path: '/admin/series' },
+        { name: 'Categories',     icon: RiStackLine,     path: '/admin/categories' },
+        { name: 'Categories CMS', icon: RiLayoutLine,    path: '/admin/categories-cms' },
         { name: 'Users',        icon: RiUserLine,      path: '/admin/users' },
         { name: 'Settings',     icon: RiSettingsLine,  path: '/admin/settings' },
     ], [canAccessDashboard]);

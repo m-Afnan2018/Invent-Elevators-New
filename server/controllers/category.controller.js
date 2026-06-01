@@ -57,3 +57,21 @@ export const deleteCategory = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
+/* PUT /api/categories/:id/cms — update only CMS fields */
+export const updateCategoryCMS = async (req, res) => {
+  try {
+    const { aboutMeta, features, ctaEyebrow, ctaTitle, ctaDesc } = req.body;
+    const update = {};
+    if (aboutMeta  !== undefined) update.aboutMeta  = aboutMeta;
+    if (features   !== undefined) update.features   = features;
+    if (ctaEyebrow !== undefined) update.ctaEyebrow = ctaEyebrow;
+    if (ctaTitle   !== undefined) update.ctaTitle   = ctaTitle;
+    if (ctaDesc    !== undefined) update.ctaDesc    = ctaDesc;
+    const doc = await Category.findByIdAndUpdate(req.params.id, update, { new: true, runValidators: true });
+    if (!doc) return res.status(404).json({ success: false, message: "Category not found" });
+    res.status(200).json({ success: true, data: doc });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err.message });
+  }
+};
