@@ -1,18 +1,10 @@
-/**
- * Category Routes
- * ---------------
- * All category related API endpoints.
- *
- * Base URL:
- * /api/categories
- */
-
 import express from "express";
 import { requireAuth } from "../middlewares/auth.middleware.js";
 import {
     createCategory,
     getAllCategories,
     getCategoryById,
+    getCategoryBySlug,
     updateCategory,
     deleteCategory,
     updateCategoryCMS,
@@ -20,26 +12,12 @@ import {
 
 const router = express.Router();
 
-/* ---------------------------------------------------
-   Category Routes
---------------------------------------------------- */
-
-// Create category
-router.post("/", requireAuth, createCategory);
-
-// Get all categories
-router.get("/", getAllCategories);
-
-// Get single category
-router.get("/:id", getCategoryById);
-
-// Update category
-router.put("/:id", requireAuth, updateCategory);
-
-// Disable category (soft delete)
-router.delete("/:id", requireAuth, deleteCategory);
-
-// Update CMS fields only
-router.put("/:id/cms", requireAuth, updateCategoryCMS);
+router.post("/",             requireAuth, createCategory);
+router.get("/",              getAllCategories);
+router.get("/by-slug/:slug", getCategoryBySlug); // must be before /:id
+router.get("/:id",           getCategoryById);
+router.put("/:id",           requireAuth, updateCategory);
+router.delete("/:id",        requireAuth, deleteCategory);
+router.put("/:id/cms",       requireAuth, updateCategoryCMS);
 
 export default router;

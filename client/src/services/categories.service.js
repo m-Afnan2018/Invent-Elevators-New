@@ -157,3 +157,12 @@ export const updateCategoryCMS = async (id, cmsData) => {
     throw error;
   }
 };
+
+export const getCategoryBySlug = async (slug) => {
+  try {
+    const response = await apiGet(`${ENDPOINTS.CATEGORIES}/by-slug/${slug}`);
+    return extractData(response);
+  } catch (error) {
+    throw error;
+  }
+};

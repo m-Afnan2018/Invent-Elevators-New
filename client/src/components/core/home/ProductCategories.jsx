@@ -59,7 +59,7 @@ export default function ProductCategories() {
           {activeCategories.map((cat, i) => (
             <Link
               key={cat._id}
-              href={`/categories/${cat._id}`}
+              href={`/categories/${cat.slug || cat._id}`}
               className={styles.card}
               style={{ "--delay": `${i * 0.08}s` }}
             >

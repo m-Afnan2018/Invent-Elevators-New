@@ -61,7 +61,7 @@ const FALLBACK_CATEGORIES = [
 ];
 
 function CategoryCard({ category, productCount = 0 }) {
-  const href = `/categories/${category._id}`;
+  const href = `/categories/${category.slug || category._id}`;
   const fallbackImg =
     "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80";
 

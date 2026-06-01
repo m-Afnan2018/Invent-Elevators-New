@@ -201,7 +201,7 @@ function ProductCard({ product, index }) {
         )}
 
         {/* CTA */}
-        <Link href={`/products/${_id}`} className={styles.cta}>
+        <Link href={`/products/${slug || _id}`} className={styles.cta}>
           <span>View Product</span>
           <span className={styles.ctaArrow}>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

@@ -6,10 +6,10 @@ const FALLBACK_IMG =
   "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80";
 
 export default function CategoryCard({ category, productCount = 0 }) {
-  const { _id, name, description, image } = category;
+  const { _id, slug, name, description, image } = category;
 
   return (
-    <Link href={`/categories/${_id}`} className={styles.card}>
+    <Link href={`/categories/${slug || _id}`} className={styles.card}>
       {/* Gold accent bar (slides in on hover) */}
       <div className={styles.accentBar} />
 

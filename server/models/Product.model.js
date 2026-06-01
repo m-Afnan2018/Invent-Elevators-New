@@ -17,6 +17,7 @@ const productSchema = new mongoose.Schema(
     categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "Category" }],
     subCategories: [{ type: mongoose.Schema.Types.ObjectId, ref: "SubCategory" }],
     name: { type: String, required: true, trim: true },
+    slug: { type: String, trim: true, lowercase: true, unique: true, sparse: true },
     description: { type: String, trim: true },
     image: { type: String },
     images: [{ type: String }],

@@ -57,7 +57,7 @@ export default function ProductHero({ product }) {
           <>
             <span className={styles.bcSep}>/</span>
             <Link
-              href={`/categories/${primaryCategory._id}`}
+              href={`/categories/${primaryCategory.slug || primaryCategory._id}`}
               className={styles.bcLink}
             >
               {primaryCategory.name}

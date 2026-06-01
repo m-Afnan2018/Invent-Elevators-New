@@ -51,7 +51,7 @@ export default function CategoryPageClient({ categoryId = null }) {
       try {
         const res = await getCategories();
         const all = extractCollection(res, ["categories"]);
-        const found = categoryId ? all.find((c) => c._id === categoryId) : null;
+        const found = categoryId ? all.find((c) => c._id === categoryId || c.slug === categoryId) : null;
         setCategory(found || null);
       } finally {
         setIsLoading(false);

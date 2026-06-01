@@ -158,7 +158,7 @@ export default function Series({ activeCategories = [] }) {
                         {activeCategories.map((cat, i) => (
                             <Link
                                 key={cat._id}
-                                href={cat.__fallback ? "/categories" : `/categories/${cat._id}`}
+                                href={cat.__fallback ? "/categories" : `/categories/${cat.slug || cat._id}`}
                                 className={styles.catCard}
                             >
                                 <div className={styles.catImgWrap}>

@@ -75,3 +75,17 @@ export const updateCategoryCMS = async (req, res) => {
     res.status(400).json({ success: false, message: err.message });
   }
 };
+
+/* GET /api/categories/by-slug/:slug — slug-first lookup with _id fallback */
+export const getCategoryBySlug = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    let doc = await Category.findOne({ slug });
+    if (!doc && /^[a-f0-9]{24}$/.test(slug)) doc = await Category.findById(slug);
+    if (!doc) return res.status(404).json({ success: false, message: "Category not found" });
+    res.status(200).json({ success: true, data: doc });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+

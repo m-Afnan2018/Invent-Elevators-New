@@ -88,3 +88,12 @@ export const getProductsByCategory = async (categoryId) => {
     throw error;
   }
 };
+
+export const getProductBySlug = async (slug) => {
+  try {
+    const response = await apiGet(`${ENDPOINTS.PRODUCTS}/slug/${slug}`);
+    return extractData(response);
+  } catch (error) {
+    throw error;
+  }
+};

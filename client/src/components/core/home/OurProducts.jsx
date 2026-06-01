@@ -72,7 +72,7 @@ export default function OurProducts() {
                   {product.description || "Built for reliable performance and modern lift applications."}
                 </p>
 
-                <Link href={`/products/${product._id}`} className={styles.cardCta}>
+                <Link href={`/products/${product.slug || product._id}`} className={styles.cardCta}>
                   <span>View Product</span>
                   <span className={styles.ctaIconWrap}>→</span>
                 </Link>
