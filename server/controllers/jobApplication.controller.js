@@ -26,7 +26,7 @@ const ALLOWED_MIME = new Set([
 
 export const resumeUpload = multer({
   storage: resumeStorage,
-  limits: { fileSize: 10 * 1024 * 1024 },
+  limits: { fileSize: 1024 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
     if (ALLOWED_MIME.has(file.mimetype)) return cb(null, true);
     cb(new Error("Only PDF, DOC, and DOCX files are allowed"), false);

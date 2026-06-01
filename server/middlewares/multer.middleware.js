@@ -24,7 +24,7 @@ const fileFilter = (_req, file, cb) => {
     }
 };
 
-const limits = { fileSize: 10 * 1024 * 1024 }; // 10 MB per file
+const limits = { fileSize: 1024 * 1024 * 1024 }; // 1 GB per file
 
 /**
  * Slugify a filename stem for safe, readable filenames.
