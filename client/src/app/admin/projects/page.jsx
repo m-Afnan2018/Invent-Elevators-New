@@ -295,6 +295,10 @@ const ProjectsPage = () => {
             });
             setFeaturedImagePreview(project.featuredImage);
             setGalleryPreviews(project.galleryImages || []);
+            // Ensure the saved category appears as an option even if not in the fetched list
+            if (project.category && !categories.includes(project.category)) {
+                setCategories(prev => [...prev, project.category]);
+            }
         } else {
             setEditingProject(null);
             setFormData({
