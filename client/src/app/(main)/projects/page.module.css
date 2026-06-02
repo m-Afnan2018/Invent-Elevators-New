@@ -217,7 +217,7 @@
 /* ── Category Tabs ── */
 .tabsSection {
   /* background: #fff; */
-  border-bottom: 1px solid #eeeee9;
+  /* border-bottom: 1px solid #eeeee9; */
   position: sticky;
   top: 46px;
   z-index: 20;
