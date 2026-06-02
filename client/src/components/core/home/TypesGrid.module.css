@@ -90,9 +90,9 @@
   opacity: 0;
 }
 
-/* ── Active cell — expands to ~60% of row width ── */
+/* ── Active cell — expands to ~65% of row width ── */
 .cellActive {
-  flex: 2.7;
+  flex: 3.5;
   padding: 60px 48px;
   overflow: visible;
 }
@@ -195,7 +195,7 @@
   line-height: 1.65;
   text-align: center;
   margin: 0;
-  max-width: 360px;
+  max-width: 440px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
