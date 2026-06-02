@@ -60,7 +60,6 @@ export default function TypesGrid({ series = [] }) {
               key={item._id || i}
               href={`/series/${anchor}`}
               className={[styles.cell, isActive ? styles.cellActive : '', isDimmed ? styles.cellDimmed : ''].join(' ').trim()}
-              onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <div className={styles.cellImg}>
@@ -76,7 +75,10 @@ export default function TypesGrid({ series = [] }) {
                 <div className={styles.cellImgOverlay} />
               </div>
 
-              <div className={styles.cellContent}>
+              <div
+                className={styles.cellContent}
+                onMouseEnter={() => setHoveredIndex(i)}
+              >
                 <p className={styles.name}>{item.name}</p>
                 <p className={styles.sub}>{item.subtitle || ""}</p>
                 <div className={styles.hoverInfo}>
