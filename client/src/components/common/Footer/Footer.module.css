@@ -60,6 +60,7 @@
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   line-height: 1.4;
   font-weight: 400;
+  text-transform: capitalize;
 }
 
 .taglineDark {

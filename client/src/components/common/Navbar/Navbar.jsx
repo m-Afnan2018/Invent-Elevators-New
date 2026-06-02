@@ -57,7 +57,7 @@ export default function Navbar() {
 
                 <Image width={100} height={100} src='/logo-invent-png-without-bg-1.png' alt="Invent Elevators" style={{height: '70px', objectFit: 'cover', width: 'auto', filter: 'brightness(0) invert(1)'}}/>
                 </Link>
-                <Link href="/contact" className={styles.topQuote}>↳ GET A FREE QUOTE</Link>
+                <Link href="/contact" className={styles.topQuote}>↳ FREE QUOTE</Link>
             </header>
 
             {/* ── Backdrop overlay ─────────────────────── */}

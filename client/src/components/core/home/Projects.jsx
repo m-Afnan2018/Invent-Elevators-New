@@ -32,7 +32,7 @@ export default function Projects({ featuredProjects: propProjects = [] }) {
 
   return (
     <section className={[styles.section, styles.projectSection].join(' ')}>
-      <h2 className={`${styles.heading} headings`}>Our Projects</h2>
+      <h2 className={` headings`}>Our Projects</h2>
       <p>We believe an elevator should feel like a natural extension of the architecture, enhancing elegance, functionality,<br/> and the overall luxury experience of the space.</p>
       <div className={styles.grid}>
         {projects.map((project, i) => (
