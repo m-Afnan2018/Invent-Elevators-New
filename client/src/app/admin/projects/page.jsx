@@ -534,7 +534,7 @@ const ProjectsPage = () => {
                                     <div className={styles.cardFooter}>
                                         <span className={styles.categoryTag}>{project.category}</span>
                                         <span className={styles.galleryCount}>
-                                            <RiImageAddLine /> {project.galleryImages.length} photos
+                                            <RiImageAddLine /> {(project.galleryImages || []).length} photos
                                         </span>
                                     </div>
                                 </div>
