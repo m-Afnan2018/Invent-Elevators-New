@@ -30,7 +30,7 @@ export default function SeriesHeroSplit({ series }) {
         <div className={styles.content}>
           <span className={styles.eyebrow}>{series.tagline}</span>
           <h1 className={styles.heading}>{series.name}</h1>
-          <p className={styles.desc}>{series.description}</p>
+          {/* <p className={styles.desc}>{series.description}</p> */}
 
           <div className={styles.btns}>
             <Link href="#crafted" className={styles.btnGold}>Explore Designs</Link>
