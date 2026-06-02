@@ -207,6 +207,7 @@ export default function AreaWeServePage() {
       </section>
 
       <LocationSection
+        id="dubai"
         cityName="DUBAI"
         description="Delivering precision-engineered lift solutions across Dubai's most iconic residential, commercial, and hospitality developments — from Palm Jumeirah villas to Downtown high-rises."
         mapSrc="https://maps.google.com/maps?q=Dubai,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"
@@ -214,6 +215,7 @@ export default function AreaWeServePage() {
       />
 
       <LocationSection
+        id="sharjah"
         cityName="SHARJAH"
         description="Serving Sharjah's growing skyline with bespoke elevator installations designed for performance, safety, and elegance across retail, residential, and mixed-use developments."
         mapSrc="https://maps.google.com/maps?q=Sharjah,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"
@@ -221,6 +223,7 @@ export default function AreaWeServePage() {
       />
 
       <LocationSection
+        id="abu-dhabi"
         cityName="ABU DHABI"
         description="Serving Abu Dhabi's skyline with bespoke elevator installations built for performance and elegance — from ADNOC headquarters to Saadiyat Island's luxury residences."
         mapSrc="https://maps.google.com/maps?q=Abu+Dhabi,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"

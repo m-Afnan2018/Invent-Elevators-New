@@ -11,6 +11,7 @@ export default function LocationSection({
   mapSrc = "",
   mapPlaceholder = "",
   projects = [],
+  id = "",
 }) {
   const doubled = [...projects, ...projects];
 
@@ -106,7 +107,7 @@ export default function LocationSection({
   };
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id={id || undefined}>
       {/* ── Top: city info + map ── */}
       <div className={styles.inner}>
         <div className={styles.topRow}>

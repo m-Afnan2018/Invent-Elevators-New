@@ -6,7 +6,7 @@
     height: 440px;
     border-radius: 0px;
     overflow: hidden;
-    cursor: pointer;
+    cursor: default;
     flex-shrink: 0;
 
     /* subtle outer shadow + glass rim */

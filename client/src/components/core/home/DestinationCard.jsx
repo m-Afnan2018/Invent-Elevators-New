@@ -1,14 +1,23 @@
+import Link from 'next/link';
 import styles from './DestinationCard.module.css';
 
-// Replace `image` prop with your actual image path/URL
+const COUNTRY_ANCHORS = {
+  dubai:       'dubai',
+  'abu dhabi': 'abu-dhabi',
+  sharjah:     'sharjah',
+};
+
 const DestinationCard = ({
     image = null,
     country = 'Dubai',
     flag = '🇦🇪',
     home = 2345,
     car = 54,
-    accentColor = '#7B2FBE', // purple tint for active card; pass any color
+    accentColor = '#7B2FBE',
 }) => {
+    const anchor = COUNTRY_ANCHORS[country.toLowerCase()] || country.toLowerCase().replace(/\s+/g, '-');
+    const href = `/area-we-serve#${anchor}`;
+
     return (
         <div
             className={styles.card}
@@ -33,11 +42,11 @@ const DestinationCard = ({
                         {country} <span className={styles.flag}>{flag}</span>
                     </h2>
                     <p className={styles.stats}>
-                        {home.toLocaleString()} Home Lift · {car} Car Lift 
+                        {home.toLocaleString()} Home Lift · {car} Car Lift
                     </p>
                 </div>
 
-                <button className={styles.cta}>
+                <Link href={href} className={styles.cta}>
                     <span>Explore Now</span>
                     <svg
                         className={styles.arrow}
@@ -50,7 +59,7 @@ const DestinationCard = ({
                     >
                         <polyline points="9 18 15 12 9 6" />
                     </svg>
-                </button>
+                </Link>
             </div>
         </div>
     );
