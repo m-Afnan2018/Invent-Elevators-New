@@ -37,7 +37,7 @@ export const updateProject = async (req, res) => {
       body.slug = await uniqueSlug(toSlug(body.title), req.params.id);
     if (typeof body.metaKeywords === "string")
       body.metaKeywords = body.metaKeywords.split(",").map(k => k.trim()).filter(Boolean);
-    const doc = await Project.findByIdAndUpdate(req.params.id, body, { new: true, runValidators: true });
+    const doc = await Project.findByIdAndUpdate(req.params.id, body, { new: true });
     if (!doc) return res.status(404).json({ success: false, message: "Project not found" });
     res.status(200).json({ success: true, data: doc });
   } catch (err) {

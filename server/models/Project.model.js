@@ -9,7 +9,7 @@ const projectSchema = new mongoose.Schema(
     location: { type: String, trim: true },
     completionDate: { type: Date },
     category: { type: String, trim: true },
-    status: { type: String, enum: ["planning", "ongoing", "completed", "on-hold"], default: "planning" },
+    status: { type: String, enum: ["quote", "active", "delivered", "completed", "on-hold"], default: "quote" },
     featuredImage: { type: String },
     galleryImages: [{ type: String }],
     isFeatured:    { type: Boolean, default: false },
