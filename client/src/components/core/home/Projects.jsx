@@ -17,8 +17,11 @@ export default function Projects({ featuredProjects: propProjects = [] }) {
     getProjects()
       .then(data => {
         const list = Array.isArray(data) ? data : [];
-        const valid = list.filter(p => p?._id && p?.title).slice(0, 6);
-        if (valid.length) setFetched(valid);
+        const all = list.filter(p => p?._id && p?.title);
+        // Prefer projects that have a featured image
+        const withImage = all.filter(p => p.featuredImage);
+        const picks = (withImage.length ? withImage : all).slice(0, 6);
+        if (picks.length) setFetched(picks);
       })
       .catch(() => {});
   }, []);
