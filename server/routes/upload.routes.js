@@ -13,6 +13,7 @@ import express from "express";
 import fs from "fs";
 import path from "path";
 import { requireAuth } from "../middlewares/auth.middleware.js";
+import Media from "../models/Media.model.js";
 import { createUploadMiddleware } from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
@@ -52,12 +53,21 @@ router.post("/", requireAuth, (req, res, next) => {
         return res.status(400).json({ success: false, message: "No file uploaded" });
     }
 
+    const url = toPublicUrl(req.file.path);
+    // Save to Media library (fire-and-forget)
+    Media.create({
+        url,
+        filename: req.file.filename,
+        originalName: req.file.originalname || req.file.filename,
+        mimeType: req.file.mimetype,
+        type: req.file.mimetype?.startsWith("video/") ? "video" : "image",
+        size: req.file.size || 0,
+        folder: getFolder(req.query),
+    }).catch(() => {});
     res.status(200).json({
         success: true,
         message: "Image uploaded successfully",
-        data: {
-            url: toPublicUrl(req.file.path),
-        },
+        data: { url },
     });
 });
 
@@ -80,12 +90,23 @@ router.post("/multiple", requireAuth, (req, res, next) => {
         return res.status(400).json({ success: false, message: "No files uploaded" });
     }
 
+    const urls = req.files.map(f => toPublicUrl(f.path));
+    // Save each to Media library (fire-and-forget)
+    req.files.forEach(f => {
+        Media.create({
+            url: toPublicUrl(f.path),
+            filename: f.filename,
+            originalName: f.originalname || f.filename,
+            mimeType: f.mimetype,
+            type: f.mimetype?.startsWith("video/") ? "video" : "image",
+            size: f.size || 0,
+            folder: getFolder(req.query),
+        }).catch(() => {});
+    });
     res.status(200).json({
         success: true,
         message: "Images uploaded successfully",
-        data: req.files.map((f) => ({
-            url: toPublicUrl(f.path),
-        })),
+        data: urls.map(url => ({ url })),
     });
 });
 

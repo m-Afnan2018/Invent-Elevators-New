@@ -20,6 +20,8 @@ import {
 } from 'react-icons/ri';
 import toast from 'react-hot-toast';
 import styles from './page.module.css';
+import MediaSelector from '@/components/admin/MediaSelector';
+import { RiGalleryLine } from 'react-icons/ri';
 import Image from 'next/image';
 import { getProjects, createProject, updateProject, deleteProject } from '@/services/projects.service';
 import { getProducts } from '@/services/products.service';
@@ -87,6 +89,8 @@ const ProjectsPage = () => {
         video: '',
     });
     const [testimonialImgUploading, setTestimonialImgUploading] = useState(false);
+    const [mediaSelectorOpen, setMediaSelectorOpen] = useState(false);
+    const [mediaSelectorTarget, setMediaSelectorTarget] = useState(null); // { field, index, subField }
     async function fetchProjects() {
         try {
             const data = await getProjects();
@@ -235,6 +239,30 @@ const ProjectsPage = () => {
     const removeTestimonial = (index) => {
         const newTestimonials = formData.testimonials.filter((_, i) => i !== index);
         setFormData({ ...formData, testimonials: newTestimonials });
+    };
+
+    const openMediaSelector = (field, index = null, subField = null) => {
+        setMediaSelectorTarget({ field, index, subField });
+        setMediaSelectorOpen(true);
+    };
+
+    const onMediaSelect = (url) => {
+        const { field, index, subField } = mediaSelectorTarget;
+        if (index !== null && subField) {
+            // nested: e.g. gallery image or testimonial image
+        } else if (field === 'featuredImage') {
+            setFeaturedImagePreview(url);
+            setFormData(prev => ({ ...prev, featuredImage: url }));
+        } else if (field === 'testimonialImage') {
+            setCurrentTestimonial(prev => ({ ...prev, image: url }));
+        } else if (field === 'galleryImages') {
+            setFormData(prev => ({
+                ...prev,
+                galleryImages: [...prev.galleryImages, url],
+            }));
+            setGalleryPreviews(prev => [...prev, url]);
+        }
+        setMediaSelectorOpen(false);
     };
 
     const handleTestimonialImageUpload = async (e) => {
@@ -766,6 +794,9 @@ const ProjectsPage = () => {
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Upload featured image</span>
                                             </label>
+                                            <button type="button" className={styles.libraryBtn} onClick={() => openMediaSelector('featuredImage')}>
+                                                <RiGalleryLine /> Library
+                                            </button>
                                             {featuredImagePreview && (
                                                 <div className={styles.imagePreview}>
                                                     <Image width={1000} height={1000} src={featuredImagePreview} alt="Featured" />
@@ -1076,6 +1107,13 @@ const ProjectsPage = () => {
                     </div>
                 )}
             </div>
+            <MediaSelector
+                isOpen={mediaSelectorOpen}
+                onClose={() => setMediaSelectorOpen(false)}
+                onSelect={onMediaSelect}
+                accept="image"
+                folder="projects"
+            />
         </section>
     );
 };

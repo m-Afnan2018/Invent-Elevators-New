@@ -1103,3 +1103,7 @@
 }
 
 .citiesRow { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.4rem; }
+
+/* ── Media library picker button ── */
+.libraryBtn { display:inline-flex; align-items:center; gap:.3rem; padding:.6rem .85rem; background:var(--bg-tertiary); border:1px solid var(--border-color); border-radius:.45rem; color:var(--text-secondary); font-size:.82rem; font-weight:500; cursor:pointer; transition:all .2s; white-space:nowrap; font-family:inherit; }
+.libraryBtn:hover { border-color:var(--accent); color:var(--accent); background:rgba(59,130,246,.05); }
