@@ -87,7 +87,7 @@ const tiers = [
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export default function HeritageCard() {
+export default function HeritageCard({ children }: { children?: React.ReactNode }) {
   const [activeImg, setActiveImg] = useState(0);
   const [prevImg, setPrevImg] = useState<number | null>(null);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');

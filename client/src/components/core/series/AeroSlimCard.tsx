@@ -81,7 +81,7 @@ const machines = [
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
-export default function AeroSlimCard() {
+export default function AeroSlimCard({ children }: { children?: React.ReactNode }) {
   const [activeImg, setActiveImg] = useState(0);
   const [prevImg, setPrevImg] = useState<number | null>(null);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
