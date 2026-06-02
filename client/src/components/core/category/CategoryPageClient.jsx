@@ -201,6 +201,7 @@ export default function CategoryPageClient({ categoryId = null }) {
 
       {/* ── 5. GALLERY — auto-scroll marquee of projects in this category ── */}
       <div id="gallery">
+        <h2 className={styles.galleryHeading}>Related Projects</h2>
         <CategoryProjectsGallery categoryName={name} />
       </div>
 
