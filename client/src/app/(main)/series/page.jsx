@@ -7,7 +7,7 @@ import { getProjects } from "@/services/projects.service";
 import { extractCollection } from "@/lib/apiResponse";
 import styles from "./page.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
-import TypesGrid from "@/components/core/series/TypesGrid";
+import TypesGrid from "@/components/core/home/TypesGrid";
 import SeriesElevatorCard from "@/components/core/series/SeriesElevatorCard";
 import ElevatorProductPage from "@/components/core/series/ElevatorProductPage";
 import HeritageCard from "@/components/core/series/HeritageCard";

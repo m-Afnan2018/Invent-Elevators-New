@@ -24,7 +24,7 @@ export default function TypesGrid({ series = [] }) {
   const items = useMemo(() => series.slice(0, 4), [seriesKey]);
 
   const bgImages     = useMemo(() => items.map((it, i) => it.url      || FALLBACK_IMAGES[i]       || ""), [items]);
-  const descriptions = useMemo(() => items.map((it, i) => it.subtitle || FALLBACK_DESCRIPTIONS[i] || ""), [items]);
+  const descriptions = useMemo(() => items.map((it, i) => it.description || it.subtitle || FALLBACK_DESCRIPTIONS[i] || ""), [items]);
   const anchors      = useMemo(() => items.map((it, i) => it.link     || FALLBACK_ANCHORS[i]      || it.name?.toLowerCase().replace(/\s+/g, "-") || "#"), [items]);
 
   const [hoveredIndex, setHoveredIndex] = useState(null);
