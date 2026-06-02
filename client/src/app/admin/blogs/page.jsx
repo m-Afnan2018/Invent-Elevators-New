@@ -594,7 +594,7 @@ const BlogsPage = () => {
                                                 className={styles.fileInput}
                                                 ref={featuredImageInputRef}
                                             />
-                                            <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>setFormData(f=>({...f,featuredImage:url})),\'image\',\'blogs\')}><RiGalleryLine /> Library</button>
+                                            <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>setFormData(f=>({...f,featuredImage:url})),"image","blogs")}><RiGalleryLine /> Library</button>
                                             <label htmlFor="featuredImageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Click to upload featured image</span>
@@ -721,7 +721,7 @@ const BlogsPage = () => {
                                                 className={styles.fileInput}
                                                 ref={ogImageInputRef}
                                             />
-                                            <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>setFormData(f=>({...f,ogImage:url})),\'image\',\'blogs\')}><RiGalleryLine /> Library</button>
+                                            <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>setFormData(f=>({...f,ogImage:url})),"image","blogs")}><RiGalleryLine /> Library</button>
                                             <label htmlFor="ogImageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Upload OG image (1200x630 recommended)</span>
