@@ -1,6 +1,5 @@
 "use client";
 import styles from "./Projects.module.css";
-import Image from "next/image";
 import Link from "next/link";
 
 const FALLBACK_IMAGES = [
@@ -23,7 +22,7 @@ export default function Projects({ featuredProjects = [] }) {
           >
             {/* Image */}
             <div className={styles.imgWrap}>
-              <Image
+              <img
                 src={
                   project.featuredImage ||
                   project.image ||
@@ -31,11 +30,8 @@ export default function Projects({ featuredProjects = [] }) {
                   FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]
                 }
                 alt={project.title}
-                fill
-                sizes="(max-width: 640px) 100vw, 50vw"
                 className={styles.img}
               />
-              {/* Price tag bottom-right */}
               {project.price && (
                 <span className={styles.price}>
                   FROM {project.price} PER PERSON
