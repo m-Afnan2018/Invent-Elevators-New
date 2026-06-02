@@ -229,6 +229,7 @@ function ProjectCard({ project }) {
 }
 
 export default function SeriesPage() {
+  const banner = useBanner('series');
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
