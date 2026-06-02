@@ -624,14 +624,31 @@
 .categoryInput {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .categoryInput select {
   flex: 1;
+  min-width: 0;
+  width: auto;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.categoryInput select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .newCategoryInput {
   width: 150px;
+  flex-shrink: 0;
 }
 
 .addCategoryBtn {
