@@ -145,7 +145,7 @@
   display: grid;
   grid-template-columns: 42% 1fr;
   min-height: 580px;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .collectionImg {
@@ -363,6 +363,7 @@
   overflow: hidden;
   background: #e0dfd9;
   filter: grayscale(100%);
+  margin: 1rem;
 }
 
 .testimonialMediaInner {
@@ -690,7 +691,7 @@
   .featuresInner,
   .appsInner {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 22px;
   }
 
   .featuresLeft,
@@ -710,7 +711,7 @@
   }
 
   .collectionInfo {
-    padding: 56px 32px;
+    padding: 56px 12px;
   }
 
   .testimonial {
@@ -740,6 +741,10 @@
 
   .heroContent {
     padding-bottom: 56px;
+  }
+
+  .featureCard {
+    padding: 16px 0;
   }
 
   .features,

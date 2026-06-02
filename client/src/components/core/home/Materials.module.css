@@ -1,6 +1,6 @@
 /* ─── Section ──────────────────────────────────────────── */
 .section {
-  padding: 96px 0;
+  padding: 56px 0;
   background: white;
 }
 
@@ -14,7 +14,7 @@
 .head {
   margin: auto;
   margin-bottom: 56px;
-  max-width: 80%;
+  /* max-width: 80%; */
 }
 
 .eyebrow {

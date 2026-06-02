@@ -174,11 +174,11 @@ export default function CategoriesBrowse() {
             <span>Our Products</span>
           </div>
           <h1 className={styles.heroTitle}>Elevator Categories</h1>
-          <p className={styles.heroDesc}>
+          {/* <p className={styles.heroDesc}>
             Explore our complete range of elevator solutions — from bespoke home
             lifts and high-speed commercial elevators to specialist healthcare and
             car lift systems, engineered for the UAE.
-          </p>
+          </p> */}
         </div>
 
         {/* Scroll indicator */}

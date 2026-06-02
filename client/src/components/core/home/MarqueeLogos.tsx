@@ -8,12 +8,12 @@ const topLogos = [
   { src: "/images/logos/logo-5.png", alt: "Logo 5" },
   { src: "/images/logos/logo-6.png", alt: "Logo 6" },
   { src: "/images/logos/logo-7.png", alt: "Logo 7" },
-  { src: "/images/logos/logo-9.png", alt: "Logo 9" },
-  { src: "/images/logos/logo-10.png", alt: "Logo 10" },
-  { src: "/images/logos/logo-11.png", alt: "Logo 11" },
-  { src: "/images/logos/logo-12.png", alt: "Logo 12" },
-  { src: "/images/logos/logo-13.png", alt: "Logo 13" },
-  { src: "/images/logos/logo-14.png", alt: "Logo 14" },
+  // { src: "/images/logos/logo-9.png", alt: "Logo 9" },
+  // { src: "/images/logos/logo-10.png", alt: "Logo 10" },
+  // { src: "/images/logos/logo-11.png", alt: "Logo 11" },
+  // { src: "/images/logos/logo-12.png", alt: "Logo 12" },
+  // { src: "/images/logos/logo-13.png", alt: "Logo 13" },
+  // { src: "/images/logos/logo-14.png", alt: "Logo 14" },
 ];
 
 // Bottom row logos (right to left → animate right)

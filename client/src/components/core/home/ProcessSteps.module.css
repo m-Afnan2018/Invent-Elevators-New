@@ -28,6 +28,7 @@
   color: #777777;
   margin: 0;
   font-weight: 400;
+  text-transform: unset;
 }
 
 /* ── Steps row ── */
