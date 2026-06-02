@@ -25,6 +25,7 @@ export default function Projects({ featuredProjects = [] }) {
             <div className={styles.imgWrap}>
               <Image
                 src={
+                  project.featuredImage ||
                   project.image ||
                   project.images?.[0] ||
                   FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]
