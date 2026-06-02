@@ -46,9 +46,9 @@
 /* ── Row ── */
 .row {
   display: flex;
-  min-height: 700px;
-  padding-top: 22vh;
-  padding-bottom: 18vh;
+  min-height: 580px;
+  padding-top: 16vh;
+  padding-bottom: 16vh;
   position: relative;
   z-index: 1;
 }
