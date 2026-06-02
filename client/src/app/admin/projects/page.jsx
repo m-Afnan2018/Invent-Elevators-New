@@ -451,9 +451,9 @@ const ProjectsPage = () => {
                                     <tr key={project._id}>
                                         <td>
                                             <div className={styles.projectCell}>
-                                                {project.featuredImage ? (
+                                                {(project.featuredImage || project.galleryImages?.[0] || project.image) ? (
                                                     <img
-                                                        src={project.featuredImage}
+                                                        src={project.featuredImage || project.galleryImages?.[0] || project.image}
                                                         alt={project.title}
                                                         className={styles.projectThumbnail}
                                                     />
@@ -515,9 +515,9 @@ const ProjectsPage = () => {
                         {filteredProjects.map((project) => (
                             <div key={project._id} className={styles.card}>
                                 <div className={styles.cardImageWrapper}>
-                                    {project.featuredImage ? (
+                                    {(project.featuredImage || project.galleryImages?.[0] || project.image) ? (
                                         <img
-                                            src={project.featuredImage}
+                                            src={project.featuredImage || project.galleryImages?.[0] || project.image}
                                             alt={project.title}
                                             className={styles.cardImage}
                                         />
