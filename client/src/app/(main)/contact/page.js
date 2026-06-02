@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import useBanner from '@/hooks/useBanner';
 import ContactHero from "@/components/core/contact/ContactHero";
 import { createLead } from "@/services/leads.service";
 import styles from "./page.module.css";
@@ -62,6 +63,7 @@ const INQUIRY_TYPES = [
 ];
 
 export default function Contact() {
+  const banner = useBanner('contact');
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -95,7 +97,7 @@ export default function Contact() {
 
   return (
     <main className={styles.page}>
-      <ContactHero />
+      <ContactHero banner={banner} />
 
       {/* ── Contact Body ── */}
       <section className={styles.contactSection}>

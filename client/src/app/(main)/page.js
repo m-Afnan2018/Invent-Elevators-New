@@ -8,6 +8,7 @@ import { getCategories } from "@/services/categories.service";
 import { getTestimonials } from "@/services/testimonials.service";
 import { getProducts } from "@/services/products.service";
 import { getProjects } from "@/services/projects.service";
+import useBanner from "@/hooks/useBanner";
 import { getBlogs } from "@/services/blogs.service";
 import { extractCollection } from "@/lib/apiResponse";
 import Series from "@/components/core/home/Series";
@@ -27,7 +28,7 @@ import Stats from "@/components/core/home/Stats";
 const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80";
 
-const HERO_IMAGES = [
+const HERO_IMAGES_DEFAULT = [
   "/hero/hero-1.jpg",
   "/hero/hero-2.jpg",
   "/hero/hero-3.jpg",
@@ -224,6 +225,7 @@ const MARQUEE_ITEMS = [
 ];
 
 export default function Home() {
+  const banner = useBanner('home');
   const [categories, setCategories] = useState([]);
   const [apiTestimonials, setApiTestimonials] = useState([]);
   const [products, setProducts] = useState([]);
@@ -234,6 +236,7 @@ export default function Home() {
   const parallaxRef = useRef(null);
 
   useEffect(() => {
+    const HERO_IMAGES = banner?.image ? [banner.image, ...HERO_IMAGES_DEFAULT] : HERO_IMAGES_DEFAULT;
     heroTimer.current = setInterval(() => setHeroIdx((i) => (i + 1) % HERO_IMAGES.length), 6000);
     return () => clearInterval(heroTimer.current);
   }, []);
@@ -316,7 +319,7 @@ export default function Home() {
       {/* ── Hero ── */}
       <section className={`${styles.hero} ${styles.heroSection}`}>
         {/* <div ref={parallaxRef} className={styles.heroBgWrap}>
-          {HERO_IMAGES.map((src, i) => (
+          {(banner?.image ? [banner.image, ...HERO_IMAGES_DEFAULT] : HERO_IMAGES_DEFAULT).map((src, i) => (
             <div key={src} className={`${styles.heroBg} ${i === heroIdx ? styles.heroBgActive : ""}`}>
               <Image src={src} alt="Invent Elevator" fill sizes="100vw" className={styles.heroBgImg} priority={i === 0} />
             </div>
@@ -324,6 +327,7 @@ export default function Home() {
         </div> */}
         <div ref={parallaxRef} className={styles.heroBgWrap}>
           <video
+            src={banner?.video || undefined}
             className={styles.heroBgVideo}
             src="/hero/hero.mp4"
             autoPlay

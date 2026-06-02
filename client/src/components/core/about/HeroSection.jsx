@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./HeroSection.module.css";
 
-export default function HeroSection() {
+export default function HeroSection({ banner = null }) {
   return (
     <section className={styles.hero}>
       <div className={styles.bgWrap}>
         <Image
           fill
           sizes="100vw"
-          src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1800&q=85&fit=crop"
+          src={banner?.image || "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1800&q=85&fit=crop"}
           alt="Luxury elevator interior"
           priority
           className={styles.bgImg}

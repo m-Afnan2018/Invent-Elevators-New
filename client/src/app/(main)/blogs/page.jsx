@@ -1,4 +1,5 @@
 "use client";
+import useBanner from '@/hooks/useBanner';
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";

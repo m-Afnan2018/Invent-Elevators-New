@@ -38,7 +38,7 @@ const ContactHero = () => {
       {/* Background image */}
       <div className={styles.bgWrap}>
         <Image
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80"
+          src={banner?.image || "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1800&q=80"}
           alt="Modern office building"
           fill
           priority

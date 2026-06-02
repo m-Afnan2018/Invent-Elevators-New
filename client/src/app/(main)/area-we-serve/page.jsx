@@ -1,4 +1,5 @@
 "use client";
+import useBanner from '@/hooks/useBanner';
 
 import { useEffect, useState } from "react";
 import { getProjects } from "@/services/projects.service";
@@ -164,6 +165,7 @@ const ABU_DHABI_PROJECTS = [
 ];
 
 export default function AreaWeServePage() {
+  const banner = useBanner("area-we-serve");
   const [dubaiProjects,    setDubai]    = useState(DUBAI_PROJECTS);
   const [sharjahProjects,  setSharjah]  = useState(SHARJAH_PROJECTS);
   const [abuDhabiProjects, setAbuDhabi] = useState(ABU_DHABI_PROJECTS);
@@ -194,7 +196,7 @@ export default function AreaWeServePage() {
       <section className={styles.hero}>
         <div className={styles.heroBgWrap}>
           <Image
-            src="/projects/downtown.png"
+            src={banner?.image || "/projects/downtown.png"}
             alt="UAE skyline"
             fill
             priority

@@ -11,7 +11,7 @@ import ElyseValues from '../../../components/core/about/ElyseValues';
 export default function About() {
     return (
         <div className={styles.page}>
-            <HeroSection />
+            <HeroSection banner={banner} />
             <HeritageSection />
             {/* <PhilosophySection /> */}
             {/* <SpiritSection /> */}

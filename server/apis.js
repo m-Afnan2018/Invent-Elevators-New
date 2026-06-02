@@ -26,6 +26,7 @@ export const API_ROUTES = {
   TESTIMONIALS: `${API_BASE}/testimonials`,
   SERIES: `${API_BASE}/series`,
   MEDIA: `${API_BASE}/media`,
+  BANNERS: `${API_BASE}/banners`,
 };
 
 export default API_ROUTES;

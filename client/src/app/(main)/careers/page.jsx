@@ -1,4 +1,5 @@
 "use client";
+import useBanner from '@/hooks/useBanner';
 import { useState, useEffect, useRef } from "react";
 import styles from "./page.module.css";
 import { getActiveJobs, submitApplication } from "@/services/careers.service";
@@ -164,6 +165,7 @@ function JobCard({ job, onApply }) {
 }
 
 export default function CareersPage() {
+  const banner = useBanner('careers');
   const [jobs, setJobs]         = useState([]);
   const [loading, setLoading]   = useState(true);
   const [dept, setDept]         = useState("All");

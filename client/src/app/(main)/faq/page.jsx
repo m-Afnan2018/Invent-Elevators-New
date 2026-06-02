@@ -1,4 +1,5 @@
 "use client";
+import useBanner from '@/hooks/useBanner';
 
 import { useState } from "react";
 import Link from "next/link";
@@ -96,6 +97,7 @@ const FAQ_DATA = [
 const ALL_CATS = FAQ_DATA.map((g) => g.category);
 
 export default function FAQPage() {
+  const banner = useBanner("faq");
   const [activeCat, setActiveCat] = useState("General");
 
   const visibleItems =
@@ -111,7 +113,7 @@ export default function FAQPage() {
         {/* Background image */}
         <div className={styles.heroBgWrap}>
           <Image
-            src="/projects/yas-island.png"
+            src={banner?.image || "/projects/yas-island.png"}
             alt="FAQ — Invent Elevator"
             fill
             priority
