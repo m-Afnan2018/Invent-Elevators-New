@@ -41,13 +41,6 @@ const DEFAULT_TESTIMONIAL = {
   image: "/projects/palm-jumeirah.png",
 };
 
-const DEFAULT_GALLERY = [
-  "/projects/adnoc.png",
-  "/projects/downtown.png",
-  "/projects/city-centre.png",
-  "/projects/yas-island.png",
-];
-
 const DEFAULT_APPLICATIONS = [
   { label: "Luxury Villas",    image: "/projects/downtown.png" },
   { label: "High-Rise Towers", image: "/projects/adnoc.png" },
@@ -89,7 +82,6 @@ export default function CategoryPageClient({ categoryId = null }) {
   const cmsAboutMeta   = category?.aboutMeta?.length    ? category.aboutMeta    : DEFAULT_ABOUT_META;
   const cmsFeatures    = category?.features?.length     ? category.features     : DEFAULT_FEATURES;
   const cmsTestimonial = category?.testimonial?.quote   ? category.testimonial  : DEFAULT_TESTIMONIAL;
-  const cmsGallery     = category?.galleryImages?.length ? category.galleryImages : DEFAULT_GALLERY;
   const cmsApps        = category?.applications?.length  ? category.applications  : DEFAULT_APPLICATIONS;
   const cmsStats       = category?.stats?.length         ? category.stats         : DEFAULT_STATS;
   const cmsCtaEyebrow  = category?.ctaEyebrow || "Get Started";
@@ -148,7 +140,7 @@ export default function CategoryPageClient({ categoryId = null }) {
           </ul>
           <p className={styles.collectionDesc}>{desc}</p>
           <Link href="#gallery" className={styles.collectionCta}>
-            Browse Products
+            Browse Projects
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>

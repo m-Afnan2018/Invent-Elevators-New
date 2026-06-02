@@ -28,8 +28,8 @@ const DEFAULT_STATS = [
   { value: '3x',   label: 'Faster Installation' },
 ];
 
-const TABS = ['about', 'features', 'testimonial', 'gallery', 'applications', 'stats', 'cta'];
-const TAB_LABELS = { about: 'Spec Rows', features: 'Features', testimonial: 'Testimonial', gallery: 'Gallery', applications: 'Applications', stats: 'Stats', cta: 'CTA' };
+const TABS = ['about', 'features', 'testimonial', 'applications', 'stats', 'cta'];
+const TAB_LABELS = { about: 'Spec Rows', features: 'Features', testimonial: 'Testimonial', applications: 'Applications', stats: 'Stats', cta: 'CTA' };
 
 export default function CategoriesCMSPage() {
   const [categories, setCategories] = useState([]);
@@ -51,7 +51,7 @@ export default function CategoriesCMSPage() {
     setForm({
       aboutMeta:    cat.aboutMeta?.length    ? cat.aboutMeta    : DEFAULT_ABOUT_META,
       features:     cat.features?.length     ? cat.features     : DEFAULT_FEATURES,
-      testimonial:  { quote: '', name: '', role: '', image: '', video: '', mediaType: 'image', ...(cat.testimonial || {}) },
+      testimonial:  { quote: '', name: '', role: '', image: '', video: '', ...(cat.testimonial || {}), mediaType: cat.testimonial?.video ? 'video' : 'image' },
       galleryImages: (cat.galleryImages || []).join('\n'),
       applications: cat.applications || [],
       stats:        cat.stats?.length ? cat.stats : DEFAULT_STATS,
@@ -101,7 +101,7 @@ export default function CategoriesCMSPage() {
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Categories CMS</h1>
-          <p className={styles.subtitle}>Edit all content sections of each category page — specs, features, testimonial, gallery, applications, stats, and CTA.</p>
+          <p className={styles.subtitle}>Edit all content sections of each category page — specs, features, testimonial, applications, stats, and CTA. (Gallery auto-populates from projects.)</p>
         </div>
       </div>
 
@@ -109,7 +109,7 @@ export default function CategoriesCMSPage() {
         <div className={styles.tableWrap}>
           <table className={styles.table}>
             <thead>
-              <tr><th>Category</th><th>Spec Rows</th><th>Features</th><th>Gallery</th><th>Stats</th><th>Action</th></tr>
+              <tr><th>Category</th><th>Spec Rows</th><th>Features</th><th>Stats</th><th>Action</th></tr>
             </thead>
             <tbody>
               {categories.map(cat => (
@@ -122,7 +122,6 @@ export default function CategoriesCMSPage() {
                   </td>
                   <td className={styles.tdCenter}>{cat.aboutMeta?.length || DEFAULT_ABOUT_META.length}</td>
                   <td className={styles.tdCenter}>{cat.features?.length  || DEFAULT_FEATURES.length}</td>
-                  <td className={styles.tdCenter}>{cat.galleryImages?.length || 0}</td>
                   <td className={styles.tdCenter}>{cat.stats?.length || DEFAULT_STATS.length}</td>
                   <td><button className={styles.editBtn} onClick={() => openEdit(cat)}><RiEditLine /> Edit</button></td>
                 </tr>
