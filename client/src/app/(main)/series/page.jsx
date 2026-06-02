@@ -15,6 +15,7 @@ import HorizonCard from "@/components/core/series/HorizonCard";
 import AeroSlimCard from "@/components/core/series/AeroSlimCard";
 import OrbitCard from "@/components/core/series/OrbitCard";
 import AtelierCard from "@/components/core/series/AtelierCard";
+import useBanner from '@/hooks/useBanner';
 
 const FALLBACK_PROJECTS = [
   {
@@ -268,11 +269,12 @@ export default function SeriesPage() {
         {/* Background image */}
         <div className={styles.heroBgWrap}>
           <Image
-            src="/projects/adnoc.png"
+            src={banner?.image || "/projects/adnoc.png"}
             alt="Modern building projects"
             fill
             priority
             sizes="100vw"
+            unoptimized={!!(banner?.image)}
             className={styles.heroBgImg}
           />
         </div>

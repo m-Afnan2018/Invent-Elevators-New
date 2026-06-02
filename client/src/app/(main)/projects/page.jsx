@@ -7,6 +7,7 @@ import { getProjects } from "@/services/projects.service";
 import { extractCollection } from "@/lib/apiResponse";
 import styles from "./page.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
+import useBanner from '@/hooks/useBanner';
 
 const FALLBACK_PROJECTS = [
   {
@@ -220,6 +221,7 @@ function ProjectCard({ project }) {
 }
 
 export default function ProjectsPage() {
+  const banner = useBanner('projects');
   const [projects, setProjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
@@ -260,11 +262,12 @@ export default function ProjectsPage() {
         {/* Background image */}
         <div className={styles.heroBgWrap}>
           <Image
-            src="/projects/palm-jumeirah.png"
+            src={banner?.image || "/projects/palm-jumeirah.png"}
             alt="Modern building projects"
             fill
             priority
             sizes="100vw"
+            unoptimized={!!(banner?.image)}
             className={styles.heroBgImg}
           />
         </div>
