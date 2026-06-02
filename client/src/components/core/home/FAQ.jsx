@@ -71,7 +71,7 @@ export default function FAQ({ faqs = DEFAULT_FAQS }) {
                   maxHeight: open === i ? "400px" : "0",
                 }}
               >
-                <p className={styles.answer}>{item.a}</p>
+                <p className={`${styles.answer} lineHeightDescription`}>{item.a}</p>
               </div>
             </div>
           ))}

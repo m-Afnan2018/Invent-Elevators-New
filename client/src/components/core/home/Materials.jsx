@@ -38,7 +38,7 @@ export default function Materials() {
         <div className={styles.head}>
           <p className={styles.eyebrow}>Craftsmanship</p>
           <h2 className={`${styles.title} headings`}>Luxury Materials and Refined Finishes</h2>
-          <p className={styles.subtitle}>
+          <p className={`${styles.subtitle} lineHeightDescription`}>
             Crafted with premium materials and elegant detailing, every Invent Elevator is designed to complement sophisticated interiors and modern architecture. From sleek panoramic glass and rich wood textures to brushed stainless steel and champagne gold accents, each finish is carefully selected to deliver a timeless luxury experience.
           </p>
         </div>

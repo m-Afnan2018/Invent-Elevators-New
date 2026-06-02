@@ -123,7 +123,7 @@ export default function OurProjects() {
 
         {/* ── Bottom CTA strip ── */}
         <div className={styles.ctaStrip}>
-          <p className={styles.ctaStripText}>
+          <p className={`${styles.ctaStripText} lineHeightDescription`}>
             Interested in seeing more of our installations?
           </p>
           <Link href="/projects" className={styles.ctaStripBtn}>

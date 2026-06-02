@@ -43,7 +43,7 @@ export default function ProductCategories() {
           </div>
 
           <div className={styles.introRight}>
-            <p className={styles.introText}>
+            <p className={`${styles.introText} lineHeightDescription`}>
               Choose from home elevators, passenger lifts, freight systems, and
               custom-built options designed around traffic, space, and performance
               requirements.
