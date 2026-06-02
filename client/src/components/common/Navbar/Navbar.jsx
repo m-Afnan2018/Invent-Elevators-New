@@ -55,7 +55,7 @@ export default function Navbar() {
                 <div/>
                 <Link href="/" className={styles.topLogo}>
 
-                <Image width={100} height={100} src='/logo-invent-png-without-bg-1.png' alt="Invent Elevators" style={{height: '70px', objectFit: 'cover', width: 'auto', filter: 'brightness(0) invert(1)'}}/>
+                <Image width={100} height={100} src='/logo-invent-png-without-bg-1.png' alt="Invent Elevators" style={{height: '70px', objectFit: 'cover', width: 'auto', filter: 'brightness(0) invert(1)', marginLeft: '1rem'}}/>
                 </Link>
                 <Link href="/contact" className={styles.topQuote}>↳ FREE QUOTE</Link>
             </header>

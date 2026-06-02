@@ -107,7 +107,7 @@ export default function CategoryPageClient({ categoryId = null }) {
         <div className={styles.heroContent}>
           <p className={styles.heroEyebrow}>Our Solutions</p>
           <h1 className={styles.heroTitle}>{name}</h1>
-          <p className={styles.heroDesc}>{desc}</p>
+          {/* <p className={styles.heroDesc}>{desc}</p> */}
           <Link href="/contact" className={styles.heroCta}>
             Get a Quote
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

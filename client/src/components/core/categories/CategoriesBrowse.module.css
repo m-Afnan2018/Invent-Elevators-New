@@ -213,7 +213,7 @@
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 56px rgba(0,0,0,0.1);
+  /* box-shadow: 0 24px 56px rgba(0,0,0,0.1); */
 }
 
 .cardImgWrap {

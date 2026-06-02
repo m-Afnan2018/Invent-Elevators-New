@@ -68,18 +68,18 @@ export default function TypesGrid({ series = [] }) {
                   )}
 
                   {/* Tiers */}
-                  <div className={styles.tiers}>
+                  {/* <div className={styles.tiers}>
                     <Link href={`/series#${SERIES_ANCHORS[i]}`} className={styles.tier}>Essentials</Link>
                     <span className={styles.tierDivider}>/</span>
                     <Link href={`/series#${SERIES_ANCHORS[i]}`} className={styles.tier}>Elite</Link>
-                  </div>
+                  </div> */}
 
                   {/* Design options */}
-                  <div className={styles.designOptions}>
+                  {/* <div className={styles.designOptions}>
                     {DESIGN_OPTIONS.map((opt) => (
                       <Link key={opt} href={`/series#${SERIES_ANCHORS[i]}`} className={styles.designOpt}>{opt}</Link>
                     ))}
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

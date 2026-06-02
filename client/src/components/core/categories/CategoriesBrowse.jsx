@@ -83,9 +83,9 @@ function CategoryCard({ category, productCount = 0 }) {
           className={`${styles.cardImg} ${hovered ? styles.cardImgHovered : ""}`}
         />
         <div className={styles.cardImgOverlay} />
-        <span className={styles.countBadge}>
+        {/* <span className={styles.countBadge}>
           {productCount > 0 ? `${productCount} Products` : "View Collection"}
-        </span>
+        </span> */}
       </div>
 
       <div className={styles.cardBody}>
