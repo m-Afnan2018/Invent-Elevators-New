@@ -744,6 +744,7 @@ const CategoriesPage = () => {
                                                 )}
                                             </label>
                                         </div>
+                                        <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>{setIconPreview(url);setFormData(p=>({...p,icon:url}));}, "image", "categories")}><RiGalleryLine /> Select from Library</button>
                                         {iconPreview && (
                                             <button type="button" className={styles.clearImgBtn} onClick={() => { setIconPreview(''); setFormData(p => ({ ...p, icon: '' })); }}>
                                                 Remove icon
@@ -773,6 +774,7 @@ const CategoriesPage = () => {
                                                 )}
                                             </label>
                                         </div>
+                                        <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>{setImagePreview(url);setFormData(p=>({...p,image:url}));}, "image", "categories")}><RiGalleryLine /> Select from Library</button>
                                         {imagePreview && (
                                             <button type="button" className={styles.clearImgBtn} onClick={() => { setImagePreview(''); setFormData(p => ({ ...p, image: '' })); }}>
                                                 Remove image

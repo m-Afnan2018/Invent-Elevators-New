@@ -212,6 +212,7 @@ export default function SeriesCMSPage() {
                       catch{ toast.error('Upload failed.'); } finally{ setUploading(false); }
                     }} />
                   </label>
+                  <button type="button" className={styles.addBtn} onClick={()=>openMs(url=>setForm(f=>({...f,images:(f.images?f.images.trim()+'\n':'')+url})),"image","series")}><RiGalleryLine /> Select from Library</button>
                 </div>
               )}
 
