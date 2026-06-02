@@ -16,6 +16,10 @@
   margin: 0;
 }
 
+p {
+  line-height: 1.25;
+}
+
 html {
   scroll-behavior: smooth;
 }
