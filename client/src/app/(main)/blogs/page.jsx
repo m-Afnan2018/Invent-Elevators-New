@@ -53,6 +53,7 @@ function Sidebar({ allTags, activeTags, onTagClick, sidebarSearch, onSidebarSear
 }
 
 export default function Blogs() {
+  const banner = useBanner('blogs');
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -96,7 +97,7 @@ export default function Blogs() {
 
   return (
     <main className={styles.page}>
-      <BlogHero totalPosts={normalizedPosts.length} onSearch={setSearchQuery} />
+      <BlogHero totalPosts={normalizedPosts.length} onSearch={setSearchQuery} banner={banner} />
 
       {/* <section className={styles.introBand}>
         <div className={styles.introInner}>

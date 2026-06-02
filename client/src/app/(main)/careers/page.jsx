@@ -191,7 +191,7 @@ export default function CareersPage() {
     <>
       {/* Hero */}
       <section className={styles.hero}>
-        <div className={styles.heroBg} />
+        <div className={styles.heroBg} style={banner?.image ? {backgroundImage:`url(${banner.image})`,backgroundSize:'cover',backgroundPosition:'center'} : {}} />
         <div className={styles.heroContent}>
           <span className={styles.eyebrow}>Careers at Invent Elevator</span>
           <h1 className={styles.heroH1}>

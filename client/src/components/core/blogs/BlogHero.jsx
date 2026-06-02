@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./BlogHero.module.css";
 
-export default function BlogHero({ totalPosts = 0, onSearch }) {
+export default function BlogHero({ totalPosts = 0, onSearch, banner = null }) {
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e) => {
@@ -23,7 +23,7 @@ export default function BlogHero({ totalPosts = 0, onSearch }) {
       {/* Background image */}
       <div className={styles.bgWrap}>
         <Image
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1800&q=80"
+          src={banner?.image || "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1800&q=80"}
           alt="Engineering and construction"
           fill
           priority
