@@ -16,8 +16,8 @@ export const createCategory = async (req, res) => {
 
 export const getAllCategories = async (_req, res) => {
   try {
-    const categories = await Category.find().sort({ order: 1, createdAt: -1 });
-    const subcategories = await SubCategory.find().sort({ order: 1, createdAt: -1 });
+    const categories = await Category.find({ isActive: { $ne: false } }).sort({ order: 1, createdAt: -1 });
+    const subcategories = await SubCategory.find({ isActive: { $ne: false } }).sort({ order: 1, createdAt: -1 });
     res.status(200).json({ success: true, categories, subcategories, data: categories });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
