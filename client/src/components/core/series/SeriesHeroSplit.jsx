@@ -28,8 +28,8 @@ export default function SeriesHeroSplit({ series }) {
         </nav>
 
         <div className={styles.content}>
-          <span className={styles.eyebrow}>{series.name}</span>
-          <h1 className={styles.heading}>{series.tagline}</h1>
+          <span className={styles.eyebrow}>{series.tagline}</span>
+          <h1 className={styles.heading}>{series.name}</h1>
           <p className={styles.desc}>{series.description}</p>
 
           <div className={styles.btns}>
