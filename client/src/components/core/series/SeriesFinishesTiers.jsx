@@ -18,7 +18,11 @@ export default function SeriesFinishesTiers({ finishes, tiers }) {
         <div className={styles.swatchGrid}>
           {finishes.map((f) => (
             <div key={f.name} className={styles.swatchItem}>
-              <div className={styles.swatch} style={{ background: f.color }} />
+              {f.image ? (
+                <img src={f.image} alt={f.name} className={styles.swatchImg} />
+              ) : (
+                <div className={styles.swatchPlaceholder} />
+              )}
               <span className={styles.swatchName}>{f.name}</span>
             </div>
           ))}

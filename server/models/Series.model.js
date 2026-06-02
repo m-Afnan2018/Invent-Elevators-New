@@ -30,7 +30,7 @@ const seriesSchema = new mongoose.Schema(
     }],
     finishes: [{
       name:  { type: String },
-      color: { type: String },
+      image: { type: String },
     }],
     applications: [{
       label: { type: String },
