@@ -17,14 +17,14 @@ const topLogos = [
 ];
 
 // Bottom row logos (right to left → animate right)
-// const bottomLogos = [
-//   { src: "/logos/logo-9.png", alt: "Logo 9" },
-//   { src: "/logos/logo-10.png", alt: "Logo 10" },
-//   { src: "/logos/logo-11.png", alt: "Logo 11" },
-//   { src: "/logos/logo-12.png", alt: "Logo 12" },
-//   { src: "/logos/logo-13.png", alt: "Logo 13" },
-//   { src: "/logos/logo-14.png", alt: "Logo 14" },
-// ];
+const bottomLogos = [
+  { src: "/logos/logo-9.png", alt: "Logo 9" },
+  { src: "/logos/logo-10.png", alt: "Logo 10" },
+  { src: "/logos/logo-11.png", alt: "Logo 11" },
+  { src: "/logos/logo-12.png", alt: "Logo 12" },
+  { src: "/logos/logo-13.png", alt: "Logo 13" },
+  { src: "/logos/logo-14.png", alt: "Logo 14" },
+];
 
 interface LogoRowProps {
   logos: { src: string; alt: string }[];
@@ -57,7 +57,7 @@ export default function MarqueeLogos() {
     <section className={styles.section}>
       <h2 className="headings">Our Partners</h2>
       <LogoRow logos={topLogos} direction="left" />
-      {/* <LogoRow logos={bottomLogos} direction="right" /> */}
+      <LogoRow logos={bottomLogos} direction="right" />
     </section>
   );
 }

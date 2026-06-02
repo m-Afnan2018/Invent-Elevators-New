@@ -19,7 +19,7 @@
   text-transform: uppercase;
 }
 
-.heading > h2 {
+.heading>h2 {
   letter-spacing: 0.05em;
 }
 
@@ -31,7 +31,7 @@
   opacity: 0;
   transform: scale(1.06);
   transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity, transform;
 }
 
@@ -50,8 +50,10 @@
 .row {
   display: flex;
   min-height: 560px;
-  padding-top: 100px;   /* clears heading (~66px) + breathing room */
-  padding-bottom: 100px; /* equal → symmetric → centred */
+  padding-top: 100px;
+  /* clears heading (~66px) + breathing room */
+  padding-bottom: 100px;
+  /* equal → symmetric → centred */
   position: relative;
   z-index: 1;
 }
@@ -114,7 +116,8 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  position: relative; /* anchor for absolute hoverInfo */
+  position: relative;
+  /* anchor for absolute hoverInfo */
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
   transform-origin: center center;
@@ -175,7 +178,8 @@
 /* ── Hover info block — absolute so it never affects name centering ── */
 .hoverInfo {
   position: absolute;
-  top: calc(100% + 16px); /* sits just below the name/sub block */
+  top: calc(100% + 16px);
+  /* sits just below the name/sub block */
   left: 50%;
   transform: translateX(-50%) translateY(14px);
   display: flex;
@@ -184,7 +188,8 @@
   gap: 14px;
   opacity: 0;
   pointer-events: none;
-  width: 520px; /* explicit width so shrink-to-fit doesn't collapse it */
+  width: 520px;
+  /* explicit width so shrink-to-fit doesn't collapse it */
   transition: opacity 0.55s ease 0.1s, transform 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
 }
 
@@ -205,7 +210,8 @@
   text-align: center;
   white-space: normal;
   margin: 0;
-  width: 100%; /* fill the hoverInfo container width */
+  width: 100%;
+  /* fill the hoverInfo container width */
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -297,9 +303,15 @@
    No hover, no animations, no pointer tricks
 ───────────────────────────────────────────── */
 @media (hover: none) {
+
   /* Section resets */
-  .section       { padding: 0; }
-  .typesSection  { overflow: visible; }
+  .section {
+    padding: 0;
+  }
+
+  .typesSection {
+    overflow: visible;
+  }
 
   /* Heading: centered horizontally and vertically */
   .heading {
@@ -314,12 +326,14 @@
     text-align: center;
   }
 
-  .heading > h2 {
+  .heading>h2 {
     text-align: center;
   }
 
   /* Hide the shared full-section background images */
-  .bgImage { display: none; }
+  .bgImage {
+    display: none;
+  }
 
   /* ── Single-column card grid ── */
   .row {
@@ -346,15 +360,15 @@
   }
 
   /* Show the per-cell background image */
-  .cellImg { display: block; }
+  .cellImg {
+    display: block;
+  }
 
   /* Gradient overlay — dark at bottom for text legibility */
   .cellImgOverlay {
-    background: linear-gradient(
-      180deg,
-      transparent 35%,
-      rgba(0, 0, 0, 0.72) 100%
-    );
+    background: linear-gradient(180deg,
+        transparent 35%,
+        rgba(0, 0, 0, 0.72) 100%);
   }
 
   /* Content pinned to bottom-left of card */
@@ -381,8 +395,13 @@
     font-size: 1.3rem !important;
     letter-spacing: 0.06em;
     color: #fff !important;
-    margin: 0 0 4px;
-    text-align: left;
+    /* margin: 0 0 4px; */
+    text-align: center;
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 4px;
+    text-align: center;
   }
 
   .sub {
@@ -390,7 +409,7 @@
     font-size: 0.78rem;
     color: rgba(255, 255, 255, 0.7) !important;
     opacity: 1 !important;
-    text-align: left;
+    text-align: center;
     margin: 0;
   }
 
@@ -398,18 +417,30 @@
   .hoverInfo {
     display: none;
   }
-  .cell::after { display: none; }
 
-  .rowHovered .name { color: #fff; }
-  .rowHovered .sub  { opacity: 1 !important; }
+  .cell::after {
+    display: none;
+  }
+
+  .rowHovered .name {
+    color: #fff;
+  }
+
+  .rowHovered .sub {
+    opacity: 1 !important;
+  }
 }
 
 /* Portrait phones: taller cards */
 @media (hover: none) and (max-width: 480px) {
+
   .cell,
   .cellActive,
   .cellDimmed {
     aspect-ratio: 4 / 3;
   }
-  .name { font-size: 1.15rem !important; }
+
+  .name {
+    font-size: 1.15rem !important;
+  }
 }
