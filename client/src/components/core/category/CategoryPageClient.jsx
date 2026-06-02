@@ -32,6 +32,25 @@ const DEFAULT_STATS = [
   { value: "3x",   label: "Faster Installation" },
 ];
 
+const DEFAULT_TESTIMONIAL = {
+  quote: "We wanted a home elevator that matched the luxury standards of our villa, and Invent Elevator delivered exactly that. The combination of the Montanari machine and Fermator doors provides an exceptionally smooth and quiet ride. The team handled the entire project professionally, ensuring that every detail aligned with our interior design requirements.",
+  name: "Ahmed Al Rashidi",
+  role: "Villa Owner, Palm Jumeirah",
+  image: "/projects/palm-jumeirah.png",
+};
+
+const DEFAULT_GALLERY = [
+  "/projects/adnoc.png",
+  "/projects/downtown.png",
+  "/projects/city-centre.png",
+  "/projects/yas-island.png",
+];
+
+const DEFAULT_APPLICATIONS = [
+  { label: "Luxury Villas",    image: "/projects/downtown.png" },
+  { label: "High-Rise Towers", image: "/projects/adnoc.png" },
+];
+
 const FEATURE_ICONS = [
   <svg key="0" viewBox="0 0 28 28" fill="none" width="20" height="20"><circle cx="14" cy="14" r="9" stroke="currentColor" strokeWidth="1.6"/><circle cx="14" cy="14" r="3.5" fill="currentColor" opacity=".25"/><path d="M14 5v3M14 20v3M5 14h3M20 14h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>,
   <svg key="1" viewBox="0 0 28 28" fill="none" width="20" height="20"><rect x="4" y="4" width="20" height="20" rx="1" stroke="currentColor" strokeWidth="1.6"/><path d="M4 11h20M11 11v13" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>,
@@ -62,18 +81,18 @@ export default function CategoryPageClient({ categoryId = null }) {
 
   if (isLoading) return <div className={styles.skeleton} />;
 
-  const heroImage       = category?.image            || FALLBACK_BG;
-  const name            = category?.name             || "Elevator Solutions";
-  const desc            = category?.description      || "Engineered for every environment — premium vertical mobility solutions crafted for residential, commercial, and specialist applications across the UAE.";
-  const cmsAboutMeta    = category?.aboutMeta?.length   ? category.aboutMeta   : DEFAULT_ABOUT_META;
-  const cmsFeatures     = category?.features?.length    ? category.features    : DEFAULT_FEATURES;
-  const cmsTestimonial  = category?.testimonial?.quote  ? category.testimonial : null;
-  const cmsGallery      = category?.galleryImages?.length ? category.galleryImages : [];
-  const cmsApps         = category?.applications?.length  ? category.applications  : [];
-  const cmsStats        = category?.stats?.length         ? category.stats         : DEFAULT_STATS;
-  const cmsCtaEyebrow   = category?.ctaEyebrow || "Get Started";
-  const cmsCtaTitle     = category?.ctaTitle   || "Ready to Elevate Your Space?";
-  const cmsCtaDesc      = category?.ctaDesc    || "Our team of specialists is ready to guide you from initial consultation through installation — tailored to your building, your timeline, and your vision.";
+  const heroImage      = category?.image             || FALLBACK_BG;
+  const name           = category?.name              || "Elevator Solutions";
+  const desc           = category?.description       || "Engineered for every environment — premium vertical mobility solutions crafted for residential, commercial, and specialist applications across the UAE.";
+  const cmsAboutMeta   = category?.aboutMeta?.length    ? category.aboutMeta    : DEFAULT_ABOUT_META;
+  const cmsFeatures    = category?.features?.length     ? category.features     : DEFAULT_FEATURES;
+  const cmsTestimonial = category?.testimonial?.quote   ? category.testimonial  : DEFAULT_TESTIMONIAL;
+  const cmsGallery     = category?.galleryImages?.length ? category.galleryImages : DEFAULT_GALLERY;
+  const cmsApps        = category?.applications?.length  ? category.applications  : DEFAULT_APPLICATIONS;
+  const cmsStats       = category?.stats?.length         ? category.stats         : DEFAULT_STATS;
+  const cmsCtaEyebrow  = category?.ctaEyebrow || "Get Started";
+  const cmsCtaTitle    = category?.ctaTitle   || "Ready to Elevate Your Space?";
+  const cmsCtaDesc     = category?.ctaDesc    || "Our team of specialists is ready to guide you from initial consultation through installation — tailored to your building, your timeline, and your vision.";
 
   return (
     <main className={styles.main}>
@@ -155,67 +174,72 @@ export default function CategoryPageClient({ categoryId = null }) {
       </section>
 
       {/* ── 4. TESTIMONIAL ── */}
-      {cmsTestimonial && (
-        <section className={styles.testimonial}>
-          <div className={styles.testimonialMedia}>
-            {cmsTestimonial.video ? (
-              <video src={cmsTestimonial.video} className={styles.testimonialMediaInner} autoPlay muted loop playsInline />
-            ) : (
-              <Image src={cmsTestimonial.image || FALLBACK_BG} alt={cmsTestimonial.name || "Client"} fill sizes="340px" className={styles.testimonialMediaInner} />
-            )}
+      <section className={styles.testimonial}>
+        <div className={styles.testimonialMedia}>
+          {cmsTestimonial.video ? (
+            <video src={cmsTestimonial.video} className={styles.testimonialMediaInner} autoPlay muted loop playsInline />
+          ) : (
+            <Image
+              src={cmsTestimonial.image || FALLBACK_BG}
+              alt={cmsTestimonial.name || "Client"}
+              fill sizes="340px"
+              className={styles.testimonialMediaInner}
+            />
+          )}
+        </div>
+        <div className={styles.testimonialBody}>
+          <span className={styles.testimonialOpenQuote}>&ldquo;</span>
+          <blockquote className={styles.testimonialQuote}>{cmsTestimonial.quote}</blockquote>
+          <div className={styles.testimonialAttrib}>
+            <span className={styles.testimonialName}>{cmsTestimonial.name}</span>
+            {cmsTestimonial.role && <span className={styles.testimonialRole}>{cmsTestimonial.role}</span>}
           </div>
-          <div className={styles.testimonialBody}>
-            <span className={styles.testimonialOpenQuote}>"</span>
-            <blockquote className={styles.testimonialQuote}>{cmsTestimonial.quote}</blockquote>
-            <div className={styles.testimonialAttrib}>
-              <span className={styles.testimonialName}>{cmsTestimonial.name}</span>
-              {cmsTestimonial.role && <span className={styles.testimonialRole}>{cmsTestimonial.role}</span>}
-            </div>
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ── 5. GALLERY ── */}
-      {cmsGallery.length > 0 && (
-        <section className={styles.gallery} id="gallery">
-          <div className={styles.galleryRow}>
-            {cmsGallery.map((img, i) => (
-              <div key={i} className={styles.galleryItem}>
-                <Image src={img} alt={`${name} ${i + 1}`} fill sizes="25vw" className={styles.galleryImg} />
+      <section className={styles.gallery} id="gallery">
+        <div className={styles.galleryRow}>
+          {cmsGallery.map((img, i) => (
+            <div key={i} className={styles.galleryItem}>
+              <Image src={img} alt={`${name} ${i + 1}`} fill sizes="25vw" className={styles.galleryImg} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── 6. APPLICATIONS ── */}
+      <section className={styles.apps}>
+        <div className={styles.appsInner}>
+          <div className={styles.appsLeft}>
+            <p className={styles.appsEyebrow}>Use Cases</p>
+            <h2 className={styles.appsTitle}>Where {name}<br />Fits Best</h2>
+            <Link href="/contact" className={styles.appsCta}>
+              Find Out More
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+          </div>
+          <div className={styles.appsGrid}>
+            {cmsApps.slice(0, 4).map((a, i) => (
+              <div key={i} className={styles.appCard}>
+                <div className={styles.appCardImg}>
+                  <Image
+                    src={a.image || FALLBACK_BG}
+                    alt={a.label}
+                    fill
+                    sizes="(max-width:768px) 90vw, 28vw"
+                    className={styles.appCardImgInner}
+                  />
+                  <div className={styles.appCardOverlay} />
+                  <p className={styles.appCardLabel}>{a.label}</p>
+                </div>
               </div>
             ))}
           </div>
-        </section>
-      )}
-
-      {/* ── 6. APPLICATIONS ── */}
-      {cmsApps.length > 0 && (
-        <section className={styles.apps}>
-          <div className={styles.appsInner}>
-            <div className={styles.appsLeft}>
-              <p className={styles.appsEyebrow}>Use Cases</p>
-              <h2 className={styles.appsTitle}>Where {name}<br />Fits Best</h2>
-              <Link href="/contact" className={styles.appsCta}>
-                Find Out More
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </Link>
-            </div>
-            <div className={styles.appsGrid}>
-              {cmsApps.slice(0, 4).map((a, i) => (
-                <div key={i} className={styles.appCard}>
-                  <div className={styles.appCardImg}>
-                    <Image src={a.image || FALLBACK_BG} alt={a.label} fill sizes="(max-width:768px) 90vw, 28vw" className={styles.appCardImgInner} />
-                    <div className={styles.appCardOverlay} />
-                    <p className={styles.appCardLabel}>{a.label}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ── 7. STATS ── */}
       <section className={styles.stats}>
@@ -243,7 +267,9 @@ export default function CategoryPageClient({ categoryId = null }) {
           <div className={styles.ctaBtns}>
             <Link href="/contact" className={styles.ctaBtnPrimary}>
               Book a Consultation
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </Link>
             <Link href="/series" className={styles.ctaBtnOutline}>Explore Our Series</Link>
           </div>
