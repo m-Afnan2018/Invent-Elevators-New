@@ -681,3 +681,5 @@
   .thumb { height: 58px; }
   .configurator { padding: 22px 20px; }
 }
+
+.btnRow { display: flex; gap: 12px; justify-content: flex-start; align-items: center; margin-top: 24px; }

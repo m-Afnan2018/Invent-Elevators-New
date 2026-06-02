@@ -242,6 +242,7 @@ export default function OrbitCard() {
                 </div>
               ))}
             </div>
+            {children && <div className={styles.btnRow}>{children}</div>}
           </div>
         </div>
 

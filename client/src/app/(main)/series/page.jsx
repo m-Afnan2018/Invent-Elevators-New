@@ -318,35 +318,31 @@ export default function SeriesPage() {
       ]} />
 
       <div className={styles.seriesSection} id="heritage">
-        <HeritageCard />
-        <div className={styles.seriesBtnRow}>
+        <HeritageCard>
           <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
           <Link href="/series/heritage" className={styles.viewSeriesBtn}>Explore Series</Link>
-        </div>
+        </HeritageCard>
       </div>
 
       <div className={styles.seriesSection} id="horizon">
-        <HorizonCard />
-        <div className={styles.seriesBtnRow}>
+        <HorizonCard>
           <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
           <Link href="/series/horizon" className={styles.viewSeriesBtn}>Explore Series</Link>
-        </div>
+        </HorizonCard>
       </div>
 
       <div className={styles.seriesSection} id="orbit">
-        <OrbitCard />
-        <div className={styles.seriesBtnRow}>
+        <OrbitCard>
           <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
           <Link href="/series/orbit" className={styles.viewSeriesBtn}>Explore Series</Link>
-        </div>
+        </OrbitCard>
       </div>
 
       <div className={styles.seriesSection} id="aero">
-        <AeroSlimCard />
-        <div className={styles.seriesBtnRow}>
+        <AeroSlimCard>
           <Link href="/projects" className={styles.viewProjectsBtn}>View Projects</Link>
           <Link href="/series/aero" className={styles.viewSeriesBtn}>Explore Series</Link>
-        </div>
+        </AeroSlimCard>
       </div>
 
       {/* <div className={styles.seriesSection} id="atelier">

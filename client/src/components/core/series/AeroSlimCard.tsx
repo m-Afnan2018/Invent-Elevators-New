@@ -117,14 +117,14 @@ export default function AeroSlimCard() {
             <div className={styles.badge}>AS — Aero</div>
 
             {/* Pit-free callout pill */}
-            <div className={styles.pitFreePill}>
+            {/* <div className={styles.pitFreePill}>
               <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
                 <path d="M3 8h10M8 3v10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                 <circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.5" />
                 <path d="M5 11 L11 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.5" />
               </svg>
               No Pit Required
-            </div>
+            </div> */}
 
             <div className={styles.mainImageFrame}>
               {prevImg !== null && (
@@ -204,7 +204,7 @@ export default function AeroSlimCard() {
               <h1 className={styles.title}>
                 Aero <span className={styles.titleAccent}>Collection</span>
               </h1>
-              <p className={styles.titleTagline}>No Pit. No Compromise.</p>
+              {/* <p className={styles.titleTagline}>No Pit. No Compromise.</p> */}
             </div>
 
             <div className={styles.descriptionBlock}>
@@ -265,6 +265,7 @@ export default function AeroSlimCard() {
                 </div>
               ))}
             </div>
+            {children && <div className={styles.btnRow}>{children}</div>}
           </div>
         </div>
 

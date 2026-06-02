@@ -237,6 +237,7 @@ export default function HorizonCard() {
                 </div>
               ))}
             </div>
+            {children && <div className={styles.btnRow}>{children}</div>}
           </div>
         </div>
 

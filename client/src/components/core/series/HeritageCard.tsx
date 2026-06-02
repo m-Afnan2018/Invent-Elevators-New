@@ -244,6 +244,7 @@ export default function HeritageCard() {
                 </div>
               ))}
             </div>
+            {children && <div className={styles.btnRow}>{children}</div>}
           </div>
         </div>
 
