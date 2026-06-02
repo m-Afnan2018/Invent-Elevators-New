@@ -58,7 +58,16 @@ export const getProjectBySlug = async (req, res) => {
   }
 };
 
-export const getAllProjects = getAll(Project);
+export const getAllProjects = async (req, res) => {
+  try {
+    const filter = {};
+    if (req.query.city) filter.cities = req.query.city;
+    const docs = await Project.find(filter).sort({ createdAt: -1 });
+    res.status(200).json({ success: true, data: docs });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
 export const getProjectById = async (req, res) => {
   try {
     const doc = await Project.findById(req.params.id);

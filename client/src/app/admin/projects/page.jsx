@@ -59,6 +59,7 @@ const ProjectsPage = () => {
         galleryImages: [],
         isFeatured: false,
         showInFooter: false,
+        cities: [],
         linkedProducts: [],
         customSpecs: {
             capacity: '',
@@ -276,6 +277,7 @@ const ProjectsPage = () => {
                 galleryImages: project.galleryImages || [],
                 isFeatured: project.isFeatured || false,
                 showInFooter: project.showInFooter || false,
+                cities: project.cities || [],
                 linkedProducts: project.linkedProducts || [],
                 customSpecs: project.customSpecs || {
                     capacity: '',
@@ -710,6 +712,31 @@ const ProjectsPage = () => {
                                                 <span>Show in Footer</span>
                                             </label>
                                             <small className={styles.helpText}>This project will appear in the "Last Projects" section of the footer.</small>
+                                        </div>
+                                        <div className={styles.formGroup}>
+                                            <label>Area We Serve</label>
+                                            <div className={styles.citiesRow}>
+                                                {[
+                                                    { value: 'dubai',     label: 'Dubai' },
+                                                    { value: 'sharjah',   label: 'Sharjah' },
+                                                    { value: 'abu-dhabi', label: 'Abu Dhabi' },
+                                                ].map(({ value, label }) => (
+                                                    <label key={value} className={styles.checkboxLabel}>
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={(formData.cities || []).includes(value)}
+                                                            onChange={(e) => {
+                                                                const curr = formData.cities || [];
+                                                                setFormData({ ...formData, cities: e.target.checked
+                                                                    ? [...curr, value]
+                                                                    : curr.filter(city => city !== value) });
+                                                            }}
+                                                        />
+                                                        <span>{label}</span>
+                                                    </label>
+                                                ))}
+                                            </div>
+                                            <small className={styles.helpText}>Show this project in the selected city sections of the Area We Serve page.</small>
                                         </div>
                                     </div>
                                 </div>

@@ -22,6 +22,8 @@ const projectSchema = new mongoose.Schema(
     metaDescription: { type: String, trim: true },
     metaKeywords:    [{ type: String, trim: true }],
     ogImage:         { type: String, trim: true },
+    /* ── Area We Serve ── */
+    cities: [{ type: String, enum: ['dubai', 'sharjah', 'abu-dhabi'] }],
   },
   { timestamps: true }
 );

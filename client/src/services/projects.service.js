@@ -5,9 +5,10 @@ import { apiGet, apiPost, apiPut, apiDelete } from '@/lib/apiConnector';
 import { ENDPOINTS } from '@/lib/constants';
 import { extractData } from '@/lib/apiResponse';
 
-export const getProjects = async () => {
+export const getProjects = async (city = '') => {
   try {
-    const response = await apiGet(ENDPOINTS.PROJECTS);
+    const url = city ? `${ENDPOINTS.PROJECTS}?city=${city}` : ENDPOINTS.PROJECTS;
+    const response = await apiGet(url);
     return extractData(response);
   } catch (error) {
     throw error;

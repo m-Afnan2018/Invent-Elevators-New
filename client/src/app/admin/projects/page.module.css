@@ -1094,3 +1094,5 @@
   font-weight: 600;
   text-transform: uppercase;
 }
+
+.citiesRow { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.4rem; }

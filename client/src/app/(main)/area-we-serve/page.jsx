@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { getProjects } from "@/services/projects.service";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -162,6 +164,30 @@ const ABU_DHABI_PROJECTS = [
 ];
 
 export default function AreaWeServePage() {
+  const [dubaiProjects,    setDubai]    = useState(DUBAI_PROJECTS);
+  const [sharjahProjects,  setSharjah]  = useState(SHARJAH_PROJECTS);
+  const [abuDhabiProjects, setAbuDhabi] = useState(ABU_DHABI_PROJECTS);
+
+  useEffect(() => {
+    const load = async (city, setter, fallback) => {
+      try {
+        const data = await getProjects(city);
+        const list = Array.isArray(data) ? data : [];
+        const mapped = list.map(p => ({
+          title:       p.title,
+          location:    p.location || '',
+          description: p.description || '',
+          image:       p.featuredImage || p.galleryImages?.[0] || p.image || '',
+          href:        `/projects/${p.slug || p._id}`,
+        }));
+        if (mapped.length > 0) setter(mapped);
+      } catch { /* keep fallback */ }
+    };
+    load('dubai',     setDubai,    DUBAI_PROJECTS);
+    load('sharjah',   setSharjah,  SHARJAH_PROJECTS);
+    load('abu-dhabi', setAbuDhabi, ABU_DHABI_PROJECTS);
+  }, []);
+
   return (
     <main className={styles.main}>
       {/* ── Hero ── */}
@@ -211,7 +237,7 @@ export default function AreaWeServePage() {
         cityName="DUBAI"
         description="Delivering precision-engineered lift solutions across Dubai's most iconic residential, commercial, and hospitality developments — from Palm Jumeirah villas to Downtown high-rises."
         mapSrc="https://maps.google.com/maps?q=Dubai,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"
-        projects={DUBAI_PROJECTS}
+        projects={dubaiProjects}
         tags={["Home Lifts", "Passenger Lifts", "Panoramic Lifts", "Car Lifts", "Dumbwaiters"]}
       />
 
@@ -220,7 +246,7 @@ export default function AreaWeServePage() {
         cityName="SHARJAH"
         description="Serving Sharjah's growing skyline with bespoke elevator installations designed for performance, safety, and elegance across retail, residential, and mixed-use developments."
         mapSrc="https://maps.google.com/maps?q=Sharjah,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"
-        projects={SHARJAH_PROJECTS}
+        projects={sharjahProjects}
         tags={["Freight Lifts", "Hospital Lifts", "Home Lifts", "Pod Lifts", "Passenger Lifts"]}
       />
 
@@ -229,7 +255,7 @@ export default function AreaWeServePage() {
         cityName="ABU DHABI"
         description="Serving Abu Dhabi's skyline with bespoke elevator installations built for performance and elegance — from ADNOC headquarters to Saadiyat Island's luxury residences."
         mapSrc="https://maps.google.com/maps?q=Abu+Dhabi,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"
-        projects={ABU_DHABI_PROJECTS}
+        projects={abuDhabiProjects}
         tags={["Panoramic Lifts", "Car Lifts", "Home Lifts", "Chair Lifts", "Passenger Lifts"]}
       />
 
