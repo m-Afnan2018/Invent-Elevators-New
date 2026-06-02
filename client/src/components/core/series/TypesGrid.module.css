@@ -182,6 +182,24 @@
   pointer-events: auto;
 }
 
+/* Description */
+.descText {
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.65;
+  text-align: center;
+  max-width: 360px;
+  margin: 0;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+}
+
 /* Tiers row */
 .tiers {
   display: flex;

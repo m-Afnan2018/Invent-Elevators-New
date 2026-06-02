@@ -62,6 +62,11 @@ export default function TypesGrid({ series = [] }) {
 
                 {/* Extra info — visible only on active cell */}
                 <div className={styles.hoverInfo}>
+                  {/* Description */}
+                  {item.description && (
+                    <p className={styles.descText}>{item.description}</p>
+                  )}
+
                   {/* Tiers */}
                   <div className={styles.tiers}>
                     <Link href={`/series#${SERIES_ANCHORS[i]}`} className={styles.tier}>Essentials</Link>
