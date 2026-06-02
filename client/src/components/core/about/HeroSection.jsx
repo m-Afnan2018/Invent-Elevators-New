@@ -10,6 +10,7 @@ export default function HeroSection({ banner = null }) {
           fill
           sizes="100vw"
           src={banner?.image || "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1800&q=85&fit=crop"}
+              unoptimized={!!(banner?.image)}
           alt="Luxury elevator interior"
           priority
           className={styles.bgImg}

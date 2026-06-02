@@ -114,6 +114,7 @@ export default function FAQPage() {
         <div className={styles.heroBgWrap}>
           <Image
             src={banner?.image || "/projects/yas-island.png"}
+              unoptimized={!!(banner?.image)}
             alt="FAQ — Invent Elevator"
             fill
             priority

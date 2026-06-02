@@ -197,6 +197,7 @@ export default function AreaWeServePage() {
         <div className={styles.heroBgWrap}>
           <Image
             src={banner?.image || "/projects/downtown.png"}
+              unoptimized={!!(banner?.image)}
             alt="UAE skyline"
             fill
             priority

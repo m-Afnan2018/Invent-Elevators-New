@@ -24,6 +24,7 @@ export default function BlogHero({ totalPosts = 0, onSearch, banner = null }) {
       <div className={styles.bgWrap}>
         <Image
           src={banner?.image || "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1800&q=80"}
+              unoptimized={!!(banner?.image)}
           alt="Engineering and construction"
           fill
           priority
