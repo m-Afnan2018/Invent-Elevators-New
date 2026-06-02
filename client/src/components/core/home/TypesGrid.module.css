@@ -291,13 +291,21 @@
   .section       { padding: 0; }
   .typesSection  { overflow: visible; }
 
-  /* Heading: back to normal document flow */
+  /* Heading: centered horizontally and vertically */
   .heading {
     position: relative;
     padding: 1.5rem 1rem 1.25rem;
     font-size: 1.1rem;
     background: #fff;
     color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .heading > h2 {
+    text-align: center;
   }
 
   /* Hide the shared full-section background images */
@@ -376,13 +384,9 @@
     margin: 0;
   }
 
-  /* Show hoverInfo (typewriter runs via IntersectionObserver) */
+  /* Hide hoverInfo on mobile — .sub already shows the description */
   .hoverInfo {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    margin-top: 10px;
+    display: none;
   }
   .cell::after { display: none; }
 
