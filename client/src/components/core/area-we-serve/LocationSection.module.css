@@ -231,3 +231,25 @@
     animation-duration: 20s;
   }
 }
+
+/* ── Category tag pills ── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 5px 14px;
+  border: 1px solid #d0cfc8;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #555;
+  letter-spacing: 0.03em;
+  cursor: default;
+  user-select: none;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}

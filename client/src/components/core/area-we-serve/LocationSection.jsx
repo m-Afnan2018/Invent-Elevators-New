@@ -12,6 +12,7 @@ export default function LocationSection({
   mapPlaceholder = "",
   projects = [],
   id = "",
+  tags = [],
 }) {
   const doubled = [...projects, ...projects];
 
@@ -114,6 +115,13 @@ export default function LocationSection({
           <div className={styles.cityInfo}>
             <h2 className={styles.cityName}>{cityName}</h2>
             <p className={styles.description}>{description}</p>
+            {tags.length > 0 && (
+              <div className={styles.tags}>
+                {tags.map((tag) => (
+                  <span key={tag} className={styles.tag}>{tag}</span>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className={styles.mapBox}>
