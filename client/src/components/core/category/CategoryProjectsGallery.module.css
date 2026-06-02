@@ -1,0 +1,88 @@
+.section {
+  width: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.viewport {
+  overflow: hidden;
+  width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.track {
+  display: flex;
+  gap: 0;
+  will-change: transform;
+}
+
+.card {
+  flex: none;
+  width: 40vw;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  text-decoration: none;
+  display: block;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.image {
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+.card:hover .image { transform: scale(1.05); }
+
+.hoverOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  transition: background 0.3s;
+  pointer-events: none;
+}
+
+.card:hover .hoverOverlay { background: rgba(0, 0, 0, 0.5); }
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover .cardInfo { opacity: 1; transform: translateY(0); }
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.cardLocation {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) { .card { width: 75vw; } }
+@media (max-width: 480px) { .card { width: 85vw; } }

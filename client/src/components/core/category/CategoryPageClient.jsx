@@ -8,7 +8,7 @@ import { extractCollection } from "@/lib/apiResponse";
 import styles from "./CategoryPageClient.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
 import CategoryApps from "@/components/core/category/CategoryApps";
-import ProjectGallery from "@/components/core/projects/single/ProjectGallery";
+import CategoryProjectsGallery from "@/components/core/category/CategoryProjectsGallery";
 
 const FALLBACK_BG = "/projects/city-centre.png";
 
@@ -199,9 +199,9 @@ export default function CategoryPageClient({ categoryId = null }) {
         </div>
       </section>
 
-      {/* ── 5. GALLERY — same auto-scroll marquee + lightbox as project page ── */}
+      {/* ── 5. GALLERY — auto-scroll marquee of projects in this category ── */}
       <div id="gallery">
-        <ProjectGallery images={cmsGallery} featuredImage={heroImage} />
+        <CategoryProjectsGallery categoryName={name} />
       </div>
 
       {/* ── 6. APPLICATIONS — same layout as homepage Series section ── */}
