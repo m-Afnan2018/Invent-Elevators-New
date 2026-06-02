@@ -860,3 +860,5 @@
 .modal::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+.libraryBtn { display:inline-flex; align-items:center; gap:.3rem; padding:.6rem 1rem; background:var(--bg-tertiary); border:1px solid var(--border-color); border-radius:.45rem; color:var(--text-secondary); font-size:.82rem; font-weight:500; cursor:pointer; transition:all .2s; font-family:inherit; }
+.libraryBtn:hover { border-color:var(--accent); color:var(--accent); background:rgba(59,130,246,.05); }

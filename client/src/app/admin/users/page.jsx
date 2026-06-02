@@ -68,6 +68,11 @@ const UsersPage = () => {
     const [editingUser, setEditingUser] = useState(null);
     const [passwordResetUser, setPasswordResetUser] = useState(null);
     const [profileImagePreview, setProfileImagePreview] = useState('');
+  const [msOpen, setMsOpen] = useState(false);
+  const [msCb, setMsCb] = useState(null);
+  const [msAccept, setMsAccept] = useState('image');
+  const [msFolder, setMsFolder] = useState('misc');
+  const openMs = (cb, accept='image', folder='misc') => { setMsCb(()=>cb); setMsOpen(true); setMsAccept(accept); setMsFolder(folder); };
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -572,6 +577,7 @@ const UsersPage = () => {
                                                 </>
                                             )}
                                         </label>
+                                        <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>{setProfileImagePreview(url);setFormData(f=>({...f,profileImage:url}));}, "image", "users")}><RiGalleryLine /> Library</button>
                                     </div>
                                 </div>
 

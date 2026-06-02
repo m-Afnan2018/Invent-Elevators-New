@@ -989,6 +989,9 @@ const ProjectsPage = () => {
                                                     <label className={`${styles.uploadSmallBtn} ${testimonialImgUploading ? 'uploadLoading' : ''}`}>
                                                         <RiUploadCloudLine />
                                                         <input type="file" accept="image/*" style={{display:'none'}} onChange={handleTestimonialImageUpload} />
+                                                        </label>
+                                                        <button type="button" className={styles.libraryBtn} onClick={()=>openMediaSelector('testimonialImage')}><RiGalleryLine /> Library</button>
+                                                        <label style={{display:'none'}}>
                                                     </label>
                                                 </div>
                                                 {currentTestimonial.image && <img src={currentTestimonial.image} alt="preview" className={styles.testimonialMediaPreview} />}
