@@ -30,25 +30,25 @@ export default function TypesGrid({ series = [] }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <section className={}>
+    <section className={[styles.section, styles.typesSection].join(' ')}>
       <div className={styles.heading}>
         <h2 className="headings">Our Series of Home Lifts</h2>
       </div>
 
       {bgImages.map((src, i) => src && (
         <Image
-          key={}
+          key={`bg-${i}`}
           src={src}
           alt=""
           fill
           sizes="100vw"
-          className={}
+          className={[styles.bgImage, hoveredIndex === i ? styles.imageActive : ''].join(' ').trim()}
           style={{ objectFit: "cover" }}
           priority={i === 0}
         />
       ))}
 
-      <div className={}>
+      <div className={[styles.row, hoveredIndex !== null ? styles.rowHovered : ''].join(' ').trim()}>
         {items.map((item, i) => {
           const isActive = hoveredIndex === i;
           const isDimmed = hoveredIndex !== null && !isActive;
@@ -58,8 +58,8 @@ export default function TypesGrid({ series = [] }) {
           return (
             <Link
               key={item._id || i}
-              href={}
-              className={}
+              href={`/series/${anchor}`}
+              className={[styles.cell, isActive ? styles.cellActive : '', isDimmed ? styles.cellDimmed : ''].join(' ').trim()}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
