@@ -42,7 +42,7 @@
     font-weight: 600;
     font-family: var(--font-aeonik), "DM Sans", sans-serif;
     color: #0f1b2d;
-    line-height: 1.2;
+    line-height: 1.25;
     letter-spacing: -0.02em;
     margin: 0 0 16px;
 }
@@ -52,7 +52,7 @@
     font-weight: 400;
     font-family: var(--font-aeonik), "DM Sans", sans-serif;
     color: #777777;
-    line-height: 1.65;
+    line-height: 1.25;
     margin: 0;
 }
 
@@ -121,7 +121,7 @@
     font-family: var(--font-aeonik), "DM Sans", sans-serif;
     color: #0f1b2d;
     letter-spacing: 0.01em;
-    line-height: 1.4;
+    line-height: 1.25;
 }
 
 /* ── Bottom nav ── */
@@ -141,7 +141,7 @@
     background: transparent;
     cursor: pointer;
     font-size: 18px;
-    line-height: 1;
+    line-height: 1.25;
     color: #777777;
     display: flex;
     align-items: center;

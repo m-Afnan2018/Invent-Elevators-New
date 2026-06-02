@@ -13,7 +13,7 @@
   color: #444;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.25;
   padding-bottom: 1rem;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
   margin: 0;
@@ -107,14 +107,14 @@
   letter-spacing: 0.06em;
   color: #1a1a1a;
   margin: 0 0 10px;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .desc {
   font-size: 0.95rem;
   font-weight: 400;
   color: #777777;
-  line-height: 1.65;
+  line-height: 1.25;
   margin: 0;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
 }

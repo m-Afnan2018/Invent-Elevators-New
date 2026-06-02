@@ -126,7 +126,7 @@
   font-size: 4rem;
   font-weight: 700;
   color: #1a1a1a;
-  line-height: 1;
+  line-height: 1.25;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
   margin-bottom: -16px;
   display: block;
@@ -143,7 +143,7 @@
   color: #1a1a1a;
   margin: 0 0 40px;
   margin-left: 100px;
-  line-height: 1.18;
+  line-height: 1.25;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
   letter-spacing: -0.02em;
   /* text flows around the floated quote mark */

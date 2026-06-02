@@ -30,7 +30,7 @@
 .heading {
   font-family: "Syne", sans-serif;
   font-size: clamp(2rem, 3.3vw, 3rem);
-  line-height: 1.13;
+  line-height: 1.25;
   margin: 0;
   color: #101a2f;
 }
@@ -38,7 +38,7 @@
 .introText {
   margin: 0 0 1.1rem;
   color: #4f5c6f;
-  line-height: 1.7;
+  line-height: 1.25;
 }
 
 .consultBtn {

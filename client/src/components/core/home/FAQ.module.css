@@ -36,7 +36,7 @@
   font-weight: 400;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
   color: #0f0f0f;
-  line-height: 1.15;
+  line-height: 1.25;
   letter-spacing: -0.02em;
   margin: 0 0 24px;
 }
@@ -44,7 +44,7 @@
 .sub {
   font-size: 0.85rem;
   color: #777;
-  line-height: 1.7;
+  line-height: 1.25;
   margin: 0;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
 }
@@ -81,7 +81,7 @@
   color: #0f0f0f;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
   letter-spacing: 0.01em;
-  line-height: 1.4;
+  line-height: 1.25;
   transition: color 0.2s;
 }
 
@@ -101,7 +101,7 @@
   justify-content: center;
   font-size: 1.1rem;
   font-weight: 300;
-  line-height: 1;
+  line-height: 1.25;
   transition: background 0.25s, color 0.25s, border-color 0.25s;
   color: #999;
 }
@@ -121,7 +121,7 @@
 .answer {
   font-size: 0.875rem;
   color: #555;
-  line-height: 1.8;
+  line-height: 1.25;
   margin: 0;
   padding: 0 48px 28px 0;
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
