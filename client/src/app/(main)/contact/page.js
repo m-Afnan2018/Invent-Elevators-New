@@ -207,8 +207,9 @@ export default function Contact() {
 
                   <div className={styles.row2}>
                     <div className={styles.field}>
-                      <label className={styles.label} htmlFor="phone">Phone Number</label>
+                      <label className={styles.label} htmlFor="phone">Phone Number <span className={styles.req}>*</span></label>
                       <input
+                        required
                         id="phone"
                         name="phone"
                         type="tel"
