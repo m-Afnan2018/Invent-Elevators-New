@@ -141,7 +141,7 @@ export default function Series({ activeCategories = [] }) {
                     </p>
                     <div style={{ height: "5rem" }} />
                     <Link href="/categories" className={styles.mainBtn}>View All Categories</Link>
-                    <div style={{ height: "5rem" }} />
+                    <div style={{ height: "2rem" }} />
                 </div>
 
                 <div className={styles.carouselOuter} ref={outerRef}>

@@ -124,7 +124,7 @@ export default function CategoryApps({ name = "This Category", apps = [] }) {
                         Discover the ideal environments and applications where our {name.toLowerCase()} solutions deliver the best performance and aesthetic impact.
                     </p>
                     <div style={{ height: "3rem" }} />
-                    <Link href="/contact" className={styles.mainBtn}>Find Out More →</Link>
+                    {/* <Link href="/contact" className={styles.mainBtn}>Find Out More →</Link> */}
                 </div>
 
                 <div className={styles.carouselOuter} ref={outerRef}>
