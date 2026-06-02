@@ -20,7 +20,7 @@ export default function Projects({ featuredProjects: propProjects = [] }) {
         const list = Array.isArray(data) ? data : [];
         const all = list.filter(p => p?._id && p?.title);
         // Prefer projects that have a featured image
-        const withImage = all.filter(p => p.featuredImage);
+        const withImage = all.filter(p => p.featuredImage || p.galleryImages?.[0]);
         const picks = (withImage.length ? withImage : all).slice(0, 6);
         if (picks.length) setFetched(picks);
       })
@@ -46,6 +46,7 @@ export default function Projects({ featuredProjects: propProjects = [] }) {
                 src={
                   project.featuredImage ||
                   project.image ||
+                  project.galleryImages?.[0] ||
                   project.images?.[0] ||
                   FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]
                 }
