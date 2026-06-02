@@ -255,21 +255,28 @@ const ProjectsPage = () => {
                 location: project.location,
                 completionDate: project.completionDate,
                 category: project.category,
-                status: project.status,
+                status: project.status || 'quote',
                 featuredImage: project.featuredImage,
-                galleryImages: project.galleryImages,
-                isFeatured: project.isFeatured,
+                galleryImages: project.galleryImages || [],
+                isFeatured: project.isFeatured || false,
                 showInFooter: project.showInFooter || false,
-                linkedProducts: project.linkedProducts,
-                customSpecs: project.customSpecs,
-                testimonials: project.testimonials,
+                linkedProducts: project.linkedProducts || [],
+                customSpecs: project.customSpecs || {
+                    capacity: '',
+                    speed: '',
+                    floors: '',
+                    cabinSize: '',
+                    driveType: '',
+                    otherSpecs: '',
+                },
+                testimonials: project.testimonials || [],
                 metaTitle: project.metaTitle || '',
                 metaDescription: project.metaDescription || '',
                 metaKeywords: Array.isArray(project.metaKeywords) ? project.metaKeywords.join(', ') : (project.metaKeywords || ''),
                 ogImage: project.ogImage || '',
             });
             setFeaturedImagePreview(project.featuredImage);
-            setGalleryPreviews(project.galleryImages);
+            setGalleryPreviews(project.galleryImages || []);
         } else {
             setEditingProject(null);
             setFormData({
