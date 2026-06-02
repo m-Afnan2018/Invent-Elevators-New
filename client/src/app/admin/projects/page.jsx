@@ -236,6 +236,22 @@ const ProjectsPage = () => {
         setFormData({ ...formData, testimonials: newTestimonials });
     };
 
+    const handleTestimonialImageUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        setTestimonialImgUploading(true);
+        const _tid = toast.loading('Uploading image…');
+        try {
+            const url = await uploadImage(file, 'projects');
+            setCurrentTestimonial(prev => ({ ...prev, image: url }));
+            toast.success('Image uploaded!', { id: _tid });
+        } catch (err) {
+            toast.error(err?.message || 'Upload failed.', { id: _tid });
+        } finally {
+            setTestimonialImgUploading(false);
+        }
+    };
+
     const handleAddCategory = () => {
         if (newCategory.trim() && !categories.includes(newCategory.trim())) {
             setCategories([...categories, newCategory.trim()]);
