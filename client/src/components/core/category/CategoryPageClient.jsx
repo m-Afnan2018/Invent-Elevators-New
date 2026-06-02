@@ -7,6 +7,7 @@ import { getCategories } from "@/services/categories.service";
 import { extractCollection } from "@/lib/apiResponse";
 import styles from "./CategoryPageClient.module.css";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
+import CategoryApps from "@/components/core/category/CategoryApps";
 
 const FALLBACK_BG = "/projects/city-centre.png";
 
@@ -208,38 +209,8 @@ export default function CategoryPageClient({ categoryId = null }) {
         </div>
       </section>
 
-      {/* ── 6. APPLICATIONS ── */}
-      <section className={styles.apps}>
-        <div className={styles.appsInner}>
-          <div className={styles.appsLeft}>
-            <p className={styles.appsEyebrow}>Use Cases</p>
-            <h2 className={styles.appsTitle}>Where {name}<br />Fits Best</h2>
-            <Link href="/contact" className={styles.appsCta}>
-              Find Out More
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2.5 7h9M8 2.5L12.5 7 8 11.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </Link>
-          </div>
-          <div className={styles.appsGrid}>
-            {cmsApps.slice(0, 4).map((a, i) => (
-              <div key={i} className={styles.appCard}>
-                <div className={styles.appCardImg}>
-                  <Image
-                    src={a.image || FALLBACK_BG}
-                    alt={a.label}
-                    fill
-                    sizes="(max-width:768px) 90vw, 28vw"
-                    className={styles.appCardImgInner}
-                  />
-                  <div className={styles.appCardOverlay} />
-                  <p className={styles.appCardLabel}>{a.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── 6. APPLICATIONS — same layout as homepage Series section ── */}
+      <CategoryApps name={name} apps={cmsApps} />
 
       {/* ── 7. STATS ── */}
       <section className={styles.stats}>
