@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./Projects.module.css";
+import Image from "next/image";
 import Link from "next/link";
 import { getProjects } from "@/services/projects.service";
 
@@ -41,7 +42,7 @@ export default function Projects({ featuredProjects: propProjects = [] }) {
             className={styles.card}
           >
             <div className={styles.imgWrap}>
-              <img
+              <Image
                 src={
                   project.featuredImage ||
                   project.image ||
@@ -49,6 +50,8 @@ export default function Projects({ featuredProjects: propProjects = [] }) {
                   FALLBACK_IMAGES[i % FALLBACK_IMAGES.length]
                 }
                 alt={project.title}
+                fill
+                sizes="(max-width:640px) 100vw, 50vw"
                 className={styles.img}
               />
             </div>

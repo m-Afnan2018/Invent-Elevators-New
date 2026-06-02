@@ -14,8 +14,9 @@ const nextConfig = {
       /* EC2 server — with and without port 5000 */
       { protocol: 'http', hostname: 'ec2-13-200-6-248.ap-south-1.compute.amazonaws.com' },
       { protocol: 'http', hostname: 'ec2-13-200-6-248.ap-south-1.compute.amazonaws.com', port: '5000' },
-      /* localhost dev server */
+      /* localhost dev/prod server — all ports */
       { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'http', hostname: 'localhost', port: '4000' },
       { protocol: 'http', hostname: 'localhost', port: '5000' },
     ],
   },
