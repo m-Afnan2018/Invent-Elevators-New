@@ -32,7 +32,7 @@ const CONTACT_ITEMS = [
   },
 ];
 
-const ContactHero = () => {
+const ContactHero = ({ banner = null }) => {
   return (
     <section className={styles.hero}>
       {/* Background image */}
