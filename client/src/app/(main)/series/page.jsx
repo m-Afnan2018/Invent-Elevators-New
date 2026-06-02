@@ -310,12 +310,14 @@ export default function SeriesPage() {
         </div>
       </section>
 
-      <TypesGrid series={[
-        { _id: "1", link: "heritage", name: "Heritage", subtitle: "Reinforced Concrete Shaft · Essential & Elite",  url: '/series/heritage.png', description: "Built for permanence — every component selected for its ability to perform reliably for decades in residential towers and landmark developments." },
-        { _id: "2", link: "horizon",  name: "Horizon",  subtitle: "MS Shaft · Glass Cabin Car",    url: '/series/horizon.png',   description: "Full-glass cabin car that transforms vertical travel into a design statement, bringing natural light and openness to any space." },
-        { _id: "3", link: "orbit",    name: "Orbit",    subtitle: "Round Shaft · Curvature Cabin", url: '/series/orbit.png',     description: "A sculptural circular lift designed as a centrepiece — panoramic curved cabin combining iconic form with uncompromising luxury." },
-        { _id: "4", link: "aero",     name: "Aero",     subtitle: "No Pit · Slim Panoramic Lift",  url: '/series/aero-slim.png', description: "Pit-free panoramic lift engineered for spaces where a conventional pit cannot be formed — minimal footprint, maximum presence." },
-      ]} />
+      <div className={styles.typesGridWrapper}>
+        <TypesGrid series={[
+          { _id: "1", link: "heritage", name: "Heritage", subtitle: "Reinforced Concrete Shaft · Essential & Elite",  url: '/series/heritage.png', description: "Built for permanence — every component selected for its ability to perform reliably for decades in residential towers and landmark developments." },
+          { _id: "2", link: "horizon",  name: "Horizon",  subtitle: "MS Shaft · Glass Cabin Car",    url: '/series/horizon.png',   description: "Full-glass cabin car that transforms vertical travel into a design statement, bringing natural light and openness to any space." },
+          { _id: "3", link: "orbit",    name: "Orbit",    subtitle: "Round Shaft · Curvature Cabin", url: '/series/orbit.png',     description: "A sculptural circular lift designed as a centrepiece — panoramic curved cabin combining iconic form with uncompromising luxury." },
+          { _id: "4", link: "aero",     name: "Aero",     subtitle: "No Pit · Slim Panoramic Lift",  url: '/series/aero-slim.png', description: "Pit-free panoramic lift engineered for spaces where a conventional pit cannot be formed — minimal footprint, maximum presence." },
+        ]} />
+      </div>
 
       <div className={styles.seriesSection} id="heritage">
         <HeritageCard>

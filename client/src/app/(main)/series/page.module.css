@@ -598,4 +598,5 @@
   .grid { grid-template-columns: 1fr; gap: 16px; }
   .section { padding: 48px 0 72px; }
   .heroStats { gap: 16px; }
+  .typesGridWrapper { display: none; }
 }
