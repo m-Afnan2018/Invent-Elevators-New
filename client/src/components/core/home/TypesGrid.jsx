@@ -1,14 +1,14 @@
 "use client";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useMemo } from "react";
 import styles from "./TypesGrid.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
 const FALLBACK_IMAGES = [
-  '/series/heritage.png',
-  '/series/horizon.png',
-  '/series/orbit.png',
-  '/series/aero-slim.png',
+  "/series/heritage.png",
+  "/series/horizon.png",
+  "/series/orbit.png",
+  "/series/aero-slim.png",
 ];
 const FALLBACK_DESCRIPTIONS = [
   "Built for RCC shafts — the permanent choice for residential towers and landmark developments.",
@@ -17,143 +17,52 @@ const FALLBACK_DESCRIPTIONS = [
   "Pit-free, slim panoramic lift. Minimal footprint, maximum presence.",
 ];
 const FALLBACK_ANCHORS = ["heritage", "horizon", "orbit", "aero"];
-const TYPING_SPEED = 28;
 
 export default function TypesGrid({ series = [] }) {
-  /* Stabilise items — inline array in parent JSX changes reference every render */
   const seriesKey = series.map(s => s._id || s.name).join(",");
-  const items = useMemo(
-    () => series.slice(0, 4),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [seriesKey]
-  );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const items = useMemo(() => series.slice(0, 4), [seriesKey]);
 
-  const bgImages     = useMemo(() => items.map((it, i) => it.url      || FALLBACK_IMAGES[i]       || ''), [items]);
-  const descriptions = useMemo(() => items.map((it, i) => it.subtitle || FALLBACK_DESCRIPTIONS[i] || ''), [items]);
-  const anchors      = useMemo(() => items.map((it, i) => it.link     || FALLBACK_ANCHORS[i]      || it.name?.toLowerCase().replace(/\s+/g, '-') || '#'), [items]);
+  const bgImages     = useMemo(() => items.map((it, i) => it.url      || FALLBACK_IMAGES[i]       || ""), [items]);
+  const descriptions = useMemo(() => items.map((it, i) => it.subtitle || FALLBACK_DESCRIPTIONS[i] || ""), [items]);
+  const anchors      = useMemo(() => items.map((it, i) => it.link     || FALLBACK_ANCHORS[i]      || it.name?.toLowerCase().replace(/\s+/g, "-") || "#"), [items]);
 
-  /* Stable ref so effects never re-run just because the array got a new reference */
-  const descRef = useRef(descriptions);
-  descRef.current = descriptions;
-
-  /* ── Desktop hover typewriter ── */
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [typedText,    setTypedText]    = useState("");
-  const [showCursor,   setShowCursor]   = useState(false);
-  const intervalRef = useRef(null);
-
-  useEffect(() => {
-    clearInterval(intervalRef.current);
-    setTypedText("");
-
-    if (hoveredIndex === null) {
-      setShowCursor(false);
-      return;
-    }
-
-    const full = descRef.current[hoveredIndex] ?? "";
-    let pos = 0;
-    setShowCursor(true);
-
-    const delay = setTimeout(() => {
-      intervalRef.current = setInterval(() => {
-        pos++;
-        setTypedText(full.slice(0, pos));
-        if (pos >= full.length) {
-          clearInterval(intervalRef.current);
-          setTimeout(() => setShowCursor(false), 800);
-        }
-      }, TYPING_SPEED);
-    }, 180);
-
-    return () => {
-      clearTimeout(delay);
-      clearInterval(intervalRef.current);
-    };
-  }, [hoveredIndex]); // ← only hoveredIndex; descRef is a stable ref
-
-  /* ── Mobile per-cell typewriter (IntersectionObserver) ── */
-  const [isTouch,       setIsTouch]       = useState(false);
-  const [mobileTyped,   setMobileTyped]   = useState(["", "", "", ""]);
-  const [mobileCursors, setMobileCursors] = useState([false, false, false, false]);
-  const cellRefs   = useRef([]);
-  const typedCells = useRef(new Set());
-
-  useEffect(() => {
-    setIsTouch(window.matchMedia("(hover: none)").matches);
-  }, []);
-
-  useEffect(() => {
-    if (!isTouch || items.length === 0) return;
-
-    typedCells.current = new Set();
-    const observers = [];
-
-    cellRefs.current.forEach((cell, idx) => {
-      if (!cell) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (!entry.isIntersecting || typedCells.current.has(idx)) return;
-          typedCells.current.add(idx);
-
-          const desc = descRef.current[idx] ?? "";
-          let pos = 0;
-          setMobileCursors(prev => prev.map((v, j) => j === idx ? true : v));
-
-          const iv = setInterval(() => {
-            pos++;
-            setMobileTyped(prev => prev.map((v, j) => j === idx ? desc.slice(0, pos) : v));
-            if (pos >= desc.length) {
-              clearInterval(iv);
-              setTimeout(() => setMobileCursors(prev => prev.map((v, j) => j === idx ? false : v)), 800);
-            }
-          }, TYPING_SPEED);
-        },
-        { threshold: 0.45 }
-      );
-      observer.observe(cell);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach(o => o.disconnect());
-  }, [isTouch, items.length]);
 
   return (
-    <section className={`${styles.section} ${styles.typesSection}`}>
+    <section className={}>
       <div className={styles.heading}>
         <h2 className="headings">Our Series of Home Lifts</h2>
       </div>
 
-      {/* Desktop: shared background images that cross-fade on hover */}
       {bgImages.map((src, i) => src && (
         <Image
-          key={`bg-${i}`}
+          key={}
           src={src}
           alt=""
           fill
           sizes="100vw"
-          className={`${styles.bgImage} ${hoveredIndex === i ? styles.imageActive : ""}`}
+          className={}
           style={{ objectFit: "cover" }}
           priority={i === 0}
         />
       ))}
 
-      <div className={`${styles.row} ${hoveredIndex !== null ? styles.rowHovered : ""}`}>
+      <div className={}>
         {items.map((item, i) => {
           const isActive = hoveredIndex === i;
           const isDimmed = hoveredIndex !== null && !isActive;
           const anchor   = anchors[i];
-          const bgSrc    = bgImages[i] || '';
+          const bgSrc    = bgImages[i] || "";
 
           return (
             <Link
               key={item._id || i}
-              href={`/series/${anchor}`}
-              ref={el => { cellRefs.current[i] = el; }}
-              className={`${styles.cell} ${isActive ? styles.cellActive : ""} ${isDimmed ? styles.cellDimmed : ""}`}
+              href={}
+              className={}
+              onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Per-cell image — visible on touch via CSS */}
               <div className={styles.cellImg}>
                 {bgSrc && (
                   <Image
@@ -167,15 +76,11 @@ export default function TypesGrid({ series = [] }) {
                 <div className={styles.cellImgOverlay} />
               </div>
 
-              <div className={styles.cellContent} onMouseEnter={() => setHoveredIndex(i)}>
+              <div className={styles.cellContent}>
                 <p className={styles.name}>{item.name}</p>
                 <p className={styles.sub}>{item.subtitle || ""}</p>
-
                 <div className={styles.hoverInfo}>
-                  <p className={styles.typewriterText}>
-                    {isTouch ? mobileTyped[i] : typedText}
-                    {(isTouch ? mobileCursors[i] : showCursor) && <span className={styles.cursor} />}
-                  </p>
+                  <p className={styles.descText}>{descriptions[i]}</p>
                 </div>
               </div>
             </Link>

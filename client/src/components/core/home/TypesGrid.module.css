@@ -90,9 +90,9 @@
   opacity: 0;
 }
 
-/* ── Active cell — grows + content scales up ── */
+/* ── Active cell — expands to ~60% of row width ── */
 .cellActive {
-  flex: 4;
+  flex: 2.7;
   padding: 60px 48px;
   overflow: visible;
 }
@@ -185,39 +185,23 @@
   pointer-events: auto;
 }
 
-/* Typewriter description */
-.typewriterText {
+/* Description text — shown immediately on hover, no typewriter */
+.descText {
   font-family: var(--font-aeonik), "DM Sans", sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
   letter-spacing: 0.02em;
   line-height: 1.65;
   text-align: center;
-  margin: 0 0 4px;
-  max-width: 280px;
-  min-height: 2.6em;
+  margin: 0;
+  max-width: 360px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 10px 16px;
   border-radius: 6px;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
-}
-
-.cursor {
-  display: inline-block;
-  width: 1.5px;
-  height: 0.85em;
-  background: rgba(255, 255, 255, 0.8);
-  margin-left: 2px;
-  vertical-align: middle;
-  animation: blink 0.7s step-start infinite;
 }
 
 /* Tiers row */
