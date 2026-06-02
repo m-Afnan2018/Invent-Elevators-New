@@ -43,7 +43,7 @@ export default function FAQ({ faqs = DEFAULT_FAQS }) {
           <h2 className={styles.title}>
             Frequently<br />Asked<br />Questions
           </h2>
-          <p className={styles.sub}>
+          <p className={`${styles.sub} lineHeightDescription`}>
             Everything you need to know before your first conversation with us.
           </p>
         </div>

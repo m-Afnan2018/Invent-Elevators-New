@@ -489,7 +489,7 @@ export default function Home() {
                 <div className={styles.blogBody}>
                   {blog.category && <span className={styles.blogTag}>{blog.category}</span>}
                   <h3 className={styles.blogTitle}>{blog.title}</h3>
-                  <p className={styles.blogExcerpt}>
+                  <p className={`${styles.blogExcerpt} lineHeightDescription`}>
                     {blog.excerpt || blog.shortDescription || "Latest updates from our engineering and installation team."}
                   </p>
                   <span className={styles.blogReadMore}>Read article →</span>

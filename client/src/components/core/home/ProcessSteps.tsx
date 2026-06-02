@@ -90,7 +90,7 @@ export default function ProcessSteps({ data }: ProcessStepsProps) {
             {/* Heading */}
             <div className={`${styles.headingBlock} headings`}>
                 <h2 className={styles.heading}>{heading}</h2>
-                <p className={styles.subheading}>{subheading}</p>
+                <p className={`${styles.subheading} lineHeightDescription`}>{subheading}</p>
             </div>
 
             {/* Steps */}
@@ -112,7 +112,7 @@ export default function ProcessSteps({ data }: ProcessStepsProps) {
                         <div className={styles.textWrap}>
                             <span className={styles.number}>{step.number}</span>
                             <h3 className={styles.title}>{step.title}</h3>
-                            <p className={styles.description}>{step.description}</p>
+                            <p className={`${styles.description} lineHeightDescription`}>{step.description}</p>
                         </div>
 
                     </div>

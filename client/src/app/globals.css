@@ -92,6 +92,15 @@ select {
   line-height: 1.75;
 }
 
+/* ── Description / small body text ── */
+.lineHeightDescription {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #777777;
+  line-height: 1.75;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+
 /* ── Upload loading overlay (add class="uploadLoading" to any upload label) ── */
 @keyframes uploadSpin {
   to { transform: rotate(360deg); }

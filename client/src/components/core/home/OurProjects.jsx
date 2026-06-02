@@ -42,7 +42,7 @@ export default function OurProjects() {
             </h2>
           </div>
           <div className={styles.headerRight}>
-            <p className={styles.headerDesc}>
+            <p className={`${styles.headerDesc} lineHeightDescription`}>
               Explore our portfolio of completed lift installations across
               residential, commercial, and industrial sectors worldwide. Each
               project reflects our commitment to precision engineering and

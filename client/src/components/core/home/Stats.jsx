@@ -57,7 +57,7 @@ function StatItem({ stat, index, inView }) {
       </div>
       <div className={styles.statText}>
         <span className={styles.statLabel}>{stat.label}</span>
-        <span className={styles.statDesc}>{stat.description}</span>
+        <span className={`${styles.statDesc} lineHeightDescription`}>{stat.description}</span>
       </div>
     </div>
   );
