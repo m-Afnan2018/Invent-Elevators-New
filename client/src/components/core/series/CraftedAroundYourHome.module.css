@@ -34,7 +34,7 @@
 .grid {
   max-width: 1240px;
   margin: 0 auto;
-  /* padding: 0 56px; */
+  padding: 0 56px;
   display: flex;
   flex-direction: row;
   gap: 16px;
@@ -49,6 +49,7 @@
   flex-direction: row;
   overflow: hidden;
   min-height: 340px;
+  width: 100%;
   transition: background 0.25s;
 }
 .card:hover { background: #fafaf8; }
