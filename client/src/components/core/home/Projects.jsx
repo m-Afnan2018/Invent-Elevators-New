@@ -1,6 +1,8 @@
 "use client";
+import { useEffect, useState } from "react";
 import styles from "./Projects.module.css";
 import Link from "next/link";
+import { getProjects } from "@/services/projects.service";
 
 const FALLBACK_IMAGES = [
   "/projects/project-1.webp",
@@ -8,19 +10,33 @@ const FALLBACK_IMAGES = [
   "/projects/project-3.webp",
 ];
 
-export default function Projects({ featuredProjects = [] }) {
+export default function Projects({ featuredProjects: propProjects = [] }) {
+  const [fetched, setFetched] = useState([]);
+
+  useEffect(() => {
+    getProjects()
+      .then(data => {
+        const list = Array.isArray(data) ? data : [];
+        const valid = list.filter(p => p?._id && p?.title).slice(0, 6);
+        if (valid.length) setFetched(valid);
+      })
+      .catch(() => {});
+  }, []);
+
+  // Prefer self-fetched data; fall back to prop (which may be FALLBACK_PROJECTS)
+  const projects = fetched.length ? fetched : propProjects;
+
   return (
-    <section className={`${styles.section} ${styles.projectSection}`}>
-      <h2 className='{styles.heading} headings'>Our Projects</h2>
+    <section className={[styles.section, styles.projectSection].join(' ')}>
+      <h2 className={`${styles.heading} headings`}>Our Projects</h2>
       <p>We believe an elevator should feel like a natural extension of the architecture, enhancing elegance, functionality,<br/> and the overall luxury experience of the space.</p>
       <div className={styles.grid}>
-        {featuredProjects.map((project, i) => (
+        {projects.map((project, i) => (
           <Link
             key={project._id}
             href={project.__fallback ? "/projects" : `/projects/${project.slug || project._id}`}
             className={styles.card}
           >
-            {/* Image */}
             <div className={styles.imgWrap}>
               <img
                 src={
@@ -32,27 +48,18 @@ export default function Projects({ featuredProjects = [] }) {
                 alt={project.title}
                 className={styles.img}
               />
-              {project.price && (
-                <span className={styles.price}>
-                  FROM {project.price} PER PERSON
-                </span>
-              )}
             </div>
-
-            {/* Text below image */}
             <div className={styles.body}>
               <h3 className={styles.title}>{project.title}</h3>
               <p className={styles.desc}>
-                {(project.description || "Custom vertical mobility solution.")
-                  .slice(0, 160)}
+                {(project.description || "Custom vertical mobility solution.").slice(0, 160)}
                 {(project.description || "").length > 160 ? "…" : ""}
               </p>
             </div>
           </Link>
         ))}
       </div>
-
-      <button className={styles.viewMoreBtn}>View More </button>
+      <button className={styles.viewMoreBtn}>View More</button>
     </section>
   );
 }

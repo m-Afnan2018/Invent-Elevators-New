@@ -258,23 +258,21 @@ export default function Home() {
 
   useEffect(() => {
     const loadHomeData = async () => {
-      try {
-        const [categoryRes, productRes, projectRes, blogRes, testimonialRes] = await Promise.all([
-          getCategories(),
-          getProducts(),
-          getProjects(),
-          getBlogs(),
-          getTestimonials().catch(() => []),
-        ]);
-        setCategories(extractCollection(categoryRes, ["categories"]));
-        setProducts(extractCollection(productRes));
-        setProjects(extractCollection(projectRes));
-        setBlogs(extractCollection(blogRes));
-        if (Array.isArray(testimonialRes)) {
-          const active = testimonialRes.filter(t => t.isActive !== false && t.isFeatured);
-          if (active.length > 0) setApiTestimonials(active);
-        }
-      } catch (_e) { }
+      const [categoryRes, productRes, projectRes, blogRes, testimonialRes] = await Promise.all([
+        getCategories().catch(() => []),
+        getProducts().catch(() => []),
+        getProjects().catch(() => []),
+        getBlogs().catch(() => []),
+        getTestimonials().catch(() => []),
+      ]);
+      setCategories(extractCollection(categoryRes, ["categories"]));
+      setProducts(extractCollection(productRes));
+      setProjects(extractCollection(projectRes));
+      setBlogs(extractCollection(blogRes));
+      if (Array.isArray(testimonialRes)) {
+        const active = testimonialRes.filter(t => t.isActive !== false && t.isFeatured);
+        if (active.length > 0) setApiTestimonials(active);
+      }
     };
     loadHomeData();
   }, []);
