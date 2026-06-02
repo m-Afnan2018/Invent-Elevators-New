@@ -5,6 +5,8 @@ import { RiAddLine, RiEditLine, RiDeleteBinLine, RiSearchLine, RiCloseLine, RiUs
 import toast from 'react-hot-toast';
 import { getTestimonials, createTestimonial, updateTestimonial, deleteTestimonial } from '@/services/testimonials.service';
 import { uploadImage } from '@/services/upload.service';
+import MediaSelector from '@/components/admin/MediaSelector';
+import { RiGalleryLine } from 'react-icons/ri';
 import styles from './page.module.css';
 
 const EMPTY = {
@@ -23,6 +25,11 @@ export default function TestimonialsAdminPage() {
   const [form,      setForm]      = useState(EMPTY);
   const [saving,    setSaving]    = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [msOpen, setMsOpen] = useState(false);
+  const [msCb, setMsCb] = useState(null);
+  const [msAccept, setMsAccept] = useState('image');
+  const [msFolder, setMsFolder] = useState('misc');
+  const openMs = (cb, accept='image', folder='misc') => { setMsCb(()=>cb); setMsOpen(true); setMsAccept(accept); setMsFolder(folder); };
 
   const load = async () => {
     try {
@@ -202,6 +209,7 @@ export default function TestimonialsAdminPage() {
                       <RiUploadCloudLine />
                       <input type="file" accept="image/*" style={{ display: 'none' }} onChange={handleAvatarUpload} />
                     </label>
+                    <button type="button" className={styles.uploadBtn} onClick={()=>openMs(url=>setForm(f=>({...f,avatar:url})),'image','testimonials')}><RiGalleryLine /></button>
                   </div>
                   {form.avatar && <img src={form.avatar} alt="preview" className={styles.mediaPreview} />}
                 </div>
@@ -228,6 +236,7 @@ export default function TestimonialsAdminPage() {
           </div>
         </div>
       )}
+      <MediaSelector isOpen={msOpen} onClose={()=>setMsOpen(false)} onSelect={url=>{ msCb?.(url); setMsOpen(false); }} accept={msAccept} folder={msFolder} />
     </div>
   );
 }

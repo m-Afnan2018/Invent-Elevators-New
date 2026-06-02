@@ -21,6 +21,8 @@ import { getProducts, createProduct, updateProduct, deleteProduct } from '@/serv
 import { getCategories, getSubCategories } from '@/services/categories.service';
 import { getComponents } from '@/services/components.service';
 import { uploadImage, uploadMultipleImages } from '@/services/upload.service';
+import MediaSelector from '@/components/admin/MediaSelector';
+import { RiGalleryLine } from 'react-icons/ri';
 
 const ProductsPage = () => {
     const [products, setProducts] = useState([]);
@@ -42,6 +44,11 @@ const ProductsPage = () => {
     });
     const [imagePreview, setImagePreview] = useState('');
     const [isUploading, setIsUploading] = useState(false);
+  const [msOpen, setMsOpen] = useState(false);
+  const [msCb, setMsCb] = useState(null);
+  const [msAccept, setMsAccept] = useState('image');
+  const [msFolder, setMsFolder] = useState('misc');
+  const openMs = (cb, accept='image', folder='misc') => { setMsCb(()=>cb); setMsOpen(true); setMsAccept(accept); setMsFolder(folder); };
     const [saveError, setSaveError] = useState('');
     const imageInputRef = useRef(null);
 
@@ -465,7 +472,8 @@ const ProductsPage = () => {
                                             className={styles.fileInput}
                                             ref={imageInputRef}
                                         />
-                                        <label htmlFor="imageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
+                                        <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>{setImagePreviews(p=>[...p,url]);setFormData(p=>({...p,images:[...p.images,url]}));},'image','products')}><RiGalleryLine /> Library</button>
+            <label htmlFor="imageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                             <RiUploadCloudLine className={styles.uploadIcon} />
                                             <span>Click to upload image(s)</span>
                                         </label>

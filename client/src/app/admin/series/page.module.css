@@ -71,3 +71,5 @@
 .finishGrid { display: flex; flex-direction: column; gap: .6rem; }
 .finishRow { display: grid; grid-template-columns: 44px 1fr auto; gap: .6rem; align-items: center; }
 .colorPicker { width: 40px; height: 36px; border: 1px solid var(--border-color); border-radius: .35rem; cursor: pointer; padding: 2px; background: var(--bg-primary); }
+.libraryBtn { display:inline-flex; align-items:center; gap:.3rem; padding:.5rem .8rem; background:var(--bg-tertiary); border:1px solid var(--border-color); border-radius:.45rem; color:var(--text-secondary); font-size:.82rem; cursor:pointer; transition:all .2s; font-family:inherit; }
+.libraryBtn:hover { border-color:var(--accent); color:var(--accent); }

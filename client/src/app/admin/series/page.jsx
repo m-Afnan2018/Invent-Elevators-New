@@ -5,6 +5,8 @@ import { RiEditLine, RiSaveLine, RiCloseLine, RiAddLine, RiDeleteBinLine, RiImag
 import toast from 'react-hot-toast';
 import { getAllSeriesCMS, upsertSeriesCMS } from '@/services/series.service';
 import { uploadImage } from '@/services/upload.service';
+import MediaSelector from '@/components/admin/MediaSelector';
+import { RiGalleryLine } from 'react-icons/ri';
 import styles from './page.module.css';
 
 /* ── Fallback mirrors SERIES_DATA in page.jsx ── */
@@ -54,6 +56,11 @@ export default function SeriesCMSPage() {
   const [saving,     setSaving]     = useState(false);
   const [activeTab,  setActiveTab]  = useState('basic');
   const [uploading,  setUploading]  = useState(false);
+  const [msOpen, setMsOpen] = useState(false);
+  const [msCb, setMsCb] = useState(null);
+  const [msAccept, setMsAccept] = useState('image');
+  const [msFolder, setMsFolder] = useState('misc');
+  const openMs = (cb, accept='image', folder='misc') => { setMsCb(()=>cb); setMsOpen(true); setMsAccept(accept); setMsFolder(folder); };
 
   useEffect(() => {
     getAllSeriesCMS()
@@ -181,7 +188,7 @@ export default function SeriesCMSPage() {
                   <div className={styles.field}><label>Hero Image</label>
                     <div className={styles.imgRow}>
                       <input value={form.heroImage||''} onChange={e=>setForm(f=>({...f,heroImage:e.target.value}))} placeholder="URL or upload →" />
-                      <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'heroImage')} /></label>
+                      <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'heroImage')} /></label><button type="button" className={styles.uploadBtn} onClick={()=>openMs(url=>setForm(f=>({...f,heroImage:url})),'image','series')}><RiGalleryLine /></button>
                     </div>
                     {form.heroImage && <img src={form.heroImage} alt="" className={styles.imgPreview} />}
                   </div>
@@ -247,7 +254,7 @@ export default function SeriesCMSPage() {
                       <textarea rows={2} value={c.desc||''} onChange={e=>setItem('cabinStyles',i,'desc',e.target.value)} placeholder="Short description…" />
                       <div className={styles.imgRow}>
                         <input value={c.image||''} onChange={e=>setItem('cabinStyles',i,'image',e.target.value)} placeholder="Image URL" />
-                        <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'cabinStyles',i,'image')} /></label>
+                        <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'cabinStyles',i,'image')} /></label><button type="button" className={styles.uploadBtn} onClick={()=>openMs(url=>setItem('cabinStyles',i,'image',url),'image','series')}><RiGalleryLine /></button>
                       </div>
                       {c.image && <img src={c.image} alt="" className={styles.imgPreview} />}
                     </div>
@@ -268,7 +275,7 @@ export default function SeriesCMSPage() {
                         <input value={f.image||''} onChange={e=>setItem('finishes',i,'image',e.target.value)} placeholder="Image URL or upload →" />
                         <label className={`${styles.uploadBtn} ${uploading?'uploadLoading':''}`}>
                           <RiImageAddLine />
-                          <input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'finishes',i,'image')} />
+                          <input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'finishes',i,'image')} /><button type="button" className={styles.uploadBtn} onClick={()=>openMs(url=>setItem('finishes',i,'image',url),'image','series')}><RiGalleryLine /></button>
                         </label>
                       </div>
                       {f.image && <img src={f.image} alt={f.name} className={styles.imgPreview} />}
@@ -288,7 +295,7 @@ export default function SeriesCMSPage() {
                       </div>
                       <div className={styles.imgRow}>
                         <input value={a.image||''} onChange={e=>setItem('applications',i,'image',e.target.value)} placeholder="Image URL" />
-                        <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'applications',i,'image')} /></label>
+                        <label className={`${styles.uploadBtn} ${uploading ? 'uploadLoading' : ''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,'applications',i,'image')} /></label><button type="button" className={styles.uploadBtn} onClick={()=>openMs(url=>setItem('applications',i,'image',url),'image','series')}><RiGalleryLine /></button>
                       </div>
                       {a.image && <img src={a.image} alt="" className={styles.imgPreview} />}
                     </div>
@@ -309,6 +316,7 @@ export default function SeriesCMSPage() {
           </div>
         </div>
       )}
+      <MediaSelector isOpen={msOpen} onClose={()=>setMsOpen(false)} onSelect={url=>{ msCb?.(url); setMsOpen(false); }} accept={msAccept} folder={msFolder} />
     </div>
   );
 }

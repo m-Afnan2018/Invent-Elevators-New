@@ -31,6 +31,8 @@ import {
     deleteSubCategory,
 } from '@/services/categories.service';
 import { uploadImage } from '@/services/upload.service';
+import MediaSelector from '@/components/admin/MediaSelector';
+import { RiGalleryLine } from 'react-icons/ri';
 
 const CategoriesPage = () => {
     const [categories, setCategories] = useState([]);
@@ -44,6 +46,11 @@ const CategoriesPage = () => {
     const [iconPreview,  setIconPreview]  = useState('');
     const [imagePreview, setImagePreview] = useState('');
     const [isUploading,  setIsUploading]  = useState(false);
+  const [msOpen, setMsOpen] = useState(false);
+  const [msCb, setMsCb] = useState(null);
+  const [msAccept, setMsAccept] = useState('image');
+  const [msFolder, setMsFolder] = useState('misc');
+  const openMs = (cb, accept='image', folder='misc') => { setMsCb(()=>cb); setMsOpen(true); setMsAccept(accept); setMsFolder(folder); };
 
     const [formData, setFormData] = useState({
         name: '',

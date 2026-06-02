@@ -5,6 +5,8 @@ import { RiEditLine, RiSaveLine, RiCloseLine, RiAddLine, RiDeleteBinLine, RiImag
 import toast from 'react-hot-toast';
 import { getCategories, updateCategoryCMS } from '@/services/categories.service';
 import { uploadImage } from '@/services/upload.service';
+import MediaSelector from '@/components/admin/MediaSelector';
+import { RiGalleryLine } from 'react-icons/ri';
 import { extractCollection } from '@/lib/apiResponse';
 import styles from './page.module.css';
 
@@ -39,6 +41,11 @@ export default function CategoriesCMSPage() {
   const [saving,     setSaving]     = useState(false);
   const [activeTab,  setActiveTab]  = useState('about');
   const [uploading,  setUploading]  = useState(false);
+  const [msOpen, setMsOpen] = useState(false);
+  const [msCb, setMsCb] = useState(null);
+  const [msAccept, setMsAccept] = useState('image');
+  const [msFolder, setMsFolder] = useState('misc');
+  const openMs = (cb, accept='image', folder='misc') => { setMsCb(()=>cb); setMsOpen(true); setMsAccept(accept); setMsFolder(folder); };
 
   useEffect(() => {
     getCategories()
@@ -195,7 +202,7 @@ export default function CategoriesCMSPage() {
                     <div className={styles.field}><label>Client Image</label>
                       <div className={styles.imgRow}>
                         <input value={form.testimonial?.image||''} onChange={e=>setT('image',e.target.value)} placeholder="URL or upload →" />
-                        <label className={`${styles.uploadBtn} ${uploading?'uploadLoading':''}`}><RiUploadCloudLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,url=>setT('image',url))} /></label>
+                        <label className={`${styles.uploadBtn} ${uploading?'uploadLoading':''}`}><RiUploadCloudLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,url=>setT('image',url))} /></label><button type="button" className={styles.uploadBtn} onClick={()=>openMs(url=>setT('image',url),'image','categories')}><RiGalleryLine /></button>
                       </div>
                       {form.testimonial?.image && <img src={form.testimonial.image} alt="" className={styles.imgPreview} />}
                     </div>
@@ -227,7 +234,7 @@ export default function CategoriesCMSPage() {
                       <div className={styles.row2}><input value={a.label||''} onChange={e=>setItem('applications',i,'label',e.target.value)} placeholder="Label (e.g. Luxury Villas)" /><button className={styles.delBtn} onClick={()=>removeItem('applications',i)}><RiDeleteBinLine /></button></div>
                       <div className={styles.imgRow}>
                         <input value={a.image||''} onChange={e=>setItem('applications',i,'image',e.target.value)} placeholder="Image URL" />
-                        <label className={`${styles.uploadBtn} ${uploading?'uploadLoading':''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,url=>setItem('applications',i,'image',url))} /></label>
+                        <label className={`${styles.uploadBtn} ${uploading?'uploadLoading':''}`}><RiImageAddLine /><input type="file" accept="image/*" style={{display:'none'}} onChange={e=>uploadImg(e,url=>setItem('applications',i,'image',url))} /></label><button type="button" className={styles.uploadBtn} onClick={()=>openMs(url=>setItem('applications',i,'image',url),'image','categories')}><RiGalleryLine /></button>
                       </div>
                       {a.image && <img src={a.image} alt="" className={styles.imgPreview} />}
                     </div>
@@ -271,6 +278,7 @@ export default function CategoriesCMSPage() {
           </div>
         </div>
       )}
+      <MediaSelector isOpen={msOpen} onClose={()=>setMsOpen(false)} onSelect={url=>{ msCb?.(url); setMsOpen(false); }} accept={msAccept} folder={msFolder} />
     </div>
   );
 }

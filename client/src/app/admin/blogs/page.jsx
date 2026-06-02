@@ -25,6 +25,8 @@ import styles from './page.module.css';
 import Image from 'next/image';
 import { getBlogs, createBlog, updateBlog, deleteBlog } from '@/services/blogs.service';
 import { uploadImage } from '@/services/upload.service';
+import MediaSelector from '@/components/admin/MediaSelector';
+import { RiGalleryLine } from 'react-icons/ri';
 
 const STATUS_OPTIONS = [
     { value: 'draft', label: 'Draft', icon: RiDraftLine },
@@ -42,6 +44,11 @@ const BlogsPage = () => {
     const [imagePreview, setImagePreview] = useState('');
     const [ogImagePreview, setOgImagePreview] = useState('');
     const [isUploading, setIsUploading] = useState(false);
+  const [msOpen, setMsOpen] = useState(false);
+  const [msCb, setMsCb] = useState(null);
+  const [msAccept, setMsAccept] = useState('image');
+  const [msFolder, setMsFolder] = useState('misc');
+  const openMs = (cb, accept='image', folder='misc') => { setMsCb(()=>cb); setMsOpen(true); setMsAccept(accept); setMsFolder(folder); };
     const [formData, setFormData] = useState({
         title: '',
         slug: '',
@@ -587,6 +594,7 @@ const BlogsPage = () => {
                                                 className={styles.fileInput}
                                                 ref={featuredImageInputRef}
                                             />
+                                            <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>setFormData(f=>({...f,featuredImage:url})),\'image\',\'blogs\')}><RiGalleryLine /> Library</button>
                                             <label htmlFor="featuredImageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Click to upload featured image</span>
@@ -713,6 +721,7 @@ const BlogsPage = () => {
                                                 className={styles.fileInput}
                                                 ref={ogImageInputRef}
                                             />
+                                            <button type="button" className={styles.libraryBtn} onClick={()=>openMs(url=>setFormData(f=>({...f,ogImage:url})),\'image\',\'blogs\')}><RiGalleryLine /> Library</button>
                                             <label htmlFor="ogImageUpload" className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`}>
                                                 <RiUploadCloudLine className={styles.uploadIcon} />
                                                 <span>Upload OG image (1200x630 recommended)</span>
@@ -745,6 +754,7 @@ const BlogsPage = () => {
                                         {isUploading ? 'Uploading…' : (editingBlog ? 'Update Blog' : 'Create Blog')}
                                     </button>
                                 </div>
+      <MediaSelector isOpen={msOpen} onClose={()=>setMsOpen(false)} onSelect={url=>{ msCb?.(url); setMsOpen(false); }} accept={msAccept} folder={msFolder} />
                             </form>
                         </div>
                     </div>
