@@ -59,8 +59,7 @@ export default function Projects({ featuredProjects: propProjects = [] }) {
             <div className={styles.body}>
               <h3 className={styles.title}>{project.title}</h3>
               <p className={`${styles.desc} lineHeightDescription`}>
-                {(project.description || "Custom vertical mobility solution.").slice(0, 160)}
-                {(project.description || "").length > 160 ? "…" : ""}
+                {project.description || "Custom vertical mobility solution."}
               </p>
             </div>
           </Link>
