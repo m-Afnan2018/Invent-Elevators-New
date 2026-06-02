@@ -652,6 +652,7 @@ const ProjectsPage = () => {
                                                         </option>
                                                     ))}
                                                 </select>
+                                                <div className={styles.categoryAddGroup}>
                                                 <input
                                                     type="text"
                                                     value={newCategory}
@@ -666,6 +667,7 @@ const ProjectsPage = () => {
                                                 >
                                                     <RiAddLine />
                                                 </button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className={styles.formGroup}>
