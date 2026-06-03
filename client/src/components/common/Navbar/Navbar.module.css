@@ -382,3 +382,22 @@
     outline: 2px solid rgba(255, 255, 255, 0.45);
     outline-offset: 2px;
 }
+/* ── WhatsApp pill icon ── */
+.pillWhatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+}
+
+.pillWhatsapp:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+}
