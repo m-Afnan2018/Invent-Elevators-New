@@ -219,6 +219,7 @@
   .heading { font-size: clamp(24px, 7vw, 36px); }
   .specRow { grid-template-columns: 1fr 1fr; padding-top: 14px; }
   .specValue { font-size: 11px; }
+  .right { display: none; }
 }
 
 @media (max-width: 480px) {
