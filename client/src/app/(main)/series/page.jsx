@@ -16,6 +16,7 @@ import AeroSlimCard from "@/components/core/series/AeroSlimCard";
 import OrbitCard from "@/components/core/series/OrbitCard";
 import AtelierCard from "@/components/core/series/AtelierCard";
 import useBanner from '@/hooks/useBanner';
+import PageHero from "@/components/common/PageHero/PageHero";
 
 const FALLBACK_PROJECTS = [
   {
@@ -266,52 +267,24 @@ export default function SeriesPage() {
   return (
     <main className={styles.main}>
       {/* ── Hero ── */}
+      <PageHero
+        image={banner?.image}
+        fallbackImage="/projects/adnoc.png"
+        eyebrow="Our Series"
+        title="Elevator Series"
+        description="Four distinct series — Heritage, Horizon, Orbit, and Aero — each engineered for a different shaft type, architectural context, and performance requirement."
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Series" }]}
+      />
+
+      {/* ── OLD hero (commented out — kept for reference) ──
       <section className={styles.hero}>
-        {/* Background image */}
-        <div className={styles.heroBgWrap}>
-          <Image
-            src={banner?.image || "/projects/adnoc.png"}
-            alt="Modern building projects"
-            fill
-            priority
-            sizes="100vw"
-            unoptimized={!!(banner?.image)}
-            className={styles.heroBgImg}
-          />
-        </div>
-        <div className={styles.heroOverlayTop} />
-        <div className={styles.heroOverlayBottom} />
-
-        {/* Breadcrumb */}
-        <nav className={styles.heroBreadcrumb}>
-          <Link href="/" className={styles.heroBcLink}>Home</Link>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
-            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span className={styles.heroBcActive}>Series</span>
-        </nav>
-
-        <div className={styles.heroInner}>
-          <div className={styles.eyebrow}>
-            <span className={styles.eyebrowDot} />
-            <span>Our Series</span>
-          </div>
-          <h1 className={styles.heroTitle}>Our Series</h1>
-          <p className={styles.heroDesc}>
-            Explore completed lift installations and success stories across residential
-            villas, commercial towers, hospitality venues, and healthcare facilities
-            across the UAE.
-          </p>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className={styles.heroScrollWrap}>
-          <span className={styles.heroScrollLabel}>Scroll to explore</span>
-          <div className={styles.heroScrollTrack}>
-            <div className={styles.heroScrollThumb} />
-          </div>
-        </div>
+        <div className={styles.heroBgWrap}><Image src={banner?.image || "/projects/adnoc.png"} alt="Modern building projects" fill priority sizes="100vw" unoptimized={!!(banner?.image)} className={styles.heroBgImg} /></div>
+        <div className={styles.heroOverlayTop} /><div className={styles.heroOverlayBottom} />
+        <nav className={styles.heroBreadcrumb}><Link href="/" className={styles.heroBcLink}>Home</Link><svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}><path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg><span className={styles.heroBcActive}>Series</span></nav>
+        <div className={styles.heroInner}><div className={styles.eyebrow}><span className={styles.eyebrowDot} /><span>Our Series</span></div><h1 className={styles.heroTitle}>Our Series</h1><p className={styles.heroDesc}>Explore completed lift installations and success stories across residential villas, commercial towers, hospitality venues, and healthcare facilities across the UAE.</p></div>
+        <div className={styles.heroScrollWrap}><span className={styles.heroScrollLabel}>Scroll to explore</span><div className={styles.heroScrollTrack}><div className={styles.heroScrollThumb} /></div></div>
       </section>
+      ── END OLD hero ── */}
 
       <div className={styles.typesGridWrapper}>
         <TypesGrid series={[

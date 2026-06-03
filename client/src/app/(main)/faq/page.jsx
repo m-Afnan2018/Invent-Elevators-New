@@ -1,5 +1,6 @@
 "use client";
 import useBanner from '@/hooks/useBanner';
+import PageHero from "@/components/common/PageHero/PageHero";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -109,68 +110,35 @@ export default function FAQPage() {
     <main className={styles.page}>
 
       {/* ── Hero ── */}
+      <PageHero
+        image={banner?.image}
+        fallbackImage="/projects/yas-island.png"
+        eyebrow="Knowledge Base"
+        title={<>Frequently Asked<br />Questions</>}
+        description="Everything you need to know about our products, services, safety standards, and processes — answered clearly."
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "FAQ" }]}
+      />
+
+      {/* ── OLD hero (commented out — kept for reference) ──
       <section className={styles.hero}>
-        {/* Background image */}
-        <div className={styles.heroBgWrap}>
-          <Image
-            src={banner?.image || "/projects/yas-island.png"}
-              unoptimized={!!(banner?.image)}
-            alt="FAQ — Invent Elevator"
-            fill
-            priority
-            sizes="100vw"
-            className={styles.heroBgImg}
-          />
-        </div>
-        <div className={styles.heroOverlayTop} />
-        <div className={styles.heroOverlayBottom} />
-
-        {/* Breadcrumb — absolute, top */}
-        <nav className={styles.heroBreadcrumb}>
-          <Link href="/" className={styles.heroBcLink}>Home</Link>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
-            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span className={styles.heroBcActive}>FAQ</span>
-        </nav>
-
-        {/* Content — anchored to bottom */}
+        <div className={styles.heroBgWrap}><Image src={banner?.image || "/projects/yas-island.png"} unoptimized={!!(banner?.image)} alt="FAQ — Invent Elevator" fill priority sizes="100vw" className={styles.heroBgImg} /></div>
+        <div className={styles.heroOverlayTop} /><div className={styles.heroOverlayBottom} />
+        <nav className={styles.heroBreadcrumb}><Link href="/" className={styles.heroBcLink}>Home</Link><svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}><path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg><span className={styles.heroBcActive}>FAQ</span></nav>
         <div className={styles.heroInner}>
-          <div className={styles.heroEyebrow}>
-            <span className={styles.eyebrowDot} />
-            <span>Knowledge Base</span>
-          </div>
+          <div className={styles.heroEyebrow}><span className={styles.eyebrowDot} /><span>Knowledge Base</span></div>
           <h1 className={styles.heroTitle}>Frequently Asked<br />Questions</h1>
-          <p className={styles.heroDesc}>
-            Everything you need to know about our products, services, safety
-            standards, and processes — answered clearly.
-          </p>
+          <p className={styles.heroDesc}>Everything you need to know about our products, services, safety standards, and processes — answered clearly.</p>
           <div className={styles.heroStats}>
-            <div className={styles.heroStat}>
-              <strong>{FAQ_DATA.reduce((n, g) => n + g.items.length, 0)}</strong>
-              <span>Questions answered</span>
-            </div>
+            <div className={styles.heroStat}><strong>{FAQ_DATA.reduce((n, g) => n + g.items.length, 0)}</strong><span>Questions answered</span></div>
             <div className={styles.statDivider} />
-            <div className={styles.heroStat}>
-              <strong>{FAQ_DATA.length}</strong>
-              <span>Topic categories</span>
-            </div>
+            <div className={styles.heroStat}><strong>{FAQ_DATA.length}</strong><span>Topic categories</span></div>
             <div className={styles.statDivider} />
-            <div className={styles.heroStat}>
-              <strong>24h</strong>
-              <span>Response time</span>
-            </div>
+            <div className={styles.heroStat}><strong>24h</strong><span>Response time</span></div>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div className={styles.heroScrollWrap}>
-          <span className={styles.heroScrollLabel}>Scroll to explore</span>
-          <div className={styles.heroScrollTrack}>
-            <div className={styles.heroScrollThumb} />
-          </div>
-        </div>
+        <div className={styles.heroScrollWrap}><span className={styles.heroScrollLabel}>Scroll to explore</span><div className={styles.heroScrollTrack}><div className={styles.heroScrollThumb} /></div></div>
       </section>
+      ── END OLD hero ── */}
 
       {/* ── Tabs ── */}
       <section className={styles.tabsSection}>

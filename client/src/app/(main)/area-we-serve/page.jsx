@@ -1,5 +1,6 @@
 "use client";
 import useBanner from '@/hooks/useBanner';
+import PageHero from "@/components/common/PageHero/PageHero";
 
 import { useEffect, useState } from "react";
 import { getProjects } from "@/services/projects.service";
@@ -193,47 +194,24 @@ export default function AreaWeServePage() {
   return (
     <main className={styles.main}>
       {/* ── Hero ── */}
+      <PageHero
+        image={banner?.image}
+        fallbackImage="/projects/downtown.png"
+        eyebrow="Our Locations"
+        title="Areas We Serve"
+        description="Delivering precision-engineered lift solutions across Dubai, Sharjah, and Abu Dhabi — from luxury villas to iconic commercial towers."
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Areas We Serve" }]}
+      />
+
+      {/* ── OLD hero (commented out — kept for reference) ──
       <section className={styles.hero}>
-        <div className={styles.heroBgWrap}>
-          <Image
-            src={banner?.image || "/projects/downtown.png"}
-              unoptimized={!!(banner?.image)}
-            alt="UAE skyline"
-            fill
-            priority
-            sizes="100vw"
-            className={styles.heroBgImg}
-          />
-        </div>
-        <div className={styles.heroOverlayTop} />
-        <div className={styles.heroOverlayBottom} />
-
-        <nav className={styles.heroBreadcrumb}>
-          <Link href="/" className={styles.heroBcLink}>Home</Link>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
-            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span className={styles.heroBcActive}>Areas We Serve</span>
-        </nav>
-
-        <div className={styles.heroInner}>
-          <div className={styles.eyebrow}>
-            <span className={styles.eyebrowDot} />
-            <span>Our Locations</span>
-          </div>
-          <h1 className={styles.heroTitle}>Areas We Serve</h1>
-          <p className={styles.heroDesc}>
-            Delivering precision-engineered lift solutions across Dubai, Sharjah, and Abu Dhabi — from luxury villas to iconic commercial towers.
-          </p>
-        </div>
-
-        <div className={styles.heroScrollWrap}>
-          <span className={styles.heroScrollLabel}>Scroll to explore</span>
-          <div className={styles.heroScrollTrack}>
-            <div className={styles.heroScrollThumb} />
-          </div>
-        </div>
+        <div className={styles.heroBgWrap}><Image src={banner?.image || "/projects/downtown.png"} unoptimized={!!(banner?.image)} alt="UAE skyline" fill priority sizes="100vw" className={styles.heroBgImg} /></div>
+        <div className={styles.heroOverlayTop} /><div className={styles.heroOverlayBottom} />
+        <nav className={styles.heroBreadcrumb}><Link href="/" className={styles.heroBcLink}>Home</Link><svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}><path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg><span className={styles.heroBcActive}>Areas We Serve</span></nav>
+        <div className={styles.heroInner}><div className={styles.eyebrow}><span className={styles.eyebrowDot} /><span>Our Locations</span></div><h1 className={styles.heroTitle}>Areas We Serve</h1><p className={styles.heroDesc}>Delivering precision-engineered lift solutions across Dubai, Sharjah, and Abu Dhabi — from luxury villas to iconic commercial towers.</p></div>
+        <div className={styles.heroScrollWrap}><span className={styles.heroScrollLabel}>Scroll to explore</span><div className={styles.heroScrollTrack}><div className={styles.heroScrollThumb} /></div></div>
       </section>
+      ── END OLD hero ── */}
 
       <LocationSection
         id="dubai"

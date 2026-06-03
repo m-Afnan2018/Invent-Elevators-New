@@ -1,5 +1,6 @@
 "use client";
 import useBanner from '@/hooks/useBanner';
+import PageHero from "@/components/common/PageHero/PageHero";
 import { useState, useEffect, useRef } from "react";
 import styles from "./page.module.css";
 import { getActiveJobs, submitApplication } from "@/services/careers.service";
@@ -190,21 +191,26 @@ export default function CareersPage() {
   return (
     <>
       {/* Hero */}
+      <PageHero
+        image={banner?.image}
+        fallbackImage="/projects/downtown.png"
+        eyebrow="Careers at Invent Elevator"
+        title={<>Build the Future<br />of Vertical Mobility</>}
+        description="Join a team that engineers premium lift solutions for residences, villas, and high‑rise developments across the UAE and beyond."
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Careers" }]}
+      />
+
+      {/* ── OLD hero (commented out — kept for reference) ──
       <section className={styles.hero}>
         <div className={styles.heroBg} style={banner?.image ? {backgroundImage:`url(${banner.image})`,backgroundSize:'cover',backgroundPosition:'center'} : {}} />
         <div className={styles.heroContent}>
           <span className={styles.eyebrow}>Careers at Invent Elevator</span>
-          <h1 className={styles.heroH1}>
-            Build the Future<br />
-            <em className={styles.accent}>of Vertical Mobility</em>
-          </h1>
-          <p className={styles.heroDesc}>
-            Join a team that engineers premium lift solutions for residences, villas,
-            and high‑rise developments across the UAE and beyond.
-          </p>
+          <h1 className={styles.heroH1}>Build the Future<br /><em className={styles.accent}>of Vertical Mobility</em></h1>
+          <p className={styles.heroDesc}>Join a team that engineers premium lift solutions for residences, villas, and high‑rise developments across the UAE and beyond.</p>
           <a href="#openings" className={styles.heroBtn}>See Open Positions ↓</a>
         </div>
       </section>
+      ── END OLD hero ── */}
 
       {/* Why Join Us */}
       <section className={styles.whySection}>

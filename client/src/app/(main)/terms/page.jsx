@@ -1,22 +1,29 @@
 "use client";
 import useBanner from '@/hooks/useBanner';
+import PageHero from "@/components/common/PageHero/PageHero";
 import styles from '../legal.module.css';
 
 export default function TermsPage() {
   const banner = useBanner('terms');
   return (
     <div className={styles.page}>
-      <div
-        className={styles.hero}
-        style={{ backgroundImage: banner?.image ? `url(${banner.image})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }}
-      >
+      <PageHero
+        image={banner?.image}
+        fallbackImage="/projects/downtown.png"
+        eyebrow="Legal"
+        title="Terms of Service"
+        description="Last updated: June 2026"
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Terms of Service" }]}
+      />
+
+      {/* ── OLD hero (commented out — kept for reference) ──
+      <div className={styles.hero} style={{ backgroundImage: banner?.image ? `url(${banner.image})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }}>
         {banner?.image && <div style={{ position:'absolute',inset:0,background:'rgba(0,0,0,0.6)',zIndex:0 }} />}
         <div className={styles.heroInner} style={{ position:'relative',zIndex:1 }}>
-          <p className={styles.eyebrow}>Legal</p>
-          <h1 className={styles.heroTitle}>Terms of Service</h1>
-          <p className={styles.heroMeta}>Last updated: June 2026</p>
+          <p className={styles.eyebrow}>Legal</p><h1 className={styles.heroTitle}>Terms of Service</h1><p className={styles.heroMeta}>Last updated: June 2026</p>
         </div>
       </div>
+      ── END OLD hero ── */}
       <div className={styles.content}>
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>Agreement to Terms</h2>
