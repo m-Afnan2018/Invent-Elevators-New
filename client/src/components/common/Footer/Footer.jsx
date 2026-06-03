@@ -61,10 +61,11 @@ export default function Footer() {
           <h4 className={styles.columnTitle}>Navigation</h4>
           <ul className={styles.linkList}>
             <li><Link href="/about" className={styles.link}>About Us</Link></li>
-            <li><Link href="/services" className={styles.link}>Services</Link></li>
             <li><Link href="/projects" className={styles.link}>Projects</Link></li>
-            <li><Link href="/services" className={styles.link}>Services</Link></li>
-            <li><Link href="/vision" className={styles.link}>Vision</Link></li>
+            <li><Link href="/series" className={styles.link}>Series</Link></li>
+            <li><Link href="/area-we-serve" className={styles.link}>Area We Serve</Link></li>
+            <li><Link href="/careers" className={styles.link}>Careers</Link></li>
+            <li><Link href="/contact" className={styles.link}>Contact</Link></li>
           </ul>
         </div>
 
