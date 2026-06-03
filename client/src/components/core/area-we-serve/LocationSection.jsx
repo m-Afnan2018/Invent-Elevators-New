@@ -8,6 +8,7 @@ const SPEED = 0.6; // px per animation frame (~36 px/s at 60 fps)
 export default function LocationSection({
   cityName = "DUBAI",
   description = "",
+  mapImage = "",
   mapSrc = "",
   mapPlaceholder = "",
   projects = [],
@@ -125,7 +126,13 @@ export default function LocationSection({
           </div>
 
           <div className={styles.mapBox}>
-            {mapSrc ? (
+            {mapImage ? (
+              <img
+                src={mapImage}
+                alt={`Map of ${cityName}`}
+                className={styles.mapImage}
+              />
+            ) : mapSrc ? (
               <iframe
                 src={mapSrc}
                 className={styles.mapIframe}

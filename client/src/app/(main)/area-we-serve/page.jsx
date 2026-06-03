@@ -239,7 +239,7 @@ export default function AreaWeServePage() {
         id="dubai"
         cityName="DUBAI"
         description="Delivering precision-engineered lift solutions across Dubai's most iconic residential, commercial, and hospitality developments — from Palm Jumeirah villas to Downtown high-rises."
-        mapSrc="https://maps.google.com/maps?q=Dubai,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"
+        mapImage="/images/maps/dubai.png"
         projects={dubaiProjects}
         tags={["Home Lifts", "Passenger Lifts", "Panoramic Lifts", "Car Lifts", "Dumbwaiters"]}
       />
@@ -248,7 +248,7 @@ export default function AreaWeServePage() {
         id="sharjah"
         cityName="SHARJAH"
         description="Serving Sharjah's growing skyline with bespoke elevator installations designed for performance, safety, and elegance across retail, residential, and mixed-use developments."
-        mapSrc="https://maps.google.com/maps?q=Sharjah,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"
+        mapImage="/images/maps/sharjah.png"
         projects={sharjahProjects}
         tags={["Freight Lifts", "Hospital Lifts", "Home Lifts", "Pod Lifts", "Passenger Lifts"]}
       />
@@ -257,7 +257,7 @@ export default function AreaWeServePage() {
         id="abu-dhabi"
         cityName="ABU DHABI"
         description="Serving Abu Dhabi's skyline with bespoke elevator installations built for performance and elegance — from ADNOC headquarters to Saadiyat Island's luxury residences."
-        mapSrc="https://maps.google.com/maps?q=Abu+Dhabi,UAE&t=&z=11&ie=UTF8&iwloc=&output=embed"
+        mapImage="/images/maps/abu-dhabi.png"
         projects={abuDhabiProjects}
         tags={["Panoramic Lifts", "Car Lifts", "Home Lifts", "Chair Lifts", "Passenger Lifts"]}
       />
