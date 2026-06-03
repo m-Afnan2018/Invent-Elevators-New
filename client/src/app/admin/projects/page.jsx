@@ -58,6 +58,7 @@ const ProjectsPage = () => {
         category: '',
         status: 'quote',
         featuredImage: '',
+        bannerImage: '',
         galleryImages: [],
         isFeatured: false,
         showInFooter: false,
@@ -253,6 +254,8 @@ const ProjectsPage = () => {
         } else if (field === 'featuredImage') {
             setFeaturedImagePreview(url);
             setFormData(prev => ({ ...prev, featuredImage: url }));
+        } else if (field === 'bannerImage') {
+            setFormData(prev => ({ ...prev, bannerImage: url }));
         } else if (field === 'testimonialImage') {
             setCurrentTestimonial(prev => ({ ...prev, image: url }));
         } else if (field === 'galleryImages') {
@@ -302,6 +305,7 @@ const ProjectsPage = () => {
                 category: project.category,
                 status: project.status || 'quote',
                 featuredImage: project.featuredImage,
+                bannerImage: project.bannerImage || '',
                 galleryImages: project.galleryImages || [],
                 isFeatured: project.isFeatured || false,
                 showInFooter: project.showInFooter || false,
@@ -339,6 +343,7 @@ const ProjectsPage = () => {
                 category: '',
                 status: 'quote',
                 featuredImage: '',
+                bannerImage: '',
                 galleryImages: [],
                 isFeatured: false,
         showInFooter: false,
@@ -803,6 +808,34 @@ const ProjectsPage = () => {
                                                 </div>
                                             )}
                                         </div>
+                                    </div>
+
+                                    {/* Banner / Hero Image */}
+                                    <div className={styles.formGroup}>
+                                        <label>Banner Image <span style={{fontWeight:400,color:'var(--text-muted)',fontSize:'.82rem'}}>(hero override — defaults to Featured Image)</span></label>
+                                        <div style={{display:'flex',gap:'.5rem',alignItems:'center',flexWrap:'wrap'}}>
+                                            <input
+                                                type="text"
+                                                value={formData.bannerImage}
+                                                onChange={e => setFormData({...formData, bannerImage: e.target.value})}
+                                                placeholder="URL or upload / pick from library"
+                                                className={styles.formInput}
+                                                style={{flex:1,minWidth:'200px'}}
+                                            />
+                                            <label className={`${styles.uploadLabel} ${isUploading ? 'uploadLoading' : ''}`} style={{padding:'.6rem .9rem',cursor:'pointer'}}>
+                                                <RiUploadCloudLine />
+                                                <input type="file" accept="image/*" style={{display:'none'}} onChange={async e => {
+                                                    const file = e.target.files[0]; if (!file) return;
+                                                    const tid = toast.loading('Uploading…');
+                                                    try { const url = await uploadImage(file,'projects'); setFormData(f=>({...f,bannerImage:url})); toast.success('Uploaded!',{id:tid}); }
+                                                    catch(err){ toast.error(err?.message||'Failed',{id:tid}); }
+                                                }} />
+                                            </label>
+                                            <button type="button" className={styles.libraryBtn} onClick={() => openMediaSelector('bannerImage')}>
+                                                <RiGalleryLine /> Library
+                                            </button>
+                                        </div>
+                                        {formData.bannerImage && <img src={formData.bannerImage} alt="banner preview" style={{marginTop:'.5rem',maxHeight:'100px',width:'100%',objectFit:'cover',borderRadius:'.35rem',border:'1px solid var(--border-color)'}} />}
                                     </div>
 
                                     {/* Gallery Images */}

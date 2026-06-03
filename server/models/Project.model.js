@@ -11,6 +11,7 @@ const projectSchema = new mongoose.Schema(
     category: { type: String, trim: true },
     status: { type: String, enum: ["quote", "active", "delivered", "completed", "on-hold"], default: "quote" },
     featuredImage: { type: String },
+    bannerImage:   { type: String },  // hero/banner override — falls back to featuredImage
     galleryImages: [{ type: String }],
     isFeatured:    { type: Boolean, default: false },
     showInFooter:  { type: Boolean, default: false },

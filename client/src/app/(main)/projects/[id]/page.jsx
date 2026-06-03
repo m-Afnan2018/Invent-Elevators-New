@@ -61,7 +61,7 @@ export default function ProjectDetailsPage() {
     );
   }
 
-  const heroImage = project.featuredImage || project.image || FALLBACK_IMAGE;
+  const heroImage = project.bannerImage || project.featuredImage || project.image || FALLBACK_IMAGE;
   const requirements = project.customSpecs?.requirements || [];
 
   return (
