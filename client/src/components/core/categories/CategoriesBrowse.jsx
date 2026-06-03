@@ -8,6 +8,7 @@ import { getCategories } from "@/services/categories.service";
 import { getProducts } from "@/services/products.service";
 import { extractCollection } from "@/lib/apiResponse";
 import MarqueeLogos from "@/components/core/projects/MarqueeLogos";
+import PageHero from "@/components/common/PageHero/PageHero";
 
 const FALLBACK_CATEGORIES = [
   {
@@ -145,50 +146,23 @@ export default function CategoriesBrowse() {
   return (
     <main className={styles.main}>
       {/* ── Hero ── */}
+      <PageHero
+        fallbackImage="/projects/al-majaz.png"
+        eyebrow="Our Products"
+        title="Elevator Categories"
+        description="Explore our complete range of elevator solutions — from bespoke home lifts and high-speed commercial elevators to specialist healthcare and car lift systems, engineered for the UAE."
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Categories" }]}
+      />
+
+      {/* ── OLD hero (commented out — kept for reference) ──
       <section className={styles.hero}>
-        <div className={styles.heroBgWrap}>
-          <Image
-            src="/projects/al-majaz.png"
-            alt="Elevator categories"
-            fill
-            priority
-            sizes="100vw"
-            className={styles.heroBgImg}
-          />
-        </div>
-        <div className={styles.heroOverlayTop} />
-        <div className={styles.heroOverlayBottom} />
-
-        {/* Breadcrumb */}
-        <nav className={styles.heroBreadcrumb}>
-          <Link href="/" className={styles.heroBcLink}>Home</Link>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}>
-            <path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span className={styles.heroBcActive}>Categories</span>
-        </nav>
-
-        <div className={styles.heroInner}>
-          <div className={styles.eyebrow}>
-            <span className={styles.eyebrowDot} />
-            <span>Our Products</span>
-          </div>
-          <h1 className={styles.heroTitle}>Elevator Categories</h1>
-          {/* <p className={styles.heroDesc}>
-            Explore our complete range of elevator solutions — from bespoke home
-            lifts and high-speed commercial elevators to specialist healthcare and
-            car lift systems, engineered for the UAE.
-          </p> */}
-        </div>
-
-        {/* Scroll indicator */}
-        <div className={styles.heroScrollWrap}>
-          <span className={styles.heroScrollLabel}>Scroll to explore</span>
-          <div className={styles.heroScrollTrack}>
-            <div className={styles.heroScrollThumb} />
-          </div>
-        </div>
+        <div className={styles.heroBgWrap}><Image src="/projects/al-majaz.png" alt="Elevator categories" fill priority sizes="100vw" className={styles.heroBgImg} /></div>
+        <div className={styles.heroOverlayTop} /><div className={styles.heroOverlayBottom} />
+        <nav className={styles.heroBreadcrumb}><Link href="/" className={styles.heroBcLink}>Home</Link><svg width="12" height="12" viewBox="0 0 12 12" fill="none" className={styles.heroBcChevron}><path d="M4 2l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" /></svg><span className={styles.heroBcActive}>Categories</span></nav>
+        <div className={styles.heroInner}><div className={styles.eyebrow}><span className={styles.eyebrowDot} /><span>Our Products</span></div><h1 className={styles.heroTitle}>Elevator Categories</h1></div>
+        <div className={styles.heroScrollWrap}><span className={styles.heroScrollLabel}>Scroll to explore</span><div className={styles.heroScrollTrack}><div className={styles.heroScrollThumb} /></div></div>
       </section>
+      ── END OLD hero ── */}
 
       {/* ── Categories Grid ── */}
       <section className={styles.section}>
