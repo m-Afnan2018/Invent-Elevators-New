@@ -1,15 +1,17 @@
+"use client";
+import useBanner from '@/hooks/useBanner';
 import styles from '../legal.module.css';
 
-export const metadata = {
-  title: 'Privacy Policy | Invent Elevator',
-  description: 'Learn how Invent Elevator collects, uses, and protects your personal information.',
-};
-
 export default function PrivacyPage() {
+  const banner = useBanner('privacy');
   return (
     <div className={styles.page}>
-      <div className={styles.hero}>
-        <div className={styles.heroInner}>
+      <div
+        className={styles.hero}
+        style={{ backgroundImage: banner?.image ? `url(${banner.image})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      >
+        {banner?.image && <div style={{ position:'absolute',inset:0,background:'rgba(0,0,0,0.6)',zIndex:0 }} />}
+        <div className={styles.heroInner} style={{ position:'relative',zIndex:1 }}>
           <p className={styles.eyebrow}>Legal</p>
           <h1 className={styles.heroTitle}>Privacy Policy</h1>
           <p className={styles.heroMeta}>Last updated: June 2026</p>

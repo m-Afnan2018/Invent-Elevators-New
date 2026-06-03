@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const PAGES = ["home","about","area-we-serve","faq","careers","contact","blogs","series","projects"];
+const PAGES = ["home","about","area-we-serve","faq","careers","contact","blogs","series","projects","privacy","cookies","terms","accessibility"];
 
 const bannerSchema = new mongoose.Schema(
   {

@@ -18,6 +18,10 @@ const PAGES = [
   { key: 'faq',           label: 'FAQ',           path: '/faq',           fallback: '/projects/yas-island.png',  supportsVideo: false },
   { key: 'careers',       label: 'Careers',       path: '/careers',       fallback: '/projects/adnoc.png',       supportsVideo: false },
   { key: 'contact',       label: 'Contact',       path: '/contact',       fallback: '/projects/al-majaz.png',    supportsVideo: false },
+  { key: 'privacy',       label: 'Privacy Policy', path: '/privacy',       fallback: '/projects/downtown.png',    supportsVideo: false },
+  { key: 'cookies',       label: 'Cookies Policy', path: '/cookies',       fallback: '/projects/city-centre.png', supportsVideo: false },
+  { key: 'terms',         label: 'Terms of Service',path: '/terms',        fallback: '/projects/adnoc.png',       supportsVideo: false },
+  { key: 'accessibility', label: 'Accessibility',  path: '/accessibility', fallback: '/projects/palm-jumeirah.png',supportsVideo: false },
 ];
 
 const toAbs = (url) => (!url || url.startsWith('http') || url.startsWith('/')) ? url : `${API_BASE_URL}${url}`;
