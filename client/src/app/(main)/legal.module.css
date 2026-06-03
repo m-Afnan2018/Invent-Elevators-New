@@ -1,0 +1,45 @@
+/* Shared legal page styles */
+.page { background: #fff; min-height: 100vh; }
+
+/* ── Hero ── */
+.hero { background: #0a0a0a; padding: 120px 48px 72px; }
+.heroInner { max-width: 860px; margin: 0 auto; }
+.eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.4); margin: 0 0 20px; }
+.heroTitle {
+  font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; color: #fff;
+  line-height: 1.08; letter-spacing: -.03em; margin: 0 0 20px;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+}
+.heroMeta { font-size: .82rem; color: rgba(255,255,255,.35); margin: 0; letter-spacing: .04em; }
+
+/* ── Content ── */
+.content { max-width: 860px; margin: 0 auto; padding: 72px 48px 96px; }
+.section { margin-bottom: 52px; }
+.section:last-child { margin-bottom: 0; }
+
+.sectionTitle {
+  font-size: 1.1rem; font-weight: 700; color: #0a0a0a;
+  margin: 0 0 16px; letter-spacing: -.01em;
+  font-family: var(--font-aeonik), "DM Sans", sans-serif;
+  display: flex; align-items: center; gap: 10px;
+}
+.sectionTitle::before { content: '—'; color: #aaa; font-weight: 300; flex-shrink: 0; }
+
+.para { font-size: .94rem; color: #444; line-height: 1.8; margin: 0 0 14px; }
+.para:last-child { margin-bottom: 0; }
+
+.list { list-style: none; padding: 0; margin: 0 0 14px; display: flex; flex-direction: column; gap: 8px; }
+.list li { font-size: .94rem; color: #444; line-height: 1.7; padding-left: 18px; position: relative; }
+.list li::before { content: '·'; position: absolute; left: 0; color: #0a0a0a; font-weight: 700; }
+
+.divider { width: 40px; height: 1px; background: #0a0a0a; margin: 52px 0; }
+
+.contactBox { background: #f7f6f1; border-left: 3px solid #0a0a0a; padding: 24px 28px; margin-top: 40px; }
+.contactBox p { font-size: .9rem; color: #444; line-height: 1.7; margin: 0 0 6px; }
+.contactBox p:last-child { margin-bottom: 0; }
+.contactBox a { color: #0a0a0a; font-weight: 600; text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .hero { padding: 100px 24px 56px; }
+  .content { padding: 48px 24px 72px; }
+}
