@@ -247,7 +247,7 @@
 .pill {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     padding: 5px 6px 5px 5px;
     background: rgba(20, 20, 20, 0.9);
     backdrop-filter: blur(20px);
