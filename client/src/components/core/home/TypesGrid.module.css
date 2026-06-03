@@ -212,7 +212,7 @@
   margin: 0;
   width: 100%;
   /* fill the hoverInfo container width */
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -411,6 +411,8 @@
     opacity: 1 !important;
     text-align: center;
     margin: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   /* Hide hoverInfo on mobile — .sub already shows the description */
