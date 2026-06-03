@@ -278,8 +278,8 @@
   z-index: 2;
 }
 
-/* ── Touch devices ── */
-@media (hover: none) {
+/* ── Touch devices & tablets ── */
+@media (hover: none), (max-width: 1024px) {
   .cell {
     pointer-events: none;
   }

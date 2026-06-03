@@ -302,7 +302,7 @@
    TOUCH DEVICES — simple image-card grid
    No hover, no animations, no pointer tricks
 ───────────────────────────────────────────── */
-@media (hover: none) {
+@media (hover: none), (max-width: 1024px) {
 
   /* Section resets */
   .section {
@@ -432,7 +432,7 @@
 }
 
 /* Portrait phones: taller cards */
-@media (hover: none) and (max-width: 480px) {
+@media (hover: none) and (max-width: 480px), (max-width: 480px) {
 
   .cell,
   .cellActive,
