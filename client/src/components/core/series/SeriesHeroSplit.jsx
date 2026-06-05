@@ -15,9 +15,22 @@ function SpecIcon() {
 export default function SeriesHeroSplit({ series }) {
   return (
     <section className={styles.hero}>
+      {/* ── Full-bleed background image ── */}
+      <div className={styles.bgWrap}>
+        <Image
+          src={series.heroImage}
+          alt={series.name}
+          fill
+          priority
+          sizes="100vw"
+          className={styles.heroImg}
+        />
+      </div>
+      <div className={styles.overlayLeft} aria-hidden />
+      <div className={styles.overlayTop} aria-hidden />
       <div className={styles.leftGlow} aria-hidden />
 
-      {/* ── Left dark panel ── */}
+      {/* ── Content panel ── */}
       <div className={styles.left}>
         <nav className={styles.breadcrumb}>
           <Link href="/" className={styles.bcLink}>Home</Link>
@@ -40,7 +53,7 @@ export default function SeriesHeroSplit({ series }) {
           <div className={styles.specRow}>
             {series.details.map((d) => (
               <div key={d.label} className={styles.specItem}>
-                <SpecIcon />
+                {/* <SpecIcon /> */}
                 <div className={styles.specText}>
                   <span className={styles.specLabel}>{d.label}</span>
                   <span className={styles.specValue}>{d.value}</span>
@@ -49,19 +62,6 @@ export default function SeriesHeroSplit({ series }) {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* ── Right image panel ── */}
-      <div className={styles.right}>
-        <Image
-          src={series.heroImage}
-          alt={series.name}
-          fill
-          priority
-          sizes="(max-width:900px) 100vw, 56vw"
-          className={styles.heroImg}
-        />
-        <div className={styles.rightOverlay} aria-hidden />
       </div>
     </section>
   );

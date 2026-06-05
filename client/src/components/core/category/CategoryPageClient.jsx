@@ -127,7 +127,7 @@ export default function CategoryPageClient({ categoryId = null }) {
           <h2 className={styles.collectionTitle}>
             {name} <span className={styles.collectionTitleLight}>Collection</span>
           </h2>
-          <ul className={styles.specList}>
+          {/* <ul className={styles.specList}>
             {cmsAboutMeta.map((m, i) => (
               <li key={i} className={styles.specRow}>
                 <span className={styles.specCheck}>✓</span>
@@ -137,7 +137,7 @@ export default function CategoryPageClient({ categoryId = null }) {
                 </div>
               </li>
             ))}
-          </ul>
+          </ul> */}
           <p className={styles.collectionDesc}>{desc}</p>
           <Link href="#gallery" className={styles.collectionCta}>
             Browse Projects

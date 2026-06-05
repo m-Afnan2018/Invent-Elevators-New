@@ -168,7 +168,7 @@
   padding: 80px 72px 80px 64px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background: #fff;
 }
 

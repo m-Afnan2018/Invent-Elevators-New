@@ -2,6 +2,7 @@
   display: flex;
   min-height: 520px;
   border-bottom: 1px solid #ebebeb;
+  padding: 2rem;
 }
 
 .imageWrap {
@@ -16,7 +17,10 @@
   object-position: center;
   transition: transform 12s ease;
 }
-.section:hover .img { transform: scale(1.03); }
+
+.section:hover .img {
+  transform: scale(1.03);
+}
 
 .textWrap {
   flex: 1;
@@ -73,23 +77,57 @@
   align-self: flex-start;
   transition: background 0.2s, color 0.2s;
 }
-.cta:hover { background: #0a0a0a; color: #ffffff; }
+
+.cta:hover {
+  background: #0a0a0a;
+  color: #ffffff;
+}
 
 @media (max-width: 900px) {
-  .section { flex-direction: column; }
-  .imageWrap { flex: none; height: 60vw; min-height: 260px; }
-  .textWrap { padding: 44px 40px; gap: 16px; }
-  .desc { max-width: 100%; }
-  .cta { align-self: flex-start; }
+  .section {
+    flex-direction: column;
+  }
+
+  .imageWrap {
+    flex: none;
+    height: 60vw;
+    min-height: 260px;
+  }
+
+  .textWrap {
+    padding: 44px 40px;
+    gap: 16px;
+  }
+
+  .desc {
+    max-width: 100%;
+  }
+
+  .cta {
+    align-self: flex-start;
+  }
 }
 
 @media (max-width: 640px) {
-  .textWrap { padding: 36px 24px; }
-  .heading { font-size: clamp(22px, 6vw, 32px); }
+  .textWrap {
+    padding: 36px 24px;
+  }
+
+  .heading {
+    font-size: clamp(22px, 6vw, 32px);
+  }
 }
 
 @media (max-width: 480px) {
-  .imageWrap { height: 70vw; }
-  .textWrap { padding: 32px 20px 40px; }
-  .desc { font-size: 13.5px; }
+  .imageWrap {
+    height: 70vw;
+  }
+
+  .textWrap {
+    padding: 32px 20px 40px;
+  }
+
+  .desc {
+    font-size: 13.5px;
+  }
 }
