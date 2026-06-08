@@ -449,8 +449,8 @@ export default function Home() {
           a: "Yes. We offer comprehensive Annual Maintenance Contracts (AMC) covering routine inspections, preventive maintenance, and emergency breakdown support. Our technicians are available 365 days a year."
         },
         {
-          q: "Are your elevators compliant with Indian safety standards?",
-          a: "Absolutely. All our lifts are designed and installed in compliance with the National Building Code of India (NBC) and relevant BIS standards, ensuring complete safety for all users."
+          q: "Are your elevators compliant with Dubai safety standards?",
+          a: "Absolutely. All our lifts are designed and installed in compliance with Dubai Civil Defense regulations and international EN 81-20/50 elevator safety standards, ensuring complete safety for all users."
         },
         {
           q: "Can the lift design be customized to match my interiors?",

@@ -72,7 +72,7 @@ const FAQ_DATA = [
       },
       {
         q: "How long does installation take?",
-        a: "A standard home lift typically takes 3–5 days on-site. Larger commercial installations may take 2–4 weeks depending on shaft complexity and number of floors.",
+        a: "A standard home lift typically takes 30+ days on-site. Larger commercial installations may take 2–4 weeks depending on shaft complexity and number of floors.",
       },
     ],
   },
