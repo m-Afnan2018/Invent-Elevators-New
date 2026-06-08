@@ -6,15 +6,15 @@ import styles from "./CoverageSection.module.css";
 const LOCATIONS = [
   {
     city: "Dubai",
-    image: "/contractor/images/coverage/dubai.jpeg",
+    image: "/contractor/images/cover/dubai.jpeg",
   },
   {
     city: "Sharjah",
-    image: "/contractor/images/coverage/sharjah2.jpeg",
+    image: "/contractor/images/cover/sharjah2.jpeg",
   },
   {
     city: "Abu Dhabi",
-    image: "/contractor/images/coverage/abu-dhabi.jpeg",
+    image: "/contractor/images/cover/abu-dhabi.jpeg",
   },
 ];
 

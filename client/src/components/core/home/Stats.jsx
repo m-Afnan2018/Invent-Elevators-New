@@ -127,7 +127,7 @@ export default function Stats() {
             {/* <h2 className={`${styles.title} headings`} style={{ textAlign: 'left' }}>Numbers That<br />Speak for Themselves</h2> */}
             <h2 className={`${styles.title} headings`} style={{ textAlign: 'left' }}>10+ Years of Experience</h2>
             <p className={styles.subtitle}>
-              Founded over two decades ago, Invent Elevator is a pioneer in manufacturing home lift solutions by incorporating unparalleled engineering excellence and state-of-the-art elevation systems.
+              Founded over one decade ago, Invent Elevator is a pioneer in manufacturing home lift solutions by incorporating unparalleled engineering excellence and state-of-the-art elevation systems.
             </p>
           </div>
 
