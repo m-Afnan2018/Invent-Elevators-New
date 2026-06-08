@@ -442,7 +442,7 @@ export default function Home() {
         },
         {
           q: "How long does the installation process take?",
-          a: "Installation typically takes 3–7 days depending on the lift type and site conditions. Our team conducts a thorough site assessment beforehand to ensure a smooth and timely installation with minimal disruption."
+          a: "Installation typically takes 30+ days depending on the lift type and site conditions. Our team conducts a thorough site assessment beforehand to ensure a smooth and timely installation with minimal disruption."
         },
         {
           q: "Do you provide after-sales service and maintenance?",
