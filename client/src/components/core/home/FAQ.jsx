@@ -16,8 +16,8 @@ const DEFAULT_FAQS = [
     a: "Yes. Every installation is backed by our comprehensive maintenance programme, including scheduled inspections, 24/7 emergency support, and genuine parts replacement.",
   },
   {
-    q: "Are your elevators compliant with Indian safety standards?",
-    a: "All our systems meet and exceed Bureau of Indian Standards (BIS) requirements and relevant NBC provisions. We handle all statutory inspections and certification on your behalf.",
+    q: "Are your elevators compliant with Dubai safety standards?",
+    a: "All our systems meet and exceed Dubai Civil Defense requirements and international EN 81-20/50 elevator safety standards. We handle all statutory inspections and certification on your behalf.",
   },
   {
     q: "Can the cabin design be fully customised?",
